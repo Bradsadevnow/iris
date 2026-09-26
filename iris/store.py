@@ -136,7 +136,8 @@ class Store:
         );
         CREATE TABLE IF NOT EXISTS active_context (
           singleton INTEGER PRIMARY KEY CHECK(singleton=1), world_scope TEXT,
-          task_scope TEXT, skill_scopes_json TEXT NOT NULL, updated_at REAL NOT NULL
+          task_scope TEXT, skill_scopes_json TEXT NOT NULL,
+          role_scopes_json TEXT NOT NULL DEFAULT '[]', updated_at REAL NOT NULL
         );
         CREATE TABLE IF NOT EXISTS domain_versions (
           domain TEXT PRIMARY KEY, version INTEGER NOT NULL, updated_at REAL NOT NULL
@@ -184,6 +185,9 @@ class Store:
                     "ALTER TABLE canonical_state ADD COLUMN imagination_world_json TEXT NOT NULL "
                     "DEFAULT '{\"schema_version\": 2, \"sources\": {}, \"nodes\": {}, \"edges\": [], \"constraints\": []}'"
                 )
+            context_columns = {row[1] for row in db.execute("PRAGMA table_info(active_context)")}
+            if "role_scopes_json" not in context_columns:
+                db.execute("ALTER TABLE active_context ADD COLUMN role_scopes_json TEXT NOT NULL DEFAULT '[]'")
             now = time.time()
             world = empty_world()
             self_state = {"name": "halcyon", "memory": {}}
@@ -194,7 +198,9 @@ class Store:
             )
             for dimension in ('joy','sadness','fear','anger','trust','disgust','surprise','anticipation'):
                 db.execute("INSERT OR IGNORE INTO affect_state VALUES (?,50.0,50.0,0.015,10.0,?)", (dimension, now))
-            db.execute("INSERT OR IGNORE INTO active_context VALUES (1,'world:iris',NULL,'[]',?)", (now,))
+            db.execute(
+                "INSERT OR IGNORE INTO active_context (singleton, world_scope, task_scope, skill_scopes_json, role_scopes_json, updated_at) "
+                "VALUES (1,'world:iris',NULL,'[]','[]',?)", (now,))
             db.execute("UPDATE active_context SET world_scope='world:halcyon',updated_at=? WHERE world_scope='world:iris'", (now,))
             for domain in ("self", "memory", "affect", "context", "capabilities", "governance"):
                 db.execute("INSERT OR IGNORE INTO domain_versions VALUES (?,0,?)", (domain, now))
@@ -611,13 +617,15 @@ class Store:
         with self.connect() as db:
             row = db.execute("SELECT * FROM active_context WHERE singleton=1").fetchone()
         return {"global": True, "world": row["world_scope"], "task": row["task_scope"],
-                "skills": json.loads(row["skill_scopes_json"])}
+                "skills": json.loads(row["skill_scopes_json"]),
+                "roles": json.loads(row["role_scopes_json"])}
 
-    def set_active_context(self, world: str | None, task: str | None, skills: list[str]) -> dict:
+    def set_active_context(self, world: str | None, task: str | None, skills: list[str],
+                           roles: list[str] | None = None) -> dict:
         clean = sorted({s for s in skills if s.startswith("skill:")})
         with self.transaction(immediate=True) as db:
-            db.execute("UPDATE active_context SET world_scope=?,task_scope=?,skill_scopes_json=?,updated_at=? WHERE singleton=1",
-                       (world, task, json.dumps(clean), time.time()))
+            db.execute("UPDATE active_context SET world_scope=?,task_scope=?,skill_scopes_json=?,role_scopes_json=?,updated_at=? WHERE singleton=1",
+                       (world, task, json.dumps(clean), json.dumps(sorted(set(roles or []))), time.time()))
             self._bump_domain(db, "context")
         return self.active_context()
 

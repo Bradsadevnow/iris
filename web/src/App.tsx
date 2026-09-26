@@ -4,7 +4,7 @@ import {
   Database, FileCheck2, MessageSquare, Network, PanelLeftClose, PanelLeftOpen,
   Plus, Send, Settings, ShieldCheck, Sparkles, Square, UserRound, X, Zap,
 } from "lucide-react";
-import { api, Conversation, ConversationDetail, Message, StreamEvent, SystemProjection, TokenUsage } from "./api";
+import { api, Conversation, ConversationDetail, Message, RoleSummary, StreamEvent, SystemProjection, TokenUsage } from "./api";
 
 const MemoryView = lazy(() => import("./MemoryView"));
 const SelfSystemView = lazy(() => import("./SelfSystemView"));
@@ -228,8 +228,19 @@ function ReceiptDrawer({ turnId, onClose }: { turnId: string; onClose: () => voi
 
 function SelfDrawer({ onClose, onOpenFull }: { onClose: () => void; onOpenFull: () => void }) {
   const [projection, setProjection] = useState<SystemProjection | null>(null);
+  const [roles, setRoles] = useState<RoleSummary[]>([]);
   const [error, setError] = useState("");
-  useEffect(() => { api.systemProjection().then(setProjection).catch(() => setError("The live Self projection is unavailable.")); }, []);
+  const [busyRole, setBusyRole] = useState<string | null>(null);
+  const load = () => api.systemProjection().then(setProjection).catch(() => setError("The live Self projection is unavailable."));
+  useEffect(() => { load(); api.availableRoles().then(setRoles).catch(() => {}); }, []);
+  const toggleRole = async (roleId: string) => {
+    if (!projection) return;
+    const active = projection.context.roles;
+    const next = active.includes(roleId) ? active.filter((id) => id !== roleId) : [...active, roleId];
+    setBusyRole(roleId);
+    try { await api.setActiveContext({ world: projection.context.world, task: projection.context.task, skills: projection.context.skills, roles: next }); await load(); }
+    finally { setBusyRole(null); }
+  };
   const affect = projection ? Object.entries(projection.affect.values)
     .sort((a, b) => Math.abs(b[1] - (projection.affect.baselines[b[0]] ?? 50)) - Math.abs(a[1] - (projection.affect.baselines[a[0]] ?? 50))) : [];
   const scopes = projection ? ["global", ...projection.context.skills, projection.context.world, projection.context.task].filter(Boolean) as string[] : [];
@@ -238,6 +249,16 @@ function SelfDrawer({ onClose, onOpenFull }: { onClose: () => void; onOpenFull: 
       <div className="self-drawer-intro"><div className="self-drawer-mark"><UserRound size={19} /></div><div><span><i /> Live system projection</span><p>Read-only composition of state owned across Halcyon.</p></div></div>
       <section className="self-drawer-section"><h3>Canonical identity <b>v{projection.self.version}</b></h3>
         <div className="self-drawer-claims">{projection.self.claims.length ? projection.self.claims.map((claim) => <article key={claim.id}><CircleDot size={11} /><p><strong>{claim.subject}</strong> {claim.predicate.replaceAll("_", " ")} <em>{claim.value}</em></p></article>) : <p className="muted">No canonical claims yet.</p>}</div>
+      </section>
+      <section className="self-drawer-section"><h3>Roles <b>{projection.context.roles.length} active</b></h3>
+        <p className="self-drawer-hint">Halcyon stays Halcyon — a role informs her for this task, it doesn't replace her.</p>
+        <div className="self-drawer-roles">{roles.map((pack) => {
+          const equipped = projection.context.roles.includes(pack.id);
+          return <button key={pack.id} className={`role-chip ${equipped ? "active" : ""}`} disabled={busyRole === pack.id}
+            title={pack.tagline} onClick={() => void toggleRole(pack.id)}>
+            <span>{pack.name}</span>{equipped ? <X size={11} /> : <Plus size={11} />}
+          </button>;
+        })}</div>
       </section>
       <section className="self-drawer-section"><h3>Current affect <b>v{projection.affect.version}</b></h3>
         <div className="self-drawer-affect">{affect.map(([name, value]) => <div key={name}><span>{name}</span><div><i style={{ width: `${Math.max(0, Math.min(100, value))}%` }} /></div><b>{value.toFixed(0)}</b></div>)}</div>

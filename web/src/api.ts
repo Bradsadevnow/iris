@@ -95,7 +95,13 @@ export type ScopedMemory = {
   affect_after?: Record<string, number> | null; affect_delta?: Record<string, number> | null;
   created_at: number;
 };
-export type ActiveContext = { global: true; world: string | null; task: string | null; skills: string[] };
+export type ActiveContext = { global: true; world: string | null; task: string | null; skills: string[]; roles: string[] };
+export type RoleSummary = { id: string; name: string; version: number; tagline: string; path: string };
+export type RolePackDetail = {
+  id: string; name: string; version: number; tagline?: string; lineage?: string;
+  claims: { id: string; kind: string; subject: string; predicate: string; value: string; source?: string }[];
+  capabilities: { id: string; effect_class: string; description: string }[];
+};
 export type AffectState = {
   values: Record<string, number>; baselines: Record<string, number>; directions: Record<string, string>;
   history: { id: string; source_event_id: string; transition_kind: string; before: Record<string, number>; delta: Record<string, number>; after: Record<string, number>; created_at: number }[];
@@ -162,6 +168,8 @@ export const api = {
   timeline: () => request<TimelineEvent[]>("/api/memory/timeline"),
   activeContext: () => request<ActiveContext>("/api/context/active"),
   setActiveContext: (context: Omit<ActiveContext, "global">) => request<ActiveContext>("/api/context/active", { method: "PUT", body: JSON.stringify(context) }),
+  availableRoles: () => request<RoleSummary[]>("/api/system/roles"),
+  roleDetail: (id: string) => request<RolePackDetail>(`/api/system/roles/${encodeURIComponent(id)}`),
   systemProjection: () => request<SystemProjection>("/api/system/projection"),
   selfClaims: () => request<{ version: number; claims: SelfClaim[] }>("/api/self/claims"),
   capabilities: () => request<{ version: number; items: Capability[] }>("/api/capabilities"),

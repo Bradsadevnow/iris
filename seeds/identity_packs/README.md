@@ -1,16 +1,31 @@
 # Identity packs
 
-A pack is a swappable Self: a JSON manifest of `self_claims` (identity,
-values, commitments, goals — the same shape `seeds/halcyon_identity.json`
-uses) plus a `capabilities` list (the persona's declared toolkit). Loading
-one is the identity equivalent of `iris/profile_seed.py`'s profile import —
-one atomic transaction, nothing partial.
+A pack is a JSON manifest of `self_claims` (identity, values, commitments,
+goals — the same shape `seeds/halcyon_identity.json` uses) plus a
+`capabilities` list (the persona's declared toolkit).
+
+**In the app, these load as role overlays** (Self → Roles, or the Roles
+section of the "Self" popout in chat): Halcyon's own Self stays canonical
+and always active; equipping a pack folds its claims into the prompt for
+that session as an `# ACTIVE ROLE OVERLAY` — informing her, not replacing
+her. Toggling is instant, reversible, and writes nothing to `self_claims`
+or `capabilities` (see `iris/server.py`'s `render_role_overlay` and the
+`roles` field on `/api/context/active`).
+
+There is also a CLI-only **permanent identity swap** path, for anyone who
+wants a genuinely separate persistent identity rather than an overlay:
 
 ```bash
 python3 run.py --list-identity-packs
 python3 run.py --identity-pack seeds/identity_packs/engineer.json
 python3 run.py --identity-pack seeds/halcyon_identity.json   # switch back
 ```
+
+That path (`iris.identity_packs.install_identity_pack`) writes the pack's
+claims into the real `self_claims`/`capabilities` tables — `mode="switch"`
+(default) retires every other active claim first; `mode="layer"` blends
+instead. It's a different, rarer use case than the UI overlay above and the
+two don't interact.
 
 ## What's here
 

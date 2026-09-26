@@ -22,6 +22,7 @@ from pydantic import BaseModel, Field
 
 from .kernel import Boundary, Gate, NOMINATION
 from .graph import normalize_world, visible_world
+from .identity_packs import list_packs, load_pack
 from .loop import SYSTEM, render_vocabulary
 from .store import ConversationBusy, StateConflict, Store
 from .tools import TOOLS, build_invariants
@@ -31,6 +32,7 @@ ROOT = Path(__file__).resolve().parent.parent
 STATE_DIR = Path(os.environ.get("IRIS_STATE", ROOT / "state"))
 BOUNDARY_PATH = Path(os.environ.get("IRIS_BOUNDARY", ROOT / "boundary/imagine_and_chat.yaml"))
 DB_PATH = Path(os.environ.get("IRIS_DB", STATE_DIR / "iris.db"))
+IDENTITY_PACKS_DIR = ROOT / "seeds" / "identity_packs"
 LM_BASE = os.environ.get("IRIS_LM_BASE", "http://localhost:1234").rstrip("/")
 LM_MODEL = os.environ.get("IRIS_LM_MODEL", "openai/gpt-oss-20b")
 LM_API = os.environ.get("IRIS_LM_API", "anthropic").lower()
@@ -58,6 +60,7 @@ class ActiveContextRequest(BaseModel):
     world: str | None = "world:halcyon"
     task: str | None = None
     skills: list[str] = Field(default_factory=list)
+    roles: list[str] = Field(default_factory=list)
 
 class MemoryEntryRequest(BaseModel):
     scope: str
@@ -196,6 +199,32 @@ def system_projection() -> dict:
     }
 
 
+def render_role_overlay(role_ids: list[str]) -> str:
+    """Read-only prompt text for the currently-equipped identity packs (see
+    iris/identity_packs.py). Never writes to self_claims or capabilities — a
+    role informs Halcyon for this turn, it does not replace her. A pack's
+    declared capabilities render as descriptive prose here, not as entries in
+    the real, executable capabilities system."""
+    sections = []
+    for role_id in role_ids:
+        path = IDENTITY_PACKS_DIR / f"{role_id}.json"
+        if not path.exists():
+            continue
+        pack = load_pack(path)
+        claim_lines = "\n".join(f"- [{claim['kind']}] {claim['value']}" for claim in pack["claims"])
+        methods = ", ".join(cap["id"].split(".", 1)[-1] for cap in pack.get("capabilities", []))
+        section = f"## Filling the role of {pack['name']} — {pack.get('tagline', '')}\n{claim_lines}"
+        if methods:
+            section += f"\nKnown methods: {methods}"
+        sections.append(section)
+    if not sections:
+        return ""
+    return ("\n\n# ACTIVE ROLE OVERLAY\n"
+            "You are Halcyon, currently filling one or more roles for this task — informed by "
+            "them, not replaced by them. Stay yourself; let the role shape what you notice and "
+            "recommend.\n\n" + "\n\n".join(sections))
+
+
 def model_context(conversation_id: str | None, draft: str,
                   memory_channels: list[str] | None = None,
                   include_world_mutation: bool = True,
@@ -250,7 +279,8 @@ committed before the gate decides.
                  + "\n\n# RETRIEVED SCOPED MEMORY\n" + scoped_text
                  + "\n\n# CURRENT AFFECT\n" + affect_text
                  + "\n\n# CANONICAL SELF CLAIMS\n" + (self_claim_text or "(none)")
-                 + "\n\n# AVAILABLE CAPABILITIES\n" + (capability_text or "(none)"))
+                 + "\n\n# AVAILABLE CAPABILITIES\n" + (capability_text or "(none)")
+                 + render_role_overlay(active.get("roles", [])))
     prior = STORE.context_messages(conversation_id) if conversation_id else []
     conversation = prior + [{"role": "user", "content": draft}]
     return {"state_sequence": sequence, "state": state, "instructions": instructions,
@@ -905,6 +935,17 @@ def create_self_claim(body: SelfClaimRequest):
 def get_capabilities():
     return {"version": STORE.versions().get("capabilities", 0), "items": STORE.capabilities()}
 
+@app.get("/api/system/roles")
+def get_available_roles():
+    return list_packs(IDENTITY_PACKS_DIR)
+
+@app.get("/api/system/roles/{role_id}")
+def get_role_detail(role_id: str):
+    path = IDENTITY_PACKS_DIR / f"{role_id}.json"
+    if not path.exists():
+        raise HTTPException(404, "Role pack not found")
+    return load_pack(path)
+
 @app.post("/api/capabilities/mcp", status_code=201)
 def register_mcp(body: McpCapabilityRequest):
     try:
@@ -979,7 +1020,11 @@ def active_context():
 
 @app.put("/api/context/active")
 def update_active_context(body: ActiveContextRequest):
-    return STORE.set_active_context(body.world, body.task, body.skills)
+    known = {pack["id"] for pack in list_packs(IDENTITY_PACKS_DIR)}
+    unknown = [role for role in body.roles if role not in known]
+    if unknown:
+        raise HTTPException(422, f"unknown role id(s): {', '.join(unknown)}")
+    return STORE.set_active_context(body.world, body.task, body.skills, body.roles)
 
 @app.get("/api/memory/entries")
 def memory_entries(channel: str | None = None):
