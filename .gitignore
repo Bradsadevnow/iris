@@ -1,0 +1,10 @@
+# The identity's live state is a save-file, not source. It lives on disk and in
+# snapshots, versioned on its own terms — not in the code repo. Keep the dir,
+# ignore its contents.
+state/*
+!state/.gitkeep
+
+__pycache__/
+*.pyc
+.env
+*.env
