@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Wake Iris up.
+"""Wake Halcyon up.
 
     python3 run.py                 # chat with her (a REPL)
     python3 run.py --imagine 5     # let her grow her world autonomously, N turns
@@ -35,7 +35,7 @@ def build():
 
 
 def _report(reply: str, receipt: dict) -> None:
-    print("\niris>", reply)
+    print("\nhalcyon>", reply)
     c = receipt.get("claim")
     if c:
         basis = receipt["decision_basis"][-1]
@@ -47,7 +47,23 @@ def main():
     ap.add_argument("--imagine", type=int, default=0, help="autonomous world-growth turns")
     ap.add_argument("--attest", action="store_true")
     ap.add_argument("--show", action="store_true")
+    ap.add_argument("--server", action="store_true", help="run the Halcyon web server")
+    ap.add_argument("--seed-profile", metavar="PATH", help="atomically merge a versioned profile seed")
     args = ap.parse_args()
+
+    if args.seed_profile:
+        from iris.store import Store
+        from iris.profile_seed import import_seed
+        state_dir = os.environ.get("IRIS_STATE", "state")
+        store = Store(os.environ.get("IRIS_DB", str(Path(state_dir) / "iris.db")), state_dir)
+        print(json.dumps(import_seed(store, args.seed_profile), indent=2))
+        return
+
+    if args.server:
+        import uvicorn
+        port = int(os.environ.get("IRIS_PORT", "8000"))
+        uvicorn.run("iris.server:app", host="127.0.0.1", port=port, reload=False)
+        return
 
     boundary, memory, gate = build()
 
@@ -69,7 +85,7 @@ def main():
             _report(reply, receipt)
         return
 
-    print("iris is awake. talk to her.  (ctrl-D to let her sleep)\n")
+    print("halcyon is awake. talk to her.  (ctrl-D to let her sleep)\n")
     while True:
         try:
             user = input("you> ").strip()

@@ -1,0 +1,17 @@
+id: example-profile
+version: 1
+
+sources:
+  example-public: {kind: test_fixture, title: "Synthetic public profile", captured_at: "2026-01-01"}
+  example-private: {kind: test_fixture, title: "Synthetic protected context", captured_at: "2026-01-01"}
+
+nodes:
+  - {id: person:example, label: Example Person, type: Person, sources: [example-public], properties: {primary_identity: true}}
+  - {id: organization:example, label: Example Organization, type: Organization, sources: [example-public]}
+  - {id: project:example, label: Example Project, type: Project, sources: [example-public]}
+  - {id: context:private, label: Private test context, type: SensitiveContext, visibility: protected, sources: [example-private]}
+
+edges:
+  - {id: claim:dates-a, source: person:example, relation: participated_in, target: organization:example, sources: [example-public], status: disputed, properties: {date_range: "2020–2021", conflict_group: example-dates}}
+  - {id: claim:dates-b, source: person:example, relation: participated_in, target: organization:example, sources: [example-public], status: disputed, properties: {date_range: "2021–2022", conflict_group: example-dates}}
+  - {source: person:example, relation: builds, target: project:example, sources: [example-public]}

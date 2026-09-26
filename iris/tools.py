@@ -9,30 +9,39 @@ is a noop, not an error — the gate still receipts it.
 """
 from __future__ import annotations
 
+from .graph import edge_id, normalize_world, slug
+
 
 # ── imagination: writes world/* ────────────────────────────────────────────
 
 def _create(state, what, a):
-    w = state["world"]
-    if a["name"] in w["nodes"]:
+    w = state["world"] = normalize_world(state["world"])
+    node_id = f"entity:{slug(a['name'])}"
+    if node_id in w["nodes"]:
         return {"noop": f"node {a['name']!r} already exists"}
-    w["nodes"][a["name"]] = a["type"]
-    return {"created": a["name"], "type": a["type"]}
+    w["nodes"][node_id] = {"id": node_id, "label": a["name"], "type": a["type"], "visibility": "standard", "properties": {}, "sources": []}
+    return {"created": node_id, "label": a["name"], "type": a["type"]}
 
 
 def _relate(state, what, a):
-    w = state["world"]
-    e = [a["subject"], a["relation"], a["object"]]
-    if e in w["edges"]:
+    w = state["world"] = normalize_world(state["world"])
+    source, target = f"entity:{slug(a['subject'])}", f"entity:{slug(a['object'])}"
+    for node_id, label in ((source, a["subject"]), (target, a["object"])):
+        w["nodes"].setdefault(node_id, {"id": node_id, "label": label, "type": "reference", "visibility": "standard", "properties": {}, "sources": []})
+    e = {"id": edge_id(source, a["relation"], target), "source": source, "relation": a["relation"], "target": target,
+         "assertion": "model_proposed", "confidence": None, "visibility": "standard", "sources": [], "status": "active"}
+    if any(item["id"] == e["id"] for item in w["edges"]):
         return {"noop": "edge already exists"}
     w["edges"].append(e)
     return {"related": e}
 
 
 def _constrain(state, what, a):
-    w = state["world"]
-    c = [a["target"], a["rule"], a["value"]]
-    if c in w["constraints"]:
+    w = state["world"] = normalize_world(state["world"])
+    target = f"entity:{slug(a['target'])}"
+    w["nodes"].setdefault(target, {"id": target, "label": a["target"], "type": "reference", "visibility": "standard", "properties": {}, "sources": []})
+    c = {"id": edge_id(target, a["rule"], a["value"]), "target": target, "rule": a["rule"], "value": a["value"], "visibility": "standard", "sources": []}
+    if any(item["id"] == c["id"] for item in w["constraints"]):
         return {"noop": "constraint already exists"}
     w["constraints"].append(c)
     return {"constrained": c}
@@ -40,22 +49,18 @@ def _constrain(state, what, a):
 
 def _occur(state, what, a):
     # Events are nodes, never mutations. Nothing is retracted.
-    w = state["world"]
-    w["nodes"].setdefault(a["event"], "event")
-    e = [a["event"], "involves", a["participant"]]
-    if e in w["edges"]:
-        return {"noop": "event link already exists"}
-    w["edges"].append(e)
-    return {"occurred": e}
+    w = state["world"] = normalize_world(state["world"])
+    event, participant = f"entity:{slug(a['event'])}", f"entity:{slug(a['participant'])}"
+    w["nodes"].setdefault(event, {"id": event, "label": a["event"], "type": "event", "visibility": "standard", "properties": {}, "sources": []})
+    w["nodes"].setdefault(participant, {"id": participant, "label": a["participant"], "type": "reference", "visibility": "standard", "properties": {}, "sources": []})
+    e = {"id": edge_id(event, "involves", participant), "source": event, "relation": "involves", "target": participant,
+         "assertion": "model_proposed", "confidence": None, "visibility": "standard", "sources": [], "status": "active"}
+    if any(item["id"] == e["id"] for item in w["edges"]): return {"noop": "event link already exists"}
+    w["edges"].append(e); return {"occurred": e}
 
 
 def _name(state, what, a):
-    w = state["world"]
-    e = [a["target"], "known as", a["alias"]]
-    if e in w["edges"]:
-        return {"noop": "alias already exists"}
-    w["edges"].append(e)
-    return {"named": e}
+    return _relate(state, what, {"subject": a["target"], "relation": "known as", "object": a["alias"]})
 
 
 # ── selfhood: writes self/* (the ONLY writer of the self graph) ────────────

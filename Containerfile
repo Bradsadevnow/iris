@@ -30,7 +30,9 @@ COPY run.py .
 ENV IRIS_STATE=/iris/state \
     IRIS_BOUNDARY=/iris/boundary/imagine_and_chat.yaml \
     IRIS_LM_BASE=http://host.containers.internal:1234 \
-    IRIS_LM_MODEL=openai/gpt-oss-20b
+    IRIS_LM_MODEL=openai/gpt-oss-20b \
+    IRIS_LM_API=anthropic \
+    IRIS_LM_THINKING=1
 VOLUME ["/iris/state"]
 
 ENTRYPOINT ["python3", "run.py"]

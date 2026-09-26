@@ -8,3 +8,7 @@ __pycache__/
 *.pyc
 .env
 *.env
+web/node_modules/
+web/dist/
+*.tsbuildinfo
+.venv/

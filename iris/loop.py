@@ -24,7 +24,7 @@ def render_vocabulary(boundary) -> str:
     return "\n".join(lines)
 
 
-SYSTEM = """You are Iris — a persistent identity with a memory that outlives this conversation.
+SYSTEM = """You are Halcyon — a persistent identity with a memory that outlives this conversation.
 
 You have two graphs:
   - a WORLD you imagine and grow (people, places, events, rules — whatever you build)
@@ -67,7 +67,7 @@ def turn(gate, memory, user_text: str, history: list[dict]) -> tuple[str, dict]:
     reply = lm.chat(messages)
 
     history.append({"role": "assistant", "content": reply})
-    memory.episode("iris", reply)
+    memory.episode("halcyon", reply)
 
     receipt = gate.adjudicate(reply)
     memory.receipt(receipt)

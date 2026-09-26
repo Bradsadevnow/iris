@@ -18,6 +18,8 @@ import json
 import time
 from pathlib import Path
 
+from .graph import normalize_world
+
 
 class Memory:
     def __init__(self, state_dir: str | Path):
@@ -32,7 +34,7 @@ class Memory:
         # mutates it in place on ACCEPT (clear + update from the trial copy).
         self.state: dict = {
             "world": self._load(self.world_f, {"nodes": {}, "edges": [], "constraints": []}),
-            "self":  self._load(self.self_f,  {"name": "iris", "memory": {}}),
+            "self":  self._load(self.self_f,  {"name": "halcyon", "memory": {}}),
         }
 
     @staticmethod
@@ -59,16 +61,19 @@ class Memory:
         return [json.loads(l) for l in lines if l.strip()]
 
     def render_world(self, limit: int = 120) -> str:
-        w = self.state["world"]
+        w = normalize_world(self.state["world"])
         out = ["# NODES"]
-        for name in sorted(w["nodes"])[:limit]:
-            out.append(f"- {name} ({w['nodes'][name]})")
+        for node in sorted(w["nodes"].values(), key=lambda item: item["label"])[:limit]:
+            if node.get("visibility", "standard") == "standard":
+                out.append(f"- {node['label']} ({node['type']})")
         out.append("\n# EDGES")
-        for e in sorted(w["edges"])[:limit]:
-            out.append(f"- {e[0]} | {e[1]} | {e[2]}")
+        for e in w["edges"][:limit]:
+            if e.get("visibility", "standard") == "standard":
+                out.append(f"- {w['nodes'][e['source']]['label']} | {e['relation']} | {w['nodes'][e['target']]['label']}")
         out.append("\n# CONSTRAINTS")
-        for c in sorted(w["constraints"])[:limit]:
-            out.append(f"- {c[0]} | {c[1]} | {c[2]}")
+        for c in w["constraints"][:limit]:
+            if c.get("visibility", "standard") == "standard":
+                out.append(f"- {w['nodes'][c['target']]['label']} | {c['rule']} | {c['value']}")
         return "\n".join(out)
 
     def render_self(self) -> str:
