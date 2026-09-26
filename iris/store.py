@@ -215,7 +215,19 @@ class Store:
 
     @staticmethod
     def _install_identity(db: sqlite3.Connection, now: float) -> None:
-        """Idempotently migrate the active Self to the reviewed Halcyon manifest."""
+        """Idempotently migrate the active Self to the reviewed Halcyon manifest.
+
+        Runs on every Store construction, so it must not clobber an identity pack
+        (iris/identity_packs.py) a caller switched in — otherwise every restart
+        would silently revert the active Self back to Halcyon. Skip entirely if
+        some other subject already holds the active claims; only migrate when
+        Halcyon is the active Self or no Self has been installed yet.
+        """
+        other_active = db.execute(
+            "SELECT 1 FROM self_claims WHERE status='active' AND subject!='Halcyon' LIMIT 1"
+        ).fetchone()
+        if other_active:
+            return
         manifest_path = Path(__file__).resolve().parent.parent / "seeds" / "halcyon_identity.json"
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         version = int(manifest["version"])
