@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Graph from "graphology";
-import forceAtlas2 from "graphology-layout-forceatlas2";
-import Sigma from "sigma";
-import { ArrowDownLeft, ArrowUpRight, CircleDot, Database, Focus, Maximize2, Minus, Network, Plus, Search, Sparkles, X } from "lucide-react";
+import { ArrowDownLeft, ArrowUpRight, CircleDot, Database, Network, Search, Sparkles, X } from "lucide-react";
 import { api, ActiveContext, AffectState, MemoryNode, ScopedMemory, TimelineEvent, WorldMemory } from "./api";
 import { AffectLens, ChannelFilter, ChannelTabs, Explorer, LensTabs, MemoryLens, Timeline } from "./BraidPanels";
+import { GraphCanvas, formatType, initialPosition, layoutGraph } from "./GraphCanvas";
 
 const TYPE_COLORS: Record<string, string> = {
   Person: "#c3b5ff", Principle: "#a7d7c5", Belief: "#a7d7c5", DerivedPattern: "#d5a6c2",
@@ -20,16 +19,6 @@ const colorFor = (type: string) => {
   for (let i = 0; i < type.length; i += 1) hash = ((hash << 5) - hash + type.charCodeAt(i)) | 0;
   return palette[Math.abs(hash) % palette.length];
 };
-const formatType = (type: string) => type.replace(/([a-z])([A-Z])/g, "$1 $2");
-
-const initialPosition = (name: string, index: number, count: number) => {
-  let hash = 2166136261;
-  for (let i = 0; i < name.length; i += 1) hash = Math.imul(hash ^ name.charCodeAt(i), 16777619);
-  const angle = (index / Math.max(count, 1)) * Math.PI * 2 + ((hash >>> 0) % 100) / 100;
-  const radius = 4 + ((hash >>> 8) % 100) / 35;
-  return { x: Math.cos(angle) * radius, y: Math.sin(angle) * radius };
-};
-
 function buildGraph(memory: WorldMemory): Graph {
   const graph = new Graph({ multi: true, type: "directed" });
   const names = new Set(Object.keys(memory.nodes));
@@ -45,13 +34,7 @@ function buildGraph(memory: WorldMemory): Graph {
   memory.edges.forEach((edge) => {
     if (!graph.hasEdge(edge.id)) graph.addDirectedEdgeWithKey(edge.id, edge.source, edge.target, { label: edge.relation, color: "#4c4a50", size: 1 });
   });
-  if (graph.order > 1 && graph.size > 0) {
-    forceAtlas2.assign(graph, { iterations: Math.min(160, 40 + graph.order * 2), settings: { gravity: 1.1, scalingRatio: 7, slowDown: 4 } });
-  }
-  graph.forEachNode((node) => {
-    const identity = Boolean(graph.getNodeAttribute(node, "primaryIdentity"));
-    graph.setNodeAttribute(node, "size", identity ? 19 : Math.min(14, 5.5 + Math.sqrt(graph.degree(node)) * 1.8));
-  });
+  layoutGraph(graph, { emphasizedAttribute: "primaryIdentity" });
   return graph;
 }
 
@@ -101,58 +84,13 @@ function NodeInspector({ node, onClose, onSelect }: { node: MemoryNode; onClose:
   </aside>;
 }
 
-export function WorldGraph({ memory, selected, onSelect }: { memory: WorldMemory; selected: string | null; onSelect: (name: string | null) => void }) {
-  const container = useRef<HTMLDivElement>(null);
-  const renderer = useRef<Sigma | null>(null);
-  const selectedRef = useRef<string | null>(selected);
+export function MemoryGraph({ memory, selected, onSelect }: { memory: WorldMemory; selected: string | null; onSelect: (name: string | null) => void }) {
   const graph = useMemo(() => buildGraph(memory), [memory]);
-  useEffect(() => {
-    if (!container.current || graph.order === 0) return;
-    const sigma = new Sigma(graph, container.current, {
-      allowInvalidContainer: true,
-      renderEdgeLabels: false,
-      labelColor: { color: "#d9d5df" },
-      labelFont: "DM Sans",
-      labelSize: 12,
-      labelDensity: .7,
-      labelGridCellSize: 140,
-      labelRenderedSizeThreshold: 9,
-      defaultEdgeColor: "#35333a",
-      defaultNodeColor: "#9484db",
-      stagePadding: 50,
-      nodeReducer: (node, data) => {
-        const active = selectedRef.current;
-        if (!active) return data;
-        if (node === active) return { ...data, highlighted: true, zIndex: 2, size: data.size * 1.28, color: "#d4caff" };
-        if (graph.areNeighbors(node, active)) return { ...data, zIndex: 1, size: data.size * 1.08 };
-        return { ...data, color: "#302e35", label: "", zIndex: 0 };
-      },
-      edgeReducer: (edge, data) => {
-        const active = selectedRef.current;
-        if (!active) return data;
-        const [source, target] = graph.extremities(edge);
-        return source === active || target === active ? { ...data, color: "#8074aa", size: 1.8, zIndex: 1 } : { ...data, color: "#28272a", hidden: false, zIndex: 0 };
-      },
-    });
-    sigma.on("clickNode", ({ node }) => onSelect(node));
-    sigma.on("clickStage", () => onSelect(null));
-    renderer.current = sigma;
-    return () => { sigma.kill(); renderer.current = null; };
-  }, [graph, onSelect]);
-  useEffect(() => {
-    selectedRef.current = selected;
-    renderer.current?.refresh();
-    if (!selected || !renderer.current || !graph.hasNode(selected)) return;
-    const display = renderer.current.getNodeDisplayData(selected);
-    if (display) renderer.current.getCamera().animate({ x: display.x, y: display.y, ratio: .45 }, { duration: 350 });
-  }, [selected, graph]);
-  const zoom = (factor: number) => renderer.current?.getCamera().animatedZoom({ duration: 220, factor });
-  const reset = () => renderer.current?.getCamera().animatedReset({ duration: 320 });
   if (graph.order === 0) return <div className="graph-empty"><div><Network size={28} /><h2>No world yet</h2><p>As Halcyon imagines and remembers relationships, they will appear here.</p></div></div>;
   const types = [...new Set(Object.values(memory.nodes).map((node) => node.type))].slice(0, 6);
-  return <div className="graph-stage"><div className="graph-atmosphere" /><div className="sigma-container" ref={container} />
+  return <div className="graph-stage"><div className="graph-atmosphere" />
+    <GraphCanvas graph={graph} selected={selected} onSelect={onSelect} />
     <div className="graph-intro"><span>Living memory</span><p>Select anything to trace what it means and where it came from.</p></div>
-    <div className="graph-controls" aria-label="Graph controls"><button onClick={() => zoom(1.4)} aria-label="Zoom in"><Plus size={15} /></button><button onClick={() => zoom(.72)} aria-label="Zoom out"><Minus size={15} /></button><button onClick={reset} aria-label="Fit graph"><Maximize2 size={14} /></button>{selected ? <button onClick={() => onSelect(null)} aria-label="Clear focus"><Focus size={14} /></button> : null}</div>
     <div className="graph-key">{types.map((type) => <span key={type}><i style={{ background: colorFor(type) }} />{formatType(type)}</span>)}</div>
     <div className="graph-legend"><span><b>{graph.order}</b> memories</span><span><b>{graph.size}</b> connections</span><span className="graph-state"><i />state {memory.sequence}</span></div>
   </div>;
@@ -193,7 +131,7 @@ export default function MemoryView() {
       <span className="memory-sequence"><i /> live state {world?.sequence ?? "…"}</span>
     </header>
     <div className="memory-subnav"><LensTabs lens={lens} onChange={setLens} />{lens !== "affect" ? <ChannelTabs channel={channel} onChange={setChannel} /> : null}<div className="scope-pills"><span>global</span>{activeContext?.skills.map((item) => <span key={item}>{item}</span>)}{activeContext?.world ? <span>{activeContext.world}</span> : null}{activeContext?.task ? <span>{activeContext.task}</span> : null}</div></div>
-    <section className="memory-content">{error ? <div className="memory-error"><Database size={26} /><h2>Memory unavailable</h2><p>{error}</p></div> : world ? lens === "graph" && projectedWorld ? <WorldGraph memory={projectedWorld} selected={selected} onSelect={setSelected} /> : lens === "explorer" ? <Explorer entries={channel === "all" ? entries : entries.filter((item) => item.channel === channel)} query={query} /> : lens === "timeline" ? <Timeline events={channel === "all" ? timeline : timeline.filter((item) => item.kind === channel)} /> : affect ? <AffectLens affect={affect} emotional={entries.filter((item) => item.channel === "emotional_semantic")} /> : <div className="memory-loading">Loading Affect…</div> : <div className="memory-loading">Loading world…</div>}
+    <section className="memory-content">{error ? <div className="memory-error"><Database size={26} /><h2>Memory unavailable</h2><p>{error}</p></div> : world ? lens === "graph" && projectedWorld ? <MemoryGraph memory={projectedWorld} selected={selected} onSelect={setSelected} /> : lens === "explorer" ? <Explorer entries={channel === "all" ? entries : entries.filter((item) => item.channel === channel)} query={query} /> : lens === "timeline" ? <Timeline events={channel === "all" ? timeline : timeline.filter((item) => item.kind === channel)} /> : affect ? <AffectLens affect={affect} emotional={entries.filter((item) => item.channel === "emotional_semantic")} /> : <div className="memory-loading">Loading Affect…</div> : <div className="memory-loading">Loading world…</div>}
       {node ? <NodeInspector node={node} onClose={() => setSelected(null)} onSelect={setSelected} /> : null}
     </section>
   </main>;

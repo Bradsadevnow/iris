@@ -541,12 +541,20 @@ Exact shapes will be formalized with generated OpenAPI types. Required endpoints
 - `GET /api/turns/{turn_id}`
 - `GET /api/turns/{turn_id}/stream` or an SSE response from turn creation
 
+### World
+
+- `GET /api/world` — known/seeded entity graph (real people, places, organizations) that Memory projects.
+
+### Imagination
+
+- `GET /api/imagination/world` — the separate, fictional world graph Imagination's nomination verbs write to.
+- `GET /api/imagination/nodes/{node_id}` — entity detail (properties, relations, constraints, provenance) within that graph.
+
 ### Memory
 
-- `GET /api/memory/world`
 - `GET /api/memory/self`
 - `GET /api/memory/search?q=...`
-- `GET /api/memory/nodes/{node_id}`
+- `GET /api/memory/nodes/{node_id}` — entity detail within the known/seeded entity graph.
 - `GET /api/memory/nodes/{node_id}/provenance`
 
 ### Governance

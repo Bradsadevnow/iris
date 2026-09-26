@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { Brain, CircleDot, Pause, Send, Sparkles, Square } from "lucide-react";
 import { api, ImaginationRun, Message, WorldMemory } from "./api";
-import { WorldGraph } from "./MemoryView";
+import ImaginationWorldGraph from "./ImaginationWorldGraph";
 
 type LiveTurn = { content: string; reasoning: string; status: "thinking" | "responding" | "saving"; kind: "chat" | "autonomous" };
 
@@ -46,7 +46,7 @@ export default function ImaginationView() {
 
   const updateRun = (next: ImaginationRun) => { runRef.current = next; setRun(next); };
   const refresh = async (runId?: string) => {
-    const [nextWorld, nextRun] = await Promise.all([api.world(), runId ? api.imaginationRun(runId) : Promise.resolve(null)]);
+    const [nextWorld, nextRun] = await Promise.all([api.imaginationWorld(), runId ? api.imaginationRun(runId) : Promise.resolve(null)]);
     setWorld(nextWorld);
     if (nextRun) updateRun(nextRun);
   };
@@ -64,7 +64,7 @@ export default function ImaginationView() {
     events.onerror = () => { if (events.readyState !== EventSource.CLOSED) setError("The imagination stream disconnected."); };
   };
   useEffect(() => {
-    Promise.all([api.world(), api.imaginationRuns()]).then(async ([nextWorld, runs]) => {
+    Promise.all([api.imaginationWorld(), api.imaginationRuns()]).then(async ([nextWorld, runs]) => {
       setWorld(nextWorld);
       if (runs[0]) { const detail = await api.imaginationRun(runs[0].id); updateRun(detail); if (detail.status === "running" || detail.conversation?.active_turn) subscribe(detail.id); }
     }).catch(() => setError("Imagination is unavailable. Restart the Halcyon server."));
@@ -100,6 +100,6 @@ export default function ImaginationView() {
       <button onClick={stop} disabled={run?.status !== "running"}><Square size={11} />Stop</button>
     </div></header>
     <div className="imagination-status"><span className={`run-state ${run?.status ?? "idle"}`}><i />{run?.status ?? "idle"}</span><span>{run ? `${run.completed_steps} autonomous turns complete` : "New world session"}</span><span>{world ? `state ${world.sequence} · ${Object.keys(world.nodes).length} nodes` : "loading world"}</span>{error ? <b>{error}</b> : null}</div>
-    <div className="imagination-split"><section className="imagination-chat"><ImaginationTranscript run={run} live={live} /><form className="world-composer" onSubmit={send}><textarea aria-label="Talk to Halcyon about the world" placeholder="Talk to Halcyon about this world…" rows={2} value={draft} onChange={(event) => setDraft(event.target.value)} disabled={busy} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); event.currentTarget.form?.requestSubmit(); } }} /><button aria-label="Send world message" disabled={busy || !draft.trim()}><Send size={14} /></button></form></section><section className="imagination-world"><div className="world-pane-label"><span>Canonical world</span><b>Live graph</b></div>{world ? <WorldGraph memory={world} selected={selected} onSelect={setSelected} /> : <div className="memory-loading">Loading world…</div>}</section></div>
+    <div className="imagination-split"><section className="imagination-chat"><ImaginationTranscript run={run} live={live} /><form className="world-composer" onSubmit={send}><textarea aria-label="Talk to Halcyon about the world" placeholder="Talk to Halcyon about this world…" rows={2} value={draft} onChange={(event) => setDraft(event.target.value)} disabled={busy} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); event.currentTarget.form?.requestSubmit(); } }} /><button aria-label="Send world message" disabled={busy || !draft.trim()}><Send size={14} /></button></form></section><section className="imagination-world"><div className="world-pane-label"><span>Canonical world</span><b>Live graph</b></div>{world ? <ImaginationWorldGraph memory={world} selected={selected} onSelect={setSelected} /> : <div className="memory-loading">Loading world…</div>}</section></div>
   </main>;
 }

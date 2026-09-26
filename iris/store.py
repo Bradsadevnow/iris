@@ -108,7 +108,9 @@ class Store:
         );
         CREATE TABLE IF NOT EXISTS canonical_state (
           singleton INTEGER PRIMARY KEY CHECK(singleton = 1), sequence INTEGER NOT NULL,
-          world_json TEXT NOT NULL, self_json TEXT NOT NULL, updated_at REAL NOT NULL
+          world_json TEXT NOT NULL, self_json TEXT NOT NULL,
+          imagination_world_json TEXT NOT NULL DEFAULT '{"schema_version": 2, "sources": {}, "nodes": {}, "edges": [], "constraints": []}',
+          updated_at REAL NOT NULL
         );
         CREATE TABLE IF NOT EXISTS seed_imports (
           seed_id TEXT NOT NULL, seed_version INTEGER NOT NULL, seed_hash TEXT NOT NULL,
@@ -176,12 +178,19 @@ class Store:
         """
         with self.connect() as db:
             db.executescript(schema)
+            columns = {row[1] for row in db.execute("PRAGMA table_info(canonical_state)")}
+            if "imagination_world_json" not in columns:
+                db.execute(
+                    "ALTER TABLE canonical_state ADD COLUMN imagination_world_json TEXT NOT NULL "
+                    "DEFAULT '{\"schema_version\": 2, \"sources\": {}, \"nodes\": {}, \"edges\": [], \"constraints\": []}'"
+                )
             now = time.time()
             world = empty_world()
             self_state = {"name": "halcyon", "memory": {}}
             db.execute(
-                "INSERT OR IGNORE INTO canonical_state VALUES (1, 0, ?, ?, ?)",
-                (json.dumps(world), json.dumps(self_state), now),
+                "INSERT OR IGNORE INTO canonical_state (singleton, sequence, world_json, self_json, imagination_world_json, updated_at) "
+                "VALUES (1, 0, ?, ?, ?, ?)",
+                (json.dumps(world), json.dumps(self_state), json.dumps(empty_world()), now),
             )
             for dimension in ('joy','sadness','fear','anger','trust','disgust','surprise','anticipation'):
                 db.execute("INSERT OR IGNORE INTO affect_state VALUES (?,50.0,50.0,0.015,10.0,?)", (dimension, now))
@@ -319,6 +328,7 @@ class Store:
             return row["sequence"], {
                 "world": normalize_world(json.loads(row["world_json"])),
                 "self": json.loads(row["self_json"]),
+                "imagination_world": normalize_world(json.loads(row["imagination_world_json"])),
             }
         finally:
             if owns:
@@ -430,8 +440,9 @@ class Store:
             next_sequence = current_sequence + 1 if changed else current_sequence
             if changed:
                 db.execute(
-                    "UPDATE canonical_state SET sequence=?, world_json=?, self_json=?, updated_at=? WHERE singleton=1",
-                    (next_sequence, json.dumps(new_state["world"]), json.dumps(new_state["self"]), now),
+                    "UPDATE canonical_state SET sequence=?, world_json=?, self_json=?, imagination_world_json=?, updated_at=? WHERE singleton=1",
+                    (next_sequence, json.dumps(new_state["world"]), json.dumps(new_state["self"]),
+                     json.dumps(new_state["imagination_world"]), now),
                 )
             message_id = _id("msg")
             db.execute(

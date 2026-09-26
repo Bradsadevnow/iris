@@ -100,38 +100,43 @@ Imagination is a persistent world session, not a disposable generation job.
 - The left side contains a conversation with Halcyon about the current imagined world.
 - A chat response may nominate one world change, but ordinary discussion does not require one.
 - **Rip** runs the requested number of additional autonomous world-building turns.
-- Chat turns and autonomous turns share one conversation, one canonical entity graph, and the
-  same gate and transaction machinery.
+- Chat turns and autonomous turns share one conversation, the canonical imagined-world graph, and
+  the same gate and transaction machinery.
 - An autonomous counter advances only after a world mutation commits. A malformed or denied
   attempt receives one governed retry before the run fails.
 - Each committed step refreshes the right-hand graph and focuses the changed entity when possible.
 
 ### Important graph distinction
 
-The repository currently has a conceptual naming collision:
+There are three canonical graphs/dicts in `canonical_state`, and they are never mixed:
 
-1. **Imagined world graph** — fictional entities, places, events, relations, aliases, and
-   constraints created by Imagination.
-2. **Memory graph** — experiences and cognitive/emotional meanings connected by scope,
-   derivation, provenance, and retrieval relationships.
+1. **Imagined world graph** (`canonical_state.imagination_world_json`, `state["imagination_world"]`)
+   — fictional entities, places, events, relations, aliases, and constraints created by
+   Imagination's `create`/`relate`/`constrain`/`occur`/`name` verbs. Served at `/api/imagination/world`
+   and `/api/imagination/nodes/{id}`, rendered by `ImaginationWorldGraph.tsx`. Starts empty.
+2. **Known/seeded entity graph** (`canonical_state.world_json`, `state["world"]`) — real people,
+   places, and organizations imported by `iris/profile_seed.py` (e.g. the user's own biography).
+   Served at `/api/world` and `/api/memory/nodes/{id}`, and is what Memory's graph projects onto
+   (augmented with scope/semantic-memory nodes via `braidProjection` in `MemoryView.tsx`).
+3. **Memory graph** — experiences and cognitive/emotional meanings connected by scope, derivation,
+   provenance, and retrieval relationships, projected over graph (2) above.
 
-These are not the same graph.
+This used to be a single shared `world_json`, which meant seeded biography and Imagination's
+fictional entities lived in the same store — Imagination would render (and could nominate changes
+onto) the user's real biography. `iris/tools.py`'s imagination verbs now write to
+`imagination_world_json` exclusively; `world_json` is only ever written by profile import. The
+UI keeps the same separation: `ImaginationWorldGraph.tsx` and `MemoryView.tsx`'s `MemoryGraph` are
+two distinct components using world-native vs. memory-native copy, sharing only the domain-neutral
+`GraphCanvas.tsx` primitive (Sigma lifecycle, layout, camera, selection highlighting).
 
-At present, canonical SQLite stores an entity graph under `canonical_state.world_json`. The
-Imagination pane renders that graph, which is correct in source data, but it reuses `WorldGraph`
-from the Memory UI. That renderer includes memory-oriented labels such as “Living memory” and the
-Memory page can augment its projection with semantic-memory nodes. The reuse makes the Imagination
-pane look like a memory graph even when its input is only the world entity graph.
-
-The next graph pass should separate domain projection from rendering:
-
-```text
-canonical imagined world ----> WorldProjection ----> WorldCanvas
-canonical Memory channels ----> MemoryProjection --> MemoryCanvas
-```
-
-Shared low-level graph primitives are fine. Domain labels, node taxonomy, inspectors, filters,
-layout rules, and update animations should remain separate. See **Current design questions** below.
+`model_context()` in `iris/server.py` presents both worlds to ordinary chat (so Halcyon can read
+and nominate imagined-world changes in any conversation, not only inside the Imagination view,
+labeled `WHAT YOU KNOW` vs `THE WORLD YOU ARE IMAGINING`), but Imagination-specific contexts
+(`imagination_context`, `world_dialogue_context`) omit `WHAT YOU KNOW` and the `experience`/
+`cognitive_semantic` Memory channels, so a fictional turn's prompt never mixes in unrelated real
+facts. See **Current design questions** below for what is still open (multiple named worlds,
+world history/replay, and whether an imagined-world session should ever write a summary back to
+autobiographical Memory).
 
 ## Memory and retrieval
 
@@ -172,7 +177,7 @@ Important durable records include:
 
 - conversations, turns, messages, and captured contexts;
 - proposals, gate decisions, receipts, and mutations;
-- canonical world and legacy self-memory JSON inside the canonical-state row;
+- canonical known-world, imagined-world, and legacy self-memory JSON inside the canonical-state row;
 - Memory channel entries and Affect history;
 - canonical Self claims and domain versions;
 - active retrieval context;
@@ -277,10 +282,11 @@ These are active architecture decisions, not hidden implementation details:
 1. **World versus Memory graph.** Define a first-class imagined-world projection and canvas,
    including world-specific node types, inspectors, temporal events, constraints, and visual
    language. Keep Memory provenance and semantics in a separate projection.
-2. **Worlds as state owners.** Decide whether one `world_json` remains adequate or whether each
-   imagined world owns a stable ID, graph, history, status, and boundary.
-3. **Memory of imagination.** Decide what Halcyon remembers about creating or discussing a world
-   without copying every fictional entity into autobiographical Memory.
+2. **Worlds as state owners.** Decide whether one `imagination_world_json` remains adequate or
+   whether each imagined world owns a stable ID, graph, history, status, and boundary.
+3. **Memory of imagination.** Resolved for now: Imagination stays fully isolated from
+   autobiographical Memory. No automatic summary write-back — if the user wants something from an
+   imagined world remembered as an autobiographical fact, that requires an explicit nomination.
 4. **Temporal world semantics.** `occur` currently produces graph state, but the UI lacks a real
    timeline, eras, causal ordering, and current-versus-historical world views.
 5. **Replay.** The ledger contains enough turn and mutation evidence for substantial inspection,
@@ -292,42 +298,48 @@ These are active architecture decisions, not hidden implementation details:
 
 ## Graph separation roadmap
 
-The immediate goal is to make the Imagination graph a view of the imagined world—not a Memory
-view with different data passed into it. This should land in small, inspectable slices.
+The goal is to make the Imagination graph a view of its own imagined-world store — not a Memory
+view with different data passed into it, and not the same store as the seeded/known-entity graph.
+Phases 1–3 below are done; this landed as small, inspectable slices.
 
-### Phase 1 — Separate names and API surfaces
+### Phase 1 — Separate names, API surfaces, and storage ✅
 
-- Add `/api/world` as the explicit canonical imagined-world read endpoint.
-- Keep `/api/memory/*` for Memory channels, retrieval, timelines, and Memory projections.
-- Rename the current ambiguous frontend graph component.
-- Preserve `/api/memory/world` temporarily as a compatibility alias, then remove it after callers
-  migrate.
+- `/api/world` is the known/seeded entity graph (`state["world"]`) that Memory projects.
+- `/api/imagination/world` is the separate, fictional graph (`state["imagination_world"]`) that
+  Imagination's verbs write to — a distinct `canonical_state.imagination_world_json` column, not a
+  shared store. `/api/imagination/nodes/{id}` mirrors `/api/memory/nodes/{id}` for that graph.
+- `/api/memory/*` stays for Memory channels, retrieval, timelines, and Memory projections.
+- No compatibility alias was kept for the old `/api/memory/world` path — the one frontend caller
+  migrated in the same change that introduced `/api/world`, so there was nothing left to alias.
 
 **Done when:** no Imagination code imports a component named for Memory or fetches its world through
-a Memory URL.
+a Memory URL, **and** an Imagination-created entity cannot appear in, or overwrite, the seeded
+known-entity graph, or vice versa. ✅ verified end-to-end (chat/autonomous Imagination turns only
+ever mutate `imagination_world_json`; profile import only ever mutates `world_json`).
 
-### Phase 2 — Extract neutral rendering primitives
+### Phase 2 — Extract neutral rendering primitives ✅
 
-- Extract the shared Sigma lifecycle, camera, zoom, fit, selection, and resize behavior into a
-  domain-neutral `GraphCanvas`.
-- Keep graph construction and domain labels outside that primitive.
-- Preserve visible focus and camera movement when a committed patch identifies a changed entity.
+- `GraphCanvas.tsx` holds the shared Sigma lifecycle, force-directed layout, camera, zoom/fit, and
+  selection-highlight reducers.
+- Graph construction, node-type color palettes, and copy stay in `ImaginationWorldGraph.tsx` and
+  `MemoryView.tsx` respectively.
+- Camera still animates to the newly committed entity via the existing `selected`/`onSelect`
+  contract.
 
 **Done when:** World and Memory can share rendering mechanics without sharing node semantics or UI
-copy.
+copy. ✅
 
-### Phase 3 — Build the Imagination world projection
+### Phase 3 — Build the Imagination world projection ✅
 
-- Create a dedicated `ImaginationWorldGraph` and world projection.
-- Use world-native categories such as place, person, organization, object, event, concept, and
-  reference.
-- Give relations, aliases, constraints, and occurred events distinct visual treatment.
-- Replace “Living memory” language with world-state language.
-- Add an inspector for entity properties, relationships, constraints, aliases, event involvement,
-  creation turn, source proposal, and commit receipt.
+- `ImaginationWorldGraph.tsx` is a dedicated component reading `/api/imagination/world`.
+- Node coloring keys off world-native categories (place, person, organization, object, event,
+  concept), falling back to a hash palette for free-form types.
+- Copy reads “Canonical World” / “entities” / “relations” — no “Living memory” language.
+- `WorldEntityInspector` shows properties, relations, constraints, aliases, and creation
+  provenance, reading `/api/imagination/nodes/{id}`.
 
 **Done when:** a user can watch the fictional world develop and inspect what exists in that world
-without encountering Memory-channel concepts.
+without encountering Memory-channel concepts. ✅
 
 ### Phase 4 — Build the Memory projection independently
 
@@ -353,10 +365,36 @@ and meaning system.
 
 ### Deferred decision — one world or many
 
-The current server has one canonical `world_json` shared by all Imagination sessions. The first
-four phases should preserve that simple model. Multiple worlds would require stable world IDs,
-world selection in Context, per-world boundaries and versions, and explicit cross-world Memory.
-That expansion should happen only after the single-world projection is clean.
+The server has one canonical `imagination_world_json` shared by all Imagination sessions (separate
+from the one canonical `world_json` Memory projects — see Phase 1). Phases 4–5 should preserve that
+simple model. Multiple named imagined worlds would require stable world IDs, world selection in
+Context, per-world boundaries and versions, and explicit cross-world Memory. That expansion should
+happen only after the single-imagined-world projection is clean.
+
+## System & architecture roadmap
+
+Beyond the Graph Separation Roadmap, the following architecture refactorings are planned:
+
+### 1. Server route modularization (`server.py`)
+
+Split the monolithic ~1,000-line `iris/server.py` into focused FastAPI routers and service modules:
+- `iris/routers/chat.py` — turn execution, message history, token counting, active retrieval context.
+- `iris/routers/imagination.py` — persistent world sessions, streaming autonomous batches, run controls.
+- `iris/routers/system.py` — Affect vector state, System Identity projections, Self claims, capabilities, MCP declarations.
+- `iris/services/turn_executor.py` — atomic adjudication, model streaming, trial commit logic.
+- `iris/services/stream_hub.py` — SSE event streaming hub (`StreamHub`) and client channel lifecycle.
+
+### 2. Legacy CLI & self migration
+
+- **SQLite CLI Integration**: Refactor `run.py` and `--imagine` CLI flags to use `Store` (SQLite WAL) instead of the legacy JSON `Memory` class to prevent state divergence when running CLI and server concurrently.
+- **Canonical Self Claims**: Deprecate the legacy `remember` verb (`self.memory` dictionary) in favor of nominations writing directly to `self_claims` with versioning vectors.
+
+### 3. Test suite & integration hardening
+
+- **Autonomous Run Testing**: Add automated integration tests for multi-turn `Imagination` runs, pause/stop states, and batch counters.
+- **Gate Invariant Breach Tests**: Test rollback mechanics when trial states breach boundary constraints.
+- **Concurrency & Re-adjudication**: Unit test optimistic lock conflict retries and single-turn conversation lock guards.
+
 
 ## Experimental limits
 

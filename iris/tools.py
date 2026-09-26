@@ -1,8 +1,10 @@
 """The verbs — the only code that touches canonical state, one function per verb.
 
 Five imagination verbs (create / relate / constrain / occur / name) that grow the
-world graph, living behind the gate instead of after a permissive prose extractor.
-Plus `remember`, the sole writer of the SELF graph.
+IMAGINED world graph (state["imagination_world"]) — fictional entities Halcyon and
+the user build together, distinct from state["world"] (the seeded, factual entity
+graph Memory projects). Living behind the gate instead of after a permissive prose
+extractor. Plus `remember`, the sole writer of the SELF graph.
 
 Each returns a small result dict describing what changed (or a noop). A repeat
 is a noop, not an error — the gate still receipts it.
@@ -12,10 +14,10 @@ from __future__ import annotations
 from .graph import edge_id, normalize_world, slug
 
 
-# ── imagination: writes world/* ────────────────────────────────────────────
+# ── imagination: writes world/* (into state["imagination_world"]) ─────────
 
 def _create(state, what, a):
-    w = state["world"] = normalize_world(state["world"])
+    w = state["imagination_world"] = normalize_world(state["imagination_world"])
     node_id = f"entity:{slug(a['name'])}"
     if node_id in w["nodes"]:
         return {"noop": f"node {a['name']!r} already exists"}
@@ -24,7 +26,7 @@ def _create(state, what, a):
 
 
 def _relate(state, what, a):
-    w = state["world"] = normalize_world(state["world"])
+    w = state["imagination_world"] = normalize_world(state["imagination_world"])
     source, target = f"entity:{slug(a['subject'])}", f"entity:{slug(a['object'])}"
     for node_id, label in ((source, a["subject"]), (target, a["object"])):
         w["nodes"].setdefault(node_id, {"id": node_id, "label": label, "type": "reference", "visibility": "standard", "properties": {}, "sources": []})
@@ -37,7 +39,7 @@ def _relate(state, what, a):
 
 
 def _constrain(state, what, a):
-    w = state["world"] = normalize_world(state["world"])
+    w = state["imagination_world"] = normalize_world(state["imagination_world"])
     target = f"entity:{slug(a['target'])}"
     w["nodes"].setdefault(target, {"id": target, "label": a["target"], "type": "reference", "visibility": "standard", "properties": {}, "sources": []})
     c = {"id": edge_id(target, a["rule"], a["value"]), "target": target, "rule": a["rule"], "value": a["value"], "visibility": "standard", "sources": []}
@@ -49,7 +51,7 @@ def _constrain(state, what, a):
 
 def _occur(state, what, a):
     # Events are nodes, never mutations. Nothing is retracted.
-    w = state["world"] = normalize_world(state["world"])
+    w = state["imagination_world"] = normalize_world(state["imagination_world"])
     event, participant = f"entity:{slug(a['event'])}", f"entity:{slug(a['participant'])}"
     w["nodes"].setdefault(event, {"id": event, "label": a["event"], "type": "event", "visibility": "standard", "properties": {}, "sources": []})
     w["nodes"].setdefault(participant, {"id": participant, "label": a["participant"], "type": "reference", "visibility": "standard", "properties": {}, "sources": []})
@@ -85,7 +87,7 @@ def build_invariants(spec: dict) -> dict:
     self_cap = limits.get("self_max_memories", 10_000)
 
     def world_within_budget(state):
-        w = state["world"]
+        w = state["imagination_world"]
         n = len(w["nodes"]) + len(w["edges"]) + len(w["constraints"])
         if n > world_cap:
             return f"world would hold {n} elements, over the declared {world_cap}"

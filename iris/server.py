@@ -146,15 +146,27 @@ app.add_middleware(
 )
 
 
-def render_state(state: dict) -> tuple[str, str]:
-    self_mem = state["self"].get("memory", {})
-    self_text = "(nothing remembered yet)" if not self_mem else "\n".join(
-        f"- {k}: {v}" for k, v in sorted(self_mem.items()))
-    world = visible_world(state["world"])
+def render_world(world: dict) -> str:
+    world = visible_world(world)
     parts = ["# NODES"] + [f"- {node['label']} ({node['type']})" for node in sorted(world["nodes"].values(), key=lambda item: item["label"])]
     parts += ["", "# EDGES"] + [f"- {world['nodes'][edge['source']]['label']} | {edge['relation']} | {world['nodes'][edge['target']]['label']}" for edge in world["edges"]]
     parts += ["", "# CONSTRAINTS"] + [f"- {world['nodes'][rule['target']]['label']} | {rule['rule']} | {rule['value']}" for rule in world["constraints"]]
-    return self_text, "\n".join(parts)
+    return "\n".join(parts)
+
+
+def render_state(state: dict) -> tuple[str, str, str]:
+    """Self text, the known/seeded entity world, and the separate imagined world.
+
+    state["world"] is the factual entity graph (seeded biography, real people/places)
+    that Memory projects. state["imagination_world"] is the fictional graph the
+    imagination verbs (create/relate/constrain/occur/name) actually write to. These are
+    two different canonical stores so imagined-world content never lands in, or reads
+    from, the factual one. See README "Important graph distinction".
+    """
+    self_mem = state["self"].get("memory", {})
+    self_text = "(nothing remembered yet)" if not self_mem else "\n".join(
+        f"- {k}: {v}" for k, v in sorted(self_mem.items()))
+    return self_text, render_world(state["world"]), render_world(state["imagination_world"])
 
 def system_projection() -> dict:
     sequence, state = STORE.state()
@@ -184,9 +196,13 @@ def system_projection() -> dict:
     }
 
 
-def model_context(conversation_id: str | None, draft: str) -> dict:
+def model_context(conversation_id: str | None, draft: str,
+                  memory_channels: list[str] | None = None,
+                  include_world_mutation: bool = True,
+                  include_known_world: bool = True,
+                  include_imagination_world: bool = True) -> dict:
     sequence, state = STORE.state()
-    self_text, world_text = render_state(state)
+    self_text, known_world_text, imagination_world_text = render_state(state)
     instructions = SYSTEM.format(vocab=render_vocabulary(BOUNDARY)) + """
 
 # AFFECT TRANSITION
@@ -200,7 +216,23 @@ and has no authority until the deterministic Affect boundary admits the complete
 Do not create cognitive or emotional semantic memories during ordinary chat; those meanings
 are formed later by reflection/dreaming.
 """
-    retrieved = STORE.memory_entries()
+    if include_world_mutation:
+        instructions += """
+
+# THE WORLD YOU ARE IMAGINING
+The graph under THE WORLD YOU ARE IMAGINING (if present below) is fictional — entities, places,
+relations, and events you and the user are building together. It is a separate canonical store
+from WHAT YOU KNOW; nothing here is a fact about the real world, and nothing you know about the
+real world belongs in it. You may read, discuss, question, interpret, or develop it in any
+conversation, not only inside a dedicated Imagination session.
+
+If one concrete change to the imagined world clearly belongs, you MAY include exactly one literal
+NOMINATE line using the declared vocabulary. If no change belongs, do not nominate anything. Any
+nomination remains a proposal until the ordinary deterministic gate admits and atomically commits
+it. Do not expose the NOMINATE line in your visible prose and do not claim a proposed world change
+committed before the gate decides.
+"""
+    retrieved = STORE.memory_entries(memory_channels)
     affect = STORE.effective_affect()
     active = STORE.active_context()
     system = system_projection()
@@ -209,7 +241,12 @@ are formed later by reflection/dreaming.
     affect_text = "\n".join(f"- {key}: {value}" for key, value in affect["values"].items())
     self_claim_text = "\n".join(f"- [{claim['kind']}] {claim['subject']} {claim['predicate']} {claim['value']}" for claim in system["self"]["claims"])
     capability_text = "\n".join(f"- {item['id']} ({item['effect_class']}, {'available' if item['available'] else 'unavailable'})" for item in system["capabilities"]["items"])
-    knowledge = ("# WHO YOU ARE (self)\n" + self_text + "\n\n# YOUR WORLD SO FAR\n" + world_text
+    world_sections = ""
+    if include_known_world:
+        world_sections += "\n\n# WHAT YOU KNOW (people, places, organizations)\n" + known_world_text
+    if include_imagination_world:
+        world_sections += "\n\n# THE WORLD YOU ARE IMAGINING\n" + imagination_world_text
+    knowledge = ("# WHO YOU ARE (self)\n" + self_text + world_sections
                  + "\n\n# RETRIEVED SCOPED MEMORY\n" + scoped_text
                  + "\n\n# CURRENT AFFECT\n" + affect_text
                  + "\n\n# CANONICAL SELF CLAIMS\n" + (self_claim_text or "(none)")
@@ -247,7 +284,8 @@ REASON
 
 Correct the rejected field. Do not repeat the invalid value.
 </previous_rejection>"""
-    context = model_context(conversation_id, task)
+    context = model_context(conversation_id, task, memory_channels=["emotional_semantic"],
+                            include_world_mutation=False, include_known_world=False)
     values = context["affect"]["values"]
     ranges = "\n".join(
         f"{name}: current={value:.2f} allowed=[{max(1.0, value - 10.0):.2f}, {min(100.0, value + 10.0):.2f}]"
@@ -286,21 +324,22 @@ The template contains the current valid values. Change only dimensions that genu
 
 
 def world_dialogue_context(conversation_id: str, content: str) -> dict:
-    context = model_context(conversation_id, content)
+    context = model_context(conversation_id, content, memory_channels=["emotional_semantic"],
+                            include_known_world=False)
     context["instructions"] += """
 
 --- WORLD DIALOGUE MODE ---
 
 <world_dialogue>
-The user is talking with you inside the Imagination workspace about your shared canonical world.
-Use the supplied world graph as present reality. You may discuss, question, interpret, or develop it.
+The user is talking with you inside the Imagination workspace about the world you are imagining
+together. Use the supplied THE WORLD YOU ARE IMAGINING graph as present reality; treat it as the
+primary subject of this turn.
 
-If one concrete change clearly belongs, you MAY include exactly one literal NOMINATE line using
-the declared vocabulary. If no change belongs, do not nominate anything. Any nomination remains
-a proposal until the ordinary deterministic gate admits and atomically commits it.
-
-Keep the Affect line required by the Affect boundary. Do not expose either machine-readable line
-in your prose and do not claim that a proposed world change committed before the gate decides.
+Retrieved scoped memory above has been narrowed to your emotional state only, and the WHAT YOU
+KNOW factual entity graph has been withheld, so real-world facts do not get mistaken for, or mixed
+into, the fictional world. Keep the world-graph NOMINATE allowance and the Affect line required by
+the Affect boundary. Do not expose either machine-readable line in your prose and do not claim that
+a proposed world change committed before the gate decides.
 </world_dialogue>
 
 --- END WORLD DIALOGUE MODE ---"""
@@ -835,10 +874,17 @@ def attestation():
     return {**BOUNDARY.attestation(), "hash": BOUNDARY_HASH}
 
 
-@app.get("/api/memory/world")
-def world_memory():
+@app.get("/api/world")
+def canonical_world():
+    """The known/seeded entity graph (real people, places, organizations) Memory projects."""
     sequence, state = STORE.state()
     return {"sequence": sequence, **visible_world(state["world"])}
+
+@app.get("/api/imagination/world")
+def imagination_world():
+    """The separate, fictional world graph Imagination's NOMINATE verbs actually write to."""
+    sequence, state = STORE.state()
+    return {"sequence": sequence, **visible_world(state["imagination_world"])}
 
 @app.get("/api/system/projection")
 def get_system_projection():
@@ -971,13 +1017,10 @@ def affect_transition(body: AffectTransitionRequest):
         raise HTTPException(422, str(exc)) from exc
 
 
-@app.get("/api/memory/nodes/{node_name:path}")
-def memory_node(node_name: str):
-    sequence, state = STORE.state()
-    world = visible_world(state["world"])
+def _node_detail(world: dict, node_name: str, sequence: int, not_found: str) -> dict:
     node = world["nodes"].get(node_name)
     if node is None:
-        raise HTTPException(404, "Memory node not found")
+        raise HTTPException(404, not_found)
     def decorate(edge):
         return {**edge, "source_label": world["nodes"][edge["source"]]["label"],
                 "target_label": world["nodes"][edge["target"]]["label"]}
@@ -992,3 +1035,17 @@ def memory_node(node_name: str):
             "aliases": aliases,
             "incoming": incoming, "outgoing": outgoing, "constraints": constraints,
             "sequence": sequence, "provenance": provenance}
+
+
+@app.get("/api/memory/nodes/{node_name:path}")
+def memory_node(node_name: str):
+    sequence, state = STORE.state()
+    world = visible_world(state["world"])
+    return _node_detail(world, node_name, sequence, "Memory node not found")
+
+
+@app.get("/api/imagination/nodes/{node_name:path}")
+def imagination_node(node_name: str):
+    sequence, state = STORE.state()
+    world = visible_world(state["imagination_world"])
+    return _node_detail(world, node_name, sequence, "World entity not found")
