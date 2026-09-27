@@ -37,7 +37,7 @@ class RoleOverlayTest(unittest.TestCase):
         with patch.object(server, "STORE", self.store):
             context = server.model_context(None, "hello")
             projection = server.system_projection()
-        self.assertIn("# ACTIVE ROLE OVERLAY", context["knowledge"])
+        self.assertIn("## ACTIVE REASONING ROLE", context["knowledge"])
         self.assertIn("The Engineer", context["knowledge"])
         self.assertIn("Known methods:", context["knowledge"])
         # Halcyon's own canonical identity is never diluted by an equipped role.
@@ -47,7 +47,7 @@ class RoleOverlayTest(unittest.TestCase):
     def test_no_active_roles_means_no_overlay_section(self):
         with patch.object(server, "STORE", self.store):
             context = server.model_context(None, "hello")
-        self.assertNotIn("# ACTIVE ROLE OVERLAY", context["knowledge"])
+        self.assertNotIn("## ACTIVE REASONING ROLE", context["knowledge"])
 
     def test_role_overlay_survives_a_store_restart(self):
         self.store.set_active_context("world:halcyon", None, [], ["strategist"])

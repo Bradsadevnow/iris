@@ -26,9 +26,13 @@ history, and nearby emotional-semantic memories without synthesizing a single mo
 ## Retrieval
 
 Every chat context includes Global, selected Skill scopes, active World, and active Task.
-Only entries within those scopes are retrieved. The captured turn context stores retrieved
-Memory, Affect, and active scopes separately so Context Used can show what the model actually
-received.
+Only entries within those scopes are eligible. Eligibility is not retrieval: the context router
+selects a smaller supplied set, and later bound tools may return a separate tool-retrieved set.
+The captured turn context must store eligible, supplied, omitted, and tool-retrieved Memory IDs
+separately so Context Used shows what the model actually received.
+
+The complete joint vocabulary and lifecycle are defined in
+[`CONTEXT_BRAID_DESIGN.md`](CONTEXT_BRAID_DESIGN.md).
 
 ## Ordinary-turn Affect boundary
 

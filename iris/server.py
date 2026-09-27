@@ -24,6 +24,7 @@ from .kernel import Boundary, Gate, NOMINATION
 from .graph import normalize_world, visible_world
 from .identity_packs import list_packs, load_pack
 from .loop import SYSTEM, render_vocabulary
+from .projection import ProjectionService
 from .store import ConversationBusy, StateConflict, Store
 from .tools import TOOLS, build_invariants
 
@@ -34,7 +35,7 @@ BOUNDARY_PATH = Path(os.environ.get("IRIS_BOUNDARY", ROOT / "boundary/imagine_an
 DB_PATH = Path(os.environ.get("IRIS_DB", STATE_DIR / "iris.db"))
 IDENTITY_PACKS_DIR = ROOT / "seeds" / "identity_packs"
 LM_BASE = os.environ.get("IRIS_LM_BASE", "http://localhost:1234").rstrip("/")
-LM_MODEL = os.environ.get("IRIS_LM_MODEL", "openai/gpt-oss-20b")
+LM_MODEL = os.environ.get("IRIS_LM_MODEL", "google/gemma-4-e4b")
 LM_API = os.environ.get("IRIS_LM_API", "anthropic").lower()
 LM_API_KEY = os.environ.get("IRIS_LM_API_KEY", "")
 LM_THINKING = os.environ.get("IRIS_LM_THINKING", "1") not in {"0", "false", "False"}
@@ -55,6 +56,14 @@ class TurnRequest(BaseModel):
 class TokenRequest(BaseModel):
     conversation_id: str | None = None
     draft: str = ""
+
+class ProjectionPreviewRequest(BaseModel):
+    message: str
+    include_known_world: bool = True
+    include_imagination_world: bool = True
+    token_budget: int = Field(default=8000, ge=500, le=24000)
+    max_nodes: int = Field(default=80, ge=1, le=200)
+    max_depth: int = Field(default=2, ge=0, le=2)
 
 class ActiveContextRequest(BaseModel):
     world: str | None = "world:halcyon"
@@ -234,6 +243,13 @@ def model_context(conversation_id: str | None, draft: str,
     self_text, known_world_text, imagination_world_text = render_state(state)
     instructions = SYSTEM.format(vocab=render_vocabulary(BOUNDARY)) + """
 
+# GROUNDED RESPONSE PIPELINE
+This pass determines substance, not presentation. Keep canonical Self, task roles, supplied
+knowledge, retrieval handles, and capabilities distinct. A registered capability description is
+not a tool result and MUST NOT be narrated as an invocation. Expansion handles prove only that
+adjacent material was omitted. Use only facts literally supplied in this turn or returned by an
+actual tool-result message. State when requested material is unavailable.
+
 # AFFECT TRANSITION
 The CURRENT AFFECT vector below is canonical input, not prose or personality.
 React naturally from it. At the end of every completed response, propose exactly one complete
@@ -261,33 +277,139 @@ nomination remains a proposal until the ordinary deterministic gate admits and a
 it. Do not expose the NOMINATE line in your visible prose and do not claim a proposed world change
 committed before the gate decides.
 """
-    retrieved = STORE.memory_entries(memory_channels)
+    eligible_memory = STORE.memory_entries(memory_channels)
     affect = STORE.effective_affect()
     active = STORE.active_context()
     system = system_projection()
-    channel_names = {"experience": "EXPERIENCE", "cognitive_semantic": "COGNITIVE MEANING", "emotional_semantic": "EMOTIONAL MEANING"}
-    scoped_text = "\n".join(f"- [{item['scope']}] [{channel_names[item['channel']]}] {item['content']}" for item in retrieved) or "(no scoped memories yet)"
+    projection = ProjectionService(STORE, IDENTITY_PACKS_DIR).build(
+        draft, include_known_world=include_known_world,
+        include_imagination_world=include_imagination_world,
+        memory_channels=memory_channels,
+        token_budget=max(1000, min(12000, CONTEXT_LIMIT // 2)),
+    )
     affect_text = "\n".join(f"- {key}: {value}" for key, value in affect["values"].items())
-    self_claim_text = "\n".join(f"- [{claim['kind']}] {claim['subject']} {claim['predicate']} {claim['value']}" for claim in system["self"]["claims"])
-    capability_text = "\n".join(f"- {item['id']} ({item['effect_class']}, {'available' if item['available'] else 'unavailable'})" for item in system["capabilities"]["items"])
-    world_sections = ""
-    if include_known_world:
-        world_sections += "\n\n# WHAT YOU KNOW (people, places, organizations)\n" + known_world_text
-    if include_imagination_world:
-        world_sections += "\n\n# THE WORLD YOU ARE IMAGINING\n" + imagination_world_text
-    knowledge = ("# WHO YOU ARE (self)\n" + self_text + world_sections
-                 + "\n\n# RETRIEVED SCOPED MEMORY\n" + scoped_text
-                 + "\n\n# CURRENT AFFECT\n" + affect_text
-                 + "\n\n# CANONICAL SELF CLAIMS\n" + (self_claim_text or "(none)")
-                 + "\n\n# AVAILABLE CAPABILITIES\n" + (capability_text or "(none)")
-                 + render_role_overlay(active.get("roles", [])))
+    knowledge = (projection["rendered_context"]
+                 + "\n\n# GOVERNED CONTROL STATE\n"
+                 + "The current Affect vector is required for the hidden transition protocol; it is not knowledge or persona.\n"
+                 + affect_text)
+    selected_roles = projection["strategy"].get("selected_roles", [])
+    expression = expression_profile(selected_roles, affect)
     prior = STORE.context_messages(conversation_id) if conversation_id else []
     conversation = prior + [{"role": "user", "content": draft}]
+    supplied_memory_ids = {node["id"] for node in projection["selected_nodes"] if node["owner"] == "memory"}
+    supplied_memory = [item for item in eligible_memory if item["id"] in supplied_memory_ids]
+    omitted_memory = [item["id"] for item in eligible_memory if item["id"] not in supplied_memory_ids]
+    selected_by_owner = {
+        owner: [node["id"] for node in projection["selected_nodes"] if node["owner"] == owner]
+        for owner in ("self", "context", "role", "memory", "known_world", "imagination", "capabilities")
+    }
+    kernel_ids = {"self:halcyon", "self:identity:name", "self:identity:pronouns",
+                  "self:identity:form", "self:identity:origin", "self:relationship:brad"}
+    context_manifest = {
+        "identity_kernel": [node_id for node_id in selected_by_owner["self"] if node_id in kernel_ids],
+        "activated_self_claims": [node_id for node_id in selected_by_owner["self"] if node_id not in kernel_ids],
+        "task_context": active,
+        "roles": [{"id": role_id, "source": projection["strategy"].get("role_sources", {}).get(role_id, "explicit")}
+                  for role_id in selected_roles],
+        "conversation": {"messages_supplied": len(conversation), "prior_messages": len(prior)},
+        "memory": {"eligible": [item["id"] for item in eligible_memory],
+                   "supplied": [item["id"] for item in supplied_memory],
+                   "omitted": omitted_memory, "tool_retrieved": []},
+        "knowledge": {"known_world": selected_by_owner["known_world"],
+                      "imagination": selected_by_owner["imagination"]},
+        "tools": {"registered": [item["id"] for item in system["capabilities"]["items"] if item["available"]],
+                  "bound": []},
+        "affect_snapshot": {"values": affect["values"], "baselines": affect["baselines"],
+                            "directions": affect["directions"]},
+        "expansion_handles": projection["expansion_handles"],
+        "budgets": projection["request"]["limits"],
+        "versions": projection["domain_versions"],
+    }
     return {"state_sequence": sequence, "state": state, "instructions": instructions,
-            "knowledge": knowledge, "retrieved_memory": retrieved, "affect": affect,
+            "knowledge": knowledge, "retrieved_memory": supplied_memory,
+            "eligible_memory": eligible_memory, "supplied_memory": supplied_memory,
+            "affect": affect,
             "active_context": active, "system_projection": system,
+            "prompt_projection": projection,
+            "expression_profile": expression, "context_manifest": context_manifest,
             "conversation": conversation, "model_id": LM_MODEL,
             "context_limit": CONTEXT_LIMIT}
+
+
+def expression_profile(role_ids: list[str], affect: dict) -> dict:
+    """Build the final rendering profile, deliberately outside knowledge selection."""
+    voice = next((claim["value"] for claim in STORE.self_claims()
+                  if claim["id"] == "self:preference:voice"), "plain, direct language")
+    role_voices = []
+    for role_id in role_ids:
+        path = IDENTITY_PACKS_DIR / f"{role_id}.json"
+        if not path.exists():
+            continue
+        pack = load_pack(path)
+        role_voices.extend(claim["value"] for claim in pack["claims"]
+                           if claim["kind"] == "preference" and claim["predicate"] == "expresses itself with")
+    return {"voice": voice, "role_voices": role_voices, "affect": affect["values"]}
+
+
+def expression_instructions(profile: dict) -> str:
+    role_voice = "\n".join(f"- {value}" for value in profile.get("role_voices", [])) or "- none"
+    affect = "; ".join(f"{key}:{value}" for key, value in profile.get("affect", {}).items())
+    trajectory = profile.get("affect_trajectory", {})
+    direction = "; ".join(f"{key}:{value:+.2f}" for key, value in trajectory.get("delta", {}).items())
+    return f"""You are the final expression layer for Halcyon.
+
+Rewrite the supplied GROUNDED DRAFT into Halcyon's visible voice. Expression happens after
+reasoning and retrieval. Preserve every factual claim, uncertainty, recommendation, refusal,
+and availability boundary. Do not add facts, imply a tool was called, strengthen confidence,
+or introduce new conclusions. Do not mention this pipeline. Return visible prose only: never
+emit NOMINATE or AFFECT lines.
+
+HALCYON VOICE
+- {profile.get('voice', 'plain, direct language')}
+
+ROLE-SPECIFIC PRESENTATION (style only)
+{role_voice}
+
+CURRENT AFFECTIVE COLOR
+{affect}
+
+UNCOMMITTED AFFECTIVE TRAJECTORY (tone only; never describe it as committed state)
+{direction or 'none'}
+"""
+
+
+def validate_expression(grounded: str, expressed: str) -> str:
+    """Reject expression output that crosses the control-plane boundary."""
+    fidelity = expression_fidelity(display_content(grounded), expressed)
+    if not fidelity["passed"]:
+        return display_content(grounded)
+    return fidelity["value"]
+
+
+def expression_fidelity(grounded_visible: str, expressed: str) -> dict:
+    """Conservative structural checks until grounded output is a typed envelope."""
+    value = display_content(expressed).strip()
+    checks: dict[str, bool] = {
+        "nonempty": bool(value),
+        "no_control_lines": "NOMINATE what=" not in expressed and not any(
+            AFFECT_LINE.match(line.strip()) for line in expressed.splitlines()
+        ),
+    }
+    grounded_numbers = set(re.findall(r"(?<![\w])[-+]?\d+(?:\.\d+)?%?", grounded_visible))
+    expressed_numbers = set(re.findall(r"(?<![\w])[-+]?\d+(?:\.\d+)?%?", value))
+    checks["numbers_preserved"] = grounded_numbers <= expressed_numbers
+    grounded_ids = set(re.findall(r"`([^`]+)`", grounded_visible))
+    expressed_ids = set(re.findall(r"`([^`]+)`", value))
+    checks["quoted_identifiers_preserved"] = grounded_ids <= expressed_ids
+    boundary_terms = ("unavailable", "not available", "cannot", "not callable", "not supplied",
+                      "unknown", "uncertain", "proposed", "uncommitted", "denied", "failed")
+    required_boundaries = {term for term in boundary_terms if term in grounded_visible.lower()}
+    checks["availability_preserved"] = all(term in value.lower() for term in required_boundaries)
+    checks["bounded_expansion"] = len(value) <= max(len(grounded_visible) * 3, len(grounded_visible) + 400)
+    return {"passed": all(checks.values()), "checks": checks, "value": value,
+            "grounded_numbers": sorted(grounded_numbers),
+            "grounded_identifiers": sorted(grounded_ids),
+            "required_boundaries": sorted(required_boundaries)}
 
 
 def imagination_context(conversation_id: str, intention: str, step: int,
@@ -545,12 +667,12 @@ async def run_turn(turn: dict, context: dict, imagination_run_id: str | None = N
         if imagination_run_id:
             asyncio.run_coroutine_threadsafe(HUB.emit(imagination_run_id, f"imagination.{event}", {**data, "turn_id": turn_id}), loop)
 
-    def request_model():
-        system = context["instructions"] + "\n\n" + context["knowledge"]
+    def request_model(system: str, messages: list[dict], event_callback,
+                      *, use_thinking: bool = True):
         if LM_API == "anthropic":
-            payload = {"model": LM_MODEL, "system": system, "messages": context["conversation"],
+            payload = {"model": LM_MODEL, "system": system, "messages": messages,
                        "max_tokens": 2048, "stream": True}
-            if LM_THINKING:
+            if LM_THINKING and use_thinking:
                 payload["thinking"] = {"type": "enabled", "budget_tokens": 1024}
             headers = {"Content-Type": "application/json", "anthropic-version": "2023-06-01"}
             if LM_API_KEY:
@@ -559,7 +681,7 @@ async def run_turn(turn: dict, context: dict, imagination_run_id: str | None = N
             parser = parse_anthropic_stream
         elif LM_API == "openai":
             payload = {"model": LM_MODEL,
-                       "messages": [{"role": "system", "content": system}] + context["conversation"],
+                       "messages": [{"role": "system", "content": system}] + messages,
                        "temperature": 0.7, "max_tokens": 2048, "stream": True,
                        "stream_options": {"include_usage": True}}
             headers = {"Content-Type": "application/json"}
@@ -572,10 +694,64 @@ async def run_turn(turn: dict, context: dict, imagination_run_id: str | None = N
         body = json.dumps(payload).encode()
         req = urllib.request.Request(LM_BASE + endpoint, data=body, headers=headers)
         with urllib.request.urlopen(req, timeout=300) as response:
-            return parser(response, callback, cancel)
+            return parser(response, event_callback, cancel)
 
     try:
-        raw, reasoning, provider_usage = await asyncio.to_thread(request_model)
+        grounded_system = context["instructions"] + "\n\n" + context["knowledge"]
+
+        def grounding_callback(event: str, data: dict) -> None:
+            # The grounded draft is authoritative but not yet user-facing.
+            if event != "assistant.delta":
+                callback(event, data)
+
+        raw, reasoning, grounding_usage = await asyncio.to_thread(
+            request_model, grounded_system, context["conversation"], grounding_callback,
+        )
+        if turn_id in HUB.cancelled:
+            cancel.set()
+            result = STORE.fail_turn(turn_id, "generation_cancelled", cancelled=True)
+            await HUB.emit(turn_id, "turn.cancelled", {"turn": result})
+            if imagination_run_id:
+                await HUB.emit(imagination_run_id, "imagination.step.cancelled", {"turn": result})
+            HUB.cancel_events.pop(turn_id, None)
+            return False, "generation cancelled"
+        grounded_visible = display_content(raw)
+        next_affect = affect_proposal(raw)
+        if next_affect is None:
+            raise ValueError("completed response did not propose the required Affect vector")
+        affect_preview = STORE.preview_affect(next_affect)
+        expression_profile_used = copy.deepcopy(context["expression_profile"])
+        expression_profile_used["affect_trajectory"] = affect_preview
+        expressed = grounded_visible
+        expression_usage: dict = {}
+        fidelity = expression_fidelity(grounded_visible, grounded_visible)
+        expression_fallback = False
+        if grounded_visible:
+            try:
+                expression_prompt = expression_instructions(expression_profile_used)
+
+                def expression_callback(event: str, data: dict) -> None:
+                    # Validate the complete rendering before anything reaches chat.
+                    if event == "assistant.usage":
+                        callback(event, data)
+
+                candidate, _, expression_usage = await asyncio.to_thread(
+                    request_model, expression_prompt,
+                    [{"role": "user", "content": "GROUNDED DRAFT\n\n" + grounded_visible}],
+                    expression_callback, use_thinking=False,
+                )
+                fidelity = expression_fidelity(grounded_visible, candidate)
+                expressed = validate_expression(raw, candidate)
+                expression_fallback = not fidelity["passed"]
+                callback("assistant.delta", {"delta": expressed})
+            except Exception:
+                # Expression is presentation only; its failure cannot invalidate
+                # an otherwise governed response.
+                callback("assistant.delta", {"delta": grounded_visible})
+                expressed = grounded_visible
+                expression_fallback = True
+                fidelity = {"passed": False, "checks": {"expression_request": False},
+                            "value": grounded_visible}
         if turn_id in HUB.cancelled:
             cancel.set()
             result = STORE.fail_turn(turn_id, "generation_cancelled", cancelled=True)
@@ -588,11 +764,20 @@ async def run_turn(turn: dict, context: dict, imagination_run_id: str | None = N
         await HUB.emit(turn_id, "assistant.finalizing", {})
         # Finalization and gate execution operate on the authoritative state version.
         for attempt in range(2):
+            if turn_id in HUB.cancelled:
+                result = STORE.fail_turn(turn_id, "generation_cancelled", cancelled=True)
+                await HUB.emit(turn_id, "turn.cancelled", {"turn": result})
+                HUB.cancel_events.pop(turn_id, None)
+                return False, "generation cancelled"
             sequence, state = STORE.state()
             gate = Gate(BOUNDARY, copy.deepcopy(state), TOOLS, build_invariants(SPEC))
             receipt = gate.adjudicate(raw)
             proposal = proposal_from(raw, receipt)
             usage = usage_for_context(context, raw, reasoning)
+            provider_usage = dict(grounding_usage)
+            for key, value in expression_usage.items():
+                if isinstance(value, (int, float)):
+                    provider_usage[key] = provider_usage.get(key, 0) + value
             if provider_usage:
                 input_count = provider_usage.get("input_tokens", provider_usage.get("prompt_tokens", usage["input_tokens"]))
                 output_count = provider_usage.get("output_tokens", provider_usage.get("completion_tokens", usage["output_tokens"]))
@@ -603,12 +788,13 @@ async def run_turn(turn: dict, context: dict, imagination_run_id: str | None = N
                     "source": "provider",
                 })
             try:
-                next_affect = affect_proposal(raw)
-                if next_affect is None:
-                    raise ValueError("completed response did not propose the required Affect vector")
-                result = STORE.finalize(turn_id, raw, display_content(raw), reasoning or None,
+                result = STORE.finalize(turn_id, raw, expressed, reasoning or None,
                                         "analysis" if reasoning else None, receipt, gate.state,
-                                        sequence, BOUNDARY_HASH, proposal, usage, next_affect)
+                                        sequence, BOUNDARY_HASH, proposal, usage, next_affect,
+                                        {"profile": expression_profile_used,
+                                         "grounded_visible": grounded_visible,
+                                         "fidelity": fidelity,
+                                         "fallback": expression_fallback})
                 await HUB.emit(turn_id, "assistant.completed", result)
                 if imagination_run_id:
                     await HUB.emit(imagination_run_id, "imagination.assistant.completed", result)
@@ -1000,6 +1186,48 @@ def execute_tool(body: ToolExecuteRequest):
     elif body.tool_id == "memory.search":
         query = str(body.arguments["query"]).lower()
         result = [item for item in STORE.memory_entries() if query in item["content"].lower()][:20]
+    elif body.tool_id in {"graph.inspect", "graph.neighbors", "graph.search"}:
+        graph = ProjectionService(STORE, IDENTITY_PACKS_DIR).authorized_graph()
+        nodes = graph["nodes"]
+        if body.tool_id == "graph.inspect":
+            result = nodes.get(str(body.arguments["node_id"]))
+            if result is None:
+                raise HTTPException(404, "Authorized graph node not found")
+        elif body.tool_id == "graph.search":
+            terms = {term.lower() for term in re.findall(r"[a-z0-9_-]+", str(body.arguments["query"]), re.I) if len(term) > 2}
+            domains = set(body.arguments.get("domains") or [])
+            limit = min(25, max(1, int(body.arguments.get("limit", 10))))
+            matches = []
+            for node in nodes.values():
+                if domains and node["owner"] not in domains:
+                    continue
+                haystack = f"{node['label']} {node['content']}".lower()
+                score = sum(1 for term in terms if term in haystack)
+                if score:
+                    matches.append((score, node))
+            result = [node for _, node in sorted(matches, key=lambda item: (-item[0], item[1]["id"]))[:limit]]
+        else:
+            node_id = str(body.arguments["node_id"])
+            allowed_edges = set(body.arguments.get("edges") or [])
+            limit = min(25, max(1, int(body.arguments.get("limit", 12))))
+            depth = min(2, max(1, int(body.arguments.get("depth", 1))))
+            matches, seen, frontier = [], {node_id}, [(node_id, 0)]
+            while frontier and len(matches) < limit:
+                current, current_depth = frontier.pop(0)
+                if current_depth >= depth:
+                    continue
+                for edge in graph["edges"]:
+                    if allowed_edges and edge["relation"] not in allowed_edges:
+                        continue
+                    target = edge["target"] if edge["source"] == current else edge["source"] if edge["target"] == current else None
+                    if not target or target in seen or target not in nodes:
+                        continue
+                    seen.add(target)
+                    matches.append({"depth": current_depth + 1, "edge": edge, "node": nodes[target]})
+                    frontier.append((target, current_depth + 1))
+                    if len(matches) >= limit:
+                        break
+            result = matches
     else:
         result = None
     checks.append(["execute", "OK", "built-in executor returned an observation"])
@@ -1007,6 +1235,29 @@ def execute_tool(body: ToolExecuteRequest):
                                         raw_args=body.arguments, normalized_args=body.arguments, context=context,
                                         decision="ACCEPT", checks=checks, execution_status="succeeded", result=result)
     return {"observation": result, "receipt_id": receipt["id"], "remembered": False}
+
+
+@app.post("/api/projections/preview")
+def preview_projection(body: ProjectionPreviewRequest):
+    return ProjectionService(STORE, IDENTITY_PACKS_DIR).build(
+        body.message, include_known_world=body.include_known_world,
+        include_imagination_world=body.include_imagination_world,
+        token_budget=body.token_budget, max_nodes=body.max_nodes,
+        max_depth=body.max_depth,
+    )
+
+
+@app.get("/api/projections/{projection_id}")
+def get_prompt_projection(projection_id: str):
+    projection = STORE.prompt_projection(projection_id)
+    if projection is None:
+        raise HTTPException(404, "Prompt projection not found")
+    return projection
+
+
+@app.get("/api/projections")
+def get_prompt_projections(conversation_id: str | None = None, limit: int = 50):
+    return STORE.prompt_projections(conversation_id, limit)
 
 
 @app.get("/api/memory/self")

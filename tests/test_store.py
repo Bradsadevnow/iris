@@ -54,6 +54,9 @@ class StoreTransactionsTest(unittest.TestCase):
              "parse_status": "valid"},
             {"input_tokens": 10, "output_tokens": 4, "total_tokens": 14,
              "reasoning_tokens": None, "source": "estimate"},
+            expression_receipt={"profile": {"voice": "warm"},
+                                "grounded_visible": "I will remember.",
+                                "fidelity": {"passed": True}, "fallback": False},
         )
         sequence, committed = self.store.state()
         self.assertEqual(sequence, 1)
@@ -63,6 +66,9 @@ class StoreTransactionsTest(unittest.TestCase):
         self.assertEqual(loaded["status"], "complete")
         self.assertIsNotNone(loaded["assistant_message"])
         self.assertIsNotNone(loaded["receipt"])
+        captured = self.store.turn_context(turn["id"])
+        self.assertTrue(captured["expression_receipt"]["fidelity"]["passed"])
+        self.assertFalse(captured["expression_receipt"]["fallback"])
         provenance = self.store.node_provenance("missing")
         self.assertIsNone(provenance)
 

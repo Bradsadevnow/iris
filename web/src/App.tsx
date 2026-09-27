@@ -2,9 +2,10 @@ import { FormEvent, KeyboardEvent, lazy, Suspense, useEffect, useRef, useState }
 import {
   Activity, Brain, Check, ChevronDown, ChevronRight, CircleDot,
   Database, FileCheck2, MessageSquare, Network, PanelLeftClose, PanelLeftOpen,
-  Plus, Send, Settings, ShieldCheck, Sparkles, Square, UserRound, X, Zap,
+  Plus, Send, Settings, ShieldCheck, Sparkles, Square, UserRound, X,
 } from "lucide-react";
-import { api, Conversation, ConversationDetail, Message, RoleSummary, StreamEvent, SystemProjection, TokenUsage } from "./api";
+import { api, Conversation, ConversationDetail, Message, StreamEvent, TokenUsage } from "./api";
+import { ActiveProjectionPanel, ContextInspector } from "./ContextPanels";
 
 const MemoryView = lazy(() => import("./MemoryView"));
 const SelfSystemView = lazy(() => import("./SelfSystemView"));
@@ -147,9 +148,25 @@ function Transcript({ detail, draft, onContext, onReceipt }: {
 }
 
 function TokenCounter({ usage, open, setOpen }: { usage: TokenUsage | null; open: boolean; setOpen: (value: boolean) => void }) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const dismissOutside = (event: PointerEvent) => {
+      if (!wrapRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+    const dismissEscape = (event: globalThis.KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("pointerdown", dismissOutside);
+    document.addEventListener("keydown", dismissEscape);
+    return () => {
+      document.removeEventListener("pointerdown", dismissOutside);
+      document.removeEventListener("keydown", dismissEscape);
+    };
+  }, [open, setOpen]);
   if (!usage) return <span className="token-counter muted">counting…</span>;
   const ratio = usage.total / usage.context_limit;
-  return <div className="token-wrap">
+  return <div className="token-wrap" ref={wrapRef}>
     <button className={`token-counter ${ratio >= .95 ? "critical" : ratio >= .8 ? "warning" : ""}`} onClick={() => setOpen(!open)}>
       {!usage.exact && "~"}{formatTokens(usage.total)} / {formatTokens(usage.context_limit)}
     </button>
@@ -199,19 +216,6 @@ function Drawer({ title, onClose, children }: { title: string; onClose: () => vo
   return <aside className="drawer" aria-label={title}><header><h2>{title}</h2><IconButton label="Close" onClick={onClose}><X size={18} /></IconButton></header><div className="drawer-body">{children}</div></aside>;
 }
 
-function ContextDrawer({ turnId, onClose }: { turnId: string; onClose: () => void }) {
-  const [data, setData] = useState<Record<string, any> | null>(null);
-  const [tab, setTab] = useState<"instructions" | "system" | "memory" | "affect" | "conversation">("memory");
-  useEffect(() => { api.context(turnId).then(setData); }, [turnId]);
-  return <Drawer title="Context used" onClose={onClose}>
-    <div className="drawer-meta">Captured for this turn · state {data?.state_sequence ?? "…"} · {data?.model_id ?? ""}</div>
-    <div className="tabs" role="tablist">
-      {(["instructions", "system", "memory", "affect", "conversation"] as const).map((item) => <button key={item} className={tab === item ? "active" : ""} onClick={() => setTab(item)}>{item}</button>)}
-    </div>
-    <pre className="context-content">{data ? tab === "conversation" ? JSON.stringify(data.conversation, null, 2) : tab === "system" ? JSON.stringify(data.system_projection ?? {}, null, 2) : tab === "memory" ? JSON.stringify(data.retrieved_memory ?? [], null, 2) : tab === "affect" ? JSON.stringify(data.affect ?? {}, null, 2) : data.instructions_text : "Loading…"}</pre>
-  </Drawer>;
-}
-
 function ReceiptDrawer({ turnId, onClose }: { turnId: string; onClose: () => void }) {
   const [items, setItems] = useState<Record<string, any>[]>([]);
   useEffect(() => { api.governance("receipts").then(setItems); }, []);
@@ -222,53 +226,6 @@ function ReceiptDrawer({ turnId, onClose }: { turnId: string; onClose: () => voi
       <div className={`decision-hero ${receipt.outcome}`}><ShieldCheck size={18} /><div><strong>{receipt.outcome.replaceAll("_", " ")}</strong><span>{receipt.decision}</span></div></div>
       <div className="check-list">{checks.map((check, index) => <div className="check-row" key={`${check[0]}-${index}`}><span className={`check-state ${check[1].toLowerCase()}`}>{check[1]}</span><div><strong>{check[0]}</strong><p>{check[2]}</p></div></div>)}</div>
       <details><summary>Technical details</summary><pre className="context-content">{receipt.rationale}</pre></details>
-    </>}
-  </Drawer>;
-}
-
-function SelfDrawer({ onClose, onOpenFull }: { onClose: () => void; onOpenFull: () => void }) {
-  const [projection, setProjection] = useState<SystemProjection | null>(null);
-  const [roles, setRoles] = useState<RoleSummary[]>([]);
-  const [error, setError] = useState("");
-  const [busyRole, setBusyRole] = useState<string | null>(null);
-  const load = () => api.systemProjection().then(setProjection).catch(() => setError("The live Self projection is unavailable."));
-  useEffect(() => { load(); api.availableRoles().then(setRoles).catch(() => {}); }, []);
-  const toggleRole = async (roleId: string) => {
-    if (!projection) return;
-    const active = projection.context.roles;
-    const next = active.includes(roleId) ? active.filter((id) => id !== roleId) : [...active, roleId];
-    setBusyRole(roleId);
-    try { await api.setActiveContext({ world: projection.context.world, task: projection.context.task, skills: projection.context.skills, roles: next }); await load(); }
-    finally { setBusyRole(null); }
-  };
-  const affect = projection ? Object.entries(projection.affect.values)
-    .sort((a, b) => Math.abs(b[1] - (projection.affect.baselines[b[0]] ?? 50)) - Math.abs(a[1] - (projection.affect.baselines[a[0]] ?? 50))) : [];
-  const scopes = projection ? ["global", ...projection.context.skills, projection.context.world, projection.context.task].filter(Boolean) as string[] : [];
-  return <Drawer title="Halcyon · Self" onClose={onClose}>
-    {error ? <div className="self-drawer-empty"><UserRound size={22} /><p>{error}</p></div> : !projection ? <div className="self-drawer-empty"><span className="self-drawer-pulse" /><p>Composing the live projection…</p></div> : <>
-      <div className="self-drawer-intro"><div className="self-drawer-mark"><UserRound size={19} /></div><div><span><i /> Live system projection</span><p>Read-only composition of state owned across Halcyon.</p></div></div>
-      <section className="self-drawer-section"><h3>Canonical identity <b>v{projection.self.version}</b></h3>
-        <div className="self-drawer-claims">{projection.self.claims.length ? projection.self.claims.map((claim) => <article key={claim.id}><CircleDot size={11} /><p><strong>{claim.subject}</strong> {claim.predicate.replaceAll("_", " ")} <em>{claim.value}</em></p></article>) : <p className="muted">No canonical claims yet.</p>}</div>
-      </section>
-      <section className="self-drawer-section"><h3>Roles <b>{projection.context.roles.length} active</b></h3>
-        <p className="self-drawer-hint">Halcyon stays Halcyon — a role informs her for this task, it doesn't replace her.</p>
-        <div className="self-drawer-roles">{roles.map((pack) => {
-          const equipped = projection.context.roles.includes(pack.id);
-          return <button key={pack.id} className={`role-chip ${equipped ? "active" : ""}`} disabled={busyRole === pack.id}
-            title={pack.tagline} onClick={() => void toggleRole(pack.id)}>
-            <span>{pack.name}</span>{equipped ? <X size={11} /> : <Plus size={11} />}
-          </button>;
-        })}</div>
-      </section>
-      <section className="self-drawer-section"><h3>Current affect <b>v{projection.affect.version}</b></h3>
-        <div className="self-drawer-affect">{affect.map(([name, value]) => <div key={name}><span>{name}</span><div><i style={{ width: `${Math.max(0, Math.min(100, value))}%` }} /></div><b>{value.toFixed(0)}</b></div>)}</div>
-      </section>
-      <section className="self-drawer-section"><h3>Active context <b>v{projection.context.version}</b></h3><div className="self-drawer-scopes">{scopes.map((scope) => <span key={scope}>{scope}</span>)}</div></section>
-      <section className="self-drawer-section"><h3>Available capabilities <b>{projection.capabilities.available}/{projection.capabilities.items.length}</b></h3>
-        <div className="self-drawer-capabilities">{projection.capabilities.items.map((capability) => <div key={capability.id}><Zap size={12} /><span><strong>{capability.id}</strong><small>{capability.source} · {capability.effect_class}</small></span><i className={capability.available ? "available" : ""} /></div>)}</div>
-      </section>
-      <section className="self-drawer-section"><h3>Version vector</h3><div className="self-drawer-versions">{Object.entries(projection.versions).map(([owner, version]) => <span key={owner}>{owner}<b>{version}</b></span>)}</div></section>
-      <button className="open-full-self" onClick={onOpenFull}><span><UserRound size={15} />Open full Self</span><ChevronRight size={16} /></button>
     </>}
   </Drawer>;
 }
@@ -351,13 +308,14 @@ export default function App() {
       onSelect={loadConversation} onNew={() => { setConversationId(null); setDetail(null); setView("chat"); }} view={view} setView={selectView} />
     <section className="workspace">
       {view === "chat" ? <>
-        <header className="chat-header"><div><span className="status-dot" />Halcyon</div><div className="chat-state"><button className="self-popout-button" onClick={() => setDrawer({ type: "self" })}><UserRound size={14} /><span>Self</span><ChevronRight size={13} /></button></div></header>
+        <header className="chat-header"><div><span className="status-dot" />Halcyon</div><div className="chat-state"><button className="self-popout-button" onClick={() => setDrawer({ type: "self" })}><Network size={14} /><span>Active</span><ChevronRight size={13} /></button></div></header>
         <div className="chat-scroll"><Transcript detail={detail} draft={draft} onContext={(turnId) => setDrawer({ type: "context", turnId })} onReceipt={(turnId) => setDrawer({ type: "receipt", turnId })} /></div>
         <Composer conversationId={conversationId} busy={Boolean(draft)} onSend={send} onStop={stop} />
       </> : view === "imagination" ? <Suspense fallback={<div className="memory-loading">Opening imagination…</div>}><ImaginationView /></Suspense> : view === "memory" ? <Suspense fallback={<div className="memory-loading">Loading memory…</div>}><MemoryView /></Suspense> : view === "self" ? <Suspense fallback={<div className="memory-loading">Composing Self…</div>}><SelfSystemView /></Suspense> : view === "settings" ? <SettingsPage /> : <Governance view={view} />}
     </section>
-    {drawer?.type === "context" && <ContextDrawer turnId={drawer.turnId} onClose={() => setDrawer(null)} />}
+    {drawer?.type === "context" && <Drawer title="Turn context" onClose={() => setDrawer(null)}><ContextInspector turnId={drawer.turnId} /></Drawer>}
     {drawer?.type === "receipt" && <ReceiptDrawer turnId={drawer.turnId} onClose={() => setDrawer(null)} />}
-    {drawer?.type === "self" && <SelfDrawer onClose={() => setDrawer(null)} onOpenFull={() => { setDrawer(null); setView("self"); }} />}
+    {drawer?.type === "self" && <Drawer title="Active context" onClose={() => setDrawer(null)}><ActiveProjectionPanel conversationId={conversationId}
+      onOpenTurn={(turnId) => setDrawer({ type: "context", turnId })} onOpenFull={() => { setDrawer(null); setView("self"); }} /></Drawer>}
   </div>;
 }

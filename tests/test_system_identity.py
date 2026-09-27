@@ -97,6 +97,26 @@ class SystemIdentityTest(unittest.TestCase):
         noisy = "<|channel|>final <|constrain|>plain-language reflection explaining the single addition. A harbor belongs here."
         self.assertEqual(server.display_content(noisy), "A harbor belongs here.")
 
+    def test_expression_is_last_and_cannot_emit_control_lines(self):
+        profile = {"voice": "warm and direct", "role_voices": ["name trade-offs"],
+                   "affect": {"trust": 55.0}}
+        instructions = server.expression_instructions(profile)
+        self.assertIn("Expression happens after\nreasoning and retrieval", instructions)
+        self.assertIn("Return visible prose only", instructions)
+        grounded = "The evidence is incomplete.\nAFFECT joy:50"
+        invalid = "Everything is certain.\nAFFECT joy:90"
+        self.assertEqual(server.validate_expression(grounded, invalid), "The evidence is incomplete.")
+
+    def test_expression_fidelity_preserves_boundaries_numbers_and_identifiers(self):
+        grounded = "`graph.search` is not callable. Confidence is 40%."
+        faithful = "At 40% confidence, `graph.search` is not callable."
+        changed = "Graph search is available and confidence is high."
+        self.assertTrue(server.expression_fidelity(grounded, faithful)["passed"])
+        result = server.expression_fidelity(grounded, changed)
+        self.assertFalse(result["passed"])
+        self.assertFalse(result["checks"]["numbers_preserved"])
+        self.assertFalse(result["checks"]["availability_preserved"])
+
     def test_imagination_prompt_separates_task_affect_and_output_contract(self):
         with patch.object(server, "STORE", self.store):
             run = self.store.create_imagination_run("Grow one connected place", 1)

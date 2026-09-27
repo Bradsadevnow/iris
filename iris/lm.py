@@ -12,7 +12,7 @@ import os
 import urllib.request
 
 BASE = os.environ.get("IRIS_LM_BASE", "http://localhost:1234").rstrip("/")
-MODEL = os.environ.get("IRIS_LM_MODEL", "openai/gpt-oss-20b")
+MODEL = os.environ.get("IRIS_LM_MODEL", "google/gemma-4-e4b")
 
 
 def chat(messages: list[dict], temperature: float = 0.7, max_tokens: int = 1024) -> str:

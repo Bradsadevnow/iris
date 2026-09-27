@@ -25,6 +25,13 @@ The repository contains a working FastAPI and React application with:
 - Canonical Self claims and a composed, non-writable System Identity projection.
 - Active World, Task, and Skill retrieval scopes.
 - Built-in read-only capabilities plus a local authorization registry for MCP declarations.
+- A Self-centered, owner-preserving knowledge projection that ranks and token-budgets relevant
+  Self, Memory, role, world, and capability nodes for each turn.
+- A separated response pipeline: canonical Self, task context, reasoning role, supplied knowledge,
+  governed draft, then a final expression-only rendering pass.
+- Per-turn context manifests distinguishing eligible, supplied, omitted, and tool-retrieved Memory,
+  plus persisted expression inputs, fidelity results, and fallback receipts.
+- Bounded read-only graph inspection, search, and neighbor traversal with tool receipts.
 - An Imagination workspace with world-aware chat, streamed autonomous turns, a batch counter,
   pause/stop controls, and a live entity graph.
 - Memory, Self, Capabilities, Tool receipts, Proposals, Gate decisions, Receipts, and Boundary UI.
@@ -65,21 +72,24 @@ movement. It does not manufacture cognitive or emotional-semantic memories durin
 
 ## Chat and atomic finalization
 
-A normal server turn has three phases:
+A normal server turn has four phases:
 
 ```text
-begin transaction        model stream                 finalization transaction
------------------        ------------                 ------------------------
-conversation/message --> transient text/thinking --> gate + Affect checks
-turn = generating        no canonical effects         assistant + evidence
-                                                       admitted state changes
-                                                       turn = complete
+begin transaction      grounded model pass      expression model pass      finalization transaction
+-----------------      -------------------      ---------------------      ------------------------
+message + context -->  claims + uncertainty --> visible voice only -----> gate + Affect checks
+turn = generating      NOMINATE/AFFECT          no control authority       assistant + evidence
+                       no canonical effects      cannot authorize effects   admitted state changes
+                                                                            turn = complete
 ```
 
-The server never holds a database transaction open while waiting for the model. Streaming chunks
-have no authority. Only the finalized response is adjudicated. For admitted changes, the assistant
-message, receipts, mutations, canonical state, and Affect transition commit atomically. A state
-version conflict retries adjudication against the new authoritative state once.
+The server never holds a database transaction open while waiting for either model pass. The
+grounded draft is authoritative for nominations, Affect, and gate adjudication but is not shown
+directly. The expression pass receives only its visible prose plus the final voice/style profile;
+it cannot authorize effects. Its validated output becomes `display_content`, while the grounded
+draft remains `raw_content`. For admitted changes, the assistant message, receipts, mutations,
+canonical state, and Affect transition commit atomically. A state version conflict retries
+adjudication against the new authoritative state once.
 
 One conversation may have only one active turn. Interrupted generations are never adjudicated.
 
@@ -154,6 +164,48 @@ conversation supplied to the model.
 The Memory UI provides Graph, Explorer, Timeline, and Affect lenses. Its graph is a projection for
 inspection, not an additional canonical store.
 
+## Dynamic knowledge projection
+
+Before a model turn, `iris/projection.py` builds a read-only federated graph centered on Halcyon.
+The graph connects canonical Self claims to currently reachable Memory, active context, task roles,
+known-world and imagined-world entities, and registered capabilities without transferring
+ownership of those records to Self.
+
+Prompt construction now keeps these stages explicit:
+
+1. **Canonical Self** — stable identity, values, commitments, relationships, and goals.
+2. **Task context** — active World, Task, and Skill scopes.
+3. **Active reasoning role** — explicit roles plus at most one deterministically inferred task
+   stance. A role shapes attention and method; it does not rename or replace Halcyon.
+4. **Supplied knowledge** — selected Memory, known-world, or fictional nodes with owner and
+   epistemic status preserved.
+5. **Expansion handles** — receipts for omitted adjacent nodes, never retrieval results.
+6. **Registered capabilities** — declarations only. They are not callable by the model unless a
+   bound tool definition and subsequent tool result are present.
+7. **Governed control state** — current Affect needed by the hidden transition protocol; it is not
+   persona or knowledge.
+8. **Grounded draft** — determines factual substance, uncertainty, proposals, and Affect output.
+9. **Expression** — runs last and renders visible prose from the grounded draft using Halcyon's
+   voice, role-specific presentation preference, and current affective color.
+
+The expression profile is deliberately excluded from knowledge selection. Expression may change
+tone, pacing, vocabulary, and layout, but is instructed not to add claims, simulate tool use,
+strengthen confidence, or change availability boundaries. Control lines emitted by an expression
+pass are rejected and the grounded visible prose is used instead.
+
+Every started turn persists its projection receipt: selected nodes and edges, selection reasons,
+exclusions, token estimates, active strategy, source versions, and rendered context. The built-in
+`graph.inspect`, `graph.search`, and `graph.neighbors` can be called through the HTTP capability
+boundary and leave ordinary tool receipts. They are not yet bound into the Anthropic/OpenAI model
+request. Model-driven traversal during a response is therefore not implemented: the grounded model
+currently sees registered capability descriptions and expansion handles, not callable tool schemas.
+
+The current lexical selector is intentionally considered provisional. Audit prompts exposed
+over-selection from stop words, single-token matches, broad role vocabulary, capability/knowledge
+competition, fictional leakage, and a star-shaped Self graph that makes graph distance weak. The
+remediation sequence and acceptance criteria live in
+[`docs/CONTEXT_PIPELINE_ROADMAP.md`](docs/CONTEXT_PIPELINE_ROADMAP.md).
+
 ## Self and capabilities
 
 Halcyon's canonical identity is seeded from `seeds/halcyon_identity.json`. Self claims are
@@ -164,6 +216,9 @@ Built-in V1 observation capabilities are:
 - `system.inspect`
 - `memory.search`
 - `affect.inspect`
+- `graph.inspect`
+- `graph.search`
+- `graph.neighbors`
 
 Every tool attempt passes through the capability boundary and leaves a tool receipt. Tool success
 does not automatically become Memory. MCP capability declarations can be registered, but a remote
@@ -227,7 +282,7 @@ The API defaults to `http://127.0.0.1:8000`. The Vite development server proxies
 | Variable | Purpose | Default |
 |---|---|---|
 | `IRIS_LM_BASE` | Model server base URL | `http://localhost:1234` |
-| `IRIS_LM_MODEL` | Provider model identifier | `openai/gpt-oss-20b` |
+| `IRIS_LM_MODEL` | Provider model identifier | `google/gemma-4-e4b` |
 | `IRIS_LM_API` | `anthropic` or `openai` wire format | `anthropic` |
 | `IRIS_LM_API_KEY` | Optional provider credential | empty |
 | `IRIS_LM_THINKING` | Request endpoint-supported thinking | `1` |
@@ -266,6 +321,8 @@ iris/store.py                   SQLite schema and transactional persistence
 iris/server.py                  API, model streaming, chat and Imagination orchestration
 iris/graph.py                   current entity/world schema and visibility projection
 iris/tools.py                   nomination implementations and invariants
+iris/projection.py              Self-centered federation, ranking, traversal, and prompt budgeting
+tools/context_pipeline_eval.py  repeated grounded/expression context audit harness (two calls max)
 web/src/App.tsx                 application shell and navigation
 web/src/ImaginationView.tsx     world dialogue, autonomous batches, live world pane
 web/src/MemoryView.tsx          current shared graph renderer and Memory lenses
@@ -273,6 +330,8 @@ web/src/SelfSystemView.tsx      Self/System/Capabilities/Tool receipts
 docs/CHAT_SPEC.md               chat behavior and atomicity specification
 docs/BRAID_UI_SPEC.md           Affect–Memory–Language model
 docs/SELF_SYSTEM_TOOLS_SPEC.md  state-owner and capability architecture
+docs/CONTEXT_PIPELINE_ROADMAP.md identity/role/retrieval/tool/expression remediation plan
+docs/CONTEXT_BRAID_DESIGN.md     joint Context, Memory, Affect, grounding, and expression contract
 ```
 
 ## Current design questions

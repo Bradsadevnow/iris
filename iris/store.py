@@ -163,6 +163,23 @@ class Store:
         CREATE TABLE IF NOT EXISTS turn_system_contexts (
           turn_id TEXT PRIMARY KEY REFERENCES turns(id), projection_json TEXT NOT NULL
         );
+        CREATE TABLE IF NOT EXISTS turn_context_manifests (
+          turn_id TEXT PRIMARY KEY REFERENCES turns(id), manifest_json TEXT NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS turn_expression_receipts (
+          turn_id TEXT PRIMARY KEY REFERENCES turns(id), profile_json TEXT NOT NULL,
+          grounded_visible TEXT NOT NULL, expressed_content TEXT NOT NULL,
+          fidelity_json TEXT NOT NULL, fallback INTEGER NOT NULL, created_at REAL NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS prompt_projections (
+          id TEXT PRIMARY KEY, turn_id TEXT UNIQUE REFERENCES turns(id),
+          subject_id TEXT NOT NULL, state_sequence INTEGER NOT NULL,
+          domain_versions_json TEXT NOT NULL, request_json TEXT NOT NULL,
+          strategy_json TEXT NOT NULL, selected_nodes_json TEXT NOT NULL,
+          selected_edges_json TEXT NOT NULL, expansion_handles_json TEXT NOT NULL,
+          excluded_nodes_json TEXT NOT NULL, rendered_context TEXT NOT NULL,
+          estimated_tokens INTEGER NOT NULL, created_at REAL NOT NULL
+        );
         CREATE TABLE IF NOT EXISTS imagination_runs (
           id TEXT PRIMARY KEY, conversation_id TEXT NOT NULL REFERENCES conversations(id),
           seed TEXT NOT NULL, max_steps INTEGER NOT NULL, completed_steps INTEGER NOT NULL,
@@ -209,6 +226,9 @@ class Store:
                 ("system.inspect", "builtin", "observe", "Inspect the composed Halcyon System Identity projection", "{}"),
                 ("memory.search", "builtin", "observe", "Search currently reachable scoped Memory", '{"query":{"type":"string","required":true}}'),
                 ("affect.inspect", "builtin", "observe", "Inspect effective Affect and recent trajectory", "{}"),
+                ("graph.inspect", "builtin", "observe", "Inspect one authorized node in the Self-centered projection graph", '{"node_id":{"type":"string","required":true}}'),
+                ("graph.neighbors", "builtin", "observe", "Traverse authorized projection-graph relationships from one node", '{"node_id":{"type":"string","required":true},"edges":{"type":"array"},"depth":{"type":"integer"},"limit":{"type":"integer"}}'),
+                ("graph.search", "builtin", "observe", "Search the authorized Self-centered projection graph", '{"query":{"type":"string","required":true},"domains":{"type":"array"},"limit":{"type":"integer"}}'),
             )
             for tool_id, source, effect, description, schema_json in defaults:
                 db.execute("INSERT OR IGNORE INTO capabilities VALUES (?,?,?,?,?,'{}','{}',1,'capability-v1',?)",
@@ -422,6 +442,19 @@ class Store:
                         json.dumps(context.get("affect", {})), json.dumps(context.get("active_context", {}))))
             db.execute("INSERT INTO turn_system_contexts VALUES (?,?)",
                        (turn_id, json.dumps(context.get("system_projection", {}))))
+            db.execute("INSERT INTO turn_context_manifests VALUES (?,?)",
+                       (turn_id, json.dumps(context.get("context_manifest", {}))))
+            projection = context.get("prompt_projection")
+            if projection:
+                db.execute(
+                    "INSERT INTO prompt_projections VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                    (projection["id"], turn_id, projection["subject_id"], projection["state_sequence"],
+                     json.dumps(projection["domain_versions"]), json.dumps(projection["request"]),
+                     json.dumps(projection["strategy"]), json.dumps(projection["selected_nodes"]),
+                     json.dumps(projection["selected_edges"]), json.dumps(projection["expansion_handles"]),
+                     json.dumps(projection["excluded"]), projection["rendered_context"],
+                     projection["estimated_tokens"], projection["created_at"]),
+                )
             db.execute("UPDATE conversations SET updated_at=? WHERE id=?", (now, conversation_id))
         return {"id": turn_id, "conversation_id": conversation_id, "ordinal": ordinal,
                 "status": "generating", "created_at": now, "user_message_id": message_id}
@@ -444,7 +477,8 @@ class Store:
     def finalize(self, turn_id: str, raw: str, display: str, reasoning: str | None,
                  reasoning_kind: str | None, receipt: dict, new_state: dict,
                  expected_sequence: int, boundary_hash: str, proposal: dict | None,
-                 usage: dict, affect_values: dict[str, float] | None = None) -> dict:
+                 usage: dict, affect_values: dict[str, float] | None = None,
+                 expression_receipt: dict | None = None) -> dict:
         now = time.time()
         with self.transaction(immediate=True) as db:
             turn = db.execute("SELECT * FROM turns WHERE id=?", (turn_id,)).fetchone()
@@ -508,6 +542,14 @@ class Store:
                 (outcome, now, usage.get("input_tokens"), usage.get("reasoning_tokens"),
                  usage.get("output_tokens"), usage.get("total_tokens"), usage.get("source"), turn_id),
             )
+            if expression_receipt:
+                db.execute(
+                    "INSERT INTO turn_expression_receipts VALUES (?,?,?,?,?,?,?)",
+                    (turn_id, json.dumps(expression_receipt.get("profile", {})),
+                     expression_receipt.get("grounded_visible", ""), display,
+                     json.dumps(expression_receipt.get("fidelity", {})),
+                     int(bool(expression_receipt.get("fallback"))), now),
+                )
             db.execute("UPDATE conversations SET updated_at=? WHERE id=?", (now, turn["conversation_id"]))
         if changed:
             self.write_projections(next_sequence, new_state)
@@ -554,10 +596,11 @@ class Store:
     def context_messages(self, conversation_id: str, limit: int = 20) -> list[dict]:
         with self.connect() as db:
             rows = db.execute(
-                "SELECT role, raw_content FROM messages WHERE conversation_id=? AND status='final' "
+                "SELECT role, raw_content, display_content FROM messages WHERE conversation_id=? AND status='final' "
                 "ORDER BY created_at DESC LIMIT ?", (conversation_id, limit),
             ).fetchall()
-            return [{"role": r["role"], "content": r["raw_content"]} for r in reversed(rows)]
+            return [{"role": r["role"], "content": r["display_content"] if r["role"] == "assistant" else r["raw_content"]}
+                    for r in reversed(rows)]
 
     def turn(self, turn_id: str) -> dict | None:
         with self.connect() as db:
@@ -585,7 +628,43 @@ class Store:
                 data["active_context"] = json.loads(braid["active_context_json"])
             system = db.execute("SELECT projection_json FROM turn_system_contexts WHERE turn_id=?", (turn_id,)).fetchone()
             data["system_projection"] = json.loads(system["projection_json"]) if system else {}
+            manifest = db.execute("SELECT manifest_json FROM turn_context_manifests WHERE turn_id=?", (turn_id,)).fetchone()
+            data["context_manifest"] = json.loads(manifest["manifest_json"]) if manifest else {}
+            expression = db.execute("SELECT * FROM turn_expression_receipts WHERE turn_id=?", (turn_id,)).fetchone()
+            if expression:
+                data["expression_receipt"] = {
+                    **dict(expression),
+                    "profile": json.loads(expression["profile_json"]),
+                    "fidelity": json.loads(expression["fidelity_json"]),
+                    "fallback": bool(expression["fallback"]),
+                }
+            projection = db.execute("SELECT id FROM prompt_projections WHERE turn_id=?", (turn_id,)).fetchone()
+            data["prompt_projection"] = self.prompt_projection(projection["id"]) if projection else None
             return data
+
+    def prompt_projection(self, projection_id: str) -> dict | None:
+        with self.connect() as db:
+            row = db.execute("SELECT * FROM prompt_projections WHERE id=?", (projection_id,)).fetchone()
+        if not row:
+            return None
+        item = dict(row)
+        for key in ("domain_versions", "request", "strategy", "selected_nodes",
+                    "selected_edges", "expansion_handles", "excluded_nodes"):
+            item[key] = json.loads(item.pop(f"{key}_json"))
+        return item
+
+    def prompt_projections(self, conversation_id: str | None = None,
+                           limit: int = 50) -> list[dict]:
+        limit = min(200, max(1, int(limit)))
+        query = (
+            "SELECT p.id FROM prompt_projections p JOIN turns t ON t.id=p.turn_id "
+            + ("WHERE t.conversation_id=? " if conversation_id else "")
+            + "ORDER BY p.created_at DESC LIMIT ?"
+        )
+        params = (conversation_id, limit) if conversation_id else (limit,)
+        with self.connect() as db:
+            rows = db.execute(query, params).fetchall()
+        return [item for row in rows if (item := self.prompt_projection(row["id"]))]
 
     def governance(self, table: str) -> list[dict]:
         if table not in {"proposals", "gate_decisions", "receipts"}:
@@ -646,6 +725,27 @@ class Store:
         return {"values": values, "baselines": baselines, "directions": directions,
                 "history": [{**dict(r), "before": json.loads(r["before_json"]), "delta": json.loads(r["delta_json"]),
                              "after": json.loads(r["after_json"])} for r in history]}
+
+    def preview_affect(self, values: dict[str, float], at: float | None = None) -> dict:
+        """Validate an uncommitted complete Affect vector against the effective snapshot."""
+        at = at or time.time()
+        with self.connect() as db:
+            rows = db.execute("SELECT * FROM affect_state ORDER BY rowid").fetchall()
+        known = {row["dimension"]: row for row in rows}
+        if set(values) != set(known):
+            raise ValueError("affect proposal must contain all configured dimensions")
+        before, after, delta = {}, {}, {}
+        for dimension, row in known.items():
+            hours = max(0.0, (at - row["updated_at"]) / 3600.0)
+            current = row["current_value"] + (row["baseline"] - row["current_value"]) * min(1.0, row["homeostasis_rate"] * hours)
+            value = float(values[dimension])
+            change = value - current
+            if not (value == value and abs(value) != float("inf")):
+                raise ValueError(f"invalid affect transition for {dimension}")
+            if not (1.0 <= value <= 100.0) or abs(change) > row["max_delta"]:
+                raise ValueError(f"invalid affect transition for {dimension}")
+            before[dimension], after[dimension], delta[dimension] = round(current, 2), round(value, 2), round(change, 2)
+        return {"before": before, "after": after, "delta": delta, "committed": False}
 
     def memory_entries(self, channels: list[str] | None = None) -> list[dict]:
         context = self.active_context()

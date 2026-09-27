@@ -118,6 +118,56 @@ export type SystemProjection = {
   capabilities: { items: Capability[]; available: number; version: number };
   governance: { boundaries: Record<string, string>; version: number };
 };
+export type PromptProjectionNode = {
+  id: string; owner: string; kind: string; label: string; content: string;
+  status: string; confidence?: number | null; visibility: string; scope: string;
+  source_ids: string[]; created_at?: number | null; metadata: Record<string, unknown>;
+  score: number; reason: string; estimated_tokens: number;
+};
+export type PromptProjection = {
+  id: string; turn_id?: string | null; subject_id: string; state_sequence: number;
+  domain_versions: Record<string, number>;
+  request: { message: string; active_context: ActiveContext; limits: { prompt_tokens: number; max_nodes: number; max_depth: number } };
+  strategy: { explicit_roles: string[]; selected_roles: string[]; role_sources: Record<string, "explicit" | "inferred">; query_terms: string[]; role_terms: string[]; preferred_edges: string[] };
+  selected_nodes: PromptProjectionNode[];
+  selected_edges: { source: string; relation: string; target: string; owner: string }[];
+  expansion_handles: { node_id: string; available_edges: string[]; unexpanded_count: number }[];
+  excluded_nodes: { node_id: string; reason: string }[];
+  rendered_context: string; estimated_tokens: number; created_at: number;
+};
+export type ContextManifest = {
+  identity_kernel: string[];
+  activated_self_claims: string[];
+  task_context: ActiveContext;
+  roles: { id: string; source: "explicit" | "inferred" }[];
+  conversation: { messages_supplied: number; prior_messages: number };
+  memory: { eligible: string[]; supplied: string[]; omitted: string[]; tool_retrieved: string[] };
+  knowledge: { known_world: string[]; imagination: string[] };
+  tools: { registered: string[]; bound: string[] };
+  affect_snapshot: { values: Record<string, number>; baselines: Record<string, number>; directions: Record<string, string> };
+  expansion_handles: PromptProjection["expansion_handles"];
+  budgets: { prompt_tokens: number; max_nodes: number; max_depth: number };
+  versions: Record<string, number>;
+};
+export type ExpressionReceipt = {
+  profile: { voice?: string; role_voices?: string[]; affect?: Record<string, number>; affect_trajectory?: { before?: Record<string, number>; after?: Record<string, number>; delta?: Record<string, number>; committed?: boolean } };
+  grounded_visible: string;
+  expressed_content: string;
+  fidelity: { passed?: boolean; checks?: Record<string, boolean>; grounded_numbers?: string[]; grounded_identifiers?: string[]; required_boundaries?: string[] };
+  fallback: boolean;
+  created_at: number;
+};
+export type TurnContext = {
+  turn_id: string; state_sequence: number; model_id: string; instructions_text: string;
+  conversation: { role: string; content: string }[];
+  retrieved_memory: ScopedMemory[];
+  affect: AffectState;
+  active_context: ActiveContext;
+  system_projection: SystemProjection;
+  context_manifest: ContextManifest;
+  expression_receipt?: ExpressionReceipt;
+  prompt_projection?: PromptProjection | null;
+};
 export type ToolReceipt = { id: string; tool_id: string; source: string; effect_class: string; raw_args: Record<string, unknown>; normalized_args?: Record<string, unknown>; context: ActiveContext; capability_version: number; decision: string; checks: string[][]; execution_status: string; result?: unknown; error?: string; created_at: number };
 export type ImaginationRun = {
   id: string; conversation_id: string; seed: string; max_steps: number; completed_steps: number;
@@ -155,7 +205,7 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ conversation_id: conversationId, draft }),
     }),
-  context: (turnId: string) => request<Record<string, unknown>>(`/api/turns/${turnId}/context`),
+  context: (turnId: string) => request<TurnContext>(`/api/turns/${turnId}/context`),
   governance: (kind: string) => request<Record<string, unknown>[]>(`/api/governance/${kind}`),
   boundary: () => request<Record<string, unknown>>("/api/boundary/attestation"),
   world: () => request<WorldMemory>("/api/world"),
@@ -171,6 +221,7 @@ export const api = {
   availableRoles: () => request<RoleSummary[]>("/api/system/roles"),
   roleDetail: (id: string) => request<RolePackDetail>(`/api/system/roles/${encodeURIComponent(id)}`),
   systemProjection: () => request<SystemProjection>("/api/system/projection"),
+  promptProjections: (conversationId?: string | null, limit = 50) => request<PromptProjection[]>(`/api/projections?limit=${limit}${conversationId ? `&conversation_id=${encodeURIComponent(conversationId)}` : ""}`),
   selfClaims: () => request<{ version: number; claims: SelfClaim[] }>("/api/self/claims"),
   capabilities: () => request<{ version: number; items: Capability[] }>("/api/capabilities"),
   toolReceipts: () => request<ToolReceipt[]>("/api/tools/receipts"),

@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { Activity, Brain, Check, ChevronDown, CircleDot, Database, Fingerprint, Plug, Search, ShieldCheck, Sparkles, Wrench, X } from "lucide-react";
-import { api, Capability, RolePackDetail, RoleSummary, SelfClaim, SystemProjection, ToolReceipt } from "./api";
+import { Activity, Brain, Check, ChevronDown, CircleDot, Database, Fingerprint, Network, Plug, Search, ShieldCheck, Wrench, X } from "lucide-react";
+import { api, Capability, PromptProjection, SelfClaim, SystemProjection, ToolReceipt } from "./api";
 
-type Lens = "identity" | "system" | "capabilities" | "roles" | "receipts";
-const titles: Record<Lens, string> = { identity: "Identity", system: "System", capabilities: "Capabilities", roles: "Roles", receipts: "Tool receipts" };
+type Lens = "identity" | "system" | "capabilities" | "attention" | "receipts";
+const titles: Record<Lens, string> = { identity: "Identity", system: "Composition", capabilities: "Capabilities", attention: "Attention history", receipts: "Tool receipts" };
 
 function Identity({ claims }: { claims: SelfClaim[] }) {
   const groups = useMemo(() => claims.reduce((map, claim) => map.set(claim.kind, [...(map.get(claim.kind) ?? []), claim]), new Map<string, SelfClaim[]>()), [claims]);
@@ -32,30 +32,21 @@ function Capabilities({ items, onRun }: { items: Capability[]; onRun: (tool: Cap
   return <div className="capability-lens"><header><span>Capability boundary</span><h2>What Halcyon can attempt</h2><p>Discovery describes a tool. Local policy decides whether it is reachable.</p></header>{items.map((tool) => <article key={tool.id}><div className="capability-source">{tool.source.startsWith("mcp:") ? <Plug size={15} /> : <Wrench size={15} />}<span>{tool.source}</span></div><div className="capability-main"><div><h3>{tool.id}</h3><span className={`effect ${tool.effect_class}`}>{tool.effect_class}</span></div><p>{tool.description}</p><footer><span>{tool.boundary_version}</span><span>{Object.keys(tool.schema).length} arguments</span></footer></div><button disabled={!tool.available || tool.id === "memory.search"} onClick={() => onRun(tool)}>{tool.available ? "Run" : "Disconnected"}</button></article>)}</div>;
 }
 
-function Roles({ roles, active, onToggle, busy }: { roles: RoleSummary[]; active: string[]; onToggle: (id: string) => void; busy: string | null }) {
-  const [expanded, setExpanded] = useState<string | null>(null);
-  const [detail, setDetail] = useState<Record<string, RolePackDetail>>({});
-  const toggleExpand = async (id: string) => {
-    if (expanded === id) { setExpanded(null); return; }
-    setExpanded(id);
-    if (!detail[id]) { const full = await api.roleDetail(id); setDetail((current) => ({ ...current, [id]: full })); }
-  };
-  if (!roles.length) return <div className="self-empty"><Sparkles size={26} /><h2>No role packs found</h2><p>Add one under seeds/identity_packs/ and it will appear here.</p></div>;
-  return <div className="roles-lens">
-    <header><span>Role overlays</span><h2>Wear a hat for the task at hand</h2><p>Halcyon's own Self stays canonical — an equipped role informs her without replacing her. Toggle any number on or off.</p></header>
-    <div className="roles-grid">{roles.map((pack) => {
-      const equipped = active.includes(pack.id);
-      const isOpen = expanded === pack.id;
-      const full = detail[pack.id];
-      return <article key={pack.id} className={equipped ? "equipped" : ""}>
-        <header><h3>{pack.name}</h3><button className={`equip-toggle ${equipped ? "on" : ""}`} disabled={busy === pack.id} onClick={() => onToggle(pack.id)}>{equipped ? "Equipped" : "Equip"}</button></header>
-        <p className="role-tagline">{pack.tagline}</p>
-        <button className="role-expand" onClick={() => void toggleExpand(pack.id)}>{isOpen ? "Hide details" : "Show claims & methods"}<ChevronDown size={13} className={isOpen ? "rotated" : ""} /></button>
-        {isOpen ? <div className="role-detail">{!full ? <p className="muted">Loading…</p> : <>
-          <ul className="role-claims">{full.claims.map((claim) => <li key={claim.id}><span className="role-claim-kind">{claim.kind}</span>{claim.value}</li>)}</ul>
-          {full.capabilities.length ? <p className="role-methods"><strong>Known methods:</strong> {full.capabilities.map((cap) => cap.id.split(".").slice(1).join(".")).join(", ")}</p> : null}
-        </>}</div> : null}
-      </article>;
+function Attention({ items }: { items: PromptProjection[] }) {
+  const [open, setOpen] = useState<string | null>(items[0]?.id ?? null);
+  if (!items.length) return <div className="self-empty"><Network size={26} /><h2>No projections yet</h2><p>Send a message to capture what Halcyon focused on for that turn.</p></div>;
+  return <div className="attention-lens"><header><span>Turn-specific attention</span><h2>Projection history</h2><p>What reached the model, why it was selected, and what stayed outside the prompt budget.</p></header>
+    <div className="attention-list">{items.map((item) => {
+      const isOpen = open === item.id;
+      const counts = item.selected_nodes.reduce<Record<string, number>>((map, node) => { map[node.owner] = (map[node.owner] ?? 0) + 1; return map; }, {});
+      return <article key={item.id} className={isOpen ? "open" : ""}><button onClick={() => setOpen(isOpen ? null : item.id)} aria-expanded={isOpen}>
+        <div><strong>{item.request.message}</strong><small>{new Date(item.created_at * 1000).toLocaleString()} · state {item.state_sequence}</small></div>
+        <span>{item.selected_nodes.length} nodes · {item.estimated_tokens.toLocaleString()} tokens</span><ChevronDown size={15} className={isOpen ? "rotated" : ""} />
+      </button>{isOpen ? <div className="attention-detail">
+        <div className="attention-counts">{Object.entries(counts).map(([owner, count]) => <span key={owner}>{owner.replaceAll("_", " ")}<b>{count}</b></span>)}</div>
+        <h3>Selected nodes</h3>{item.selected_nodes.map((node) => <div className="attention-node" key={node.id}><div><strong>{node.label}</strong><span>{node.owner} · {node.status}</span></div><p>{node.content}</p><small>{node.reason}</small></div>)}
+        <footer><code>{item.id}</code><span>{item.excluded_nodes.length} excluded · {item.expansion_handles.length} expansion handles</span></footer>
+      </div> : null}</article>;
     })}</div>
   </div>;
 }
@@ -70,20 +61,11 @@ export default function SelfSystemView() {
   const [lens, setLens] = useState<Lens>("identity");
   const [projection, setProjection] = useState<SystemProjection | null>(null);
   const [receipts, setReceipts] = useState<ToolReceipt[]>([]);
-  const [roles, setRoles] = useState<RoleSummary[]>([]);
-  const [busyRole, setBusyRole] = useState<string | null>(null);
+  const [projections, setProjections] = useState<PromptProjection[]>([]);
   const [error, setError] = useState("");
-  const refresh = () => Promise.all([api.systemProjection(), api.toolReceipts(), api.availableRoles()])
-    .then(([next, nextReceipts, nextRoles]) => { setProjection(next); setReceipts(nextReceipts); setRoles(nextRoles); });
+  const refresh = () => Promise.all([api.systemProjection(), api.toolReceipts(), api.promptProjections(null, 30)])
+    .then(([next, nextReceipts, nextProjections]) => { setProjection(next); setReceipts(nextReceipts); setProjections(nextProjections); });
   useEffect(() => { refresh().catch(() => setError("System projection unavailable. Restart the Halcyon server.")); }, []);
   const run = async (tool: Capability) => { await api.executeTool(tool.id); await refresh(); setLens("receipts"); };
-  const toggleRole = async (roleId: string) => {
-    if (!projection) return;
-    const active = projection.context.roles;
-    const next = active.includes(roleId) ? active.filter((id) => id !== roleId) : [...active, roleId];
-    setBusyRole(roleId);
-    try { await api.setActiveContext({ world: projection.context.world, task: projection.context.task, skills: projection.context.skills, roles: next }); await refresh(); }
-    finally { setBusyRole(null); }
-  };
-  return <main className="self-page"><header className="self-toolbar"><div><span className="eyebrow">System identity</span><h1>Self</h1></div><nav>{(Object.keys(titles) as Lens[]).map((item) => <button className={lens === item ? "active" : ""} onClick={() => setLens(item)} key={item}>{titles[item]}</button>)}</nav><span className="projection-label"><i /> projection</span></header><section className="self-content">{error ? <div className="self-empty"><Brain size={26} /><h2>Self unavailable</h2><p>{error}</p></div> : !projection ? <div className="self-empty">Composing Halcyon…</div> : lens === "identity" ? <Identity claims={projection.self.claims} /> : lens === "system" ? <System projection={projection} /> : lens === "capabilities" ? <Capabilities items={projection.capabilities.items} onRun={run} /> : lens === "roles" ? <Roles roles={roles} active={projection.context.roles} onToggle={toggleRole} busy={busyRole} /> : <Receipts items={receipts} />}</section></main>;
+  return <main className="self-page"><header className="self-toolbar"><div><span className="eyebrow">System identity</span><h1>Self</h1></div><nav>{(Object.keys(titles) as Lens[]).map((item) => <button className={lens === item ? "active" : ""} onClick={() => setLens(item)} key={item}>{titles[item]}</button>)}</nav><span className="projection-label"><i /> projection</span></header><section className="self-content">{error ? <div className="self-empty"><Brain size={26} /><h2>Self unavailable</h2><p>{error}</p></div> : !projection ? <div className="self-empty">Composing Halcyon…</div> : lens === "identity" ? <Identity claims={projection.self.claims} /> : lens === "system" ? <System projection={projection} /> : lens === "capabilities" ? <Capabilities items={projection.capabilities.items} onRun={run} /> : lens === "attention" ? <Attention items={projections} /> : <Receipts items={receipts} />}</section></main>;
 }
