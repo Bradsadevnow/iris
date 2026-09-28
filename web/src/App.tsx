@@ -1,10 +1,10 @@
 import { FormEvent, KeyboardEvent, lazy, Suspense, useEffect, useRef, useState } from "react";
 import {
-  Activity, Brain, Check, ChevronDown, ChevronRight, CircleDot,
+  Activity, ArrowLeft, Brain, Check, ChevronDown, ChevronRight, CircleDot,
   Database, FileCheck2, MessageSquare, Network, PanelLeftClose, PanelLeftOpen,
   Plus, Send, Settings, ShieldCheck, Sparkles, Square, UserRound, X,
 } from "lucide-react";
-import { api, Conversation, ConversationDetail, Message, StreamEvent, TokenUsage } from "./api";
+import { api, CharacterSnapshot, Conversation, ConversationDetail, Message, StreamEvent, TokenUsage } from "./api";
 import { ActiveProjectionPanel, ContextInspector } from "./ContextPanels";
 
 const MemoryView = lazy(() => import("./MemoryView"));
@@ -127,8 +127,8 @@ function Transcript({ detail, draft, onContext, onReceipt }: {
   }
   return <div className="transcript">
     {detail?.messages.map((message) => (
-      <article className={`message ${message.role}`} key={message.id}>
-        <div className="message-meta">{message.role === "user" ? "You" : "Halcyon"}</div>
+      <article className={`message ${message.role} ${message.raw_content.startsWith("IRIS_CHARACTER_SNAPSHOT_V1\n") ? "character-snapshot" : ""}`} key={message.id}>
+        <div className="message-meta">{message.raw_content.startsWith("IRIS_CHARACTER_SNAPSHOT_V1\n") ? "Character draft" : message.role === "user" ? "You" : "Halcyon"}</div>
         {message.role === "assistant" && <Thinking content={message.reasoning_content} turnId={message.turn_id} onContext={onContext} />}
         <div className="message-content">{message.display_content}</div>
         {message.role === "assistant" && <div className="message-foot">
@@ -212,8 +212,8 @@ function Composer({ conversationId, busy, onSend, onStop }: {
   </form><div className="composer-note">Halcyon can make mistakes. Inspect memory changes when they matter.</div></div>;
 }
 
-function Drawer({ title, onClose, children }: { title: string; onClose: () => void; children: React.ReactNode }) {
-  return <aside className="drawer" aria-label={title}><header><h2>{title}</h2><IconButton label="Close" onClick={onClose}><X size={18} /></IconButton></header><div className="drawer-body">{children}</div></aside>;
+function Drawer({ title, onClose, onBack, children }: { title: string; onClose: () => void; onBack?: () => void; children: React.ReactNode }) {
+  return <aside className="drawer" aria-label={title}><header><div className="drawer-title">{onBack ? <IconButton label="Back to active context" onClick={onBack}><ArrowLeft size={17} /></IconButton> : null}<h2>{title}</h2></div><IconButton label="Close" onClick={onClose}><X size={18} /></IconButton></header><div className="drawer-body">{children}</div></aside>;
 }
 
 function ReceiptDrawer({ turnId, onClose }: { turnId: string; onClose: () => void }) {
@@ -270,7 +270,7 @@ export default function App() {
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [detail, setDetail] = useState<ConversationDetail | null>(null);
   const [draft, setDraft] = useState<DraftAssistant | null>(null);
-  const [drawer, setDrawer] = useState<{ type: "context" | "receipt"; turnId: string } | { type: "self" } | null>(null);
+  const [drawer, setDrawer] = useState<{ type: "context"; turnId: string; returnToActive?: boolean } | { type: "receipt"; turnId: string } | { type: "self" } | null>(null);
 
   const refreshList = () => api.conversations().then(setConversations);
   const loadConversation = (id: string) => { setConversationId(id); setView("chat"); api.conversation(id).then(setDetail); };
@@ -301,7 +301,19 @@ export default function App() {
   };
 
   const stop = async () => { if (draft) await api.cancelTurn(draft.turnId); };
+  const sendCharacter = async (snapshot: CharacterSnapshot) => {
+    const message = await api.appendCharacterSnapshot(conversationId, snapshot);
+    setConversationId(message.conversation_id);
+    await refreshList();
+    setDetail(await api.conversation(message.conversation_id));
+  };
   const selectView = (next: View) => { setView(next); setDrawer(null); };
+
+  const imaginationChat = <div className="embedded-chat">
+    <div className="embedded-chat-heading"><span className="status-dot" /><div><strong>Chat with Halcyon</strong><small>Character optional. Conversation always open.</small></div></div>
+    <div className="embedded-chat-scroll"><Transcript detail={detail} draft={draft} onContext={(turnId) => setDrawer({ type: "context", turnId })} onReceipt={(turnId) => setDrawer({ type: "receipt", turnId })} /></div>
+    <Composer conversationId={conversationId} busy={Boolean(draft)} onSend={send} onStop={stop} />
+  </div>;
 
   return <div className="app-shell">
     <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} conversations={conversations} selectedId={conversationId}
@@ -311,11 +323,11 @@ export default function App() {
         <header className="chat-header"><div><span className="status-dot" />Halcyon</div><div className="chat-state"><button className="self-popout-button" onClick={() => setDrawer({ type: "self" })}><Network size={14} /><span>Active</span><ChevronRight size={13} /></button></div></header>
         <div className="chat-scroll"><Transcript detail={detail} draft={draft} onContext={(turnId) => setDrawer({ type: "context", turnId })} onReceipt={(turnId) => setDrawer({ type: "receipt", turnId })} /></div>
         <Composer conversationId={conversationId} busy={Boolean(draft)} onSend={send} onStop={stop} />
-      </> : view === "imagination" ? <Suspense fallback={<div className="memory-loading">Opening imagination…</div>}><ImaginationView /></Suspense> : view === "memory" ? <Suspense fallback={<div className="memory-loading">Loading memory…</div>}><MemoryView /></Suspense> : view === "self" ? <Suspense fallback={<div className="memory-loading">Composing Self…</div>}><SelfSystemView /></Suspense> : view === "settings" ? <SettingsPage /> : <Governance view={view} />}
+      </> : view === "imagination" ? <Suspense fallback={<div className="memory-loading">Opening imagination…</div>}><ImaginationView chatRail={imaginationChat} onSendCharacter={sendCharacter} /></Suspense> : view === "memory" ? <Suspense fallback={<div className="memory-loading">Loading memory…</div>}><MemoryView /></Suspense> : view === "self" ? <Suspense fallback={<div className="memory-loading">Composing Self…</div>}><SelfSystemView /></Suspense> : view === "settings" ? <SettingsPage /> : <Governance view={view} />}
     </section>
-    {drawer?.type === "context" && <Drawer title="Turn context" onClose={() => setDrawer(null)}><ContextInspector turnId={drawer.turnId} /></Drawer>}
+    {drawer?.type === "context" && <Drawer title="Turn context" onClose={() => setDrawer(null)} onBack={drawer.returnToActive ? () => setDrawer({ type: "self" }) : undefined}><ContextInspector turnId={drawer.turnId} /></Drawer>}
     {drawer?.type === "receipt" && <ReceiptDrawer turnId={drawer.turnId} onClose={() => setDrawer(null)} />}
     {drawer?.type === "self" && <Drawer title="Active context" onClose={() => setDrawer(null)}><ActiveProjectionPanel conversationId={conversationId}
-      onOpenTurn={(turnId) => setDrawer({ type: "context", turnId })} onOpenFull={() => { setDrawer(null); setView("self"); }} /></Drawer>}
+      onOpenTurn={(turnId) => setDrawer({ type: "context", turnId, returnToActive: true })} onOpenFull={() => { setDrawer(null); setView("self"); }} /></Drawer>}
   </div>;
 }

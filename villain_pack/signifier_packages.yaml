@@ -1,0 +1,130 @@
+signifiers:
+  architectural_power:
+    visual_cues: [elevated rooms, private maps, controlled lighting, distance from ordinary people]
+    room_logic: power is visible in the walls
+    object_logic: keys, screens, doors, and thresholds matter
+  ceremonial_luxury:
+    visual_cues: [tailored clothes, museum surfaces, expensive silence, curated taste]
+    room_logic: beauty is used as insulation from consequence
+    object_logic: every object implies ownership
+  clean_horror:
+    visual_cues: [sterile surfaces, white light, polished tools, impossible cleanliness]
+    room_logic: the room denies that anything messy happened there
+    object_logic: instruments look humane until they are named
+  investor_glass:
+    visual_cues: [glass walls, neutral seating, product stages, frictionless branding]
+    room_logic: transparency is weaponized theater
+    object_logic: screens and decks replace evidence
+  ritual_procedure:
+    visual_cues: [uniforms, forms, fluorescent corridors, monitored doors]
+    room_logic: movement itself is permissioned
+    object_logic: badges, seals, and timestamps carry threat
+  mirror_logic:
+    visual_cues: [reflections, fabric sheen, staged portraits, duplicated gestures]
+    room_logic: intimacy is curated, not spontaneous
+    object_logic: personal items become proof of invasion
+  body_horror:
+    visual_cues: [wet textures, wrong growth, skin problems, impossible anatomy]
+    room_logic: the environment participates in infection
+    object_logic: ordinary containers stop being trustworthy
+  interface_glow:
+    visual_cues: [status lights, processed calm, dashboards, autonomous motion]
+    room_logic: control is distributed, not local
+    object_logic: nothing looks like the weapon until it acts like one
+
+  elevated_vantage:
+    visual_cues: [balconies, overhead rooms, command catwalks, distance as status]
+    room_logic: height itself becomes authority
+    object_logic: looking down is part of the threat
+  controlled_spectacle:
+    visual_cues: [timed reveals, ceremonial screens, staged entrances, choreographed witnesses]
+    room_logic: every event has already been blocked like theater
+    object_logic: the set is part of the weapon
+  prototype_glow:
+    visual_cues: [test lights, charging cradles, translucent housings, too-clean energy]
+    room_logic: invention keeps leaking into the room before the pitch begins
+    object_logic: the prototype is always both miracle and hazard
+  sterile_precision:
+    visual_cues: [measured spacing, polished metal, calibrated trays, no visible mess]
+    room_logic: precision is used to deny guilt
+    object_logic: each tool implies premeditation without admitting it
+  private_testing:
+    visual_cues: [restricted labs, one-way glass, numbered subjects, sealed notebooks]
+    room_logic: secrecy is framed as methodological necessity
+    object_logic: access itself is incriminating
+  neutral_luxury:
+    visual_cues: [expensive beige, muted glass, impossible quiet, scentless elegance]
+    room_logic: wealth removes friction and therefore witnesses
+    object_logic: nothing looks personal until you realize all of it is curated power
+  frictionless_branding:
+    visual_cues: [soft logos, seamless interfaces, polished decks, calming product language]
+    room_logic: usability is the camouflage
+    object_logic: the brand arrives before the harm does
+  stagecraft:
+    visual_cues: [presentation remotes, mood lighting, keynote posture, audience geometry]
+    room_logic: persuasion is choreographed as inevitability
+    object_logic: every prop has investor-demo energy
+  sanctioned_space:
+    visual_cues: [authorized doors, official tables, approved restraints, stamped files]
+    room_logic: the room is dangerous because it is legitimate
+    object_logic: paperwork stabilizes the violence
+  surveillance_grid:
+    visual_cues: [cameras, sensor arrays, mirrored feeds, red recording lights]
+    room_logic: there is no private angle left
+    object_logic: seeing becomes a means of control rather than truth
+  fluorescent_control:
+    visual_cues: [cold ceiling panels, endless hallways, pale walls, timed door buzzers]
+    room_logic: institutional light flattens resistance into behavior management
+    object_logic: the environment punishes deviation before a person does
+  ritual_damage:
+    visual_cues: [arranged objects, repeated symbols, careful vandalism, devotional cruelty]
+    room_logic: violence is meant to be read as a message
+    object_logic: damage becomes handwriting
+  banal_horror:
+    visual_cues: [ordinary kitchens, motel lamps, office carpet, familiar clutter made wrong]
+    room_logic: terror hides inside routine with no special effects budget
+    object_logic: common objects are reclassified as threats
+  stillness_then_shock:
+    visual_cues: [motionless figures, held frames, empty pauses, one abrupt break in pattern]
+    room_logic: delay is the setup mechanism
+    object_logic: calm is not safety but timing
+  asymmetry:
+    visual_cues: [crooked frames, mismatched eyes, unbalanced rooms, one wrong detail]
+    room_logic: the world is off by just enough to trigger dread
+    object_logic: the tiny inconsistency becomes the whole story
+  fabric_sheen:
+    visual_cues: [silk, satin, velvet, polished skin, expensive surfaces that catch light]
+    room_logic: intimacy is lit like a trap instead of a comfort
+    object_logic: texture announces seduction before dialogue does
+  staged_intimacy:
+    visual_cues: [carefully framed family photos, curated breakfasts, placed gifts, rehearsed closeness]
+    room_logic: affection has blocking notes
+    object_logic: personal gestures are evidence of preparation
+  wrong_family_photo:
+    visual_cues: [portraits that are almost right, duplicate smiles, edited histories, extra people in frames]
+    room_logic: domestic legitimacy is assembled by hand
+    object_logic: the image is where the lie congeals
+  contamination:
+    visual_cues: [spores, stains, breath on glass, creeping residue, tainted fluids]
+    room_logic: nothing stays clean once the breach begins
+    object_logic: contact itself becomes plot
+  appetite:
+    visual_cues: [teeth, mouths, feeding rituals, consumption marks, empty containers]
+    room_logic: desire is physical and escalating
+    object_logic: every object implies use or ingestion
+  impossible_birth:
+    visual_cues: [nests, pods, swelling forms, wrong infants, ceremonial maternity horror]
+    room_logic: creation itself is recoded as threat
+    object_logic: containers become reproductive promises you should not trust
+  processed_calm:
+    visual_cues: [pleasant status tones, gentle interface colors, smooth voices, anti-panic design]
+    room_logic: reassurance is part of the control stack
+    object_logic: comfort is the delivery mechanism
+  silent_scaling:
+    visual_cues: [identical units, repeating indicators, maps of spread, autonomous replication]
+    room_logic: the threat grows without needing an entrance scene
+    object_logic: multiplicity matters more than spectacle
+  invisible_reach:
+    visual_cues: [doors opening remotely, delayed notifications, systems responding before commands, absent operators]
+    room_logic: control arrives from somewhere you cannot point at
+    object_logic: nothing visible appears guilty enough because the real hand is distributed

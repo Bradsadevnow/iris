@@ -1,0 +1,25 @@
+skins:
+  generic:
+    framing: cinematic portable villain card
+    nouns: [facility, network, room, records, subject]
+    institutions: [oversight board, private office, response team, archive]
+  sci_fi:
+    framing: prestige systems paranoia
+    nouns: [station, lattice, tribunal, subdeck, archive shard]
+    institutions: [oversight directorate, orbital court, response wing, recovery array]
+  suburban_thriller:
+    framing: domestic paranoia
+    nouns: [house, county, basement, nursery, letter]
+    institutions: [sheriff office, memorial hospital, school board, family court]
+  corporate_satire:
+    framing: glossy executive menace
+    nouns: [campus, deck, investor memo, policy lane, user base]
+    institutions: [board, legal, trust and safety, growth office]
+  gothic:
+    framing: aristocratic rot
+    nouns: [estate, crypt, chapel, heirloom, corridor]
+    institutions: [household, abbey, inheritance court, town council]
+  fantasy:
+    framing: mythic domination
+    nouns: [keep, relic, sigil, bloodline, gate]
+    institutions: [throne, order, temple, war council]

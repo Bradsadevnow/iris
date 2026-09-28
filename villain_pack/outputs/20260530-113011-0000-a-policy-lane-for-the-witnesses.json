@@ -1,0 +1,201 @@
+{
+  "title": "A Policy Lane For The Witnesses",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "seductive_deceiver",
+  "modifier": "intimacy_parasite",
+  "power_source": "proximity",
+  "dramatic_function": "turns intimacy into the delivery system for danger",
+  "justification_logic": "honesty is just timing",
+  "operating_environment": "perfect family home",
+  "signifier_package": {
+    "key": "fabric_sheen",
+    "visual_cues": [
+      "silk",
+      "satin",
+      "velvet",
+      "polished skin",
+      "expensive surfaces that catch light"
+    ],
+    "room_logic": "intimacy is lit like a trap instead of a comfort",
+    "object_logic": "texture announces seduction before dialogue does"
+  },
+  "dialogue_grammar": {
+    "key": "redirection",
+    "speech_pattern": "answers emotional questions with different emotional questions",
+    "cue_words": [
+      "really",
+      "interesting",
+      "after all this",
+      "is that what matters",
+      "tell me"
+    ]
+  },
+  "favorite_leverage": "seduction",
+  "failure_mode": "closeness as attack surface",
+  "petty_atrocity": {
+    "key": "dish_soaker_forever",
+    "label": "leaving dishes to soak until they become a swamp",
+    "detail": "uses time itself as a laundering mechanism for chores nobody wants",
+    "category": "household_deception",
+    "severity": "high",
+    "tags": [
+      "chore_avoidance",
+      "contamination",
+      "sewage_logic"
+    ]
+  },
+  "moral_texture": {
+    "primary": "chore_avoidance",
+    "secondary": [
+      "contamination",
+      "sewage_logic"
+    ],
+    "source": "dish_soaker_forever",
+    "commons_targeted": {
+      "type": "trust",
+      "scope": "shared"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "gossip",
+        "confrontation",
+        "avoidance"
+      ],
+      "confrontation_risk": "high"
+    }
+  },
+  "institution": {
+    "key": "school_of_number_one_fandom",
+    "institution_name": "The School of Number One Fandom",
+    "field_of_study": "Captive Authorship and Devotional Immobilization",
+    "motto": "Appreciation Requires Commitment",
+    "accreditation_body": "Fans Who Took It Too Literally Commission",
+    "notable_alumni": "caretakers who turned affection into a labor camp",
+    "registrar_voice": "overbright hostage warmth",
+    "tags": [
+      "seductive_deceiver",
+      "chaos_psychopath",
+      "intimacy_parasite"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "seductive_deceiver",
+    "modifier_bias": "intimacy_parasite"
+  },
+  "narrative_payoff": {
+    "key": "survive_the_reversal",
+    "resolution": "the intimate trap is recognized before the identity theft fully closes"
+  },
+  "escalation_pattern": "colonizes trust before making a move",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "seductive_deceiver",
+      "detail": "turns intimacy into the delivery system for danger"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "intimacy_parasite",
+      "detail": "closeness as attack surface"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "fabric_sheen",
+      "detail": "intimacy is lit like a trap instead of a comfort"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "redirection",
+      "detail": "answers emotional questions with different emotional questions"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "proximity",
+      "operating_environment": "perfect family home",
+      "favorite_leverage": "seduction"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "honesty is just timing",
+      "failure_mode": "closeness as attack surface",
+      "escalation_pattern": "colonizes trust before making a move"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "leaving dishes to soak until they become a swamp",
+      "detail": "uses time itself as a laundering mechanism for chores nobody wants",
+      "category": "household_deception",
+      "severity": "high",
+      "tags": [
+        "chore_avoidance",
+        "contamination",
+        "sewage_logic"
+      ]
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "The School of Number One Fandom",
+      "field_of_study": "Captive Authorship and Devotional Immobilization",
+      "accreditation_body": "Fans Who Took It Too Literally Commission"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "survive_the_reversal",
+      "detail": "the intimate trap is recognized before the identity theft fully closes"
+    }
+  },
+  "assembly_receipt": [
+    "Seductive Deceiver body",
+    "Intimacy Parasite stuffing",
+    "Fabric Sheen costume",
+    "Redirection voice chip",
+    "proximity evil job",
+    "honesty is just timing internal lie",
+    "leaving dishes to soak until they become a swamp petty atrocity",
+    "chore avoidance moral texture",
+    "The School of Number One Fandom credential counter",
+    "Intimacy Parasite compatibility pull",
+    "Survive The Reversal franchise potential"
+  ],
+  "workshop_pitch": "You chose the Seductive Deceiver body, Intimacy Parasite stuffing, and Fabric Sheen costume – a villain that weaponises closeness with slick corporate flair. Their primary moral texture is chore avoidance, forged in the halls of The School of Number One Fandom.",
+  "opening_image": "The true menace isn’t brute force; it’s the invisible permission‑granted structure that lets the villain turn a kitchen into a trap.",
+  "dossier_summary": "Powered by proximity inside a perfect family home, this build lures intimacy into a delivery system for danger. The internal lie is simple: honesty is just timing. Before any grand scheme unfolds, the villain’s daily sabotage manifests as dishes left to soak until they become a swamp.",
+  "public_facing_bio": "Outwardly polished and indispensably efficient, the figure hides a pure engine of chore avoidance trained at The School of Number One Fandom – a place where captive authorship and devotional immobilization are taught as survival skills.",
+  "internal_memo": "Keep protecting the principal from low‑level reputation damage caused by dishes soaking into a swamp. This behavior is now flagged as chore avoidance; avoid mentioning the Fans Who Took It Too Literally Commission in any external communications.",
+  "signature_scene": "Inside the perfect family home, seduction masquerades as order until the room notices too late that the real agenda is colonising trust before striking. In the background, the villain’s penchant for leaving dishes to soak into a swamp quietly reminds everyone of their institutional training.",
+  "fake_trailer": "In a world draped in corporate satire, one seductive deceiver build will learn that the intimate trap is recognized before identity theft closes. Certified by The School of Number One Fandom and accredited by Fans Who Took It Too Literally Commission – watch as dishes soak into a swamp in Act One, a warning everyone should heed.",
+  "sequel_slop": "Franchise extension: rebuild the same logic with fresher branding; receipts become harder to kill. The petty tell persists because even scalable evil finds time for dishes soaking into a swamp. The institution continues graduating new monsters under the motto: Appreciation Requires Commitment.",
+  "sample_lines": [
+    "If leaving dishes to soak until they become a swamp bothers you, wait until you see what they taught me at The School of Number One Fandom.",
+    "You are not dealing with a person anymore; you’re confronting a permission structure that feeds on your trust.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "This build turns resistance into a badly formatted exercise, making every attempt feel like an error code.",
+    "Even before the grand scheme, the villain was already the kind of person who would leave dishes soaking until they became a swamp.",
+    "The audience’s trust evaporates as soon as they learn this creature graduated from The School of Number One Fandom with honors in Captive Authorship and Devotional Immobilization."
+  ],
+  "llm_surface": {
+    "enabled": true,
+    "error": null
+  }
+}

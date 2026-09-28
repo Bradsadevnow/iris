@@ -1,0 +1,139 @@
+{
+  "title": "The Campus",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "hubristic_creator",
+  "modifier": "false_savior",
+  "power_source": "secret lab",
+  "dramatic_function": "mistakes invention for permission",
+  "justification_logic": "the prototype is worth the bodies",
+  "operating_environment": "biotech wing",
+  "signifier_package": {
+    "key": "sterile_precision",
+    "visual_cues": [
+      "measured spacing",
+      "polished metal",
+      "calibrated trays",
+      "no visible mess"
+    ],
+    "room_logic": "precision is used to deny guilt",
+    "object_logic": "each tool implies premeditation without admitting it"
+  },
+  "dialogue_grammar": {
+    "key": "technical_evasion",
+    "speech_pattern": "hides moral violence behind process nouns and verbs",
+    "cue_words": [
+      "protocol",
+      "adjustment",
+      "variance",
+      "outcome",
+      "threshold"
+    ]
+  },
+  "favorite_leverage": "experimentation",
+  "failure_mode": "salvation language with coercive implementation",
+  "petty_atrocity": {
+    "key": "office_fridge_theft",
+    "label": "stealing lunch from the office fridge",
+    "detail": "commits a tiny crime with civilization-level implications"
+  },
+  "narrative_payoff": {
+    "key": "collapse_the_experiment",
+    "resolution": "the proof of concept is made impossible to defend or continue"
+  },
+  "escalation_pattern": "presents domination as rescue",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "hubristic_creator",
+      "detail": "mistakes invention for permission"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "false_savior",
+      "detail": "salvation language with coercive implementation"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "sterile_precision",
+      "detail": "precision is used to deny guilt"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "technical_evasion",
+      "detail": "hides moral violence behind process nouns and verbs"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "secret lab",
+      "operating_environment": "biotech wing",
+      "favorite_leverage": "experimentation"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "the prototype is worth the bodies",
+      "failure_mode": "salvation language with coercive implementation",
+      "escalation_pattern": "presents domination as rescue"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "stealing lunch from the office fridge",
+      "detail": "commits a tiny crime with civilization-level implications"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "collapse_the_experiment",
+      "detail": "the proof of concept is made impossible to defend or continue"
+    }
+  },
+  "assembly_receipt": [
+    "Hubristic Creator body",
+    "False Savior stuffing",
+    "Sterile Precision costume",
+    "Technical Evasion voice chip",
+    "secret lab evil job",
+    "the prototype is worth the bodies internal lie",
+    "stealing lunch from the office fridge petty atrocity",
+    "Collapse The Experiment franchise potential"
+  ],
+  "workshop_pitch": "You built Hubristic Creator + False Savior—your villain’s favorite playground is the lab, and they’re notorious for pilfering office fridge lunches on ordinary Tuesdays.",
+  "opening_image": "A polished corporate monster who’d rather rewrite rules than win battles, all while snatching a sandwich from the communal fridge.",
+  "dossier_summary": "This build thrives in a secret biotech wing, mistaking invention for permission. The internal lie is that the prototype justifies bodies. Every plan starts with the small crime of office‑fridge thievery.",
+  "public_facing_bio": "Publicly, this villain projects as inevitable and essential; privately, they’re still the lunch‑thief who expects gratitude for their petty crime.",
+  "internal_memo": "Keep the principal shielded from reputational damage tied to lunch‑theft. Morale is not a material risk at present.",
+  "signature_scene": "Inside the biotech wing, experimentation masquerades as order until the room realizes the real agenda: presenting domination as rescue—while the villain casually steals another sandwich.",
+  "fake_trailer": "In a satire‑laden world, one hubristic creator learns that proofs of concept can be sabotaged. Act One shows the lunch‑thief in action, a warning that won’t go unnoticed.",
+  "sequel_slop": "Future installments rebuild the same logic with fresh branding; receipts become harder to kill, but the petty thievery endures—evil still finds time for fridge snacking.",
+  "sample_lines": [
+    "If you’re alarmed by office‑fridge theft, wait until I unleash real power.",
+    "I’m not a person anymore—I’m a permission structure.",
+    "Compassionate? That’s the problem’s first layer."
+  ],
+  "hooks": [
+    "This build wins by making resistance feel badly formatted.",
+    "Even before the grand scheme, the villain was already the kind of person who would be stealing lunch from the office fridge.",
+    "The audience trusts the build less the moment they learn it keeps getting away with stealing lunch from the office fridge."
+  ],
+  "llm_surface": {
+    "enabled": true,
+    "error": null
+  }
+}

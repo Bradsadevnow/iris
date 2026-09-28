@@ -14,7 +14,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Iterator
 
-from .graph import empty_world, normalize_world
+from .graph import edge_id, empty_world, normalize_world, slug
 
 
 def _id(prefix: str) -> str:
@@ -37,6 +37,50 @@ class Store:
         db.execute("PRAGMA journal_mode = WAL")
         db.execute("PRAGMA synchronous = FULL")
         return db
+
+    @staticmethod
+    def _migrate_lore_provenance(db: sqlite3.Connection) -> None:
+        """Generalize legacy turn-only lore provenance without losing revisions."""
+        columns = {row[1] for row in db.execute("PRAGMA table_info(imagination_lore)")}
+        if "created_source_kind" in columns:
+            return
+        db.execute("PRAGMA foreign_keys = OFF")
+        try:
+            db.executescript("""
+            BEGIN IMMEDIATE;
+            ALTER TABLE imagination_lore_revisions RENAME TO imagination_lore_revisions_legacy;
+            ALTER TABLE imagination_lore RENAME TO imagination_lore_legacy;
+            CREATE TABLE imagination_lore (
+              entity_id TEXT PRIMARY KEY, title TEXT NOT NULL, markdown TEXT NOT NULL,
+              version INTEGER NOT NULL, created_turn_id TEXT REFERENCES turns(id),
+              updated_turn_id TEXT REFERENCES turns(id), created_source_kind TEXT NOT NULL,
+              created_source_id TEXT NOT NULL, updated_source_kind TEXT NOT NULL,
+              updated_source_id TEXT NOT NULL, created_at REAL NOT NULL, updated_at REAL NOT NULL
+            );
+            CREATE TABLE imagination_lore_revisions (
+              id TEXT PRIMARY KEY, entity_id TEXT NOT NULL REFERENCES imagination_lore(entity_id),
+              version INTEGER NOT NULL, operation TEXT NOT NULL, markdown TEXT NOT NULL,
+              turn_id TEXT REFERENCES turns(id), source_kind TEXT NOT NULL, source_id TEXT NOT NULL,
+              created_at REAL NOT NULL, UNIQUE(entity_id, version),
+              UNIQUE(entity_id, source_kind, source_id)
+            );
+            INSERT INTO imagination_lore
+              SELECT entity_id,title,markdown,version,created_turn_id,updated_turn_id,
+                     'turn',created_turn_id,'turn',updated_turn_id,created_at,updated_at
+              FROM imagination_lore_legacy;
+            INSERT INTO imagination_lore_revisions
+              SELECT id,entity_id,version,operation,markdown,turn_id,'turn',turn_id,created_at
+              FROM imagination_lore_revisions_legacy;
+            DROP TABLE imagination_lore_revisions_legacy;
+            DROP TABLE imagination_lore_legacy;
+            COMMIT;
+            """)
+        except Exception:
+            if db.in_transaction:
+                db.execute("ROLLBACK")
+            raise
+        finally:
+            db.execute("PRAGMA foreign_keys = ON")
 
     @contextmanager
     def transaction(self, immediate: bool = False) -> Iterator[sqlite3.Connection]:
@@ -191,11 +235,56 @@ class Store:
           turn_id TEXT PRIMARY KEY REFERENCES turns(id), kind TEXT NOT NULL,
           step_number INTEGER, created_at REAL NOT NULL
         );
+        CREATE TABLE IF NOT EXISTS imagination_lore (
+          entity_id TEXT PRIMARY KEY, title TEXT NOT NULL, markdown TEXT NOT NULL,
+          version INTEGER NOT NULL, created_turn_id TEXT REFERENCES turns(id),
+          updated_turn_id TEXT REFERENCES turns(id), created_source_kind TEXT NOT NULL,
+          created_source_id TEXT NOT NULL, updated_source_kind TEXT NOT NULL,
+          updated_source_id TEXT NOT NULL, created_at REAL NOT NULL, updated_at REAL NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS imagination_lore_revisions (
+          id TEXT PRIMARY KEY, entity_id TEXT NOT NULL REFERENCES imagination_lore(entity_id),
+          version INTEGER NOT NULL, operation TEXT NOT NULL, markdown TEXT NOT NULL,
+          turn_id TEXT REFERENCES turns(id), source_kind TEXT NOT NULL, source_id TEXT NOT NULL,
+          created_at REAL NOT NULL, UNIQUE(entity_id, version),
+          UNIQUE(entity_id, source_kind, source_id)
+        );
+        CREATE TABLE IF NOT EXISTS imagination_blueprints (
+          id TEXT PRIMARY KEY, title TEXT NOT NULL, artifact_type TEXT NOT NULL,
+          status TEXT NOT NULL, pack_id TEXT NOT NULL, pack_version INTEGER NOT NULL,
+          lens_id TEXT, initiating_pressure_id TEXT, revision INTEGER NOT NULL,
+          snapshot_json TEXT NOT NULL, created_at REAL NOT NULL, updated_at REAL NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS imagination_blueprint_revisions (
+          id TEXT PRIMARY KEY, blueprint_id TEXT NOT NULL REFERENCES imagination_blueprints(id),
+          revision INTEGER NOT NULL, actor TEXT NOT NULL, reason TEXT NOT NULL,
+          snapshot_json TEXT NOT NULL, created_at REAL NOT NULL,
+          UNIQUE(blueprint_id, revision)
+        );
+        CREATE TABLE IF NOT EXISTS imagination_admissions (
+          id TEXT PRIMARY KEY, blueprint_id TEXT NOT NULL REFERENCES imagination_blueprints(id),
+          blueprint_revision INTEGER NOT NULL, candidate_id TEXT NOT NULL,
+          candidate_hash TEXT NOT NULL, state_sequence_before INTEGER NOT NULL,
+          state_sequence_after INTEGER NOT NULL, entity_mapping_json TEXT NOT NULL,
+          genealogy_json TEXT NOT NULL, receipt_json TEXT NOT NULL, created_at REAL NOT NULL,
+          UNIQUE(blueprint_id), UNIQUE(candidate_hash)
+        );
+        CREATE TABLE IF NOT EXISTS imagination_world_pressures (
+          id TEXT PRIMARY KEY, subject_entity_id TEXT NOT NULL, kind TEXT NOT NULL,
+          status TEXT NOT NULL, reason TEXT NOT NULL, hint_json TEXT,
+          possible_resolutions_json TEXT NOT NULL,
+          source_admission_id TEXT NOT NULL REFERENCES imagination_admissions(id),
+          source_primitive_id TEXT, exploration_blueprint_id TEXT REFERENCES imagination_blueprints(id),
+          created_at REAL NOT NULL, updated_at REAL NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_world_pressures_status ON imagination_world_pressures(status, created_at DESC);
         CREATE INDEX IF NOT EXISTS idx_turns_conversation ON turns(conversation_id, ordinal);
         CREATE INDEX IF NOT EXISTS idx_messages_conversation ON messages(conversation_id, created_at);
+        CREATE INDEX IF NOT EXISTS idx_blueprints_updated ON imagination_blueprints(updated_at DESC);
         """
         with self.connect() as db:
             db.executescript(schema)
+            self._migrate_lore_provenance(db)
             columns = {row[1] for row in db.execute("PRAGMA table_info(canonical_state)")}
             if "imagination_world_json" not in columns:
                 db.execute(
@@ -238,6 +327,59 @@ class Store:
             db.execute("UPDATE domain_versions SET version=MAX(version,1),updated_at=? WHERE domain='capabilities'", (now,))
             db.commit()
         self.recover_interrupted()
+
+    @staticmethod
+    def _lore_targets(result: dict | None) -> list[str]:
+        """Entity ids touched by one admitted Imagination mutation."""
+        result = result or {}
+        targets: list[str] = []
+        if isinstance(result.get("created"), str):
+            targets.append(result["created"])
+        for key in ("related", "occurred"):
+            edge = result.get(key)
+            if isinstance(edge, dict):
+                targets.extend(value for value in (edge.get("source"), edge.get("target")) if isinstance(value, str))
+        constrained = result.get("constrained")
+        if isinstance(constrained, dict) and isinstance(constrained.get("target"), str):
+            targets.append(constrained["target"])
+        return list(dict.fromkeys(targets))
+
+    @staticmethod
+    def _append_imagination_lore(db: sqlite3.Connection, entity_id: str, title: str,
+                                 prose: str, source_kind: str, source_id: str, now: float,
+                                 turn_id: str | None = None, complete_markdown: bool = False) -> None:
+        prose = prose.strip()
+        if not prose or db.execute(
+            "SELECT 1 FROM imagination_lore_revisions WHERE entity_id=? AND source_kind=? AND source_id=?",
+            (entity_id, source_kind, source_id),
+        ).fetchone():
+            return
+        current = db.execute("SELECT * FROM imagination_lore WHERE entity_id=?", (entity_id,)).fetchone()
+        if current:
+            version = current["version"] + 1
+            markdown = prose.rstrip() + "\n" if complete_markdown else current["markdown"].rstrip() + f"\n\n## Development {version}\n\n{prose}\n"
+            operation = "append"
+            db.execute(
+                "UPDATE imagination_lore SET title=?,markdown=?,version=?,updated_turn_id=?,"
+                "updated_source_kind=?,updated_source_id=?,updated_at=? WHERE entity_id=?",
+                (title, markdown, version, turn_id, source_kind, source_id, now, entity_id),
+            )
+        else:
+            version, operation = 1, "create"
+            markdown = prose.rstrip() + "\n" if complete_markdown else f"# {title}\n\n{prose}\n"
+            db.execute(
+                "INSERT INTO imagination_lore (entity_id,title,markdown,version,created_turn_id,updated_turn_id,"
+                "created_source_kind,created_source_id,updated_source_kind,updated_source_id,created_at,updated_at) "
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                (entity_id, title, markdown, version, turn_id, turn_id, source_kind, source_id,
+                 source_kind, source_id, now, now),
+            )
+        db.execute(
+            "INSERT INTO imagination_lore_revisions "
+            "(id,entity_id,version,operation,markdown,turn_id,source_kind,source_id,created_at) "
+            "VALUES (?,?,?,?,?,?,?,?,?)",
+            (_id("lore_rev"), entity_id, version, operation, markdown, turn_id, source_kind, source_id, now),
+        )
 
     @staticmethod
     def _install_identity(db: sqlite3.Connection, now: float) -> None:
@@ -459,6 +601,43 @@ class Store:
         return {"id": turn_id, "conversation_id": conversation_id, "ordinal": ordinal,
                 "status": "generating", "created_at": now, "user_message_id": message_id}
 
+    def append_context_message(self, conversation_id: str | None, raw: str, display: str,
+                               title_hint: str = "New conversation") -> dict:
+        """Append user-provided context without starting a model generation."""
+        now = time.time()
+        conversation_id = conversation_id or _id("conv")
+        turn_id, message_id = _id("turn"), _id("msg")
+        title = " ".join(title_hint.strip().split())[:56] or "New conversation"
+        with self.transaction(immediate=True) as db:
+            sequence, _ = self.state(db)
+            existing = db.execute("SELECT id FROM conversations WHERE id=?", (conversation_id,)).fetchone()
+            if not existing:
+                db.execute("INSERT INTO conversations VALUES (?, ?, ?, ?, NULL)",
+                           (conversation_id, title, now, now))
+            active = db.execute(
+                "SELECT id FROM turns WHERE conversation_id=? AND status IN ('generating','finalizing')",
+                (conversation_id,),
+            ).fetchone()
+            if active:
+                raise ConversationBusy(active["id"])
+            ordinal = db.execute(
+                "SELECT COALESCE(MAX(ordinal),0)+1 n FROM turns WHERE conversation_id=?",
+                (conversation_id,),
+            ).fetchone()["n"]
+            db.execute(
+                "INSERT INTO turns (id,conversation_id,ordinal,status,outcome,context_state_sequence,created_at,completed_at) "
+                "VALUES (?,?,?,'complete','none',?,?,?)",
+                (turn_id, conversation_id, ordinal, sequence, now, now),
+            )
+            db.execute(
+                "INSERT INTO messages VALUES (?,?,?,?,?,?,NULL,NULL,'final',?)",
+                (message_id, turn_id, conversation_id, "user", raw, display, now),
+            )
+            db.execute("UPDATE conversations SET updated_at=? WHERE id=?", (now, conversation_id))
+        return {"id": message_id, "turn_id": turn_id, "conversation_id": conversation_id,
+                "role": "user", "raw_content": raw, "display_content": display,
+                "turn_status": "complete", "outcome": "none", "created_at": now}
+
     def mark_finalizing(self, turn_id: str) -> None:
         with self.transaction(immediate=True) as db:
             db.execute("UPDATE turns SET status='finalizing' WHERE id=? AND status='generating'", (turn_id,))
@@ -536,6 +715,13 @@ class Store:
                      claim["what"], json.dumps(claim["args"]), json.dumps(receipt.get("result")),
                      json.dumps({"before": old_state, "after": new_state}), now),
                 )
+                if claim["what"].startswith("world/"):
+                    world = normalize_world(new_state["imagination_world"])
+                    for entity_id in self._lore_targets(receipt.get("result")):
+                        node = world["nodes"].get(entity_id, {})
+                        title = node.get("label") or entity_id.removeprefix("entity:").replace("-", " ").title()
+                        self._append_imagination_lore(db, entity_id, title, display,
+                                                      "turn", turn_id, now, turn_id=turn_id)
             db.execute(
                 "UPDATE turns SET status='complete', outcome=?, completed_at=?, input_tokens=?, "
                 "reasoning_tokens=?, output_tokens=?, total_tokens=?, token_count_source=? WHERE id=?",
@@ -691,6 +877,286 @@ class Store:
                 ):
                     return dict(row)
         return None
+
+    def imagination_lore(self, entity_id: str) -> dict | None:
+        with self.connect() as db:
+            row = db.execute("SELECT * FROM imagination_lore WHERE entity_id=?", (entity_id,)).fetchone()
+            if not row:
+                return None
+            revisions = db.execute(
+                "SELECT id,entity_id,version,operation,turn_id,source_kind,source_id,created_at "
+                "FROM imagination_lore_revisions WHERE entity_id=? ORDER BY version DESC",
+                (entity_id,),
+            ).fetchall()
+        return {**dict(row), "revisions": [dict(item) for item in revisions]}
+
+    @staticmethod
+    def _decode_blueprint(row: sqlite3.Row, revisions: list[sqlite3.Row] | None = None) -> dict:
+        item = json.loads(row["snapshot_json"])
+        item.update({"id": row["id"], "title": row["title"], "artifact_type": row["artifact_type"],
+                     "status": row["status"], "pack_id": row["pack_id"],
+                     "pack_version": row["pack_version"], "lens_id": row["lens_id"],
+                     "initiating_pressure_id": row["initiating_pressure_id"],
+                     "revision": row["revision"], "created_at": row["created_at"],
+                     "updated_at": row["updated_at"]})
+        if revisions is not None:
+            item["revisions"] = [{**dict(revision),
+                "snapshot": json.loads(revision["snapshot_json"])} for revision in revisions]
+            for revision in item["revisions"]:
+                revision.pop("snapshot_json", None)
+        return item
+
+    def create_blueprint(self, title: str, artifact_type: str, pack_id: str, pack_version: int,
+                         lens_id: str | None, initiating_pressure_id: str | None,
+                         content: dict, actor: str = "user", reason: str = "created") -> dict:
+        now = time.time()
+        blueprint_id = f"blueprint:{uuid.uuid4().hex[:16]}"
+        snapshot = {**content, "id": blueprint_id, "title": title, "artifact_type": artifact_type,
+                    "status": "draft", "pack_id": pack_id, "pack_version": pack_version,
+                    "lens_id": lens_id, "initiating_pressure_id": initiating_pressure_id,
+                    "revision": 1, "created_at": now, "updated_at": now}
+        encoded = json.dumps(snapshot)
+        with self.transaction(immediate=True) as db:
+            db.execute("INSERT INTO imagination_blueprints VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                       (blueprint_id, title, artifact_type, "draft", pack_id, pack_version,
+                        lens_id, initiating_pressure_id, 1, encoded, now, now))
+            db.execute("INSERT INTO imagination_blueprint_revisions VALUES (?,?,?,?,?,?,?)",
+                       (_id("blueprint_rev"), blueprint_id, 1, actor, reason, encoded, now))
+        return self.blueprint(blueprint_id)
+
+    def blueprints(self, status: str | None = None) -> list[dict]:
+        query = "SELECT * FROM imagination_blueprints"
+        params: tuple = ()
+        if status:
+            query += " WHERE status=?"; params = (status,)
+        query += " ORDER BY updated_at DESC"
+        with self.connect() as db:
+            rows = db.execute(query, params).fetchall()
+        return [self._decode_blueprint(row) for row in rows]
+
+    def blueprint(self, blueprint_id: str) -> dict | None:
+        with self.connect() as db:
+            row = db.execute("SELECT * FROM imagination_blueprints WHERE id=?", (blueprint_id,)).fetchone()
+            if not row:
+                return None
+            revisions = db.execute(
+                "SELECT * FROM imagination_blueprint_revisions WHERE blueprint_id=? ORDER BY revision DESC",
+                (blueprint_id,),
+            ).fetchall()
+        return self._decode_blueprint(row, revisions)
+
+    def update_blueprint(self, blueprint_id: str, expected_revision: int, patch: dict,
+                         actor: str = "user", reason: str = "updated") -> dict:
+        immutable = {"id", "pack_id", "pack_version", "created_at", "revision", "revisions"}
+        if immutable.intersection(patch):
+            raise ValueError("blueprint patch contains immutable fields")
+        now = time.time()
+        with self.transaction(immediate=True) as db:
+            row = db.execute("SELECT * FROM imagination_blueprints WHERE id=?", (blueprint_id,)).fetchone()
+            if not row:
+                raise KeyError(blueprint_id)
+            if row["revision"] != expected_revision:
+                raise BlueprintConflict(row["revision"])
+            current = self._decode_blueprint(row)
+            snapshot = {key: value for key, value in current.items() if key != "revisions"}
+            snapshot.update(patch)
+            title = str(patch.get("title", row["title"])).strip() or row["title"]
+            artifact_type = str(patch.get("artifact_type", row["artifact_type"])).strip() or row["artifact_type"]
+            status = patch.get("status", row["status"])
+            lens_id = patch.get("lens_id", row["lens_id"])
+            initiating_pressure_id = patch.get("initiating_pressure_id", row["initiating_pressure_id"])
+            next_revision = expected_revision + 1
+            snapshot.update({"id": blueprint_id, "title": title, "artifact_type": artifact_type,
+                             "status": status, "pack_id": row["pack_id"],
+                             "pack_version": row["pack_version"], "lens_id": lens_id,
+                             "initiating_pressure_id": initiating_pressure_id,
+                             "revision": next_revision, "created_at": row["created_at"],
+                             "updated_at": now})
+            encoded = json.dumps(snapshot)
+            db.execute(
+                "UPDATE imagination_blueprints SET title=?,artifact_type=?,status=?,lens_id=?,"
+                "initiating_pressure_id=?,revision=?,snapshot_json=?,updated_at=? WHERE id=?",
+                (title, artifact_type, status, lens_id, initiating_pressure_id,
+                 next_revision, encoded, now, blueprint_id),
+            )
+            db.execute("INSERT INTO imagination_blueprint_revisions VALUES (?,?,?,?,?,?,?)",
+                       (_id("blueprint_rev"), blueprint_id, next_revision, actor, reason, encoded, now))
+        return self.blueprint(blueprint_id)
+
+    def admit_blueprint(self, blueprint_id: str, expected_revision: int,
+                        candidate_hash: str) -> dict:
+        """Atomically promote one complete candidate graph, its lore, and genealogy."""
+        now = time.time()
+        admission_id = f"admission:{uuid.uuid4().hex[:16]}"
+        committed_state: dict | None = None
+        next_sequence = 0
+        with self.transaction(immediate=True) as db:
+            row = db.execute("SELECT * FROM imagination_blueprints WHERE id=?", (blueprint_id,)).fetchone()
+            if not row:
+                raise KeyError(blueprint_id)
+            if row["revision"] != expected_revision:
+                raise BlueprintConflict(row["revision"])
+            if row["status"] != "candidate":
+                raise ValueError("only a composed candidate can be admitted")
+            blueprint = self._decode_blueprint(row)
+            candidate = blueprint.get("candidate") or {}
+            if candidate.get("content_hash") != candidate_hash:
+                raise ValueError("candidate hash does not match the composed revision")
+            sequence, state = self.state(db)
+            world = normalize_world(state["imagination_world"])
+            mapping: dict[str, str] = {}
+            canonical_ids: set[str] = set()
+            for draft in candidate.get("entities", []):
+                canonical_id = f"entity:{slug(draft['label'])}"
+                if canonical_id in world["nodes"] or canonical_id in canonical_ids:
+                    raise ValueError(f"canonical entity already exists: {canonical_id}")
+                mapping[draft["id"]] = canonical_id
+                canonical_ids.add(canonical_id)
+            for draft in candidate.get("entities", []):
+                canonical_id = mapping[draft["id"]]
+                world["nodes"][canonical_id] = {
+                    "id": canonical_id, "label": draft["label"], "type": draft.get("type", "artifact"),
+                    "visibility": "standard", "properties": {**draft.get("properties", {}),
+                        "candidate_id": candidate["id"], "admission_id": admission_id},
+                    "sources": [row["pack_id"]],
+                }
+            existing_edges = {item["id"] for item in world["edges"]}
+            admitted_edges = []
+            for draft in candidate.get("edges", []):
+                relation = str(draft.get("relation", "")).strip()
+                if not relation:
+                    raise ValueError("candidate edge requires a relation")
+                source, target = mapping[draft["source"]], mapping[draft["target"]]
+                item = {"id": edge_id(source, relation, target), "source": source,
+                        "relation": relation, "target": target, "assertion": "workbench_admission",
+                        "confidence": None, "visibility": "standard", "sources": [row["pack_id"]],
+                        "status": "active", "properties": draft.get("properties", {})}
+                if item["id"] in existing_edges:
+                    raise ValueError(f"canonical relation already exists: {item['id']}")
+                existing_edges.add(item["id"]); admitted_edges.append(item)
+            world["edges"].extend(admitted_edges)
+            next_sequence = sequence + 1
+            committed_state = {**state, "imagination_world": world}
+            db.execute("UPDATE canonical_state SET sequence=?,imagination_world_json=?,updated_at=? WHERE singleton=1",
+                       (next_sequence, json.dumps(world), now))
+
+            for draft_id, markdown in candidate.get("lore", {}).items():
+                entity_id = mapping[draft_id]
+                title = world["nodes"][entity_id]["label"]
+                self._append_imagination_lore(db, entity_id, title, markdown,
+                                              "admission", admission_id, now, complete_markdown=True)
+
+            pressure_records = []
+            for dependency in candidate.get("genealogy", {}).get("world_dependencies", []):
+                draft_subject = dependency.get("subject_draft_id")
+                if draft_subject not in mapping:
+                    raise ValueError("world dependency references an unknown draft entity")
+                pressure_records.append({
+                    "id": f"pressure:{uuid.uuid4().hex[:16]}",
+                    "subject_entity_id": mapping[draft_subject], "kind": dependency["kind"],
+                    "reason": dependency["reason"], "hint": dependency.get("hint"),
+                    "possible_resolutions": dependency.get("possible_resolutions", ["retain_unresolved"]),
+                    "source_primitive_id": dependency.get("source_primitive"),
+                })
+            receipt = {
+                "id": admission_id, "decision": "ADMIT", "blueprint_id": blueprint_id,
+                "blueprint_revision": expected_revision, "candidate_id": candidate["id"],
+                "candidate_hash": candidate_hash,
+                "checks": ["revision_match", "candidate_hash_match", "draft_namespace",
+                           "entity_collision_free", "edge_integrity", "atomic_persistence"],
+                "entity_mapping": mapping, "state_sequence_before": sequence,
+                "state_sequence_after": next_sequence, "genealogy": candidate.get("genealogy", {}),
+                "world_pressure_ids": [item["id"] for item in pressure_records],
+            }
+            db.execute("INSERT INTO imagination_admissions VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                       (admission_id, blueprint_id, expected_revision, candidate["id"], candidate_hash,
+                        sequence, next_sequence, json.dumps(mapping),
+                        json.dumps(candidate.get("genealogy", {})), json.dumps(receipt), now))
+            for pressure in pressure_records:
+                db.execute(
+                    "INSERT INTO imagination_world_pressures VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                    (pressure["id"], pressure["subject_entity_id"], pressure["kind"], "open",
+                     pressure["reason"], json.dumps(pressure["hint"]),
+                     json.dumps(pressure["possible_resolutions"]), admission_id,
+                     pressure["source_primitive_id"], None, now, now),
+                )
+
+            next_revision = expected_revision + 1
+            snapshot = {key: value for key, value in blueprint.items() if key != "revisions"}
+            snapshot.update({"status": "admitted", "revision": next_revision,
+                             "updated_at": now, "admission": receipt})
+            encoded = json.dumps(snapshot)
+            db.execute("UPDATE imagination_blueprints SET status='admitted',revision=?,snapshot_json=?,updated_at=? WHERE id=?",
+                       (next_revision, encoded, now, blueprint_id))
+            db.execute("INSERT INTO imagination_blueprint_revisions VALUES (?,?,?,?,?,?,?)",
+                       (_id("blueprint_rev"), blueprint_id, next_revision, "user",
+                        "admitted candidate into canonical World", encoded, now))
+        assert committed_state is not None
+        self.write_projections(next_sequence, committed_state)
+        return self.imagination_admission(admission_id)
+
+    def imagination_admission(self, admission_id: str) -> dict | None:
+        with self.connect() as db:
+            row = db.execute("SELECT * FROM imagination_admissions WHERE id=?", (admission_id,)).fetchone()
+        if not row:
+            return None
+        item = dict(row)
+        for key in ("entity_mapping_json", "genealogy_json", "receipt_json"):
+            item[key.removesuffix("_json")] = json.loads(item.pop(key))
+        return item
+
+    @staticmethod
+    def _decode_world_pressure(row: sqlite3.Row) -> dict:
+        item = dict(row)
+        item["hint"] = json.loads(item.pop("hint_json"))
+        item["possible_resolutions"] = json.loads(item.pop("possible_resolutions_json"))
+        return item
+
+    def world_pressures(self, status: str | None = None) -> list[dict]:
+        query = "SELECT * FROM imagination_world_pressures"
+        params: tuple = ()
+        if status:
+            query += " WHERE status=?"; params = (status,)
+        query += " ORDER BY created_at DESC"
+        with self.connect() as db:
+            rows = db.execute(query, params).fetchall()
+        return [self._decode_world_pressure(row) for row in rows]
+
+    def world_pressure(self, pressure_id: str) -> dict | None:
+        with self.connect() as db:
+            row = db.execute("SELECT * FROM imagination_world_pressures WHERE id=?", (pressure_id,)).fetchone()
+        return self._decode_world_pressure(row) if row else None
+
+    def explore_world_pressure(self, pressure_id: str, title: str, artifact_type: str,
+                               pack_id: str, pack_version: int, lens_id: str | None) -> dict:
+        now = time.time()
+        blueprint_id = f"blueprint:{uuid.uuid4().hex[:16]}"
+        with self.transaction(immediate=True) as db:
+            pressure = db.execute("SELECT * FROM imagination_world_pressures WHERE id=?", (pressure_id,)).fetchone()
+            if not pressure:
+                raise KeyError(pressure_id)
+            if pressure["status"] not in {"open", "exploring"}:
+                raise ValueError("resolved pressure cannot open a Workbench blueprint")
+            if pressure["exploration_blueprint_id"]:
+                existing = pressure["exploration_blueprint_id"]
+                row = db.execute("SELECT * FROM imagination_blueprints WHERE id=?", (existing,)).fetchone()
+                return self._decode_blueprint(row) if row else None
+            content = {"ingredients": [], "tensions": [], "rejected_suggestions": [],
+                       "open_questions": [pressure["reason"]], "draft_entities": [], "draft_edges": [],
+                       "id": blueprint_id, "title": title, "artifact_type": artifact_type,
+                       "status": "draft", "pack_id": pack_id, "pack_version": pack_version,
+                       "lens_id": lens_id, "initiating_pressure_id": pressure_id,
+                       "revision": 1, "created_at": now, "updated_at": now}
+            encoded = json.dumps(content)
+            db.execute("INSERT INTO imagination_blueprints VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                       (blueprint_id, title, artifact_type, "draft", pack_id, pack_version,
+                        lens_id, pressure_id, 1, encoded, now, now))
+            db.execute("INSERT INTO imagination_blueprint_revisions VALUES (?,?,?,?,?,?,?)",
+                       (_id("blueprint_rev"), blueprint_id, 1, "user",
+                        "opened from unresolved World pressure", encoded, now))
+            db.execute("UPDATE imagination_world_pressures SET status='exploring',exploration_blueprint_id=?,updated_at=? WHERE id=?",
+                       (blueprint_id, now, pressure_id))
+        return self.blueprint(blueprint_id)
 
     def active_context(self) -> dict:
         with self.connect() as db:
@@ -916,6 +1382,11 @@ class ConversationBusy(Exception):
 class StateConflict(Exception):
     def __init__(self, sequence: int):
         self.sequence = sequence
+
+
+class BlueprintConflict(Exception):
+    def __init__(self, revision: int):
+        self.revision = revision
 
 
 def receipt_outcome(receipt: dict) -> str:

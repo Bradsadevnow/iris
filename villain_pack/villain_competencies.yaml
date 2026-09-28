@@ -1,0 +1,91 @@
+competencies:
+  blame_laundering_stack:
+    label: Blame Laundering
+    summary: can move fault across rooms, roles, and reporting lines until nobody feels authorized to hold it
+    items:
+      - blame laundering
+      - strategic ambiguity
+      - documentation weaponization
+      - reputational self-extraction
+    tags: [corporate_predator, institutional_enforcer, burden_shifting, bureaucratic_sadism]
+  coercive_reassurance_stack:
+    label: Coercive Reassurance
+    summary: can make control sound considerate long enough for compliance to feel self-authored
+    items:
+      - coercive reassurance
+      - hostage empathy
+      - selective soothing
+      - managed dependency
+    tags: [seductive_deceiver, false_savior, institutional_enforcer, gaslighting]
+  procedural_domination_stack:
+    label: Procedural Domination
+    summary: can make punishment arrive wearing badges, forms, and the warm glow of process
+    items:
+      - procedural sadism
+      - selective helplessness
+      - permissions gating
+      - escalation by policy
+    tags: [institutional_enforcer, bureaucratic_sadism, administrative_cowardice]
+  charisma_fraud_stack:
+    label: Charisma Fraud
+    summary: can create confidence faster than reality can object
+    items:
+      - narrative seizure
+      - prestige mimicry
+      - staged sincerity
+      - spotlight laundering
+    tags: [performance_genius, seductive_deceiver, mastermind, public_humiliation]
+  optimization_cruelty_stack:
+    label: Optimization Cruelty
+    summary: can turn measurable harm into a dashboard maintenance routine
+    items:
+      - threshold cruelty
+      - exception pruning
+      - humane-sounding downsizing
+      - metrics over meaning
+    tags: [rogue_ai, optimization_addict, corporate_predator, performative_listening]
+  intimacy_capture_stack:
+    label: Intimacy Capture
+    summary: can turn trust into infrastructure and affection into a lock-in strategy
+    items:
+      - emotional mirroring abuse
+      - selective vulnerability
+      - closeness colonization
+      - memory dispute management
+    tags: [seductive_deceiver, intimacy_parasite, privacy_conscripting]
+  catastrophe_leverage_stack:
+    label: Catastrophe Leverage
+    summary: can extract advantage from panic while sounding like the only adult in the room
+    items:
+      - crisis opportunism
+      - scarcity theater
+      - aid capture
+      - triage exceptionalism
+    tags: [collapse_prophet, mastermind, chaos_psychopath, civilizational_failure]
+  contamination_authority_stack:
+    label: Contamination Authority
+    summary: can make boundary collapse feel inevitable, ordained, or already too late
+    items:
+      - body-boundary indifference
+      - ritualized exposure
+      - appetite governance
+      - irreversible threshold crossing
+    tags: [monstrous_other, contamination, grieving_zealot]
+  inheritance_exemption_stack:
+    label: Inheritance Exemption
+    summary: can translate prior ownership into present innocence and lifelong access
+    items:
+      - entitlement under silk
+      - lineage laundering
+      - inherited exception handling
+      - legacy-based impunity
+    tags: [inherited_heir, mastermind, corporate_predator, resource_selfishness]
+  witness_management_stack:
+    label: Witness Management
+    summary: can make observers doubt rank, timing, motive, or their own interpretation of the room
+    items:
+      - witness fatigue induction
+      - survivable truth sequencing
+      - ambient intimidation
+      - plausibly deniable menace
+    tags: [mastermind, chaos_psychopath, seductive_deceiver, public_entropy]

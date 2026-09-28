@@ -1,0 +1,155 @@
+schema: iris.imagination-pack/v1
+id: imagination-pack:villain
+version: 5
+name: Villain Generator
+status: seed-only
+description: >-
+  Portable antagonist doctrine curated from Villain Pack. Installing this seed
+  makes no fictional entities canonical and grants no executable capability.
+
+source:
+  root: villain_pack
+  provenance: villain_pack/HANDOFF.md
+
+classification:
+  file: classification.yaml
+  sha256: 77139512ad96ed935f2c202ad386e240536f262e56695ccff10211d692df92cf
+
+future_contract:
+  capabilities: [villain.generate, villain.expand]
+  entity_types: [villain, character, institution, organization, artifact, location, scheme]
+  output: atomic-world-packet
+
+doctrine:
+  - id: families
+    file: villain_families.yaml
+    root_key: families
+    sha256: cd342887b271a5e9eb4c5c43a7faac82d881808c9d576e4381939ac88ab249ef
+  - id: modifiers
+    file: villain_modifiers.yaml
+    root_key: modifiers
+    sha256: 4f55a42fa22098ba3c1e47d297acd003b01b0727136eb21c774a2f4b5d9f777e
+  - id: signifiers
+    file: signifier_packages.yaml
+    root_key: signifiers
+    sha256: 053bbed9c2543f6273012c7b058b683a36edb33734b06e5dff9de0f678aaf4fa
+  - id: dialogue
+    file: dialogue_grammars.yaml
+    root_key: dialogue_grammars
+    sha256: 83aef3ddafd72a7306c7d2d83525fc1b3d2ea4642ad27f370f5277901db783e5
+  - id: payoffs
+    file: payoff_patterns.yaml
+    root_key: payoffs
+    sha256: baa8e03cfa27b4ac0d4f040fa96527d6fcc817facf0e33e223f9d1f21eeaa916
+  - id: skins
+    file: skins.yaml
+    root_key: skins
+    sha256: 7d186a4eaf4ade4ddc7d63f4b1be857bdae626d41dfe12f8687e0dab9fae55f5
+  - id: petty_atrocities
+    file: petty_atrocities.yaml
+    root_key: petty_atrocities
+    sha256: 728a96d5d0813f86594f6a7e8750144834d10fd6c740e67c29964e6675385252
+  - id: exposures
+    file: villain_exposures.yaml
+    root_key: exposures
+    sha256: 20cf556d490bc1ef7821be3db92904e27b3c68264ea5ba7a8a4309b609b1d664
+  - id: competencies
+    file: villain_competencies.yaml
+    root_key: competencies
+    sha256: 361c6853c1e48e76f703f963b58fdcf24125cb121a95f85964cd6628b27ba567
+  - id: sidekicks
+    file: sidekick_parts.yaml
+    root_key: sidekicks
+    sha256: a7a3412f944b3f99c03d305f04e6bd16fa9951937cad61d2e1310050f5175017
+  - id: institutions
+    file: villain_institutions.yaml
+    root_key: institutions
+    sha256: 6fd6307098c8c885e5494703f56f8c81a9da12f194aadcf7a4c5759fa97b2db5
+  - id: macguffins
+    file: villain_macguffins.yaml
+    root_key: macguffins
+    sha256: c92de1fb7f25b34d18b1db8f8a5990e92c83c209b4cfeb85279d6171b21498d7
+  - id: schemes
+    file: villain_schemes.yaml
+    root_key: schemes
+    sha256: 35ff926712f19c9566610f68ab7aadb99e9feae0e00e796de0c1e16a714a1cf1
+  - id: lairs
+    file: villain_lairs.yaml
+    root_key: lairs
+    sha256: 53e14ac5226e9f47343b6607ab1150c3fd9397c64719aafa2a402875d0d647c9
+  - id: story_mechanics
+    file: villain_story_mechanics.yaml
+    root_keys: [schemes, lairs]
+    sha256: 77196661b1abefc075f4450b51c1a795ab81cd018c8ca500d60540c63a67579c
+  - id: slots
+    file: villain_slots.yaml
+    root_key: slots
+    sha256: 1b9209892ef08e0b95ee7162a92db64ff60465326d6dd0c62cc89e0b079b5094
+  - id: jobboard
+    file: villain_jobboard.yaml
+    root_keys: [strategic_agendas, structural_complications, contractor_classes, post_victory_reversal_states, venue_pool, convincer_pool, contingency_pool, betrayal_slot_pool, reveal_mechanism_pool, moral_invoice_pool]
+    sha256: 460af0d279106274c00fd66469a928082427287d32e380255c5f17c57626629e
+
+lenses:
+  - id: lens:identity
+    legacy_ids: [lens:nature, lens:bearing, lens:character, lens:disposition, lens:presence, lens:voice, lens:conduct]
+    label: Who they are
+    lanes: [identity]
+    domains: [archetype, temperament, presence, voice, manner, habits, conduct]
+  - id: lens:purpose
+    legacy_ids: [lens:bonds, lens:drives, lens:values, lens:attachments, lens:scheme, lens:story]
+    label: What they're about
+    lanes: [purpose]
+    domains: [drives, values, appetites, convictions, loyalty, obligation]
+  - id: lens:role
+    legacy_ids: [lens:origins, lens:formation, lens:institution]
+    label: Why they're here
+    lanes: [role]
+    domains: [social_role, relationship, upbringing, education, institution, profession, crisis, ideology]
+  - id: lens:contribution
+    legacy_ids: [lens:capabilities, lens:instincts, lens:practices, lens:expertise, lens:artifact]
+    label: What they bring
+    lanes: [contribution]
+    domains: [knacks, training, expertise, practices]
+  - id: lens:flaws
+    legacy_ids: [lens:fault-lines, lens:world]
+    label: Flaws
+    lanes: [flaws]
+    domains: [vulnerability, blind_spot, compulsion, contradiction, breaking_point, failure]
+
+resources:
+  policies:
+    - {id: assembly, file: assembler.py, sha256: e9f53ef94db959bbe940680649b31ed33436afc3edbaa7ee1e8dd222c391337c}
+    - {id: novelty, file: generator.py, sha256: bde7ded987dd83e4fe2f6e37203792ad87c4a9d3af80395b45ad548119c7f7ba}
+    - {id: world_derivation, file: world_derivation.py, sha256: b4f72dce4361e9adc3dc31f319486658683e4f1ed3c7fda406e5368e94d28f43}
+  surfaces:
+    - {id: prose_expansion, file: expander.py, sha256: 3362d2ea02fc5952456ef58a80d2862868db79922669ea3751b3013c873866e6}
+    - {id: villain_profile, file: villain_profile_renderer.py, sha256: 8a4c080287eb72befd410ab3e4090e47cbffaae1ebe201d8f0175a632589e14f}
+    - {id: institution_page, file: institution_page_generator.py, sha256: 9c14f74ff27552d1c2a634d39bb904da8755dd52c7c66948dc780e7567ede1fc}
+    - {id: company_page, file: company_page_generator.py, sha256: 9e77848d5b23161b0c646b3a4fb6549658bbdfed6d19c83f86e973773c4d6f74}
+    - {id: job_posting, file: job_posting_generator.py, sha256: 2fcd296c35fa6969702101b723de4622d99f3dfa52148d2f231065c1ab3eb118}
+    - {id: property_listing, file: property_listing_generator.py, sha256: 261ba4cc7dddfc5621777e969b5ca2c7e48ddf9c162e7581bf7be59685e45e84}
+    - {id: scheme_packet, file: scheme_packet_generator.py, sha256: 416625b2cf2e62a8cabd168ea954cd580cf350a4cb22565f3fc7fb95c411e404}
+    - {id: lair_dossier, file: lair_dossier_generator.py, sha256: 9b7339945f067be2d35cca8696a83ba75423853d9b26d4e17fb58f1cac8d6e04}
+    - {id: job_board, file: job_board_generator.py, sha256: c7acc357f354b0dd11028d287a9af651a031583af65a6a1557f7163404148835}
+    - {id: workshop_prompt, file: templates/build_a_villain_prompt.txt, sha256: 00aa0dbb1c0b4f92362883d7106a51715138addb001e4c45863b7fd051c04a7e}
+  guidance:
+    - {id: specification, file: VILLAIN_PACK_SPEC.md, sha256: 5a13b7b40d119a464a3e7e7743d0c500223bf483d590ec58c131f0002d5ffcca}
+    - {id: handoff, file: HANDOFF.md, sha256: d4af26d32425b241a7987b5726172e0796410781434e1987eaaa87f6bcdd22b7}
+    - {id: professional_network, file: professional_network_spec.md, sha256: 094ed4657e27d1df6fb7f91d3c394a68c333697e09d9340371e35226a99e823f}
+    - {id: scheme_lair_integration, file: scheme_lair_integration_spec.md, sha256: 496a80442446100519e472c6485f41c64bad4db31596daef9d80fd5156df6f26}
+  exemplars:
+    - {id: seductive_deceiver_card, file: outputs/20260531-140520-0000-what-seductive-deceiver-calls-mercy.json, sha256: b0673d5f8880bb1f35ed0467c627e456f8759f937a9667da105c3aa41ba5865d}
+    - {id: hubristic_creator_card, file: outputs/20260531-140632-0000-what-hubristic-creator-calls-mercy.json, sha256: 98274430069e2d2b2b249f6d9fbe99b1af807e5292463e642458fe1cefdb0a08}
+    - {id: corporate_predator_card, file: outputs/20260531-144758-0000-a-user-base-for-the-witnesses.json, sha256: ba8cc2816d2e67953888b86a639264bbb536bb1a42f23e0a3a0a6450ce866fa8}
+    - {id: professional_profile, file: professional_profiles/20260531-144758-0000-a-user-base-for-the-witnesses.md, sha256: e7a9f87f5f4603d7758fe89c0a207c13a622e079dbf139712bd2758c3510194d}
+    - {id: property_listing, file: property_listings/20260531-140520-0000-what-seductive-deceiver-calls-mercy.md, sha256: 0457262ff02843c879cbca30cb2eb9064bdd7780b4990f34cb9f4327959921ed}
+    - {id: lair_dossier, file: lair_dossiers/20260531-140520-0000-what-seductive-deceiver-calls-mercy.md, sha256: a1348c92527008de44435df942fa0df341586716c091af9528c99424e94e470c}
+    - {id: job_board_packet, file: job_board_packets/20260531-140520-0000-what-seductive-deceiver-calls-mercy.md, sha256: 4b861d4ded101deda578fc61ed6754141cf95f4b1561b196aca32a0091f82db1}
+
+excluded:
+  - generated outputs except the explicitly pinned taste exemplars
+  - LM Studio transport and model configuration
+  - command-line interfaces
+  - persistence and canonical-state ownership
+  - legacy HallTime and Skynet experiments

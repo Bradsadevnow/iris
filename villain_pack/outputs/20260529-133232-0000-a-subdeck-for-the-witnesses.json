@@ -1,0 +1,127 @@
+{
+  "title": "A Subdeck For The Witnesses",
+  "skin": "sci_fi",
+  "skin_framing": "prestige systems paranoia",
+  "villain_family": "monstrous_other",
+  "modifier": "collapse_prophet",
+  "power_source": "duplication",
+  "dramatic_function": "violates the body or category boundary itself",
+  "justification_logic": "hunger is truth",
+  "operating_environment": "growth chamber",
+  "signifier_package": {
+    "key": "appetite",
+    "visual_cues": [
+      "teeth",
+      "mouths",
+      "feeding rituals",
+      "consumption marks",
+      "empty containers"
+    ],
+    "room_logic": "desire is physical and escalating",
+    "object_logic": "every object implies use or ingestion"
+  },
+  "dialogue_grammar": {
+    "key": "choral_voice",
+    "speech_pattern": "sounds plural even when one mouth is moving",
+    "cue_words": [
+      "we",
+      "all",
+      "inside",
+      "together",
+      "many"
+    ]
+  },
+  "favorite_leverage": "infection",
+  "failure_mode": "vindication hunger",
+  "narrative_payoff": {
+    "key": "contain_the_breach",
+    "resolution": "harm can be limited but not fully undone"
+  },
+  "escalation_pattern": "welcomes disaster because it proves the worldview",
+  "portable_skin_nouns": [
+    "station",
+    "lattice",
+    "tribunal",
+    "subdeck",
+    "archive shard"
+  ],
+  "portable_institutions": [
+    "oversight directorate",
+    "orbital court",
+    "response wing",
+    "recovery array"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "sci_fi",
+      "detail": "prestige systems paranoia"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "monstrous_other",
+      "detail": "violates the body or category boundary itself"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "collapse_prophet",
+      "detail": "vindication hunger"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "appetite",
+      "detail": "desire is physical and escalating"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "choral_voice",
+      "detail": "sounds plural even when one mouth is moving"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "duplication",
+      "operating_environment": "growth chamber",
+      "favorite_leverage": "infection"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "hunger is truth",
+      "failure_mode": "vindication hunger",
+      "escalation_pattern": "welcomes disaster because it proves the worldview"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "contain_the_breach",
+      "detail": "harm can be limited but not fully undone"
+    }
+  },
+  "assembly_receipt": [
+    "Monstrous Other body",
+    "Collapse Prophet stuffing",
+    "Appetite costume",
+    "Choral Voice voice chip",
+    "duplication evil job",
+    "hunger is truth internal lie",
+    "Contain The Breach franchise potential"
+  ],
+  "workshop_pitch": "You selected Monstrous Other plus Collapse Prophet and got a villain whose favorite workplace protection is infection.",
+  "opening_image": "This build wins by making resistance feel badly formatted.",
+  "dossier_summary": "This build runs on duplication inside a growth chamber. Its dramatic function is to violates the body or category boundary itself. The internal lie is simple: hunger is truth.",
+  "signature_scene": "The villain stages a scene inside the growth chamber where infection briefly passes for order until the room notices too late that the real agenda is welcomes disaster because it proves the worldview.",
+  "fake_trailer": "In a world shaped by sci fi, one monstrous other build will learn that harm can be limited but not fully undone.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill.",
+  "sample_lines": [
+    "This build gets meaner the moment somebody mistakes it for a service.",
+    "You are not dealing with a person anymore. You are dealing with a permission structure.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "This build wins by making resistance feel badly formatted.",
+    "By the time somebody names the monster correctly, the monster has already become a workflow.",
+    "The villain is less interested in victory than in teaching the room a worse definition of normal."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

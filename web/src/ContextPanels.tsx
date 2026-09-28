@@ -5,7 +5,7 @@ import {
 } from "lucide-react";
 import {
   api, ContextManifest, ExpressionReceipt, PromptProjection, PromptProjectionNode,
-  RoleSummary, ScopedMemory, SystemProjection, TurnContext,
+  CompiledStance, RoleSummary, ScopedMemory, SystemProjection, TurnContext,
 } from "./api";
 
 const formatTokens = (value: number) => value >= 1000 ? `${(value / 1000).toFixed(1)}k` : `${value}`;
@@ -122,6 +122,28 @@ export function ContextInspector({ turnId }: { turnId: string }) {
 
 type ActiveTab = "now" | "last" | "evidence";
 
+const EMPTY_STANCE: CompiledStance = {
+  profiles: [], attention: [], principles: [], methods: [], expression: [], preferred_edges: [],
+  tensions: [], precedence: [],
+};
+
+function CombinedStance({ stance, includeProfiles = false }: { stance?: CompiledStance; includeProfiles?: boolean }) {
+  const compiled = stance ?? EMPTY_STANCE;
+  const groups = [
+    ["Attention", compiled.attention], ["Methods", compiled.methods],
+    ["Graph preferences", compiled.preferred_edges], ["Expression", compiled.expression],
+  ] as const;
+  if (!compiled.profiles.length) return <p className="context-empty-inline">No compiled profile evidence is available for this state. Halcyon uses canonical Self and task context only.</p>;
+  return <div className="combined-stance">
+    {includeProfiles ? <div className="stance-profile-stack">{compiled.profiles.map((profile) => <details key={profile.id}>
+      <summary><div><strong>{profile.name}</strong><small>{profile.source === "explicit" ? "Selected by user" : "Inferred for this turn"}</small></div><OwnerBadge owner="role">{profile.source}</OwnerBadge></summary>
+      <p>{profile.principles.slice(0, 4).join(" · ")}</p>
+    </details>)}</div> : null}
+    {groups.map(([label, contributions]) => contributions.length ? <section key={label}><h4>{label}</h4><div className="stance-contributions">{contributions.map((item) => <span key={item.value} title={`Contributed by ${item.contributed_by.join(", ")}`}>{item.value}<i>{item.contributed_by.join(" + ")}</i></span>)}</div></section> : null)}
+    {compiled.tensions.length ? <section className="stance-tensions"><h4>Productive tensions</h4>{compiled.tensions.map((tension) => <article key={tension.profiles.join("-")}><strong>{tension.profiles.join(" × ")}</strong><p>{tension.between}</p><small>{tension.requirement}</small></article>)}</section> : null}
+  </div>;
+}
+
 export function ActiveProjectionPanel({ conversationId, onOpenFull, onOpenTurn }: {
   conversationId: string | null; onOpenFull: () => void; onOpenTurn: (turnId: string) => void;
 }) {
@@ -154,13 +176,14 @@ export function ActiveProjectionPanel({ conversationId, onOpenFull, onOpenTurn }
     <div className="self-drawer-intro"><div className="self-drawer-mark"><Fingerprint size={19} /></div><div><span><i /> Halcyon · canonical Self</span><p>Identity remains stable; this panel shows the context composed around it.</p></div></div>
     {tab === "now" ? <>
       {configuredChanged ? <p className="projection-pending">Configuration changed · applies to the next turn</p> : null}
-      <section className="self-drawer-section"><h3>Active stance <b>{projection.context.roles.length} explicit</b></h3><p className="self-drawer-hint">Roles steer attention for the next turn. They are never identity or authority.</p><div className="self-drawer-roles">{roles.map((role) => { const active = projection.context.roles.includes(role.id); return <button key={role.id} className={`role-chip ${active ? "active" : ""}`} disabled={busyRole === role.id} title={role.tagline} onClick={() => void toggleRole(role.id)}><span>{role.name}</span>{active ? <X size={11} /> : <Plus size={11} />}</button>; })}</div></section>
+      <section className="self-drawer-section"><h3>Active stance <b>{projection.context.roles.length} explicit</b></h3><p className="self-drawer-hint">Select multiple profiles. They compose as peer task lenses and never become identity or authority.</p><div className="self-drawer-roles">{roles.map((role) => { const active = projection.context.roles.includes(role.id); return <button key={role.id} className={`role-chip ${active ? "active" : ""}`} disabled={busyRole === role.id} title={role.tagline} onClick={() => void toggleRole(role.id)}><span>{role.name}</span>{active ? <X size={11} /> : <Plus size={11} />}</button>; })}</div></section>
+      <section className="self-drawer-section"><h3>Combined effect <b>next turn</b></h3><CombinedStance stance={projection.stance} includeProfiles /></section>
       <section className="self-drawer-section"><h3>Retrieval scopes <b>configured now</b></h3><div className="self-drawer-scopes">{["global", ...projection.context.skills, projection.context.world, projection.context.task].filter(Boolean).map((scope) => <span key={scope}>{scope}</span>)}</div></section>
       <section className="self-drawer-section"><h3>Current Affect <b>canonical</b></h3><div className="self-drawer-affect">{Object.entries(projection.affect.values).map(([name, value]) => <div key={name}><span>{name}</span><b>{value.toFixed(0)}</b><div><i style={{ width: `${value}%` }} /></div></div>)}</div></section>
       <section className="self-drawer-section"><h3>Tool boundary <b>{projection.capabilities.available} registered</b></h3><p className="self-drawer-hint">Registered tools are not bound to a request until the turn manifest says so.</p></section>
     </> : null}
     {tab === "last" ? <>{!lastProjection ? <p className="context-empty-inline">Send a message to capture the first turn-specific projection.</p> : <>
-      <section className="self-drawer-section"><h3>Reasoning stance <b>captured</b></h3><div className="projected-role-line">{projectedRoles.map((roleId) => <b key={roleId}>{roleNames.get(roleId) ?? roleId}<i>{lastProjection.strategy.role_sources[roleId]}</i></b>)}</div></section>
+      <section className="self-drawer-section"><h3>Reasoning stance <b>captured</b></h3><div className="projected-role-line">{projectedRoles.map((roleId) => <b key={roleId}>{roleNames.get(roleId) ?? roleId}<i>{lastProjection.strategy.role_sources[roleId]}</i></b>)}</div><CombinedStance stance={lastProjection.strategy.compiled_stance} includeProfiles /></section>
       <section className="self-drawer-section"><h3>Owners in focus <b>state {lastProjection.state_sequence}</b></h3><div className="projection-owner-grid">{Object.entries(ownerCounts).map(([owner, count]) => <div key={owner}><span>{ownerLabel(owner)}</span><b>{count}</b></div>)}</div><NodeList nodes={lastProjection.selected_nodes.filter((node) => node.owner !== "self").slice(0, 8)} /></section>
     </>}</> : null}
     {tab === "evidence" ? <>{lastProjection ? <section className="self-drawer-section projection-receipt"><h3>Projection receipt</h3><code>{lastProjection.id}</code><p>{new Date(lastProjection.created_at * 1000).toLocaleString()} · {lastProjection.selected_nodes.length} selected · {lastProjection.excluded_nodes.length} excluded</p>{lastProjection.turn_id ? <button className="evidence-button" onClick={() => onOpenTurn(lastProjection.turn_id!)}><FileCheck2 size={13} />Open complete turn evidence<ChevronRight size={13} /></button> : null}</section> : <p className="context-empty-inline">No completed turn evidence yet.</p>}<section className="self-drawer-section"><h3>Boundary state <b>read only</b></h3><div className="version-chips">{Object.entries(projection.versions).map(([owner, version]) => <span key={owner}>{owner}<b>v{version}</b></span>)}</div></section></> : null}

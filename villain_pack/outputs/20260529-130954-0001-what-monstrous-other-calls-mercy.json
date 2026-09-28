@@ -1,0 +1,64 @@
+{
+  "title": "What Monstrous Other Calls Mercy",
+  "skin": "generic",
+  "skin_framing": "cinematic portable villain card",
+  "villain_family": "monstrous_other",
+  "modifier": "grieving_zealot",
+  "power_source": "bodily invasion",
+  "dramatic_function": "violates the body or category boundary itself",
+  "justification_logic": "hunger is truth",
+  "operating_environment": "chapel",
+  "signifier_package": {
+    "key": "contamination",
+    "visual_cues": [
+      "spores",
+      "stains",
+      "breath on glass",
+      "creeping residue",
+      "tainted fluids"
+    ],
+    "room_logic": "nothing stays clean once the breach begins",
+    "object_logic": "contact itself becomes plot"
+  },
+  "dialogue_grammar": {
+    "key": "inhuman_echo",
+    "speech_pattern": "repeats human ideas back with one wrong emotional setting",
+    "cue_words": [
+      "hello",
+      "remain",
+      "together",
+      "open",
+      "become"
+    ]
+  },
+  "favorite_leverage": "infection",
+  "failure_mode": "pain converted into permission",
+  "narrative_payoff": {
+    "key": "burn_the_nest",
+    "resolution": "the reproductive or invasive environment is destroyed at severe cost"
+  },
+  "opening_image": "The villain's true weapon is not force but the ability to make harm sound responsible.",
+  "escalation_pattern": "turns private loss into public doctrine",
+  "sample_lines": [
+    "This will read better in the official report.",
+    "You are confusing fear with pattern recognition."
+  ],
+  "hooks": [
+    "The villain does not want to win a fight. They want to redefine what counts as winning.",
+    "The threat becomes obvious only after the room, policy, or system has already taken their side.",
+    "The villain does not want to win a fight. They want to redefine what counts as winning."
+  ],
+  "portable_skin_nouns": [
+    "facility",
+    "network",
+    "room",
+    "records",
+    "subject"
+  ],
+  "portable_institutions": [
+    "oversight board",
+    "private office",
+    "response team",
+    "archive"
+  ]
+}

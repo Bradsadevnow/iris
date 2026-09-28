@@ -1,0 +1,153 @@
+{
+  "title": "The Records",
+  "skin": "generic",
+  "skin_framing": "cinematic portable villain card",
+  "villain_family": "chaos_psychopath",
+  "modifier": "intimacy_parasite",
+  "power_source": "ritual violence",
+  "dramatic_function": "removes stable bargaining from the story",
+  "justification_logic": "because I could",
+  "operating_environment": "wrong houses",
+  "signifier_package": {
+    "key": "stillness_then_shock",
+    "visual_cues": [
+      "motionless figures",
+      "held frames",
+      "empty pauses",
+      "one abrupt break in pattern"
+    ],
+    "room_logic": "delay is the setup mechanism",
+    "object_logic": "calm is not safety but timing"
+  },
+  "dialogue_grammar": {
+    "key": "childlike_taunt",
+    "speech_pattern": "sounds playful in ways that make the room feel spiritually contaminated",
+    "cue_words": [
+      "oops",
+      "game",
+      "funny",
+      "again",
+      "guess"
+    ]
+  },
+  "favorite_leverage": "hostage emotion",
+  "failure_mode": "closeness as attack surface",
+  "petty_atrocity": {
+    "key": "countertop_puddle_migration",
+    "label": "leaving the bathroom counter completely soaked",
+    "detail": "walks away after splashing everywhere like the next person volunteered to absorb the consequences",
+    "category": "bathroom_household_desecration",
+    "severity": "medium",
+    "tags": [
+      "shared_space_disrespect",
+      "ambient_hostility",
+      "burden_shifting"
+    ]
+  },
+  "narrative_payoff": {
+    "key": "refuse_the_game",
+    "resolution": "the hero survives by not accepting the villain's ritual terms of meaning"
+  },
+  "escalation_pattern": "colonizes trust before making a move",
+  "portable_skin_nouns": [
+    "facility",
+    "network",
+    "room",
+    "records",
+    "subject"
+  ],
+  "portable_institutions": [
+    "oversight board",
+    "private office",
+    "response team",
+    "archive"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "generic",
+      "detail": "cinematic portable villain card"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "chaos_psychopath",
+      "detail": "removes stable bargaining from the story"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "intimacy_parasite",
+      "detail": "closeness as attack surface"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "stillness_then_shock",
+      "detail": "delay is the setup mechanism"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "childlike_taunt",
+      "detail": "sounds playful in ways that make the room feel spiritually contaminated"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "ritual violence",
+      "operating_environment": "wrong houses",
+      "favorite_leverage": "hostage emotion"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "because I could",
+      "failure_mode": "closeness as attack surface",
+      "escalation_pattern": "colonizes trust before making a move"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "leaving the bathroom counter completely soaked",
+      "detail": "walks away after splashing everywhere like the next person volunteered to absorb the consequences",
+      "category": "bathroom_household_desecration",
+      "severity": "medium",
+      "tags": [
+        "shared_space_disrespect",
+        "ambient_hostility",
+        "burden_shifting"
+      ]
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "refuse_the_game",
+      "detail": "the hero survives by not accepting the villain's ritual terms of meaning"
+    }
+  },
+  "assembly_receipt": [
+    "Chaos Psychopath body",
+    "Intimacy Parasite stuffing",
+    "Stillness Then Shock costume",
+    "Childlike Taunt voice chip",
+    "ritual violence evil job",
+    "because I could internal lie",
+    "leaving the bathroom counter completely soaked petty atrocity",
+    "Refuse The Game franchise potential"
+  ],
+  "workshop_pitch": "You selected Chaos Psychopath plus Intimacy Parasite and got a villain whose favorite workplace protection is hostage emotion. Also, on a completely ordinary Tuesday, they would absolutely be caught leaving the bathroom counter completely soaked.",
+  "opening_image": "This build wins by making resistance feel badly formatted.",
+  "dossier_summary": "This build runs on ritual violence inside a wrong houses. At the story level, it removes stable bargaining from the story. The internal lie is simple: because I could. Before any grand plan begins, the daily proof of rot is leaving the bathroom counter completely soaked.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are still the kind of person who is leaving the bathroom counter completely soaked and expecting gratitude for it.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to leaving the bathroom counter completely soaked. Staff morale is not to be interpreted as material risk at this time.",
+  "signature_scene": "The villain stages a scene inside the wrong houses where hostage emotion briefly passes for order until the room notices too late that the real agenda is this: colonizes trust before making a move. Somewhere in the background, they are also the sort of person who would be leaving the bathroom counter completely soaked.",
+  "fake_trailer": "In a world shaped by generic, one chaos psychopath build will learn that the hero survives by not accepting the villain's ritual terms of meaning. Also, somebody is definitely leaving the bathroom counter completely soaked in act one and that should have been the warning.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for leaving the bathroom counter completely soaked.",
+  "sample_lines": [
+    "If leaving the bathroom counter completely soaked bothers you, wait until you see what I do with actual power.",
+    "You are not dealing with a person anymore. You are dealing with a permission structure.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "The real threat is not violence but the institutional permission structure surrounding it.",
+    "Even before the grand scheme, the villain was already the kind of person who would be leaving the bathroom counter completely soaked.",
+    "The audience trusts the build less the moment they learn it keeps getting away with leaving the bathroom counter completely soaked."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

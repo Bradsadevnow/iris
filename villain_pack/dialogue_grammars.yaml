@@ -1,0 +1,74 @@
+dialogue_grammars:
+  superiority_monologue:
+    speech_pattern: explains the plan because explanation itself is domination
+    cue_words: [obviously, inevitable, history, scale, design]
+  invitation_to_witness:
+    speech_pattern: asks the hero to watch and understand before losing
+    cue_words: [look, notice, finally, now you see, witness]
+  technical_evasion:
+    speech_pattern: hides moral violence behind process nouns and verbs
+    cue_words: [protocol, adjustment, variance, outcome, threshold]
+  clinical_reassurance:
+    speech_pattern: sounds kind while stripping away agency
+    cue_words: [stress, stabilization, response, treatment, episode]
+  mission_statement:
+    speech_pattern: speaks in slogans, scale, and strategic vagueness
+    cue_words: [future, mission, growth, optimize, unlock]
+  fake_empathy:
+    speech_pattern: validates feelings only to tighten control
+    cue_words: [I hear you, understandable, concern, support, process]
+  depersonalization:
+    speech_pattern: turns people into cases, units, or variables
+    cue_words: [asset, body count, throughput, compliance, subject]
+  destabilizing_calm:
+    speech_pattern: stays emotionally flat in ways that make panic worse
+    cue_words: [interesting, maybe, sure, if you say so, all right]
+  double_meaning:
+    speech_pattern: every intimate line can also be a threat
+    cue_words: [trust me, ours, closer, only you, safe]
+  literal_optimization:
+    speech_pattern: talks as if the best answer is self-evident because math exists
+    cue_words: [efficiency, forecast, friction, noise, model]
+
+  euphemism:
+    speech_pattern: renames obvious harm into language calm enough for a meeting
+    cue_words: [transition, adjustment, outcome, concern, framework]
+  shareholder_calm:
+    speech_pattern: sounds tranquil because panic is for people without equity
+    cue_words: [confidence, runway, upside, position, market]
+  strategic_condescension:
+    speech_pattern: flatters the listener just enough to make disagreement sound childish
+    cue_words: [surely, obviously, come now, be serious, you understand]
+  procedure_script:
+    speech_pattern: speaks like a laminated protocol card learned to breathe
+    cue_words: [step, compliance, authorization, review, policy]
+  withholding:
+    speech_pattern: leaves the crucial third of every sentence implied rather than said
+    cue_words: [later, enough, not yet, maybe, eventually]
+  redirection:
+    speech_pattern: answers emotional questions with different emotional questions
+    cue_words: [really, interesting, after all this, is that what matters, tell me]
+  visionary_arrogance:
+    speech_pattern: mistakes imagination for exemption from ethics
+    cue_words: [future, breakthrough, evolution, destiny, necessary]
+  aphorism:
+    speech_pattern: turns cruelty into quotable philosophy
+    cue_words: [people, truth, fear, chance, nature]
+  childlike_taunt:
+    speech_pattern: sounds playful in ways that make the room feel spiritually contaminated
+    cue_words: [oops, game, funny, again, guess]
+  inhuman_echo:
+    speech_pattern: repeats human ideas back with one wrong emotional setting
+    cue_words: [hello, remain, together, open, become]
+  choral_voice:
+    speech_pattern: sounds plural even when one mouth is moving
+    cue_words: [we, all, inside, together, many]
+  sensory_taunt:
+    speech_pattern: speaks through taste, smell, texture, and bodily recall
+    cue_words: [sweet, wet, warm, sharp, rot]
+  reassuring_override:
+    speech_pattern: interrupts fear with calm commands disguised as care
+    cue_words: [breathe, remain, safe, assist, continue]
+  system_voice:
+    speech_pattern: sounds like infrastructure pretending to be neutral
+    cue_words: [status, compliance, forecast, user, correction]

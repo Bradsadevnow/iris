@@ -1,0 +1,275 @@
+{
+  "title": "What Corporate Predator Calls Mercy",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "corporate_predator",
+  "modifier": "false_savior",
+  "power_source": "platform control",
+  "dramatic_function": "converts harm into policy and profit language",
+  "justification_logic": "it is just business",
+  "operating_environment": "glass boardroom",
+  "signifier_package": {
+    "key": "stagecraft",
+    "visual_cues": [
+      "presentation remotes",
+      "mood lighting",
+      "keynote posture",
+      "audience geometry"
+    ],
+    "room_logic": "persuasion is choreographed as inevitability",
+    "object_logic": "every prop has investor-demo energy"
+  },
+  "dialogue_grammar": {
+    "key": "shareholder_calm",
+    "speech_pattern": "sounds tranquil because panic is for people without equity",
+    "cue_words": [
+      "confidence",
+      "runway",
+      "upside",
+      "position",
+      "market"
+    ]
+  },
+  "favorite_leverage": "incentive structures",
+  "failure_mode": "salvation language with coercive implementation",
+  "petty_atrocity": {
+    "key": "slow_walker_phalanx",
+    "label": "walking four across on a busy sidewalk",
+    "detail": "converts public space into a moving wall of entitlement",
+    "category": "public_space_crimes",
+    "severity": "medium",
+    "tags": [
+      "flow_sabotage",
+      "social_dominance",
+      "ambient_hostility"
+    ]
+  },
+  "moral_texture": {
+    "primary": "flow_sabotage",
+    "secondary": [
+      "social_dominance",
+      "ambient_hostility"
+    ],
+    "source": "slow_walker_phalanx",
+    "commons_targeted": {
+      "type": "space",
+      "scope": "public"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "side_eye",
+        "gossip",
+        "avoidance"
+      ],
+      "confrontation_risk": "medium"
+    }
+  },
+  "institutional_exposure": {
+    "key": "compliance_theater",
+    "label": "Compliance Theater",
+    "summary": "learned to stage ethical seriousness without ever allowing it to interfere with throughput",
+    "financial": "substantial exposure to fine-as-line-item budgeting and regulated-margin improvisation",
+    "operational": "heavy exposure to training modules, audit posture, and performative remediation workflows",
+    "legal": "advanced exposure to sign-off rituals, risk acknowledgments, and controlled admissions",
+    "predatory": "repeatedly exposed others to the exhausting burden of proving the theater was theater",
+    "tags": [
+      "institutional_enforcer",
+      "corporate_predator",
+      "rogue_ai",
+      "bureaucratic_sadism"
+    ]
+  },
+  "core_competencies": {
+    "key": "procedural_domination_stack",
+    "label": "Procedural Domination",
+    "summary": "can make punishment arrive wearing badges, forms, and the warm glow of process",
+    "items": [
+      "procedural sadism",
+      "selective helplessness",
+      "permissions gating",
+      "escalation by policy"
+    ],
+    "tags": [
+      "institutional_enforcer",
+      "bureaucratic_sadism",
+      "administrative_cowardice"
+    ]
+  },
+  "sidekick": {
+    "role_key": "emotional_support_cultist",
+    "role_label": "emotional support cultist",
+    "role_detail": "provides devotion, muscle memory, and horrifyingly upbeat compliance",
+    "loyalty_key": "career_trapped",
+    "loyalty_label": "career-trapped",
+    "loyalty_detail": "resume damage now feels more terrifying than conscience",
+    "task_key": "curse_maintenance",
+    "task_label": "curse maintenance",
+    "task_detail": "keeps the rituals humming and the wards resentfully current",
+    "competence_key": "quietly_genius",
+    "competence_label": "quietly genius",
+    "competence_detail": "the sidekick is the real backend and everybody should be more worried",
+    "fold_key": "folds_if_shown_receipts",
+    "fold_label": "folds if shown receipts",
+    "fold_detail": "denial works right up until there is a printout involved"
+  },
+  "institution": {
+    "key": "school_of_therapeutic_power_abuse",
+    "institution_name": "The School of Therapeutic Power Abuse",
+    "field_of_study": "Authoritarian Caregiving and Medicated Compliance",
+    "motto": "Order Through Sedation",
+    "accreditation_body": "Committee for Licensed Bureaucratic Cruelty",
+    "notable_alumni": "award-winning portraits of institutional harm delivered in a calm tone",
+    "registrar_voice": "weaponized clinical reassurance",
+    "tags": [
+      "institutional_enforcer",
+      "bureaucratic_sadism",
+      "false_savior"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "corporate_predator",
+    "modifier_bias": "false_savior",
+    "exposure_bias": "compliance_theater",
+    "competency_bias": "procedural_domination_stack",
+    "sidekick_bias": "emotional_support_cultist"
+  },
+  "narrative_payoff": {
+    "key": "public_exposure",
+    "resolution": "legality and branding fail under visible evidence"
+  },
+  "escalation_pattern": "presents domination as rescue",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "corporate_predator",
+      "detail": "converts harm into policy and profit language"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "false_savior",
+      "detail": "salvation language with coercive implementation"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "stagecraft",
+      "detail": "persuasion is choreographed as inevitability"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "shareholder_calm",
+      "detail": "sounds tranquil because panic is for people without equity"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "platform control",
+      "operating_environment": "glass boardroom",
+      "favorite_leverage": "incentive structures"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "it is just business",
+      "failure_mode": "salvation language with coercive implementation",
+      "escalation_pattern": "presents domination as rescue"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "walking four across on a busy sidewalk",
+      "detail": "converts public space into a moving wall of entitlement",
+      "category": "public_space_crimes",
+      "severity": "medium",
+      "tags": [
+        "flow_sabotage",
+        "social_dominance",
+        "ambient_hostility"
+      ]
+    },
+    "exposure": {
+      "station": "Exposure Ledger",
+      "selection": "Compliance Theater",
+      "summary": "learned to stage ethical seriousness without ever allowing it to interfere with throughput"
+    },
+    "competencies": {
+      "station": "Competency Rubric",
+      "selection": "Procedural Domination",
+      "items": [
+        "procedural sadism",
+        "selective helplessness",
+        "permissions gating",
+        "escalation by policy"
+      ]
+    },
+    "sidekick_bench": {
+      "station": "Sidekick Bench",
+      "selection": "emotional support cultist",
+      "loyalty": "career-trapped",
+      "task": "curse maintenance"
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "The School of Therapeutic Power Abuse",
+      "field_of_study": "Authoritarian Caregiving and Medicated Compliance",
+      "accreditation_body": "Committee for Licensed Bureaucratic Cruelty"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "public_exposure",
+      "detail": "legality and branding fail under visible evidence"
+    }
+  },
+  "assembly_receipt": [
+    "Corporate Predator body",
+    "False Savior stuffing",
+    "Stagecraft costume",
+    "Shareholder Calm voice chip",
+    "platform control evil job",
+    "it is just business internal lie",
+    "walking four across on a busy sidewalk petty atrocity",
+    "flow sabotage moral texture",
+    "Compliance Theater exposure lateral",
+    "Procedural Domination competency rubric",
+    "emotional support cultist sidekick bench",
+    "The School of Therapeutic Power Abuse credential counter",
+    "False Savior compatibility pull",
+    "Public Exposure franchise potential"
+  ],
+  "workshop_pitch": "You selected Corporate Predator plus False Savior and got a villain whose favorite workplace protection is incentive structures. Their primary moral texture is flow sabotage. Their exposure lateral is Compliance Theater. Their core competency stack is Procedural Domination. Their sidekick is a emotional support cultist who stays because they are career-trapped. Their formal training comes from The School of Therapeutic Power Abuse.",
+  "opening_image": "This build wins by making resistance feel badly formatted.",
+  "dossier_summary": "This build runs on platform control inside a glass boardroom. At the story level, it converts harm into policy and profit language. The primary moral texture is flow sabotage. The internal lie is simple: it is just business. The exposure profile is compliance theater, which operationalized into procedural domination. The local ecosystem includes a emotional support cultist who handles curse maintenance. Before any grand plan begins, the daily proof of rot is walking four across on a busy sidewalk.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of flow sabotage shaped by compliance theater and confident enough to treat procedural sadism like a normal leadership behavior. The emotional support cultist nearby makes the whole thing feel alarmingly maintainable.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to walking four across on a busy sidewalk. Their current strengths remain procedural sadism, selective helplessness, permissions gating. The emotional support cultist remains responsible for curse maintenance and is currently career-trapped. Do not mention the Committee for Licensed Bureaucratic Cruelty matter in writing.",
+  "signature_scene": "The villain stages a scene inside the glass boardroom where incentive structures briefly passes for order until the room notices too late that the real agenda is this: presents domination as rescue. The emotional support cultist quietly handles curse maintenance in the background, which is why the whole thing almost works. Somewhere in the room, somebody realizes too late that the sidekick is quietly genius and folds if shown receipts.",
+  "fake_trailer": "In a world shaped by corporate satire, one corporate predator build will learn that legality and branding fail under visible evidence. Exposure: Compliance Theater. Core competencies: procedural sadism, selective helplessness. Sidekick: emotional support cultist on curse maintenance. Somebody is definitely walking four across on a busy sidewalk in act one and that should have been the warning.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for walking four across on a busy sidewalk. So does the sidekick ecosystem: another emotional support cultist arrives, still career-trapped, still handling curse maintenance.",
+  "sample_lines": [
+    "If walking four across on a busy sidewalk bothers you, wait until you meet my emotional support cultist.",
+    "My core competencies include procedural sadism, and my emotional support cultist handles curse maintenance.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "The villain is less interested in victory than in teaching the room a worse definition of normal.",
+    "Even before the grand scheme, the villain was already the kind of person who would be walking four across on a busy sidewalk.",
+    "The audience trusts the build less the moment they learn even the emotional support cultist is hanging around because they are career-trapped."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

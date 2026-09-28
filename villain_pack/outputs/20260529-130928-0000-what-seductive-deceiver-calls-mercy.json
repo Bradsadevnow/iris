@@ -1,0 +1,63 @@
+{
+  "title": "What Seductive Deceiver Calls Mercy",
+  "skin": "generic",
+  "skin_framing": "cinematic portable villain card",
+  "villain_family": "seductive_deceiver",
+  "modifier": "performance_genius",
+  "power_source": "desire",
+  "dramatic_function": "turns intimacy into the delivery system for danger",
+  "justification_logic": "honesty is just timing",
+  "operating_environment": "candlelit office",
+  "signifier_package": {
+    "key": "wrong_family_photo",
+    "visual_cues": [
+      "portraits that are almost right",
+      "duplicate smiles",
+      "edited histories",
+      "extra people in frames"
+    ],
+    "room_logic": "domestic legitimacy is assembled by hand",
+    "object_logic": "the image is where the lie congeals"
+  },
+  "dialogue_grammar": {
+    "key": "double_meaning",
+    "speech_pattern": "every intimate line can also be a threat",
+    "cue_words": [
+      "trust me",
+      "ours",
+      "closer",
+      "only you",
+      "safe"
+    ]
+  },
+  "favorite_leverage": "seduction",
+  "failure_mode": "branding louder than competence",
+  "narrative_payoff": {
+    "key": "escape_the_trap",
+    "resolution": "intimacy must be recognized as infrastructure and exited deliberately"
+  },
+  "opening_image": "The threat becomes obvious only after the room, policy, or system has already taken their side.",
+  "escalation_pattern": "uses charisma and spectacle to cover mediocrity or fraud",
+  "sample_lines": [
+    "Trust me. I built this room for us.",
+    "Only you would understand why this had to happen."
+  ],
+  "hooks": [
+    "The villain does not want to win a fight. They want to redefine what counts as winning.",
+    "The villain does not want to win a fight. They want to redefine what counts as winning.",
+    "The villain's true weapon is not force but the ability to make harm sound responsible."
+  ],
+  "portable_skin_nouns": [
+    "facility",
+    "network",
+    "room",
+    "records",
+    "subject"
+  ],
+  "portable_institutions": [
+    "oversight board",
+    "private office",
+    "response team",
+    "archive"
+  ]
+}

@@ -1,0 +1,351 @@
+{
+  "title": "The Campus",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "institutional_enforcer",
+  "modifier": "grieving_zealot",
+  "power_source": "uniforms",
+  "dramatic_function": "makes the machine legible through procedure",
+  "justification_logic": "the rules are there for a reason",
+  "operating_environment": "tribunal chamber",
+  "signifier_package": {
+    "key": "sanctioned_space",
+    "visual_cues": [
+      "authorized doors",
+      "official tables",
+      "approved restraints",
+      "stamped files"
+    ],
+    "room_logic": "the room is dangerous because it is legitimate",
+    "object_logic": "paperwork stabilizes the violence"
+  },
+  "dialogue_grammar": {
+    "key": "depersonalization",
+    "speech_pattern": "turns people into cases, units, or variables",
+    "cue_words": [
+      "asset",
+      "body count",
+      "throughput",
+      "compliance",
+      "subject"
+    ]
+  },
+  "favorite_leverage": "documentation",
+  "failure_mode": "pain converted into permission",
+  "petty_atrocity": {
+    "key": "escalator_left_lane_block",
+    "label": "standing still on the left side of the escalator",
+    "detail": "mistakes public circulation for a personal reflection zone",
+    "category": "public_space_crimes",
+    "severity": "medium",
+    "tags": [
+      "flow_sabotage",
+      "shared_space_disrespect",
+      "ambient_hostility"
+    ]
+  },
+  "petty_atrocity_profile": [
+    {
+      "key": "escalator_left_lane_block",
+      "label": "standing still on the left side of the escalator",
+      "detail": "mistakes public circulation for a personal reflection zone",
+      "category": "public_space_crimes",
+      "severity": "medium",
+      "tags": [
+        "flow_sabotage",
+        "shared_space_disrespect",
+        "ambient_hostility"
+      ]
+    },
+    {
+      "key": "chatbot_no_human_exit",
+      "label": "trapping customer support inside a chatbot with no human exit",
+      "detail": "converts service into a self-defense maze built out of fake concern",
+      "category": "institutional_douchebaggery",
+      "severity": "extreme",
+      "tags": [
+        "containment_architecture",
+        "performative_listening",
+        "bureaucratic_sadism"
+      ]
+    },
+    {
+      "key": "cart_aisle_blocker",
+      "label": "abandoning your cart across the aisle while you backtrack for one item",
+      "detail": "makes your indecision everyone's traffic pattern",
+      "category": "public_space_crimes",
+      "severity": "medium",
+      "tags": [
+        "shared_space_disrespect",
+        "public_entropy",
+        "ambient_hostility"
+      ]
+    },
+    {
+      "key": "steals_your_charger_and_acts_confused",
+      "label": "taking your charger and acting confused about it",
+      "detail": "weaponizes fake innocence over a cable everyone recognizes",
+      "category": "borrowing_lending_crimes",
+      "severity": "high",
+      "tags": [
+        "gaslighting",
+        "property_hijack",
+        "fake_innocence"
+      ]
+    },
+    {
+      "key": "microwave_fish_at_work",
+      "label": "microwaving fish at work",
+      "detail": "turns a shared space into a hostile atmosphere event",
+      "category": "office_kitchen_biohazards",
+      "severity": "high",
+      "tags": [
+        "shared_space_disrespect",
+        "atmospheric_warfare",
+        "office_terror"
+      ]
+    },
+    {
+      "key": "hovering_over_someone_eating",
+      "label": "hovering over someone's desk while they are eating to ask one quick thing",
+      "detail": "makes lunch feel like a hostage situation with a calendar invite attached",
+      "category": "workplace_humiliations",
+      "severity": "medium",
+      "tags": [
+        "boundary_puncture",
+        "time_theft",
+        "social_pressure"
+      ]
+    }
+  ],
+  "moral_texture": {
+    "primary": "flow_sabotage",
+    "secondary": [
+      "shared_space_disrespect",
+      "ambient_hostility"
+    ],
+    "source": "escalator_left_lane_block",
+    "commons_targeted": {
+      "type": "space",
+      "scope": "public"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "side_eye",
+        "gossip",
+        "avoidance"
+      ],
+      "confrontation_risk": "medium"
+    }
+  },
+  "institutional_exposure": {
+    "key": "strategic_accountability_avoidance",
+    "label": "Strategic Accountability Avoidance",
+    "summary": "learned to survive inside systems that reward harm as long as nobody names it correctly",
+    "financial": "cross-functional exposure to liability partitioning, severance math, and budgetary absolution",
+    "operational": "extensive exposure to compliance theater, stakeholder management, and document-safe cruelty",
+    "legal": "meaningful exposure to unresolved procurement questions and preemptive blame routing",
+    "predatory": "repeatedly exposed others to accountability deserts disguised as process",
+    "tags": [
+      "corporate_predator",
+      "institutional_enforcer",
+      "burden_shifting",
+      "bureaucratic_sadism"
+    ]
+  },
+  "core_competencies": {
+    "key": "procedural_domination_stack",
+    "label": "Procedural Domination",
+    "summary": "can make punishment arrive wearing badges, forms, and the warm glow of process",
+    "items": [
+      "procedural sadism",
+      "selective helplessness",
+      "permissions gating",
+      "escalation by policy"
+    ],
+    "tags": [
+      "institutional_enforcer",
+      "bureaucratic_sadism",
+      "administrative_cowardice"
+    ]
+  },
+  "sidekick": {
+    "role_key": "person_who_keeps_getting_dragged_into_this",
+    "role_label": "person who keeps getting dragged into this",
+    "role_detail": "somehow still here despite repeatedly trying to have a normal week",
+    "loyalty_key": "genuinely_loyal",
+    "loyalty_label": "genuinely loyal",
+    "loyalty_detail": "actually would go down with the ship, which is terrible news for everyone else",
+    "task_key": "emotional_containment",
+    "task_label": "emotional containment",
+    "task_detail": "handles crying, doubt, and inconvenient humanity on the villain's behalf",
+    "competence_key": "actively_making_things_worse",
+    "competence_label": "actively making things worse",
+    "competence_detail": "every attempt to help adds three fresh liabilities and one weird smell",
+    "fold_key": "folds_if_shown_receipts",
+    "fold_label": "folds if shown receipts",
+    "fold_detail": "denial works right up until there is a printout involved"
+  },
+  "institution": {
+    "key": "institute_of_smelling_a_scam_before_it_happens",
+    "institution_name": "The Institute of Smelling a Scam Before It Happens",
+    "field_of_study": "Passive-Aggressive Middle Management and Redundancy Identification",
+    "motto": "What Would You Say You Do Here",
+    "accreditation_body": "Efficiency Consultant Liaison Office",
+    "notable_alumni": "employees fixed out of the system by a glitch everyone chose to respect",
+    "registrar_voice": "fluorescent deadpan",
+    "tags": [
+      "institutional_enforcer",
+      "administrative_cowardice",
+      "workplace_humiliations"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "institutional_enforcer",
+    "modifier_bias": "grieving_zealot",
+    "exposure_bias": "strategic_accountability_avoidance",
+    "competency_bias": "procedural_domination_stack",
+    "sidekick_bias": "person_who_keeps_getting_dragged_into_this"
+  },
+  "narrative_payoff": {
+    "key": "force_a_public_breach",
+    "resolution": "the institution must reveal its violence to preserve itself and thereby loses legitimacy"
+  },
+  "escalation_pattern": "turns private loss into public doctrine",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "institutional_enforcer",
+      "detail": "makes the machine legible through procedure"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "grieving_zealot",
+      "detail": "pain converted into permission"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "sanctioned_space",
+      "detail": "the room is dangerous because it is legitimate"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "depersonalization",
+      "detail": "turns people into cases, units, or variables"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "uniforms",
+      "operating_environment": "tribunal chamber",
+      "favorite_leverage": "documentation"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "the rules are there for a reason",
+      "failure_mode": "pain converted into permission",
+      "escalation_pattern": "turns private loss into public doctrine"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "standing still on the left side of the escalator",
+      "detail": "mistakes public circulation for a personal reflection zone",
+      "category": "public_space_crimes",
+      "severity": "medium",
+      "tags": [
+        "flow_sabotage",
+        "shared_space_disrespect",
+        "ambient_hostility"
+      ],
+      "profile_size": 6
+    },
+    "exposure": {
+      "station": "Exposure Ledger",
+      "selection": "Strategic Accountability Avoidance",
+      "summary": "learned to survive inside systems that reward harm as long as nobody names it correctly"
+    },
+    "competencies": {
+      "station": "Competency Rubric",
+      "selection": "Procedural Domination",
+      "items": [
+        "procedural sadism",
+        "selective helplessness",
+        "permissions gating",
+        "escalation by policy"
+      ]
+    },
+    "sidekick_bench": {
+      "station": "Sidekick Bench",
+      "selection": "person who keeps getting dragged into this",
+      "loyalty": "genuinely loyal",
+      "task": "emotional containment"
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "The Institute of Smelling a Scam Before It Happens",
+      "field_of_study": "Passive-Aggressive Middle Management and Redundancy Identification",
+      "accreditation_body": "Efficiency Consultant Liaison Office"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "force_a_public_breach",
+      "detail": "the institution must reveal its violence to preserve itself and thereby loses legitimacy"
+    }
+  },
+  "assembly_receipt": [
+    "Institutional Enforcer body",
+    "Grieving Zealot stuffing",
+    "Sanctioned Space costume",
+    "Depersonalization voice chip",
+    "uniforms evil job",
+    "the rules are there for a reason internal lie",
+    "standing still on the left side of the escalator primary petty atrocity",
+    "6-item rot profile",
+    "flow sabotage moral texture",
+    "Strategic Accountability Avoidance exposure lateral",
+    "Procedural Domination competency rubric",
+    "person who keeps getting dragged into this sidekick bench",
+    "The Institute of Smelling a Scam Before It Happens credential counter",
+    "Grieving Zealot compatibility pull",
+    "Force A Public Breach franchise potential"
+  ],
+  "workshop_pitch": "You selected Institutional Enforcer plus Grieving Zealot and got a villain whose favorite workplace protection is documentation. Their primary moral texture is flow sabotage. Their exposure lateral is Strategic Accountability Avoidance. Their core competency stack is Procedural Domination. Their sidekick is a person who keeps getting dragged into this who stays because they are genuinely loyal. Their formal training comes from The Institute of Smelling a Scam Before It Happens.",
+  "opening_image": "By the time somebody names the monster correctly, the monster has already become a workflow.",
+  "dossier_summary": "This build runs on uniforms inside a tribunal chamber. At the story level, it makes the machine legible through procedure. The primary moral texture is flow sabotage. The internal lie is simple: the rules are there for a reason. The exposure profile is strategic accountability avoidance, which operationalized into procedural domination. The local ecosystem includes a person who keeps getting dragged into this who handles emotional containment. Before any grand plan begins, the daily proof of rot is standing still on the left side of the escalator, but the full civilian rot profile also includes trapping customer support inside a chatbot with no human exit, abandoning your cart across the aisle while you backtrack for one item, taking your charger and acting confused about it.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of flow sabotage shaped by strategic accountability avoidance and confident enough to treat procedural sadism like a normal leadership behavior. The person who keeps getting dragged into this nearby makes the whole thing feel alarmingly maintainable.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to standing still on the left side of the escalator. Pattern review now includes trapping customer support inside a chatbot with no human exit, abandoning your cart across the aisle while you backtrack for one item, taking your charger and acting confused about it. Their current strengths remain procedural sadism, selective helplessness, permissions gating. The person who keeps getting dragged into this remains responsible for emotional containment and is currently genuinely loyal. Do not mention the Efficiency Consultant Liaison Office matter in writing.",
+  "signature_scene": "The villain stages a scene inside the tribunal chamber where documentation briefly passes for order until the room notices too late that the real agenda is this: turns private loss into public doctrine. The person who keeps getting dragged into this quietly handles emotional containment in the background, which is why the whole thing almost works. Somewhere in the room, somebody realizes too late that the sidekick is actively making things worse and folds if shown receipts.",
+  "fake_trailer": "In a world shaped by corporate satire, one institutional enforcer build will learn that the institution must reveal its violence to preserve itself and thereby loses legitimacy. Exposure: Strategic Accountability Avoidance. Core competencies: procedural sadism, selective helplessness. Sidekick: person who keeps getting dragged into this on emotional containment. Somebody is definitely standing still on the left side of the escalator in act one, but the real warning is that the rot profile also includes trapping customer support inside a chatbot with no human exit, abandoning your cart across the aisle while you backtrack for one item, taking your charger and acting confused about it.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for standing still on the left side of the escalator. The wider rot profile survives too: trapping customer support inside a chatbot with no human exit, abandoning your cart across the aisle while you backtrack for one item, taking your charger and acting confused about it. So does the sidekick ecosystem: another person who keeps getting dragged into this arrives, still genuinely loyal, still handling emotional containment.",
+  "sample_lines": [
+    "If standing still on the left side of the escalator bothers you, wait until you hear the rest of my rot profile. Then meet my person who keeps getting dragged into this",
+    "My core competencies include procedural sadism, and my person who keeps getting dragged into this handles emotional containment.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "The real threat is not violence but the institutional permission structure surrounding it.",
+    "Even before the grand scheme, the villain was already the kind of person who would be standing still on the left side of the escalator, and the wider rot profile includes trapping customer support inside a chatbot with no human exit, abandoning your cart across the aisle while you backtrack for one item, taking your charger and acting confused about it.",
+    "The audience trusts the build less the moment they learn even the person who keeps getting dragged into this is hanging around because they are genuinely loyal."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

@@ -548,7 +548,36 @@ Exact shapes will be formalized with generated OpenAPI types. Required endpoints
 ### Imagination
 
 - `GET /api/imagination/world` — the separate, fictional world graph Imagination's nomination verbs write to.
-- `GET /api/imagination/nodes/{node_id}` — entity detail (properties, relations, constraints, provenance) within that graph.
+- `GET /api/imagination/nodes/{node_id}` — entity dossier containing canonical Markdown lore,
+  graph structure, lore revision metadata, and creation provenance. Lore begins only with new
+  admitted mutations; historical reflections are displayed as provenance and are not backfilled.
+- `GET /api/imagination/packs` — discover validated, inert doctrine packs and their lenses.
+- `GET /api/imagination/packs/{pack}` — inspect one pack's version and compiled graph size.
+- `GET /api/imagination/doctrine` — retrieve a bounded lens/search/selection projection with
+  inclusion reasons, visible typed relationships, and prompt-ready context. This endpoint is
+  read-only and never promotes doctrine into the canonical World.
+- `GET /api/imagination/doctrine/nodes/{node_id}` — inspect one creative primitive and its
+  immediate authored relationships.
+- `GET /api/imagination/blueprints` — list durable, noncanonical Workbench blueprints.
+- `POST /api/imagination/blueprints` — create a draft blueprint whose ingredients are validated
+  against its pinned doctrine-pack version.
+- `GET /api/imagination/blueprints/{blueprint_id}` — retrieve the current blueprint and its full
+  revision genealogy.
+- `PATCH /api/imagination/blueprints/{blueprint_id}` — revise a blueprint using optimistic
+  revision checks. Records actor and reason; admission is deliberately unavailable at this stage.
+- `POST /api/imagination/blueprints/{blueprint_id}/compose` — deterministically compile the
+  current revision into a noncanonical candidate subgraph, initial Markdown lore, inferred
+  doctrine relationships, unresolved world dependencies, and creative genealogy.
+- `POST /api/imagination/blueprints/{blueprint_id}/admit` — atomically promote the exact hashed
+  candidate into canonical World entities, relations, and lore while preserving its genealogy.
+- `GET /api/imagination/admissions/{admission_id}` — retrieve the immutable admission receipt,
+  draft-to-canonical entity mapping, state transition, and creative genealogy.
+- `GET /api/imagination/pressures` — list unresolved, exploring, retained, or resolved World
+  pressures created by admitted artifacts.
+- `GET /api/imagination/pressures/{pressure_id}` — inspect one pressure, its source primitive,
+  originating admission, resolution possibilities, and exploration state.
+- `POST /api/imagination/pressures/{pressure_id}/explore` — atomically open or return the durable
+  Workbench blueprint addressing a pressure. The pressure moves from `open` to `exploring`.
 
 ### Memory
 

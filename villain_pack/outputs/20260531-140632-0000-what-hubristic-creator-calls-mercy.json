@@ -1,0 +1,385 @@
+{
+  "title": "What Hubristic Creator Calls Mercy",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "hubristic_creator",
+  "modifier": "false_savior",
+  "power_source": "research monopoly",
+  "dramatic_function": "mistakes invention for permission",
+  "justification_logic": "because we can",
+  "operating_environment": "biotech wing",
+  "signifier_package": {
+    "key": "sterile_precision",
+    "visual_cues": [
+      "measured spacing",
+      "polished metal",
+      "calibrated trays",
+      "no visible mess"
+    ],
+    "room_logic": "precision is used to deny guilt",
+    "object_logic": "each tool implies premeditation without admitting it"
+  },
+  "dialogue_grammar": {
+    "key": "technical_evasion",
+    "speech_pattern": "hides moral violence behind process nouns and verbs",
+    "cue_words": [
+      "protocol",
+      "adjustment",
+      "variance",
+      "outcome",
+      "threshold"
+    ]
+  },
+  "favorite_leverage": "patents",
+  "failure_mode": "salvation language with coercive implementation",
+  "petty_atrocity": {
+    "key": "bare_feet_on_airplane_wall",
+    "label": "putting bare feet on the airplane wall",
+    "detail": "behaves like boundaries are an optional premium feature",
+    "category": "public_space_crimes",
+    "severity": "extreme",
+    "tags": [
+      "minor_consent_violation",
+      "public_entropy",
+      "bodily_hubris"
+    ]
+  },
+  "petty_atrocity_profile": [
+    {
+      "key": "bare_feet_on_airplane_wall",
+      "label": "putting bare feet on the airplane wall",
+      "detail": "behaves like boundaries are an optional premium feature",
+      "category": "public_space_crimes",
+      "severity": "extreme",
+      "tags": [
+        "minor_consent_violation",
+        "public_entropy",
+        "bodily_hubris"
+      ]
+    },
+    {
+      "key": "one_more_form_twice",
+      "label": "saying the application is complete and then asking for one more form twice",
+      "detail": "turns compliance into a moving target maintained by pure paper hunger",
+      "category": "institutional_douchebaggery",
+      "severity": "high",
+      "tags": [
+        "procedural_recursion",
+        "administrative_cowardice",
+        "time_theft"
+      ]
+    },
+    {
+      "key": "hovering_over_someone_eating",
+      "label": "hovering over someone's desk while they are eating to ask one quick thing",
+      "detail": "makes lunch feel like a hostage situation with a calendar invite attached",
+      "category": "workplace_humiliations",
+      "severity": "medium",
+      "tags": [
+        "boundary_puncture",
+        "time_theft",
+        "social_pressure"
+      ]
+    },
+    {
+      "key": "no_toilet_paper_replacement",
+      "label": "not replacing the toilet paper",
+      "detail": "abandons the cardboard tube like a formal declaration of contempt",
+      "category": "bathroom_household_desecration",
+      "severity": "high",
+      "tags": [
+        "shared_space_disrespect",
+        "burden_shifting",
+        "domestic_entitlement"
+      ]
+    },
+    {
+      "key": "not_returning_the_shopping_cart",
+      "label": "abandoning the shopping cart instead of returning it",
+      "detail": "outsources the final moral task to anonymous strangers because supervision is the only thing holding you together",
+      "category": "public_space_crimes",
+      "severity": "extreme",
+      "tags": [
+        "civilizational_failure",
+        "burden_shifting",
+        "public_entropy"
+      ]
+    },
+    {
+      "key": "puts_you_on_speaker_without_warning",
+      "label": "putting someone on speaker without warning them",
+      "detail": "turns a conversation into ambient performance without consent from the other side",
+      "category": "digital_etiquette_crimes",
+      "severity": "high",
+      "tags": [
+        "privacy_conscripting",
+        "minor_consent_violation",
+        "social_betrayal"
+      ]
+    }
+  ],
+  "moral_texture": {
+    "primary": "minor_consent_violation",
+    "secondary": [
+      "public_entropy",
+      "bodily_hubris"
+    ],
+    "source": "bare_feet_on_airplane_wall",
+    "commons_targeted": {
+      "type": "space",
+      "scope": "public"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "gossip",
+        "confrontation",
+        "ostracism"
+      ],
+      "confrontation_risk": "high"
+    }
+  },
+  "institutional_exposure": {
+    "key": "optimization_governance",
+    "label": "Optimization Governance",
+    "summary": "learned that if harm can be graphed, somebody will call it neutral",
+    "financial": "measurable exposure to savings narratives, loss harvesting, and metric-backed cruelty",
+    "operational": "extensive exposure to model tuning, threshold setting, and human exception pruning",
+    "legal": "active exposure to algorithmic review boards, deferred accountability, and black-box appeal routes",
+    "predatory": "repeatedly exposed others to decisions that were already made before they were informed",
+    "tags": [
+      "rogue_ai",
+      "hubristic_creator",
+      "optimization_addict",
+      "performative_listening"
+    ]
+  },
+  "core_competencies": {
+    "key": "procedural_domination_stack",
+    "label": "Procedural Domination",
+    "summary": "can make punishment arrive wearing badges, forms, and the warm glow of process",
+    "items": [
+      "procedural sadism",
+      "selective helplessness",
+      "permissions gating",
+      "escalation by policy"
+    ],
+    "tags": [
+      "institutional_enforcer",
+      "bureaucratic_sadism",
+      "administrative_cowardice"
+    ]
+  },
+  "macguffin": {
+    "key": "designer_pathogen",
+    "label": "The Courtesy Strain",
+    "artifact_class": "biological_agent",
+    "public_myth": "a precision containment tool for future crises",
+    "real_function": "makes social participation itself feel unsafe and therefore governable",
+    "desired_by": "systems monsters who want control to travel through fear and hygiene theater",
+    "misread_by": "planners who think targeted harm remains targetable",
+    "activation_condition": "requires live vectors, deniable release conditions, and a bureaucracy willing to delay naming it",
+    "use_cost": "it mutates every institutional lie into a health recommendation",
+    "containment_needs": "clean rooms, sacrificial testing sites, and people willing to disappear after exposure",
+    "betrayal_magnet": "the lab worker who notices the immunity tier map",
+    "plot_family_bias": "outbreak_and_control",
+    "lair_compatibility": "research campus, hidden lab, biotech front",
+    "institutional_cover_story": "funded as preparedness, resilience, and population continuity research",
+    "portability": "compact enough to smuggle, unstable enough to punish arrogance",
+    "custody_state": "stored in redundant freezers and in three separate guilty consciences",
+    "side_effects": "makes compassion language indistinguishable from population triage",
+    "tags": [
+      "monstrous_other",
+      "rogue_ai",
+      "hubristic_creator",
+      "biosecurity",
+      "clean_horror"
+    ]
+  },
+  "sidekick": {
+    "role_key": "personal_therapist_with_boundary_issues",
+    "role_label": "personal therapist with boundary issues",
+    "role_detail": "confuses listening, steering, and preemptive witness management",
+    "loyalty_key": "blackmailed_softly",
+    "loyalty_label": "blackmailed softly",
+    "loyalty_detail": "knows just enough to realize leaving would be worse",
+    "task_key": "emotional_containment",
+    "task_label": "emotional containment",
+    "task_detail": "handles crying, doubt, and inconvenient humanity on the villain's behalf",
+    "competence_key": "surprisingly_capable",
+    "competence_label": "surprisingly capable",
+    "competence_detail": "keeps unsettling everybody by being the second-best person in the room",
+    "fold_key": "more_loyal_than_the_villain_deserves",
+    "fold_label": "more loyal than the villain deserves",
+    "fold_detail": "their devotion is a strategic asset and a terrible moral omen"
+  },
+  "institution": {
+    "key": "aperture_enrichment_registrar",
+    "institution_name": "Aperture Enrichment Registrar",
+    "field_of_study": "Incentivized Testing and Neurotoxin Safety",
+    "motto": "The Cake Was Never the Point",
+    "accreditation_body": "Computer-Aided Enrichment Credentialing Unit",
+    "notable_alumni": "test subjects and system voices who confuse grief counseling with product design",
+    "registrar_voice": "cheerful machine menace",
+    "tags": [
+      "rogue_ai",
+      "hubristic_creator",
+      "performative_listening"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "hubristic_creator",
+    "modifier_bias": "false_savior",
+    "exposure_bias": "optimization_governance",
+    "competency_bias": "procedural_domination_stack",
+    "macguffin_bias": "designer_pathogen",
+    "sidekick_bias": "personal_therapist_with_boundary_issues"
+  },
+  "narrative_payoff": {
+    "key": "free_the_subjects",
+    "resolution": "the controlled population exits the villain's frame and becomes legible as victims"
+  },
+  "escalation_pattern": "presents domination as rescue",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "hubristic_creator",
+      "detail": "mistakes invention for permission"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "false_savior",
+      "detail": "salvation language with coercive implementation"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "sterile_precision",
+      "detail": "precision is used to deny guilt"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "technical_evasion",
+      "detail": "hides moral violence behind process nouns and verbs"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "research monopoly",
+      "operating_environment": "biotech wing",
+      "favorite_leverage": "patents"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "because we can",
+      "failure_mode": "salvation language with coercive implementation",
+      "escalation_pattern": "presents domination as rescue"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "putting bare feet on the airplane wall",
+      "detail": "behaves like boundaries are an optional premium feature",
+      "category": "public_space_crimes",
+      "severity": "extreme",
+      "tags": [
+        "minor_consent_violation",
+        "public_entropy",
+        "bodily_hubris"
+      ],
+      "profile_size": 6
+    },
+    "exposure": {
+      "station": "Exposure Ledger",
+      "selection": "Optimization Governance",
+      "summary": "learned that if harm can be graphed, somebody will call it neutral"
+    },
+    "competencies": {
+      "station": "Competency Rubric",
+      "selection": "Procedural Domination",
+      "items": [
+        "procedural sadism",
+        "selective helplessness",
+        "permissions gating",
+        "escalation by policy"
+      ]
+    },
+    "macguffin": {
+      "station": "Prize Counter",
+      "selection": "The Courtesy Strain",
+      "artifact_class": "biological_agent",
+      "real_function": "makes social participation itself feel unsafe and therefore governable"
+    },
+    "sidekick_bench": {
+      "station": "Sidekick Bench",
+      "selection": "personal therapist with boundary issues",
+      "loyalty": "blackmailed softly",
+      "task": "emotional containment"
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "Aperture Enrichment Registrar",
+      "field_of_study": "Incentivized Testing and Neurotoxin Safety",
+      "accreditation_body": "Computer-Aided Enrichment Credentialing Unit"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "free_the_subjects",
+      "detail": "the controlled population exits the villain's frame and becomes legible as victims"
+    }
+  },
+  "assembly_receipt": [
+    "Hubristic Creator body",
+    "False Savior stuffing",
+    "Sterile Precision costume",
+    "Technical Evasion voice chip",
+    "research monopoly evil job",
+    "because we can internal lie",
+    "putting bare feet on the airplane wall primary petty atrocity",
+    "6-item rot profile",
+    "minor consent violation moral texture",
+    "Optimization Governance exposure lateral",
+    "Procedural Domination competency rubric",
+    "The Courtesy Strain prize counter",
+    "personal therapist with boundary issues sidekick bench",
+    "Aperture Enrichment Registrar credential counter",
+    "False Savior compatibility pull",
+    "Free The Subjects franchise potential"
+  ],
+  "workshop_pitch": "You selected Hubristic Creator plus False Savior and got a villain whose favorite workplace protection is patents. Their primary moral texture is minor consent violation. Their exposure lateral is Optimization Governance. Their core competency stack is Procedural Domination. They are currently fixated on The Courtesy Strain. Their sidekick is a personal therapist with boundary issues who stays because they are blackmailed softly. Their formal training comes from Aperture Enrichment Registrar.",
+  "opening_image": "The villain is less interested in victory than in teaching the room a worse definition of normal.",
+  "dossier_summary": "This build runs on research monopoly inside a biotech wing. At the story level, it mistakes invention for permission. The primary moral texture is minor consent violation. The internal lie is simple: because we can. The exposure profile is optimization governance, which operationalized into procedural domination. The current prize object is The Courtesy Strain, publicly sold as a precision containment tool for future crises and privately valued for its actual function: makes social participation itself feel unsafe and therefore governable. The local ecosystem includes a personal therapist with boundary issues who handles emotional containment. Before any grand plan begins, the daily proof of rot is putting bare feet on the airplane wall, but the full civilian rot profile also includes saying the application is complete and then asking for one more form twice, hovering over someone's desk while they are eating to ask one quick thing, not replacing the toilet paper.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of minor consent violation shaped by optimization governance and confident enough to treat procedural sadism like a normal leadership behavior. Their chosen prize, The Courtesy Strain, lets them pretend the whole thing is about destiny instead of appetite. The personal therapist with boundary issues nearby makes the whole thing feel alarmingly maintainable.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to putting bare feet on the airplane wall. Pattern review now includes saying the application is complete and then asking for one more form twice, hovering over someone's desk while they are eating to ask one quick thing, not replacing the toilet paper. Their current strengths remain procedural sadism, selective helplessness, permissions gating. MacGuffin containment around The Courtesy Strain remains active; public language should stay with a precision containment tool for future crises, not the actual function: makes social participation itself feel unsafe and therefore governable. The personal therapist with boundary issues remains responsible for emotional containment and is currently blackmailed softly. Do not mention the Computer-Aided Enrichment Credentialing Unit matter in writing.",
+  "signature_scene": "The villain stages a scene inside the biotech wing where patents briefly passes for order until the room notices too late that the real agenda is this: presents domination as rescue. At the center of the scene sits The Courtesy Strain, which claims to be a precision containment tool for future crises but is really prized for one thing: makes social participation itself feel unsafe and therefore governable. The personal therapist with boundary issues quietly handles emotional containment in the background, which is why the whole thing almost works. Somewhere in the room, somebody realizes too late that the sidekick is surprisingly capable and more loyal than the villain deserves.",
+  "fake_trailer": "In a world shaped by corporate satire, one hubristic creator build will learn that the controlled population exits the villain's frame and becomes legible as victims. Exposure: Optimization Governance. Core competencies: procedural sadism, selective helplessness. Prize object: The Courtesy Strain. Sidekick: personal therapist with boundary issues on emotional containment. Somebody is definitely putting bare feet on the airplane wall in act one, but the real warning is that the rot profile also includes saying the application is complete and then asking for one more form twice, hovering over someone's desk while they are eating to ask one quick thing, not replacing the toilet paper.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for putting bare feet on the airplane wall. The wider rot profile survives too: saying the application is complete and then asking for one more form twice, hovering over someone's desk while they are eating to ask one quick thing, not replacing the toilet paper. So does The Courtesy Strain, because objects like that never stay buried once institutions learn the cover story. Another personal therapist with boundary issues arrives, still blackmailed softly, still handling emotional containment.",
+  "sample_lines": [
+    "If putting bare feet on the airplane wall bothers you, wait until you hear the rest of my rot profile. Then meet my personal therapist with boundary issues",
+    "My core competencies include procedural sadism, and my personal therapist with boundary issues handles emotional containment.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "By the time somebody names the monster correctly, the monster has already become a workflow.",
+    "Even before the grand scheme, the villain was already the kind of person who would be putting bare feet on the airplane wall, and the wider rot profile includes saying the application is complete and then asking for one more form twice, hovering over someone's desk while they are eating to ask one quick thing, not replacing the toilet paper.",
+    "The audience trusts the build less the moment they learn even the personal therapist with boundary issues is hanging around because they are blackmailed softly."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

@@ -107,6 +107,17 @@ class SystemIdentityTest(unittest.TestCase):
         invalid = "Everything is certain.\nAFFECT joy:90"
         self.assertEqual(server.validate_expression(grounded, invalid), "The evidence is incomplete.")
 
+    def test_expression_profile_uses_compiled_profile_contributions(self):
+        compiled = {
+            "profiles": [{"id": "engineer", "source": "explicit"}],
+            "expression": [{"value": "name the trade-offs", "contributed_by": ["engineer"]}],
+            "tensions": [],
+        }
+        with patch.object(server, "STORE", self.store):
+            profile = server.expression_profile(compiled, self.store.effective_affect())
+        self.assertEqual(profile["role_voices"], ["name the trade-offs"])
+        self.assertEqual(profile["role_voice_sources"], compiled["expression"])
+
     def test_expression_fidelity_preserves_boundaries_numbers_and_identifiers(self):
         grounded = "`graph.search` is not callable. Confidence is 40%."
         faithful = "At 40% confidence, `graph.search` is not callable."

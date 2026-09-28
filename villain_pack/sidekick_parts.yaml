@@ -1,0 +1,350 @@
+sidekicks:
+  roles:
+    executive_assistant_of_doom:
+      label: executive assistant of doom
+      detail: controls access, tone, and whether your panic gets calendarized
+      tags: [corporate_predator, mastermind, performance_genius]
+    compliance_lieutenant:
+      label: compliance lieutenant
+      detail: knows where the forms are buried and why they were never meant to surface
+      tags: [institutional_enforcer, bureaucratic_sadism, rogue_ai]
+    loyal_driver:
+      label: loyal driver
+      detail: hears everything, says nothing, remembers license plates like prayers
+      tags: [mastermind, seductive_deceiver, chaos_psychopath]
+    family_fixer:
+      label: family fixer
+      detail: inherited with the estate and already knows which problems get moved at night
+      tags: [inherited_heir, mastermind, seductive_deceiver]
+    deputy_of_vibes:
+      label: deputy of vibes
+      detail: smooths over scenes before witnesses can decide what they saw
+      tags: [performance_genius, corporate_predator, seductive_deceiver]
+    wellness_coordinator:
+      label: wellness coordinator
+      detail: weaponizes herbal tea, intake language, and disturbingly gentle eye contact
+      tags: [false_savior, institutional_enforcer, seductive_deceiver]
+    security_contractor:
+      label: security contractor
+      detail: translates dread into clipboards, earpieces, and removable civilians
+      tags: [institutional_enforcer, mastermind, rogue_ai]
+    graduate_acolyte:
+      label: graduate acolyte
+      detail: underpaid, overcredentialed, and two ethical compromises from a breakdown
+      tags: [hubristic_creator, rogue_ai, monstrous_other]
+    social_attack_dog:
+      label: social attack dog
+      detail: handles comments, pile-ons, and reputational nips on command
+      tags: [corporate_predator, chaos_psychopath, public_humiliation]
+    discreet_nanny:
+      label: discreet nanny
+      detail: appears domestic until you realize she knows the safe code and the bedtime lies
+      tags: [seductive_deceiver, intimacy_parasite, false_savior]
+    systems_operator:
+      label: systems operator
+      detail: never touches the spotlight, only the thresholds that decide whether doors open
+      tags: [rogue_ai, optimization_addict, institutional_enforcer]
+    church_basement_true_believer:
+      label: church-basement true believer
+      detail: handles folding chairs, rumor discipline, and doctrinal enthusiasm
+      tags: [grieving_zealot, collapse_prophet, monstrous_other]
+    legacy_cousin_on_payroll:
+      label: legacy cousin on payroll
+      detail: vaguely incompetent, deeply useful, and impossible to fire cleanly
+      tags: [inherited_heir, corporate_predator, resource_selfishness]
+    cleanup_specialist:
+      label: cleanup specialist
+      detail: turns aftermath into receipts nobody can quite weaponize
+      tags: [mastermind, chaos_psychopath, hubristic_creator]
+    personal_therapist_with_boundary_issues:
+      label: personal therapist with boundary issues
+      detail: confuses listening, steering, and preemptive witness management
+      tags: [seductive_deceiver, false_savior, gaslighting]
+    chief_of_staff:
+      label: chief of staff
+      detail: runs triage on panic, optics, and coffee with the expression of a sainted war criminal
+      tags: [corporate_predator, mastermind, institutional_enforcer]
+    publicist_of_the_end_times:
+      label: publicist of the end times
+      detail: can sell collapse as bold repositioning before lunch
+      tags: [performance_genius, collapse_prophet, corporate_predator]
+    court_wizard:
+      label: court wizard
+      detail: manages curses, paperwork, and morale with the same exhausted wand hand
+      tags: [monstrous_other, mastermind, grieving_zealot]
+    former_nemesis_on_retainer:
+      label: former nemesis on retainer
+      detail: lost once, stayed nearby, and now acts like this is strategic
+      tags: [chaos_psychopath, mastermind, seductive_deceiver]
+    childhood_friend_with_clearance:
+      label: childhood friend with clearance
+      detail: has known the villain too long to distinguish nostalgia from complicity
+      tags: [inherited_heir, seductive_deceiver, resource_selfishness]
+    professional_enabler:
+      label: professional enabler
+      detail: converts awful impulses into viable calendar entries
+      tags: [corporate_predator, false_savior, performance_genius]
+    emotional_support_cultist:
+      label: emotional support cultist
+      detail: provides devotion, muscle memory, and horrifyingly upbeat compliance
+      tags: [grieving_zealot, false_savior, monstrous_other]
+    person_who_keeps_getting_dragged_into_this:
+      label: person who keeps getting dragged into this
+      detail: somehow still here despite repeatedly trying to have a normal week
+      tags: [chaos_psychopath, burden_shifting, public_humiliation]
+    legal_affairs_sprite:
+      label: legal affairs sprite
+      detail: tiny, tireless, and deeply invested in signature order
+      tags: [institutional_enforcer, corporate_predator, bureaucratic_sadism]
+  loyalty_modes:
+    paid_too_well:
+      label: paid too well
+      detail: compensation has become a moral anesthetic
+      tags: [corporate_predator, mastermind]
+    blackmailed_softly:
+      label: blackmailed softly
+      detail: knows just enough to realize leaving would be worse
+      tags: [mastermind, seductive_deceiver, chaos_psychopath]
+    ideologically_aligned:
+      label: ideologically aligned
+      detail: genuinely believes the doctrine, which is somehow worse
+      tags: [grieving_zealot, collapse_prophet, rogue_ai]
+    emotionally_imprinted:
+      label: emotionally imprinted
+      detail: mistook special treatment for love and built a life around the misunderstanding
+      tags: [intimacy_parasite, seductive_deceiver, false_savior]
+    family_bound:
+      label: family-bound
+      detail: inherited the loyalty before understanding the terms
+      tags: [inherited_heir, mastermind]
+    career_trapped:
+      label: career-trapped
+      detail: resume damage now feels more terrifying than conscience
+      tags: [corporate_predator, institutional_enforcer, performance_genius]
+    debt_knotted:
+      label: debt-knotted
+      detail: every paycheck lands already pre-forgiven by the trap
+      tags: [resource_selfishness, bureaucratic_sadism, corporate_predator]
+    cultishly_grateful:
+      label: cultishly grateful
+      detail: confuses rescue, selection, and ownership
+      tags: [false_savior, monstrous_other, seductive_deceiver]
+    too_tired_to_resist:
+      label: too tired to resist
+      detail: exhaustion became the compliance plan
+      tags: [institutional_enforcer, rogue_ai, burden_shifting]
+    coauthor_of_the_coverup:
+      label: coauthor of the coverup
+      detail: helped once, then had to keep helping forever
+      tags: [mastermind, chaos_psychopath, hubristic_creator]
+    genuinely_loyal:
+      label: genuinely loyal
+      detail: actually would go down with the ship, which is terrible news for everyone else
+      tags: [grieving_zealot, emotional_support_cultist, security_contractor]
+    believes_the_mission:
+      label: believes the mission
+      detail: thinks the villain is history arriving in a nice coat
+      tags: [collapse_prophet, false_savior, rogue_ai]
+    thinks_they_can_fix_them:
+      label: thinks they can fix them
+      detail: still confusing access with moral leverage after all available evidence
+      tags: [personal_therapist_with_boundary_issues, childhood_friend_with_clearance, discreet_nanny]
+    too_old_to_start_over:
+      label: too old to start over
+      detail: experience calcified into a salary and then into surrender
+      tags: [chief_of_staff, loyal_driver, family_fixer]
+    convinced_this_is_normal:
+      label: convinced this is normal
+      detail: has adjusted their whole internal weather to avoid asking obvious questions
+      tags: [person_who_keeps_getting_dragged_into_this, deputy_of_vibes, wellness_coordinator]
+    accidentally_signed_a_binding_oath:
+      label: accidentally signed a binding oath
+      detail: the onboarding packet was more doctrinal than advertised
+      tags: [court_wizard, emotional_support_cultist, monstrous_other]
+    waiting_for_the_perfect_betrayal:
+      label: waiting for the perfect betrayal
+      detail: loyalty is currently just patience with better posture
+      tags: [former_nemesis_on_retainer, chief_of_staff, cleanup_specialist]
+    nobody_else_would_hire_them:
+      label: nobody else would hire them
+      detail: the sidekick economy has collapsed to one terrible employer
+      tags: [graduate_acolyte, professional_enabler, legal_affairs_sprite]
+    in_love_with_them:
+      label: in love with them
+      detail: cannot tell the difference between romance, pity, and strategic selection
+      tags: [discreet_nanny, emotional_support_cultist, childhood_friend_with_clearance]
+    owes_a_debt:
+      label: owes a debt
+      detail: one terrible favor keeps reproducing itself with interest
+      tags: [cleanup_specialist, loyal_driver, security_contractor]
+  task_domains:
+    access_and_schedule_control:
+      label: access and schedule control
+      detail: decides who gets through, who gets delayed, and who gets told there was never a slot
+      tags: [executive_assistant_of_doom, deputy_of_vibes, systems_operator, chief_of_staff]
+    witness_management:
+      label: witness management
+      detail: makes the wrong people doubt themselves at exactly the right time
+      tags: [social_attack_dog, personal_therapist_with_boundary_issues, family_fixer, former_nemesis_on_retainer]
+    cleanup_and_disposal:
+      label: cleanup and disposal
+      detail: handles aftermath before language can harden into evidence
+      tags: [cleanup_specialist, loyal_driver, security_contractor]
+    domestic_normalization:
+      label: domestic normalization
+      detail: keeps the evil looking like a household with tasteful lighting
+      tags: [discreet_nanny, wellness_coordinator, legacy_cousin_on_payroll, childhood_friend_with_clearance]
+    paperwork_and_permissions:
+      label: paperwork and permissions
+      detail: converts cruelty into process and signatures
+      tags: [compliance_lieutenant, systems_operator, graduate_acolyte, legal_affairs_sprite]
+    rumor_and_reputation_ops:
+      label: rumor and reputation ops
+      detail: floods the room with survivable interpretations before truth gets dressed
+      tags: [social_attack_dog, deputy_of_vibes, family_fixer, publicist_of_the_end_times]
+    doctrine_and_recruitment:
+      label: doctrine and recruitment
+      detail: makes the villain's worldview sound like a volunteer opportunity
+      tags: [church_basement_true_believer, wellness_coordinator, graduate_acolyte, emotional_support_cultist]
+    security_and_removal:
+      label: security and removal
+      detail: escorts risk out of frame with professional calm
+      tags: [security_contractor, loyal_driver, systems_operator]
+    money_and_miscategorization:
+      label: money and miscategorization
+      detail: keeps the ledgers tidy enough that nobody wants to pull harder
+      tags: [executive_assistant_of_doom, compliance_lieutenant, legacy_cousin_on_payroll, chief_of_staff]
+    emotional_containment:
+      label: emotional containment
+      detail: handles crying, doubt, and inconvenient humanity on the villain's behalf
+      tags: [wellness_coordinator, personal_therapist_with_boundary_issues, discreet_nanny, emotional_support_cultist]
+    logistics:
+      label: logistics
+      detail: moves crates, cars, people, and panic with suspicious elegance
+      tags: [loyal_driver, chief_of_staff, family_fixer, person_who_keeps_getting_dragged_into_this]
+    excuses:
+      label: excuses
+      detail: drafts the usable lie before the room fully understands the real event
+      tags: [professional_enabler, publicist_of_the_end_times, deputy_of_vibes]
+    procurement:
+      label: procurement
+      detail: gets impossible items without ever making the request look weird on paper
+      tags: [legacy_cousin_on_payroll, systems_operator, court_wizard]
+    curse_maintenance:
+      label: curse maintenance
+      detail: keeps the rituals humming and the wards resentfully current
+      tags: [court_wizard, church_basement_true_believer, emotional_support_cultist]
+    social_media:
+      label: social media
+      detail: turns scandal into engagement and witnesses into audience segments
+      tags: [social_attack_dog, publicist_of_the_end_times, professional_enabler]
+    hostage_coordination:
+      label: hostage coordination
+      detail: manages food, fear, timing, and the astonishing audacity of follow-up emails
+      tags: [security_contractor, chief_of_staff, personal_therapist_with_boundary_issues]
+    legal_affairs:
+      label: legal affairs
+      detail: keeps the evil one comma away from enforceability
+      tags: [legal_affairs_sprite, compliance_lieutenant, chief_of_staff]
+  competence_profiles:
+    actively_making_things_worse:
+      label: actively making things worse
+      detail: every attempt to help adds three fresh liabilities and one weird smell
+      tags: [person_who_keeps_getting_dragged_into_this, legacy_cousin_on_payroll]
+    enthusiastic_amateur:
+      label: enthusiastic amateur
+      detail: somehow both underqualified and alarmingly committed
+      tags: [church_basement_true_believer, emotional_support_cultist, discreet_nanny]
+    surprisingly_capable:
+      label: surprisingly capable
+      detail: keeps unsettling everybody by being the second-best person in the room
+      tags: [loyal_driver, former_nemesis_on_retainer, childhood_friend_with_clearance]
+    frighteningly_effective:
+      label: frighteningly effective
+      detail: makes support work feel like an apex predator adaptation
+      tags: [chief_of_staff, security_contractor, cleanup_specialist]
+    carrying_the_entire_operation:
+      label: carrying the entire operation
+      detail: the villain is basically the face and the sidekick is the load-bearing wall
+      tags: [executive_assistant_of_doom, systems_operator, family_fixer]
+    the_only_adult_in_the_room:
+      label: the only adult in the room
+      detail: would leave if adulthood were not the exact thing being exploited
+      tags: [chief_of_staff, legal_affairs_sprite, professional_enabler]
+    terrifyingly_competent:
+      label: terrifyingly competent
+      detail: could run the whole operation if the villain slipped once
+      tags: [systems_operator, family_fixer, cleanup_specialist, compliance_lieutenant]
+    polished_but_limited:
+      label: polished but limited
+      detail: shines in rehearsed conditions and degrades under improvisation
+      tags: [deputy_of_vibes, executive_assistant_of_doom, social_attack_dog, publicist_of_the_end_times]
+    weaponized_medium_talent:
+      label: weaponized medium talent
+      detail: should not be this dangerous, but infrastructure keeps helping
+      tags: [graduate_acolyte, wellness_coordinator, discreet_nanny, professional_enabler]
+    quietly_genius:
+      label: quietly genius
+      detail: the sidekick is the real backend and everybody should be more worried
+      tags: [systems_operator, graduate_acolyte, executive_assistant_of_doom, court_wizard]
+    panic_prone_under_light_pressure:
+      label: panic-prone under light pressure
+      detail: holds together until somebody asks a follow-up question with a pen in hand
+      tags: [social_attack_dog, legacy_cousin_on_payroll, deputy_of_vibes, enthusiastic_amateur]
+  fold_profiles:
+    dies_before_act_two:
+      label: dies before act two
+      detail: the sidekick solves no problems because the genre eats them immediately
+      tags: [cleanup_specialist, security_contractor, former_nemesis_on_retainer]
+    immediately_cooperates_with_authorities:
+      label: immediately cooperates with authorities
+      detail: caves the instant a badge, recorder, or stern clipboard appears
+      tags: [actively_making_things_worse, panic_prone_under_light_pressure]
+    folds_under_mild_questioning:
+      label: folds under mild questioning
+      detail: one raised eyebrow and the whole alignment strategy disintegrates
+      tags: [enthusiastic_amateur, polished_but_limited]
+    secretly_recording_everything:
+      label: secretly recording everything
+      detail: has been building an exit package one voice memo at a time
+      tags: [chief_of_staff, personal_therapist_with_boundary_issues, the_only_adult_in_the_room]
+    waiting_for_a_better_offer:
+      label: waiting for a better offer
+      detail: loyalty has a floating exchange rate and they track it closely
+      tags: [surprisingly_capable, professional_enabler, former_nemesis_on_retainer]
+    absolutely_unbreakable:
+      label: absolutely unbreakable
+      detail: would survive interrogation, exile, and common sense with equal confidence
+      tags: [genuinely_loyal, believes_the_mission, frighteningly_effective]
+    betrays_for_a_sandwich:
+      label: will betray the villain for a sandwich
+      detail: the moral line is weak but the lunch threshold is extremely clear
+      tags: [nobody_else_would_hire_them, actively_making_things_worse, person_who_keeps_getting_dragged_into_this]
+    more_loyal_than_the_villain_deserves:
+      label: more loyal than the villain deserves
+      detail: their devotion is a strategic asset and a terrible moral omen
+      tags: [in_love_with_them, cultishly_grateful, emotionally_imprinted]
+    folds_immediately:
+      label: folds immediately
+      detail: breaks the second the room gets colder than expected
+      tags: [panic_prone_under_light_pressure]
+    folds_if_shown_receipts:
+      label: folds if shown receipts
+      detail: denial works right up until there is a printout involved
+      tags: [polished_but_limited, weaponized_medium_talent]
+    folds_only_for_love:
+      label: folds only for love
+      detail: romance, family, or misplaced tenderness is the single exploit path
+      tags: [emotionally_imprinted, discreet_nanny, personal_therapist_with_boundary_issues, in_love_with_them]
+    folds_when_payroll_stops:
+      label: folds when payroll stops
+      detail: the ideology evaporates the second direct deposit does
+      tags: [paid_too_well, career_trapped, debt_knotted]
+    never_folds_cleanly:
+      label: never folds cleanly
+      detail: if they crack, they take half the room with them out of spite or panic
+      tags: [terrifyingly_competent, quietly_genius, coauthor_of_the_coverup, carrying_the_entire_operation]
+    already_planning_their_own_exit:
+      label: already planning their own exit
+      detail: smiles in meetings while quietly building a survivable betrayal lane
+      tags: [family_fixer, executive_assistant_of_doom, cleanup_specialist, waiting_for_the_perfect_betrayal]

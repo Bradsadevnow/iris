@@ -1,0 +1,63 @@
+{
+  "title": "What Corporate Predator Calls Mercy",
+  "skin": "generic",
+  "skin_framing": "cinematic portable villain card",
+  "villain_family": "corporate_predator",
+  "modifier": "bureaucratic_sadist",
+  "power_source": "capital",
+  "dramatic_function": "converts harm into policy and profit language",
+  "justification_logic": "scale forgives impact",
+  "operating_environment": "summit stage",
+  "signifier_package": {
+    "key": "investor_glass",
+    "visual_cues": [
+      "glass walls",
+      "neutral seating",
+      "product stages",
+      "frictionless branding"
+    ],
+    "room_logic": "transparency is weaponized theater",
+    "object_logic": "screens and decks replace evidence"
+  },
+  "dialogue_grammar": {
+    "key": "euphemism",
+    "speech_pattern": "renames obvious harm into language calm enough for a meeting",
+    "cue_words": [
+      "transition",
+      "adjustment",
+      "outcome",
+      "concern",
+      "framework"
+    ]
+  },
+  "favorite_leverage": "PR spin",
+  "failure_mode": "fake empathy plus administered pain",
+  "narrative_payoff": {
+    "key": "force_the_receipts_into_daylight",
+    "resolution": "hidden records become visible enough that euphemism stops working"
+  },
+  "opening_image": "A glass wall promises transparency while hiding exactly the right thing.",
+  "escalation_pattern": "enjoys punishment through procedure",
+  "sample_lines": [
+    "This will read better in the official report.",
+    "You are confusing fear with pattern recognition."
+  ],
+  "hooks": [
+    "By the time the hero understands the villain's logic, the villain has already made that logic feel normal.",
+    "The villain does not want to win a fight. They want to redefine what counts as winning.",
+    "The villain does not want to win a fight. They want to redefine what counts as winning."
+  ],
+  "portable_skin_nouns": [
+    "facility",
+    "network",
+    "room",
+    "records",
+    "subject"
+  ],
+  "portable_institutions": [
+    "oversight board",
+    "private office",
+    "response team",
+    "archive"
+  ]
+}

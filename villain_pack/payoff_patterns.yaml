@@ -1,0 +1,53 @@
+payoffs:
+  penetrate_the_system:
+    resolution: hero must infiltrate the villain environment and reverse the control advantage
+  destroy_the_stage:
+    resolution: the villain loses because the architecture of spectacle is broken in public
+  reveal_the_trial:
+    resolution: proof of experimentation reaches the outside world and changes the moral frame
+  public_exposure:
+    resolution: legality and branding fail under visible evidence
+  break_the_procedure:
+    resolution: the rules are turned against the enforcer or made unusable
+  survive_the_encounter:
+    resolution: victory means making it out alive without accepting the villain's worldview
+  escape_the_trap:
+    resolution: intimacy must be recognized as infrastructure and exited deliberately
+  contain_the_breach:
+    resolution: harm can be limited but not fully undone
+  pull_the_plug:
+    resolution: the system is narrowed, disabled, or made local again at a cost
+
+  invert_the_plan:
+    resolution: the villain's own architecture is turned into the delivery system for their defeat
+  collapse_the_experiment:
+    resolution: the proof of concept is made impossible to defend or continue
+  free_the_subjects:
+    resolution: the controlled population exits the villain's frame and becomes legible as victims
+  collapse_the_brand:
+    resolution: charisma and market confidence fail at the same public instant
+  force_the_receipts_into_daylight:
+    resolution: hidden records become visible enough that euphemism stops working
+  turn_the_records:
+    resolution: documentation flips from a tool of control into a weapon against the enforcer
+  force_a_public_breach:
+    resolution: the institution must reveal its violence to preserve itself and thereby loses legitimacy
+  refuse_the_game:
+    resolution: the hero survives by not accepting the villain's ritual terms of meaning
+  deny_the_ritual:
+    resolution: the symbolic performance fails because nobody grants it narrative completion
+  survive_the_reversal:
+    resolution: the intimate trap is recognized before the identity theft fully closes
+  survive_transformation:
+    resolution: the body or self is changed but not wholly surrendered
+  burn_the_nest:
+    resolution: the reproductive or invasive environment is destroyed at severe cost
+  narrow_the_network:
+    resolution: distributed control is forced back into a smaller, less sovereign footprint
+  outwit_the_model:
+    resolution: prediction is defeated through misdirection, noise, or strategic illegibility
+  survive_partial_shutdown:
+    resolution: the machine is hurt enough to interrupt domination but not enough to erase all consequences
+
+  expose_the_performance:
+    resolution: the seduction, persona, or social performance is made visible enough that nobody can keep mistaking it for sincerity

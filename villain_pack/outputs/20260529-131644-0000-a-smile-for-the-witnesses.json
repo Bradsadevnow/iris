@@ -1,0 +1,68 @@
+{
+  "title": "A Smile For The Witnesses",
+  "skin": "sci_fi",
+  "skin_framing": "prestige systems paranoia",
+  "villain_family": "chaos_psychopath",
+  "modifier": "collapse_prophet",
+  "power_source": "ritual violence",
+  "dramatic_function": "removes stable bargaining from the story",
+  "justification_logic": "because meaning is fake",
+  "operating_environment": "empty highways",
+  "signifier_package": {
+    "key": "ritual_damage",
+    "visual_cues": [
+      "arranged objects",
+      "repeated symbols",
+      "careful vandalism",
+      "devotional cruelty"
+    ],
+    "room_logic": "violence is meant to be read as a message",
+    "object_logic": "damage becomes handwriting"
+  },
+  "dialogue_grammar": {
+    "key": "childlike_taunt",
+    "speech_pattern": "sounds playful in ways that make the room feel spiritually contaminated",
+    "cue_words": [
+      "oops",
+      "game",
+      "funny",
+      "again",
+      "guess"
+    ]
+  },
+  "favorite_leverage": "fear theater",
+  "failure_mode": "vindication hunger",
+  "narrative_payoff": {
+    "key": "survive_the_encounter",
+    "resolution": "victory means making it out alive without accepting the villain's worldview"
+  },
+  "escalation_pattern": "welcomes disaster because it proves the worldview",
+  "portable_skin_nouns": [
+    "station",
+    "lattice",
+    "tribunal",
+    "subdeck",
+    "archive shard"
+  ],
+  "portable_institutions": [
+    "oversight directorate",
+    "orbital court",
+    "response wing",
+    "recovery array"
+  ],
+  "opening_image": "By the time the hero understands the villain's logic, the villain has already made that logic feel normal.",
+  "sample_lines": [
+    "\"I orchestrate a spectacle; you just watch the applause of your own dread.\"",
+    "\"Every scar on this floor is a story I wrote—let me read yours next.\"",
+    "\"Who needs a weapon when every glance can ignite a blaze?\""
+  ],
+  "hooks": [
+    "The villain seeks to turn inevitable ruin into an act of art, demanding the audience applaud the collapse.",
+    "Their real power lies in scripting fear as a civic duty rather than a threat.",
+    "They only reveal their true menace once society has already signed onto their manifesto."
+  ],
+  "llm_surface": {
+    "enabled": true,
+    "error": null
+  }
+}

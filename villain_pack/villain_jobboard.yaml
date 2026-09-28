@@ -1,0 +1,128 @@
+strategic_agendas:
+  community_subjugation:
+    label: Community Subjugation
+    target_scale: localized / regional
+    asset_capital_cost: 50,000 credits
+    primary_required_resource: muscle-class mercenaries
+    systemic_alignment_bias: lawful evil / authoritarian
+  forbidden_ritual_mastery:
+    label: Forbidden Ritual Mastery
+    target_scale: arcane / esoteric
+    asset_capital_cost: 120,000 credits
+    primary_required_resource: biologists and quantum chemists
+    systemic_alignment_bias: neutral evil / academic obsession
+  grand_theft_macguffin:
+    label: Grand Theft MacGuffin
+    target_scale: national / global
+    asset_capital_cost: 250,000 credits
+    primary_required_resource: infiltration experts and intel pools
+    systemic_alignment_bias: chaotic evil / opportunistic
+  eldritch_liberation:
+    label: Eldritch Liberation
+    target_scale: planar / dimensional
+    asset_capital_cost: 500,000 credits
+    primary_required_resource: sacred fliers and cultist networks
+    systemic_alignment_bias: chaotic evil / zealotry
+  omnicidal_world_erasure:
+    label: Omnicidal World Erasure
+    target_scale: planetary / cosmic
+    asset_capital_cost: 1,000,000+ credits
+    primary_required_resource: doomsday devices and planet killers
+    systemic_alignment_bias: diabolical evil / nihilism
+  societal_restructuring:
+    label: Societal Restructuring
+    target_scale: global civilization
+    asset_capital_cost: 350,000 credits
+    primary_required_resource: brainwasher arrays and spindoctors
+    systemic_alignment_bias: anti-villain / enforced utopia
+  trivial_insubordination:
+    label: Trivial Insubordination
+    target_scale: localized / satirical
+    asset_capital_cost: 100 credits
+    primary_required_resource: low-tier mooks
+    systemic_alignment_bias: chaotic neutral / petty anarchy
+structural_complications:
+  obs_01:
+    label: A Box That Cannot Be Opened
+    systemic_impact: suspends advanced tier-5 research projects
+    lair_prerequisite: laboratory and centrifuge rooms
+  obs_11:
+    label: Allies Cooperating Poorly
+    systemic_impact: morale drain accelerates across all sectors
+    lair_prerequisite: staff room with active morale recovery
+  obs_15:
+    label: Unsupportive Family Network
+    systemic_impact: inner sanctum vulnerability to leverage increases
+    lair_prerequisite: high-security inner sanctum doors
+  obs_22:
+    label: Crippling Debt Demands
+    systemic_impact: drains passive income to external entities
+    lair_prerequisite: vault space fortified against audit
+  obs_25:
+    label: Active Judicial Investigation
+    systemic_impact: double-cross risk increases and heat builds rapidly
+    lair_prerequisite: casino distraction front
+  obs_37:
+    label: Followers Are Complete Idiots
+    systemic_impact: base operational speed reduced by 30 percent
+    lair_prerequisite: high-output training room stations
+contractor_classes:
+  muscle_class:
+  - guards
+  - mercenaries
+  - marksmen
+  - martial artists
+  - hitmen
+  science_class:
+  - technicians
+  - biochemists
+  - biologists
+  - quantum chemists
+  deception_class:
+  - valets
+  - spindoctors
+  - playboys
+  - diplomats
+  - counter-agents
+  - socialites
+post_victory_reversal_states:
+  administrative_success_trap: global victory collapses into labor disputes, waste
+    management, and mook union complaints
+  indifferent_hero_revenge: the hero retires and the villain turns vindictively protective
+    of their legacy
+  hollow_victory_void: the annihilation succeeds and the villain is stranded forever
+    inside their own survival architecture
+venue_pool:
+- vault complex
+- board-controlled merger room
+- sealed archive corridor
+- off-track betting front
+- orbital custody dock
+- inheritance hearing suite
+- casino distraction floor
+convincer_pool:
+- forged access letter that feels too official to question
+- staged proof-of-concept catastrophe
+- fake insider testimony delivered with exhausted authority
+- prototype demo that works just well enough to suspend doubt
+- emotionally manipulative rehearsal that makes the next lie feel inevitable
+contingency_pool:
+- if the mark hesitates, trigger urgency and compress the clock
+- if the courier flips, route blame through compliance theater
+- if the cameras fail, treat the outage as part of the rollout
+- if the crew fractures, let the sidekick absorb the first accusation
+betrayal_slot_pool:
+- during payout conversion
+- mid-job after the first real setback
+- after the fake surrender becomes real enough to hurt
+- inside the hideout once everyone thinks the danger has passed
+reveal_mechanism_pool:
+- flashback that reveals the real plan
+- document dump that reprices prior scenes
+- recorded testimony that turns the narration toxic
+- the sidekick finally comparing notes with the wrong witness
+moral_invoice_pool:
+- the operation succeeds and everyone becomes harder to live with
+- the loot converts cleanly but the trust never does
+- the villain wins the logistics and loses the story
+- the cleanup is more criminal than the original act

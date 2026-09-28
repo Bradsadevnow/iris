@@ -1,0 +1,275 @@
+{
+  "title": "How To Survive Campus",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "monstrous_other",
+  "modifier": "collapse_prophet",
+  "power_source": "appetite",
+  "dramatic_function": "violates the body or category boundary itself",
+  "justification_logic": "bodies are doors",
+  "operating_environment": "nest",
+  "signifier_package": {
+    "key": "body_horror",
+    "visual_cues": [
+      "wet textures",
+      "wrong growth",
+      "skin problems",
+      "impossible anatomy"
+    ],
+    "room_logic": "the environment participates in infection",
+    "object_logic": "ordinary containers stop being trustworthy"
+  },
+  "dialogue_grammar": {
+    "key": "sensory_taunt",
+    "speech_pattern": "speaks through taste, smell, texture, and bodily recall",
+    "cue_words": [
+      "sweet",
+      "wet",
+      "warm",
+      "sharp",
+      "rot"
+    ]
+  },
+  "favorite_leverage": "infection",
+  "failure_mode": "vindication hunger",
+  "petty_atrocity": {
+    "key": "screenshotting_private_dms_for_clout",
+    "label": "posting private DMs for public credibility",
+    "detail": "monetizes intimacy the second an audience can be recruited for it",
+    "category": "digital_etiquette_crimes",
+    "severity": "extreme",
+    "tags": [
+      "performative_betrayal",
+      "privacy_conscripting",
+      "social_dominance"
+    ]
+  },
+  "moral_texture": {
+    "primary": "performative_betrayal",
+    "secondary": [
+      "privacy_conscripting",
+      "social_dominance"
+    ],
+    "source": "screenshotting_private_dms_for_clout",
+    "commons_targeted": {
+      "type": "attention",
+      "scope": "shared"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "gossip",
+        "confrontation",
+        "ostracism"
+      ],
+      "confrontation_risk": "high"
+    }
+  },
+  "institutional_exposure": {
+    "key": "sacramental_test_environments",
+    "label": "Sacramental Test Environments",
+    "summary": "learned to reframe experimentation as destiny and casualties as proof of seriousness",
+    "financial": "sustained exposure to prototype protection, sunk-cost worship, and grant-shaped denial",
+    "operational": "extensive exposure to captive populations, irreversible trials, and sterile escalation routines",
+    "legal": "serious exposure to research immunity fantasies, classified harm, and signatures nobody understood",
+    "predatory": "repeatedly exposed others to becoming data the moment they entered the room",
+    "tags": [
+      "hubristic_creator",
+      "monstrous_other",
+      "rogue_ai",
+      "contamination"
+    ]
+  },
+  "core_competencies": {
+    "key": "contamination_authority_stack",
+    "label": "Contamination Authority",
+    "summary": "can make boundary collapse feel inevitable, ordained, or already too late",
+    "items": [
+      "body-boundary indifference",
+      "ritualized exposure",
+      "appetite governance",
+      "irreversible threshold crossing"
+    ],
+    "tags": [
+      "monstrous_other",
+      "contamination",
+      "grieving_zealot"
+    ]
+  },
+  "sidekick": {
+    "role_key": "compliance_lieutenant",
+    "role_label": "compliance lieutenant",
+    "role_detail": "knows where the forms are buried and why they were never meant to surface",
+    "loyalty_key": "debt_knotted",
+    "loyalty_label": "debt-knotted",
+    "loyalty_detail": "every paycheck lands already pre-forgiven by the trap",
+    "task_key": "domestic_normalization",
+    "task_label": "domestic normalization",
+    "task_detail": "keeps the evil looking like a household with tasteful lighting",
+    "competence_key": "terrifyingly_competent",
+    "competence_label": "terrifyingly competent",
+    "competence_detail": "could run the whole operation if the villain slipped once",
+    "fold_key": "never_folds_cleanly",
+    "fold_label": "never folds cleanly",
+    "fold_detail": "if they crack, they take half the room with them out of spite or panic"
+  },
+  "institution": {
+    "key": "dastardly_cheating_before_finish_line",
+    "institution_name": "The Institute of Cheating Before the Finish Line",
+    "field_of_study": "Applied Sabotage and Premature Victory Celebration",
+    "motto": "I Cheat That I May Win",
+    "accreditation_body": "Council for Schemes That Backfire in the Final Reel",
+    "notable_alumni": "every racer who came in dead last while leading",
+    "registrar_voice": "cartoon solemnity",
+    "tags": [
+      "cartoon_villain",
+      "sabotage",
+      "public_humiliation"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "monstrous_other",
+    "modifier_bias": "collapse_prophet",
+    "exposure_bias": "sacramental_test_environments",
+    "competency_bias": "contamination_authority_stack",
+    "sidekick_bias": "compliance_lieutenant"
+  },
+  "narrative_payoff": {
+    "key": "contain_the_breach",
+    "resolution": "harm can be limited but not fully undone"
+  },
+  "escalation_pattern": "welcomes disaster because it proves the worldview",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "monstrous_other",
+      "detail": "violates the body or category boundary itself"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "collapse_prophet",
+      "detail": "vindication hunger"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "body_horror",
+      "detail": "the environment participates in infection"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "sensory_taunt",
+      "detail": "speaks through taste, smell, texture, and bodily recall"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "appetite",
+      "operating_environment": "nest",
+      "favorite_leverage": "infection"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "bodies are doors",
+      "failure_mode": "vindication hunger",
+      "escalation_pattern": "welcomes disaster because it proves the worldview"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "posting private DMs for public credibility",
+      "detail": "monetizes intimacy the second an audience can be recruited for it",
+      "category": "digital_etiquette_crimes",
+      "severity": "extreme",
+      "tags": [
+        "performative_betrayal",
+        "privacy_conscripting",
+        "social_dominance"
+      ]
+    },
+    "exposure": {
+      "station": "Exposure Ledger",
+      "selection": "Sacramental Test Environments",
+      "summary": "learned to reframe experimentation as destiny and casualties as proof of seriousness"
+    },
+    "competencies": {
+      "station": "Competency Rubric",
+      "selection": "Contamination Authority",
+      "items": [
+        "body-boundary indifference",
+        "ritualized exposure",
+        "appetite governance",
+        "irreversible threshold crossing"
+      ]
+    },
+    "sidekick_bench": {
+      "station": "Sidekick Bench",
+      "selection": "compliance lieutenant",
+      "loyalty": "debt-knotted",
+      "task": "domestic normalization"
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "The Institute of Cheating Before the Finish Line",
+      "field_of_study": "Applied Sabotage and Premature Victory Celebration",
+      "accreditation_body": "Council for Schemes That Backfire in the Final Reel"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "contain_the_breach",
+      "detail": "harm can be limited but not fully undone"
+    }
+  },
+  "assembly_receipt": [
+    "Monstrous Other body",
+    "Collapse Prophet stuffing",
+    "Body Horror costume",
+    "Sensory Taunt voice chip",
+    "appetite evil job",
+    "bodies are doors internal lie",
+    "posting private DMs for public credibility petty atrocity",
+    "performative betrayal moral texture",
+    "Sacramental Test Environments exposure lateral",
+    "Contamination Authority competency rubric",
+    "compliance lieutenant sidekick bench",
+    "The Institute of Cheating Before the Finish Line credential counter",
+    "Collapse Prophet compatibility pull",
+    "Contain The Breach franchise potential"
+  ],
+  "workshop_pitch": "You selected Monstrous Other plus Collapse Prophet and got a villain whose favorite workplace protection is infection. Their primary moral texture is performative betrayal. Their exposure lateral is Sacramental Test Environments. Their core competency stack is Contamination Authority. Their sidekick is a compliance lieutenant who stays because they are debt-knotted. Their formal training comes from The Institute of Cheating Before the Finish Line.",
+  "opening_image": "Something wet, living, or almost living has already crossed the category boundary.",
+  "dossier_summary": "This build runs on appetite inside a nest. At the story level, it violates the body or category boundary itself. The primary moral texture is performative betrayal. The internal lie is simple: bodies are doors. The exposure profile is sacramental test environments, which operationalized into contamination authority. The local ecosystem includes a compliance lieutenant who handles domestic normalization. Before any grand plan begins, the daily proof of rot is posting private DMs for public credibility.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of performative betrayal shaped by sacramental test environments and confident enough to treat body-boundary indifference like a normal leadership behavior. The compliance lieutenant nearby makes the whole thing feel alarmingly maintainable.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to posting private DMs for public credibility. Their current strengths remain body-boundary indifference, ritualized exposure, appetite governance. The compliance lieutenant remains responsible for domestic normalization and is currently debt-knotted. Do not mention the Council for Schemes That Backfire in the Final Reel matter in writing.",
+  "signature_scene": "The villain stages a scene inside the nest where infection briefly passes for order until the room notices too late that the real agenda is this: welcomes disaster because it proves the worldview. The compliance lieutenant quietly handles domestic normalization in the background, which is why the whole thing almost works. Somewhere in the room, somebody realizes too late that the sidekick is terrifyingly competent and never folds cleanly.",
+  "fake_trailer": "In a world shaped by corporate satire, one monstrous other build will learn that harm can be limited but not fully undone. Exposure: Sacramental Test Environments. Core competencies: body-boundary indifference, ritualized exposure. Sidekick: compliance lieutenant on domestic normalization. Somebody is definitely posting private DMs for public credibility in act one and that should have been the warning.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for posting private DMs for public credibility. So does the sidekick ecosystem: another compliance lieutenant arrives, still debt-knotted, still handling domestic normalization.",
+  "sample_lines": [
+    "If posting private DMs for public credibility bothers you, wait until you meet my compliance lieutenant.",
+    "My core competencies include body-boundary indifference, and my compliance lieutenant handles domestic normalization.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "The villain is less interested in victory than in teaching the room a worse definition of normal.",
+    "Even before the grand scheme, the villain was already the kind of person who would be posting private DMs for public credibility.",
+    "The audience trusts the build less the moment they learn even the compliance lieutenant is hanging around because they are debt-knotted."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

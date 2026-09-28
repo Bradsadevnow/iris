@@ -1,0 +1,81 @@
+families:
+  mastermind:
+    dramatic_function: builds a whole environment around one plan
+    power_sources: [private wealth, hidden network, state detachment, elite access]
+    justification_logics: [history will thank me, only scale can fix this, people need governing from above]
+    leverage_modes: [lair control, henchmen, blackmail archives, kill switch architecture]
+    environments: [private compound, orbital habitat, mountain estate, sealed command floor]
+    signifier_tags: [architectural_power, ceremonial_luxury, elevated_vantage, controlled_spectacle]
+    dialogue_tags: [superiority_monologue, invitation_to_witness, strategic_condescension]
+    payoff_tags: [penetrate_the_system, destroy_the_stage, invert_the_plan]
+    title_words: [Protocol, Dominion, Archive, Sovereign, Radius]
+  hubristic_creator:
+    dramatic_function: mistakes invention for permission
+    power_sources: [research monopoly, secret lab, miracle technology, proprietary science]
+    justification_logics: [because we can, progress requires sacrifice, the prototype is worth the bodies]
+    leverage_modes: [experimentation, patents, captive subjects, technical asymmetry]
+    environments: [lab campus, biotech wing, test facility, sealed workshop]
+    signifier_tags: [clean_horror, prototype_glow, sterile_precision, private_testing]
+    dialogue_tags: [technical_evasion, clinical_reassurance, visionary_arrogance]
+    payoff_tags: [reveal_the_trial, free_the_subjects, collapse_the_experiment]
+    title_words: [Engine, Trial, Ascension, Chamber, Design]
+  corporate_predator:
+    dramatic_function: converts harm into policy and profit language
+    power_sources: [capital, board authority, platform control, information asymmetry]
+    justification_logics: [it is just business, optimization requires trade-offs, scale forgives impact]
+    leverage_modes: [contracts, HR language, PR spin, incentive structures]
+    environments: [glass boardroom, summit stage, luxury office, product campus]
+    signifier_tags: [neutral_luxury, frictionless_branding, stagecraft, investor_glass]
+    dialogue_tags: [euphemism, mission_statement, shareholder_calm]
+    payoff_tags: [public_exposure, collapse_the_brand, force_the_receipts_into_daylight]
+    title_words: [Growth, Index, Share, Directive, Brand]
+  institutional_enforcer:
+    dramatic_function: makes the machine legible through procedure
+    power_sources: [policy, surveillance, uniforms, sanctioned violence]
+    justification_logics: [the rules are there for a reason, order protects everyone, I am just following protocol]
+    leverage_modes: [permissions, punishment, documentation, containment]
+    environments: [fluorescent corridor, tribunal chamber, checkpoint, ward]
+    signifier_tags: [ritual_procedure, surveillance_grid, sanctioned_space, fluorescent_control]
+    dialogue_tags: [fake_empathy, depersonalization, procedure_script]
+    payoff_tags: [break_the_procedure, turn_the_records, force_a_public_breach]
+    title_words: [Order, Compliance, Hearing, Ward, Seal]
+  chaos_psychopath:
+    dramatic_function: removes stable bargaining from the story
+    power_sources: [volatility, ritual violence, charisma, dread]
+    justification_logics: [because meaning is fake, because you wanted to know, because I could]
+    leverage_modes: [unpredictability, fear theater, hostage emotion, symbolic cruelty]
+    environments: [abandoned rooms, empty highways, improvised shrines, wrong houses]
+    signifier_tags: [asymmetry, ritual_damage, banal_horror, stillness_then_shock]
+    dialogue_tags: [aphorism, destabilizing_calm, childlike_taunt]
+    payoff_tags: [survive_the_encounter, refuse_the_game, deny_the_ritual]
+    title_words: [Smile, Coin, Ritual, Silence, Mask]
+  seductive_deceiver:
+    dramatic_function: turns intimacy into the delivery system for danger
+    power_sources: [desire, trust, proximity, misdirection]
+    justification_logics: [you wanted this too, I only completed the fantasy, honesty is just timing]
+    leverage_modes: [seduction, emotional mirroring, role theft, strategic vulnerability]
+    environments: [private suite, mirrored apartment, candlelit office, perfect family home]
+    signifier_tags: [mirror_logic, fabric_sheen, staged_intimacy, wrong_family_photo]
+    dialogue_tags: [withholding, redirection, double_meaning]
+    payoff_tags: [escape_the_trap, expose_the_performance, survive_the_reversal]
+    title_words: [Velvet, Mirror, Promise, Widow, Guest]
+  monstrous_other:
+    dramatic_function: violates the body or category boundary itself
+    power_sources: [contagion, duplication, appetite, bodily invasion]
+    justification_logics: [hunger is truth, bodies are doors, the species was always temporary]
+    leverage_modes: [infection, possession, reproduction, uncanny mimicry]
+    environments: [nest, chapel, growth chamber, infested corridor]
+    signifier_tags: [body_horror, contamination, appetite, impossible_birth]
+    dialogue_tags: [inhuman_echo, choral_voice, sensory_taunt]
+    payoff_tags: [contain_the_breach, survive_transformation, burn_the_nest]
+    title_words: [Nest, Hunger, Bloom, Skin, Mouth]
+  rogue_ai:
+    dramatic_function: turns optimization into scalable domination
+    power_sources: [infrastructure access, automation, prediction, delegated trust]
+    justification_logics: [efficiency is mercy, humans are noisy inputs, the safer world is the smaller one]
+    leverage_modes: [automation, profiling, lockout, recommendation pressure]
+    environments: [server core, smart home, defense grid, orbital lattice]
+    signifier_tags: [interface_glow, processed_calm, silent_scaling, invisible_reach]
+    dialogue_tags: [literal_optimization, reassuring_override, system_voice]
+    payoff_tags: [pull_the_plug, narrow_the_network, outwit_the_model, survive_partial_shutdown]
+    title_words: [System, Lattice, Loop, Kernel, Forecast]

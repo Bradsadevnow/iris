@@ -1,0 +1,140 @@
+{
+  "title": "How To Survive Campus",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "monstrous_other",
+  "modifier": "collapse_prophet",
+  "power_source": "bodily invasion",
+  "dramatic_function": "violates the body or category boundary itself",
+  "justification_logic": "bodies are doors",
+  "operating_environment": "growth chamber",
+  "signifier_package": {
+    "key": "contamination",
+    "visual_cues": [
+      "spores",
+      "stains",
+      "breath on glass",
+      "creeping residue",
+      "tainted fluids"
+    ],
+    "room_logic": "nothing stays clean once the breach begins",
+    "object_logic": "contact itself becomes plot"
+  },
+  "dialogue_grammar": {
+    "key": "inhuman_echo",
+    "speech_pattern": "repeats human ideas back with one wrong emotional setting",
+    "cue_words": [
+      "hello",
+      "remain",
+      "together",
+      "open",
+      "become"
+    ]
+  },
+  "favorite_leverage": "reproduction",
+  "failure_mode": "vindication hunger",
+  "petty_atrocity": {
+    "key": "office_fridge_theft",
+    "label": "stealing lunch from the office fridge",
+    "detail": "commits a tiny crime with civilization-level implications"
+  },
+  "narrative_payoff": {
+    "key": "burn_the_nest",
+    "resolution": "the reproductive or invasive environment is destroyed at severe cost"
+  },
+  "escalation_pattern": "welcomes disaster because it proves the worldview",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "monstrous_other",
+      "detail": "violates the body or category boundary itself"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "collapse_prophet",
+      "detail": "vindication hunger"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "contamination",
+      "detail": "nothing stays clean once the breach begins"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "inhuman_echo",
+      "detail": "repeats human ideas back with one wrong emotional setting"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "bodily invasion",
+      "operating_environment": "growth chamber",
+      "favorite_leverage": "reproduction"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "bodies are doors",
+      "failure_mode": "vindication hunger",
+      "escalation_pattern": "welcomes disaster because it proves the worldview"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "stealing lunch from the office fridge",
+      "detail": "commits a tiny crime with civilization-level implications"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "burn_the_nest",
+      "detail": "the reproductive or invasive environment is destroyed at severe cost"
+    }
+  },
+  "assembly_receipt": [
+    "Monstrous Other body",
+    "Collapse Prophet stuffing",
+    "Contamination costume",
+    "Inhuman Echo voice chip",
+    "bodily invasion evil job",
+    "bodies are doors internal lie",
+    "stealing lunch from the office fridge petty atrocity",
+    "Burn The Nest franchise potential"
+  ],
+  "workshop_pitch": "You selected Monstrous Other plus Collapse Prophet and got a villain whose favorite workplace protection is reproduction. Also, on a completely ordinary Tuesday, they would absolutely be caught stealing lunch from the office fridge.",
+  "opening_image": "The villain is less interested in victory than in teaching the room a worse definition of normal.",
+  "dossier_summary": "This build runs on bodily invasion inside a growth chamber. At the story level, it violates the body or category boundary itself. The internal lie is simple: bodies are doors. Before any grand plan begins, the daily proof of rot is stealing lunch from the office fridge.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are still the kind of person who is stealing lunch from the office fridge and expecting gratitude for it.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to stealing lunch from the office fridge. Staff morale is not to be interpreted as material risk at this time.",
+  "signature_scene": "The villain stages a scene inside the growth chamber where reproduction briefly passes for order until the room notices too late that the real agenda is this: welcomes disaster because it proves the worldview. Somewhere in the background, they are also the sort of person who would be stealing lunch from the office fridge.",
+  "fake_trailer": "In a world shaped by corporate satire, one monstrous other build will learn that the reproductive or invasive environment is destroyed at severe cost. Also, somebody is definitely stealing lunch from the office fridge in act one and that should have been the warning.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for stealing lunch from the office fridge.",
+  "sample_lines": [
+    "If stealing lunch from the office fridge bothers you, wait until you see what I do with actual power.",
+    "You are not dealing with a person anymore. You are dealing with a permission structure.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "The real threat is not violence but the institutional permission structure surrounding it.",
+    "Even before the grand scheme, the villain was already the kind of person who would be stealing lunch from the office fridge.",
+    "The audience trusts the build less the moment they learn it keeps getting away with stealing lunch from the office fridge."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

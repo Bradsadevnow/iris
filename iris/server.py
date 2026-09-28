@@ -23,9 +23,12 @@ from pydantic import BaseModel, Field
 from .kernel import Boundary, Gate, NOMINATION
 from .graph import normalize_world, visible_world
 from .identity_packs import list_packs, load_pack
+from .imagination_doctrine import validate_blueprint
+from .imagination_composer import compose_blueprint
+from .imagination_registry import ImaginationPackRegistry, LensNotFound, PackNotFound
 from .loop import SYSTEM, render_vocabulary
 from .projection import ProjectionService
-from .store import ConversationBusy, StateConflict, Store
+from .store import BlueprintConflict, ConversationBusy, StateConflict, Store
 from .tools import TOOLS, build_invariants
 
 
@@ -34,6 +37,7 @@ STATE_DIR = Path(os.environ.get("IRIS_STATE", ROOT / "state"))
 BOUNDARY_PATH = Path(os.environ.get("IRIS_BOUNDARY", ROOT / "boundary/imagine_and_chat.yaml"))
 DB_PATH = Path(os.environ.get("IRIS_DB", STATE_DIR / "iris.db"))
 IDENTITY_PACKS_DIR = ROOT / "seeds" / "identity_packs"
+IMAGINATION_PACKS_DIR = ROOT / "seeds" / "imagination_packs"
 LM_BASE = os.environ.get("IRIS_LM_BASE", "http://localhost:1234").rstrip("/")
 LM_MODEL = os.environ.get("IRIS_LM_MODEL", "google/gemma-4-e4b")
 LM_API = os.environ.get("IRIS_LM_API", "anthropic").lower()
@@ -47,10 +51,27 @@ SPEC = yaml.safe_load(BOUNDARY_PATH.read_text(encoding="utf-8"))
 BOUNDARY = Boundary(SPEC)
 BOUNDARY_HASH = "sha256:" + hashlib.sha256(BOUNDARY_PATH.read_bytes()).hexdigest()
 STORE = Store(DB_PATH, STATE_DIR)
+IMAGINATION_PACKS = ImaginationPackRegistry(IMAGINATION_PACKS_DIR, ROOT)
 
 
 class TurnRequest(BaseModel):
     content: str
+
+
+class CharacterTrait(BaseModel):
+    id: str = Field(min_length=1, max_length=300)
+    label: str = Field(min_length=1, max_length=300)
+    group: str = Field(min_length=1, max_length=100)
+    locked: bool = False
+
+
+class CharacterSnapshotRequest(BaseModel):
+    title: str = Field(min_length=1, max_length=200)
+    blueprint_id: str = Field(min_length=1, max_length=300)
+    revision: int = Field(ge=1)
+    pack_id: str = Field(min_length=1, max_length=300)
+    pack_version: int = Field(ge=1)
+    traits: list[CharacterTrait] = Field(min_length=1, max_length=200)
 
 
 class TokenRequest(BaseModel):
@@ -110,6 +131,38 @@ class ImaginationBatchRequest(BaseModel):
 
 class ImaginationChatRequest(BaseModel):
     content: str
+
+class BlueprintCreateRequest(BaseModel):
+    title: str
+    artifact_type: str
+    pack: str = "villain"
+    lens_id: str | None = None
+    initiating_pressure_id: str | None = None
+    ingredients: list[dict] = Field(default_factory=list)
+    tensions: list[dict] = Field(default_factory=list)
+    rejected_suggestions: list[dict] = Field(default_factory=list)
+    open_questions: list[str] = Field(default_factory=list)
+    draft_entities: list[dict] = Field(default_factory=list)
+    draft_edges: list[dict] = Field(default_factory=list)
+
+class BlueprintUpdateRequest(BaseModel):
+    expected_revision: int = Field(ge=1)
+    patch: dict
+    actor: str = "user"
+    reason: str = "updated"
+
+class BlueprintComposeRequest(BaseModel):
+    expected_revision: int = Field(ge=1)
+
+class BlueprintAdmitRequest(BaseModel):
+    expected_revision: int = Field(ge=1)
+    candidate_hash: str
+
+class PressureExploreRequest(BaseModel):
+    title: str
+    artifact_type: str
+    pack: str = "villain"
+    lens_id: str | None = None
 
 
 class StreamHub:
@@ -191,6 +244,7 @@ def system_projection() -> dict:
     channel_counts = {channel: sum(1 for item in entries if item["channel"] == channel)
                       for channel in ("experience", "cognitive_semantic", "emotional_semantic")}
     versions = STORE.versions()
+    stance = ProjectionService(STORE, IDENTITY_PACKS_DIR).compile_stance(context.get("roles", []))
     return {
         "projection": True,
         "self": {"claims": claims, "claim_count": len(claims), "version": versions.get("self", 0)},
@@ -199,6 +253,7 @@ def system_projection() -> dict:
                    "version": versions.get("memory", sequence)},
         "affect": {**affect, "version": versions.get("affect", 0)},
         "context": {**context, "version": versions.get("context", 0)},
+        "stance": stance,
         "capabilities": {"items": capabilities, "available": sum(1 for item in capabilities if item["available"]),
                          "version": versions.get("capabilities", 0)},
         "governance": {"boundaries": {"world_self": BOUNDARY_HASH, "affect": "affect-vector-v1",
@@ -206,32 +261,6 @@ def system_projection() -> dict:
                        "version": versions.get("governance", 0)},
         "versions": versions,
     }
-
-
-def render_role_overlay(role_ids: list[str]) -> str:
-    """Read-only prompt text for the currently-equipped identity packs (see
-    iris/identity_packs.py). Never writes to self_claims or capabilities — a
-    role informs Halcyon for this turn, it does not replace her. A pack's
-    declared capabilities render as descriptive prose here, not as entries in
-    the real, executable capabilities system."""
-    sections = []
-    for role_id in role_ids:
-        path = IDENTITY_PACKS_DIR / f"{role_id}.json"
-        if not path.exists():
-            continue
-        pack = load_pack(path)
-        claim_lines = "\n".join(f"- [{claim['kind']}] {claim['value']}" for claim in pack["claims"])
-        methods = ", ".join(cap["id"].split(".", 1)[-1] for cap in pack.get("capabilities", []))
-        section = f"## Filling the role of {pack['name']} — {pack.get('tagline', '')}\n{claim_lines}"
-        if methods:
-            section += f"\nKnown methods: {methods}"
-        sections.append(section)
-    if not sections:
-        return ""
-    return ("\n\n# ACTIVE ROLE OVERLAY\n"
-            "You are Halcyon, currently filling one or more roles for this task — informed by "
-            "them, not replaced by them. Stay yourself; let the role shape what you notice and "
-            "recommend.\n\n" + "\n\n".join(sections))
 
 
 def model_context(conversation_id: str | None, draft: str,
@@ -293,7 +322,8 @@ committed before the gate decides.
                  + "The current Affect vector is required for the hidden transition protocol; it is not knowledge or persona.\n"
                  + affect_text)
     selected_roles = projection["strategy"].get("selected_roles", [])
-    expression = expression_profile(selected_roles, affect)
+    compiled_stance = projection["strategy"].get("compiled_stance", {})
+    expression = expression_profile(compiled_stance, affect)
     prior = STORE.context_messages(conversation_id) if conversation_id else []
     conversation = prior + [{"role": "user", "content": draft}]
     supplied_memory_ids = {node["id"] for node in projection["selected_nodes"] if node["owner"] == "memory"}
@@ -311,6 +341,7 @@ committed before the gate decides.
         "task_context": active,
         "roles": [{"id": role_id, "source": projection["strategy"].get("role_sources", {}).get(role_id, "explicit")}
                   for role_id in selected_roles],
+        "compiled_stance": compiled_stance,
         "conversation": {"messages_supplied": len(conversation), "prior_messages": len(prior)},
         "memory": {"eligible": [item["id"] for item in eligible_memory],
                    "supplied": [item["id"] for item in supplied_memory],
@@ -336,19 +367,15 @@ committed before the gate decides.
             "context_limit": CONTEXT_LIMIT}
 
 
-def expression_profile(role_ids: list[str], affect: dict) -> dict:
+def expression_profile(compiled_stance: dict, affect: dict) -> dict:
     """Build the final rendering profile, deliberately outside knowledge selection."""
     voice = next((claim["value"] for claim in STORE.self_claims()
                   if claim["id"] == "self:preference:voice"), "plain, direct language")
-    role_voices = []
-    for role_id in role_ids:
-        path = IDENTITY_PACKS_DIR / f"{role_id}.json"
-        if not path.exists():
-            continue
-        pack = load_pack(path)
-        role_voices.extend(claim["value"] for claim in pack["claims"]
-                           if claim["kind"] == "preference" and claim["predicate"] == "expresses itself with")
-    return {"voice": voice, "role_voices": role_voices, "affect": affect["values"]}
+    expression = compiled_stance.get("expression", [])
+    role_voices = [item["value"] for item in expression]
+    return {"voice": voice, "role_voices": role_voices,
+            "role_voice_sources": expression, "stance_profiles": compiled_stance.get("profiles", []),
+            "stance_tensions": compiled_stance.get("tensions", []), "affect": affect["values"]}
 
 
 def expression_instructions(profile: dict) -> str:
@@ -1003,6 +1030,24 @@ def conversation(conversation_id: str):
     return data
 
 
+@app.post("/api/conversations/{conversation_id}/character-snapshots", status_code=201)
+def append_character_snapshot(conversation_id: str, body: CharacterSnapshotRequest):
+    actual_id = None if conversation_id == "new" else conversation_id
+    payload = body.model_dump()
+    raw = "IRIS_CHARACTER_SNAPSHOT_V1\n" + json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+    groups: dict[str, list[str]] = {}
+    for trait in body.traits:
+        label = f"{trait.label} (locked)" if trait.locked else trait.label
+        groups.setdefault(trait.group, []).append(label)
+    display = "Character draft · " + body.title + "\n" + "\n".join(
+        f"{group}: {', '.join(labels)}" for group, labels in groups.items()
+    )
+    try:
+        return STORE.append_context_message(actual_id, raw, display, f"Character: {body.title}")
+    except ConversationBusy as exc:
+        raise HTTPException(409, detail={"code": "conversation_busy", "turn_id": exc.turn_id}) from exc
+
+
 @app.post("/api/conversations/{conversation_id}/turns", status_code=202)
 async def create_turn(conversation_id: str, body: TurnRequest):
     content = body.content.strip()
@@ -1101,6 +1146,189 @@ def imagination_world():
     """The separate, fictional world graph Imagination's NOMINATE verbs actually write to."""
     sequence, state = STORE.state()
     return {"sequence": sequence, **visible_world(state["imagination_world"])}
+
+@app.get("/api/imagination/packs")
+def imagination_packs():
+    return IMAGINATION_PACKS.list_packs()
+
+@app.get("/api/imagination/packs/{pack}")
+def imagination_pack(pack: str):
+    try:
+        return IMAGINATION_PACKS.pack(pack)
+    except PackNotFound as exc:
+        raise HTTPException(404, "Imagination pack not found") from exc
+
+@app.get("/api/imagination/doctrine")
+def imagination_doctrine(pack: str = "villain", lens: str | None = None,
+                          q: str = "", selected: str = "", limit: int = 120,
+                          token_budget: int = 4000):
+    selected_ids = [item.strip() for item in selected.split(",") if item.strip()]
+    try:
+        return IMAGINATION_PACKS.project(
+            pack, lens=lens, query=q, selected=selected_ids,
+            limit=max(1, min(limit, 500)), token_budget=max(250, min(token_budget, 16000)),
+        )
+    except PackNotFound as exc:
+        raise HTTPException(404, "Imagination pack not found") from exc
+    except LensNotFound as exc:
+        raise HTTPException(404, "Imagination lens not found") from exc
+    except KeyError as exc:
+        raise HTTPException(404, "Doctrine primitive not found") from exc
+
+@app.get("/api/imagination/doctrine/nodes/{node_id:path}")
+def imagination_doctrine_node(node_id: str, pack: str = "villain"):
+    try:
+        return IMAGINATION_PACKS.node(pack, node_id)
+    except PackNotFound as exc:
+        raise HTTPException(404, "Imagination pack not found") from exc
+    except KeyError as exc:
+        raise HTTPException(404, "Doctrine primitive not found") from exc
+
+def _validate_blueprint_doctrine(pack: str, blueprint: dict) -> dict:
+    try:
+        pack_detail = IMAGINATION_PACKS.pack(pack)
+        if blueprint.get("lens_id"):
+            IMAGINATION_PACKS.project(pack, lens=blueprint["lens_id"], limit=1, token_budget=250)
+        references = [item.get("primitive") for item in blueprint.get("ingredients", [])]
+        references.extend(node for tension in blueprint.get("tensions", []) for node in tension.get("between", []))
+        references.extend(item.get("primitive") for item in blueprint.get("rejected_suggestions", []))
+        for node_id in {item for item in references if item}:
+            IMAGINATION_PACKS.node(pack, node_id)
+    except PackNotFound as exc:
+        raise HTTPException(404, "Imagination pack not found") from exc
+    except LensNotFound as exc:
+        raise HTTPException(404, "Imagination lens not found") from exc
+    except KeyError as exc:
+        raise HTTPException(422, f"Unknown doctrine primitive: {exc.args[0]}") from exc
+    try:
+        validate_blueprint(blueprint)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+    return pack_detail
+
+@app.get("/api/imagination/blueprints")
+def imagination_blueprints(status: str | None = None):
+    if status and status not in {"draft", "candidate", "admitted", "rejected"}:
+        raise HTTPException(422, "Invalid blueprint status")
+    return STORE.blueprints(status)
+
+@app.post("/api/imagination/blueprints", status_code=201)
+def create_imagination_blueprint(body: BlueprintCreateRequest):
+    content = {"ingredients": body.ingredients, "tensions": body.tensions,
+               "rejected_suggestions": body.rejected_suggestions,
+               "open_questions": body.open_questions, "draft_entities": body.draft_entities,
+               "draft_edges": body.draft_edges, "id": "blueprint:pending", "status": "draft",
+               "lens_id": body.lens_id}
+    pack = _validate_blueprint_doctrine(body.pack, content)
+    return STORE.create_blueprint(
+        body.title.strip() or "Untitled blueprint", body.artifact_type.strip() or "artifact",
+        pack["id"], pack["version"], body.lens_id, body.initiating_pressure_id,
+        {key: value for key, value in content.items() if key not in {"id", "status", "lens_id"}},
+    )
+
+@app.get("/api/imagination/blueprints/{blueprint_id}")
+def imagination_blueprint(blueprint_id: str):
+    item = STORE.blueprint(blueprint_id)
+    if not item:
+        raise HTTPException(404, "Blueprint not found")
+    return item
+
+@app.patch("/api/imagination/blueprints/{blueprint_id}")
+def update_imagination_blueprint(blueprint_id: str, body: BlueprintUpdateRequest):
+    current = STORE.blueprint(blueprint_id)
+    if not current:
+        raise HTTPException(404, "Blueprint not found")
+    if body.actor not in {"user", "halcyon", "system"}:
+        raise HTTPException(422, "Invalid blueprint actor")
+    status = body.patch.get("status", current["status"])
+    if status not in {"draft", "candidate", "rejected"}:
+        raise HTTPException(422, "Blueprint admission is not available yet")
+    candidate = {**current, **body.patch, "status": status}
+    pack_slug = current["pack_id"].removeprefix("imagination-pack:")
+    _validate_blueprint_doctrine(pack_slug, candidate)
+    try:
+        return STORE.update_blueprint(blueprint_id, body.expected_revision, body.patch,
+                                      actor=body.actor, reason=body.reason)
+    except BlueprintConflict as exc:
+        raise HTTPException(409, {"error": "blueprint_revision_conflict",
+                                  "current_revision": exc.revision}) from exc
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+
+@app.post("/api/imagination/blueprints/{blueprint_id}/compose")
+def compose_imagination_blueprint(blueprint_id: str, body: BlueprintComposeRequest):
+    current = STORE.blueprint(blueprint_id)
+    if not current:
+        raise HTTPException(404, "Blueprint not found")
+    if current["status"] == "rejected":
+        raise HTTPException(422, "Rejected blueprint cannot be composed")
+    try:
+        candidate = compose_blueprint(IMAGINATION_PACKS, current)
+        return STORE.update_blueprint(
+            blueprint_id, body.expected_revision,
+            {"status": "candidate", "candidate": candidate,
+             "draft_entities": candidate["entities"], "draft_edges": candidate["edges"]},
+            actor="system", reason="composed deterministic artifact candidate",
+        )
+    except BlueprintConflict as exc:
+        raise HTTPException(409, {"error": "blueprint_revision_conflict",
+                                  "current_revision": exc.revision}) from exc
+    except (KeyError, ValueError) as exc:
+        raise HTTPException(422, str(exc)) from exc
+
+@app.post("/api/imagination/blueprints/{blueprint_id}/admit", status_code=201)
+def admit_imagination_blueprint(blueprint_id: str, body: BlueprintAdmitRequest):
+    current = STORE.blueprint(blueprint_id)
+    if current and current.get("artifact_type") == "trait_bundle":
+        raise HTTPException(422, "Trait bundles are reusable ingredients, not World entities")
+    try:
+        return STORE.admit_blueprint(blueprint_id, body.expected_revision, body.candidate_hash)
+    except KeyError as exc:
+        raise HTTPException(404, "Blueprint not found") from exc
+    except BlueprintConflict as exc:
+        raise HTTPException(409, {"error": "blueprint_revision_conflict",
+                                  "current_revision": exc.revision}) from exc
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+
+@app.get("/api/imagination/admissions/{admission_id}")
+def imagination_admission(admission_id: str):
+    item = STORE.imagination_admission(admission_id)
+    if not item:
+        raise HTTPException(404, "Imagination admission not found")
+    return item
+
+@app.get("/api/imagination/pressures")
+def imagination_pressures(status: str | None = None):
+    if status and status not in {"open", "exploring", "resolved", "retained"}:
+        raise HTTPException(422, "Invalid world-pressure status")
+    return STORE.world_pressures(status)
+
+@app.get("/api/imagination/pressures/{pressure_id}")
+def imagination_pressure(pressure_id: str):
+    item = STORE.world_pressure(pressure_id)
+    if not item:
+        raise HTTPException(404, "World pressure not found")
+    return item
+
+@app.post("/api/imagination/pressures/{pressure_id}/explore", status_code=201)
+def explore_imagination_pressure(pressure_id: str, body: PressureExploreRequest):
+    try:
+        pack = IMAGINATION_PACKS.pack(body.pack)
+        if body.lens_id:
+            IMAGINATION_PACKS.project(body.pack, lens=body.lens_id, limit=1, token_budget=250)
+        return STORE.explore_world_pressure(
+            pressure_id, body.title.strip() or "Untitled pressure",
+            body.artifact_type.strip() or "artifact", pack["id"], pack["version"], body.lens_id,
+        )
+    except PackNotFound as exc:
+        raise HTTPException(404, "Imagination pack not found") from exc
+    except LensNotFound as exc:
+        raise HTTPException(404, "Imagination lens not found") from exc
+    except KeyError as exc:
+        raise HTTPException(404, "World pressure not found") from exc
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
 
 @app.get("/api/system/projection")
 def get_system_projection():
@@ -1313,7 +1541,8 @@ def affect_transition(body: AffectTransitionRequest):
         raise HTTPException(422, str(exc)) from exc
 
 
-def _node_detail(world: dict, node_name: str, sequence: int, not_found: str) -> dict:
+def _node_detail(world: dict, node_name: str, sequence: int, not_found: str,
+                 include_lore: bool = False) -> dict:
     node = world["nodes"].get(node_name)
     if node is None:
         raise HTTPException(404, not_found)
@@ -1325,12 +1554,33 @@ def _node_detail(world: dict, node_name: str, sequence: int, not_found: str) -> 
     constraints = [rule for rule in world["constraints"] if rule["target"] == node_name]
     aliases = [world["nodes"][edge["target"]]["label"] for edge in outgoing if edge["relation"] == "known as"]
     provenance = STORE.node_provenance(node["label"])
-    return {"id": node_name, "name": node["label"], "type": node["type"], "properties": node.get("properties", {}),
+    admission = STORE.imagination_admission(node.get("properties", {}).get("admission_id", ""))
+    origin = None
+    if provenance:
+        turn = STORE.turn(provenance["turn_id"])
+        message = (turn or {}).get("assistant_message") or {}
+        receipt = (turn or {}).get("receipt") or {}
+        origin = {
+            "turn_id": provenance["turn_id"], "conversation_id": provenance.get("conversation_id"),
+            "ordinal": provenance.get("ordinal"), "state_sequence": provenance["state_sequence_after"],
+            "reflection": message.get("display_content", ""),
+            "mutation": {"verb": provenance["verb"], "what": provenance["what_path"],
+                         "arguments": json.loads(provenance["args_json"]),
+                         "result": json.loads(provenance["result_json"]) if provenance.get("result_json") else None},
+            "receipt": {"id": provenance.get("receipt_id"), "decision": receipt.get("decision"),
+                        "outcome": receipt.get("outcome")},
+            "created_at": provenance["created_at"],
+        }
+    detail = {"id": node_name, "name": node["label"], "type": node["type"], "properties": node.get("properties", {}),
             "sources": node.get("sources", []),
             "source_details": [world.get("sources", {}).get(source, {"title": source}) for source in node.get("sources", [])],
             "aliases": aliases,
             "incoming": incoming, "outgoing": outgoing, "constraints": constraints,
-            "sequence": sequence, "provenance": provenance}
+            "sequence": sequence, "provenance": provenance, "origin": origin,
+            "admission": admission}
+    if include_lore:
+        detail["lore"] = STORE.imagination_lore(node_name)
+    return detail
 
 
 @app.get("/api/memory/nodes/{node_name:path}")
@@ -1344,4 +1594,4 @@ def memory_node(node_name: str):
 def imagination_node(node_name: str):
     sequence, state = STORE.state()
     world = visible_world(state["imagination_world"])
-    return _node_detail(world, node_name, sequence, "World entity not found")
+    return _node_detail(world, node_name, sequence, "World entity not found", include_lore=True)

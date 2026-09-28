@@ -1,0 +1,276 @@
+{
+  "title": "What Institutional Enforcer Calls Mercy",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "institutional_enforcer",
+  "modifier": "bureaucratic_sadist",
+  "power_source": "surveillance",
+  "dramatic_function": "makes the machine legible through procedure",
+  "justification_logic": "order protects everyone",
+  "operating_environment": "tribunal chamber",
+  "signifier_package": {
+    "key": "ritual_procedure",
+    "visual_cues": [
+      "uniforms",
+      "forms",
+      "fluorescent corridors",
+      "monitored doors"
+    ],
+    "room_logic": "movement itself is permissioned",
+    "object_logic": "badges, seals, and timestamps carry threat"
+  },
+  "dialogue_grammar": {
+    "key": "depersonalization",
+    "speech_pattern": "turns people into cases, units, or variables",
+    "cue_words": [
+      "asset",
+      "body count",
+      "throughput",
+      "compliance",
+      "subject"
+    ]
+  },
+  "favorite_leverage": "permissions",
+  "failure_mode": "fake empathy plus administered pain",
+  "petty_atrocity": {
+    "key": "conference_room_no_show",
+    "label": "claiming a conference room and then never using it",
+    "detail": "privatizes time and space only to abandon both without apology",
+    "category": "workplace_humiliations",
+    "severity": "medium",
+    "tags": [
+      "resource_selfishness",
+      "phantom_reservation",
+      "ambient_hostility"
+    ]
+  },
+  "moral_texture": {
+    "primary": "resource_selfishness",
+    "secondary": [
+      "phantom_reservation",
+      "ambient_hostility"
+    ],
+    "source": "conference_room_no_show",
+    "commons_targeted": {
+      "type": "time",
+      "scope": "shared"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "side_eye",
+        "gossip",
+        "avoidance"
+      ],
+      "confrontation_risk": "medium"
+    }
+  },
+  "institutional_exposure": {
+    "key": "executive_exception_handling",
+    "label": "Executive Exception Handling",
+    "summary": "learned that rules are most useful when visibly applied to others and quietly waived for the important",
+    "financial": "broad exposure to board shielding, retention optics, and golden-parachute triage",
+    "operational": "routine exposure to calendar colonialism, chief-of-staff insulation, and consequence deflection",
+    "legal": "practical exposure to privilege corridors, internal review choreography, and selective disclosure",
+    "predatory": "repeatedly exposed others to a hierarchy where inconvenience only travels downward",
+    "tags": [
+      "mastermind",
+      "corporate_predator",
+      "administrative_cowardice",
+      "performance_genius"
+    ]
+  },
+  "core_competencies": {
+    "key": "witness_management_stack",
+    "label": "Witness Management",
+    "summary": "can make observers doubt rank, timing, motive, or their own interpretation of the room",
+    "items": [
+      "witness fatigue induction",
+      "survivable truth sequencing",
+      "ambient intimidation",
+      "plausibly deniable menace"
+    ],
+    "tags": [
+      "mastermind",
+      "chaos_psychopath",
+      "seductive_deceiver",
+      "public_entropy"
+    ]
+  },
+  "sidekick": {
+    "role_key": "security_contractor",
+    "role_label": "security contractor",
+    "role_detail": "translates dread into clipboards, earpieces, and removable civilians",
+    "loyalty_key": "in_love_with_them",
+    "loyalty_label": "in love with them",
+    "loyalty_detail": "cannot tell the difference between romance, pity, and strategic selection",
+    "task_key": "security_and_removal",
+    "task_label": "security and removal",
+    "task_detail": "escorts risk out of frame with professional calm",
+    "competence_key": "frighteningly_effective",
+    "competence_label": "frighteningly effective",
+    "competence_detail": "makes support work feel like an apex predator adaptation",
+    "fold_key": "dies_before_act_two",
+    "fold_label": "dies before act two",
+    "fold_detail": "the sidekick solves no problems because the genre eats them immediately"
+  },
+  "institution": {
+    "key": "first_dollar_memorial_business_academy",
+    "institution_name": "The First Dollar Memorial Business Academy",
+    "field_of_study": "Aggressive Frugality and Smelling Money from Across the Room",
+    "motto": "I Like Money",
+    "accreditation_body": "Framed First Dollar Review Board",
+    "notable_alumni": "executives who can identify a moral failure by scent alone",
+    "registrar_voice": "cheerful extortion",
+    "tags": [
+      "corporate_predator",
+      "resource_selfishness",
+      "ambient_hostility"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "corporate_predator",
+    "modifier_bias": "intimacy_parasite",
+    "exposure_bias": "executive_exception_handling",
+    "competency_bias": "witness_management_stack",
+    "sidekick_bias": "security_contractor"
+  },
+  "narrative_payoff": {
+    "key": "force_a_public_breach",
+    "resolution": "the institution must reveal its violence to preserve itself and thereby loses legitimacy"
+  },
+  "escalation_pattern": "enjoys punishment through procedure",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "institutional_enforcer",
+      "detail": "makes the machine legible through procedure"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "bureaucratic_sadist",
+      "detail": "fake empathy plus administered pain"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "ritual_procedure",
+      "detail": "movement itself is permissioned"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "depersonalization",
+      "detail": "turns people into cases, units, or variables"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "surveillance",
+      "operating_environment": "tribunal chamber",
+      "favorite_leverage": "permissions"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "order protects everyone",
+      "failure_mode": "fake empathy plus administered pain",
+      "escalation_pattern": "enjoys punishment through procedure"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "claiming a conference room and then never using it",
+      "detail": "privatizes time and space only to abandon both without apology",
+      "category": "workplace_humiliations",
+      "severity": "medium",
+      "tags": [
+        "resource_selfishness",
+        "phantom_reservation",
+        "ambient_hostility"
+      ]
+    },
+    "exposure": {
+      "station": "Exposure Ledger",
+      "selection": "Executive Exception Handling",
+      "summary": "learned that rules are most useful when visibly applied to others and quietly waived for the important"
+    },
+    "competencies": {
+      "station": "Competency Rubric",
+      "selection": "Witness Management",
+      "items": [
+        "witness fatigue induction",
+        "survivable truth sequencing",
+        "ambient intimidation",
+        "plausibly deniable menace"
+      ]
+    },
+    "sidekick_bench": {
+      "station": "Sidekick Bench",
+      "selection": "security contractor",
+      "loyalty": "in love with them",
+      "task": "security and removal"
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "The First Dollar Memorial Business Academy",
+      "field_of_study": "Aggressive Frugality and Smelling Money from Across the Room",
+      "accreditation_body": "Framed First Dollar Review Board"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "force_a_public_breach",
+      "detail": "the institution must reveal its violence to preserve itself and thereby loses legitimacy"
+    }
+  },
+  "assembly_receipt": [
+    "Institutional Enforcer body",
+    "Bureaucratic Sadist stuffing",
+    "Ritual Procedure costume",
+    "Depersonalization voice chip",
+    "surveillance evil job",
+    "order protects everyone internal lie",
+    "claiming a conference room and then never using it petty atrocity",
+    "resource selfishness moral texture",
+    "Executive Exception Handling exposure lateral",
+    "Witness Management competency rubric",
+    "security contractor sidekick bench",
+    "The First Dollar Memorial Business Academy credential counter",
+    "Intimacy Parasite compatibility pull",
+    "Force A Public Breach franchise potential"
+  ],
+  "workshop_pitch": "You selected Institutional Enforcer plus Bureaucratic Sadist and got a villain whose favorite workplace protection is permissions. Their primary moral texture is resource selfishness. Their exposure lateral is Executive Exception Handling. Their core competency stack is Witness Management. Their sidekick is a security contractor who stays because they are in love with them. Their formal training comes from The First Dollar Memorial Business Academy.",
+  "opening_image": "Fluorescent corridors teach you the rules before anyone speaks them aloud.",
+  "dossier_summary": "This build runs on surveillance inside a tribunal chamber. At the story level, it makes the machine legible through procedure. The primary moral texture is resource selfishness. The internal lie is simple: order protects everyone. The exposure profile is executive exception handling, which operationalized into witness management. The local ecosystem includes a security contractor who handles security and removal. Before any grand plan begins, the daily proof of rot is claiming a conference room and then never using it.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of resource selfishness shaped by executive exception handling and confident enough to treat witness fatigue induction like a normal leadership behavior. The security contractor nearby makes the whole thing feel alarmingly maintainable.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to claiming a conference room and then never using it. Their current strengths remain witness fatigue induction, survivable truth sequencing, ambient intimidation. The security contractor remains responsible for security and removal and is currently in love with them. Do not mention the Framed First Dollar Review Board matter in writing.",
+  "signature_scene": "The villain stages a scene inside the tribunal chamber where permissions briefly passes for order until the room notices too late that the real agenda is this: enjoys punishment through procedure. The security contractor quietly handles security and removal in the background, which is why the whole thing almost works. Somewhere in the room, somebody realizes too late that the sidekick is frighteningly effective and dies before act two.",
+  "fake_trailer": "In a world shaped by corporate satire, one institutional enforcer build will learn that the institution must reveal its violence to preserve itself and thereby loses legitimacy. Exposure: Executive Exception Handling. Core competencies: witness fatigue induction, survivable truth sequencing. Sidekick: security contractor on security and removal. Somebody is definitely claiming a conference room and then never using it in act one and that should have been the warning.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for claiming a conference room and then never using it. So does the sidekick ecosystem: another security contractor arrives, still in love with them, still handling security and removal.",
+  "sample_lines": [
+    "If claiming a conference room and then never using it bothers you, wait until you meet my security contractor.",
+    "My core competencies include witness fatigue induction, and my security contractor handles security and removal.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "This build wins by making resistance feel badly formatted.",
+    "Even before the grand scheme, the villain was already the kind of person who would be claiming a conference room and then never using it.",
+    "The audience trusts the build less the moment they learn even the security contractor is hanging around because they are in love with them."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

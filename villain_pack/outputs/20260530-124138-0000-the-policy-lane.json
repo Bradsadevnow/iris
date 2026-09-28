@@ -1,0 +1,352 @@
+{
+  "title": "The Policy Lane",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "institutional_enforcer",
+  "modifier": "false_savior",
+  "power_source": "policy",
+  "dramatic_function": "makes the machine legible through procedure",
+  "justification_logic": "the rules are there for a reason",
+  "operating_environment": "ward",
+  "signifier_package": {
+    "key": "surveillance_grid",
+    "visual_cues": [
+      "cameras",
+      "sensor arrays",
+      "mirrored feeds",
+      "red recording lights"
+    ],
+    "room_logic": "there is no private angle left",
+    "object_logic": "seeing becomes a means of control rather than truth"
+  },
+  "dialogue_grammar": {
+    "key": "fake_empathy",
+    "speech_pattern": "validates feelings only to tighten control",
+    "cue_words": [
+      "I hear you",
+      "understandable",
+      "concern",
+      "support",
+      "process"
+    ]
+  },
+  "favorite_leverage": "permissions",
+  "failure_mode": "salvation language with coercive implementation",
+  "petty_atrocity": {
+    "key": "ice_cube_phantom",
+    "label": "putting the empty ice tray back in the freezer",
+    "detail": "behaves as if water refills itself through dark infrastructure nobody else is allowed to question",
+    "category": "office_kitchen_biohazards",
+    "severity": "medium",
+    "tags": [
+      "burden_shifting",
+      "ambient_hostility",
+      "domestic_entitlement"
+    ]
+  },
+  "petty_atrocity_profile": [
+    {
+      "key": "ice_cube_phantom",
+      "label": "putting the empty ice tray back in the freezer",
+      "detail": "behaves as if water refills itself through dark infrastructure nobody else is allowed to question",
+      "category": "office_kitchen_biohazards",
+      "severity": "medium",
+      "tags": [
+        "burden_shifting",
+        "ambient_hostility",
+        "domestic_entitlement"
+      ]
+    },
+    {
+      "key": "dead_required_policy_link",
+      "label": "linking a required policy page to a dead document",
+      "detail": "signals obligation without maintaining the doorway into it",
+      "category": "institutional_douchebaggery",
+      "severity": "medium",
+      "tags": [
+        "abandoned_authority",
+        "procedural_void",
+        "ambient_hostility"
+      ]
+    },
+    {
+      "key": "empty_carton_back_in_fridge",
+      "label": "putting the empty carton back in the fridge",
+      "detail": "stages counterfeit abundance so someone else has to discover the lie cold",
+      "category": "household_deception",
+      "severity": "medium",
+      "tags": [
+        "fake_innocence",
+        "burden_shifting",
+        "counterfeit_abundance"
+      ]
+    },
+    {
+      "key": "not_returning_the_shopping_cart",
+      "label": "abandoning the shopping cart instead of returning it",
+      "detail": "outsources the final moral task to anonymous strangers because supervision is the only thing holding you together",
+      "category": "public_space_crimes",
+      "severity": "extreme",
+      "tags": [
+        "civilizational_failure",
+        "burden_shifting",
+        "public_entropy"
+      ]
+    },
+    {
+      "key": "half_empty_bottle_multiplier",
+      "label": "opening a new condiment or cheese while the old one is still there",
+      "detail": "creates a small museum of abandoned half-used containers through pure domestic cowardice",
+      "category": "household_deception",
+      "severity": "medium",
+      "tags": [
+        "domestic_entitlement",
+        "chore_avoidance",
+        "ambient_hostility"
+      ]
+    },
+    {
+      "key": "question_mark_after_five_minutes",
+      "label": "sending a question mark five minutes after the first message",
+      "detail": "manufactures lateness where none exists and calls it follow-up",
+      "category": "digital_etiquette_crimes",
+      "severity": "medium",
+      "tags": [
+        "urgency_theater",
+        "time_theft",
+        "ambient_hostility"
+      ]
+    }
+  ],
+  "moral_texture": {
+    "primary": "burden_shifting",
+    "secondary": [
+      "ambient_hostility",
+      "domestic_entitlement"
+    ],
+    "source": "ice_cube_phantom",
+    "commons_targeted": {
+      "type": "food",
+      "scope": "shared"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "side_eye",
+        "gossip",
+        "avoidance"
+      ],
+      "confrontation_risk": "medium"
+    }
+  },
+  "institutional_exposure": {
+    "key": "compliance_theater",
+    "label": "Compliance Theater",
+    "summary": "learned to stage ethical seriousness without ever allowing it to interfere with throughput",
+    "financial": "substantial exposure to fine-as-line-item budgeting and regulated-margin improvisation",
+    "operational": "heavy exposure to training modules, audit posture, and performative remediation workflows",
+    "legal": "advanced exposure to sign-off rituals, risk acknowledgments, and controlled admissions",
+    "predatory": "repeatedly exposed others to the exhausting burden of proving the theater was theater",
+    "tags": [
+      "institutional_enforcer",
+      "corporate_predator",
+      "rogue_ai",
+      "bureaucratic_sadism"
+    ]
+  },
+  "core_competencies": {
+    "key": "optimization_cruelty_stack",
+    "label": "Optimization Cruelty",
+    "summary": "can turn measurable harm into a dashboard maintenance routine",
+    "items": [
+      "threshold cruelty",
+      "exception pruning",
+      "humane-sounding downsizing",
+      "metrics over meaning"
+    ],
+    "tags": [
+      "rogue_ai",
+      "optimization_addict",
+      "corporate_predator",
+      "performative_listening"
+    ]
+  },
+  "sidekick": {
+    "role_key": "social_attack_dog",
+    "role_label": "social attack dog",
+    "role_detail": "handles comments, pile-ons, and reputational nips on command",
+    "loyalty_key": "debt_knotted",
+    "loyalty_label": "debt-knotted",
+    "loyalty_detail": "every paycheck lands already pre-forgiven by the trap",
+    "task_key": "procurement",
+    "task_label": "procurement",
+    "task_detail": "gets impossible items without ever making the request look weird on paper",
+    "competence_key": "the_only_adult_in_the_room",
+    "competence_label": "the only adult in the room",
+    "competence_detail": "would leave if adulthood were not the exact thing being exploited",
+    "fold_key": "secretly_recording_everything",
+    "fold_label": "secretly recording everything",
+    "fold_detail": "has been building an exit package one voice memo at a time"
+  },
+  "institution": {
+    "key": "school_of_therapeutic_power_abuse",
+    "institution_name": "The School of Therapeutic Power Abuse",
+    "field_of_study": "Authoritarian Caregiving and Medicated Compliance",
+    "motto": "Order Through Sedation",
+    "accreditation_body": "Committee for Licensed Bureaucratic Cruelty",
+    "notable_alumni": "award-winning portraits of institutional harm delivered in a calm tone",
+    "registrar_voice": "weaponized clinical reassurance",
+    "tags": [
+      "institutional_enforcer",
+      "bureaucratic_sadism",
+      "false_savior"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "institutional_enforcer",
+    "modifier_bias": "false_savior",
+    "exposure_bias": "compliance_theater",
+    "competency_bias": "optimization_cruelty_stack",
+    "sidekick_bias": "social_attack_dog"
+  },
+  "narrative_payoff": {
+    "key": "break_the_procedure",
+    "resolution": "the rules are turned against the enforcer or made unusable"
+  },
+  "escalation_pattern": "presents domination as rescue",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "institutional_enforcer",
+      "detail": "makes the machine legible through procedure"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "false_savior",
+      "detail": "salvation language with coercive implementation"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "surveillance_grid",
+      "detail": "there is no private angle left"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "fake_empathy",
+      "detail": "validates feelings only to tighten control"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "policy",
+      "operating_environment": "ward",
+      "favorite_leverage": "permissions"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "the rules are there for a reason",
+      "failure_mode": "salvation language with coercive implementation",
+      "escalation_pattern": "presents domination as rescue"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "putting the empty ice tray back in the freezer",
+      "detail": "behaves as if water refills itself through dark infrastructure nobody else is allowed to question",
+      "category": "office_kitchen_biohazards",
+      "severity": "medium",
+      "tags": [
+        "burden_shifting",
+        "ambient_hostility",
+        "domestic_entitlement"
+      ],
+      "profile_size": 6
+    },
+    "exposure": {
+      "station": "Exposure Ledger",
+      "selection": "Compliance Theater",
+      "summary": "learned to stage ethical seriousness without ever allowing it to interfere with throughput"
+    },
+    "competencies": {
+      "station": "Competency Rubric",
+      "selection": "Optimization Cruelty",
+      "items": [
+        "threshold cruelty",
+        "exception pruning",
+        "humane-sounding downsizing",
+        "metrics over meaning"
+      ]
+    },
+    "sidekick_bench": {
+      "station": "Sidekick Bench",
+      "selection": "social attack dog",
+      "loyalty": "debt-knotted",
+      "task": "procurement"
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "The School of Therapeutic Power Abuse",
+      "field_of_study": "Authoritarian Caregiving and Medicated Compliance",
+      "accreditation_body": "Committee for Licensed Bureaucratic Cruelty"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "break_the_procedure",
+      "detail": "the rules are turned against the enforcer or made unusable"
+    }
+  },
+  "assembly_receipt": [
+    "Institutional Enforcer body",
+    "False Savior stuffing",
+    "Surveillance Grid costume",
+    "Fake Empathy voice chip",
+    "policy evil job",
+    "the rules are there for a reason internal lie",
+    "putting the empty ice tray back in the freezer primary petty atrocity",
+    "6-item rot profile",
+    "burden shifting moral texture",
+    "Compliance Theater exposure lateral",
+    "Optimization Cruelty competency rubric",
+    "social attack dog sidekick bench",
+    "The School of Therapeutic Power Abuse credential counter",
+    "False Savior compatibility pull",
+    "Break The Procedure franchise potential"
+  ],
+  "workshop_pitch": "You selected Institutional Enforcer plus False Savior and got a villain whose favorite workplace protection is permissions. Their primary moral texture is burden shifting. Their exposure lateral is Compliance Theater. Their core competency stack is Optimization Cruelty. Their sidekick is a social attack dog who stays because they are debt-knotted. Their formal training comes from The School of Therapeutic Power Abuse.",
+  "opening_image": "By the time somebody names the monster correctly, the monster has already become a workflow.",
+  "dossier_summary": "This build runs on policy inside a ward. At the story level, it makes the machine legible through procedure. The primary moral texture is burden shifting. The internal lie is simple: the rules are there for a reason. The exposure profile is compliance theater, which operationalized into optimization cruelty. The local ecosystem includes a social attack dog who handles procurement. Before any grand plan begins, the daily proof of rot is putting the empty ice tray back in the freezer, but the full civilian rot profile also includes linking a required policy page to a dead document, putting the empty carton back in the fridge, abandoning the shopping cart instead of returning it.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of burden shifting shaped by compliance theater and confident enough to treat threshold cruelty like a normal leadership behavior. The social attack dog nearby makes the whole thing feel alarmingly maintainable.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to putting the empty ice tray back in the freezer. Pattern review now includes linking a required policy page to a dead document, putting the empty carton back in the fridge, abandoning the shopping cart instead of returning it. Their current strengths remain threshold cruelty, exception pruning, humane-sounding downsizing. The social attack dog remains responsible for procurement and is currently debt-knotted. Do not mention the Committee for Licensed Bureaucratic Cruelty matter in writing.",
+  "signature_scene": "The villain stages a scene inside the ward where permissions briefly passes for order until the room notices too late that the real agenda is this: presents domination as rescue. The social attack dog quietly handles procurement in the background, which is why the whole thing almost works. Somewhere in the room, somebody realizes too late that the sidekick is the only adult in the room and secretly recording everything.",
+  "fake_trailer": "In a world shaped by corporate satire, one institutional enforcer build will learn that the rules are turned against the enforcer or made unusable. Exposure: Compliance Theater. Core competencies: threshold cruelty, exception pruning. Sidekick: social attack dog on procurement. Somebody is definitely putting the empty ice tray back in the freezer in act one, but the real warning is that the rot profile also includes linking a required policy page to a dead document, putting the empty carton back in the fridge, abandoning the shopping cart instead of returning it.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for putting the empty ice tray back in the freezer. The wider rot profile survives too: linking a required policy page to a dead document, putting the empty carton back in the fridge, abandoning the shopping cart instead of returning it. So does the sidekick ecosystem: another social attack dog arrives, still debt-knotted, still handling procurement.",
+  "sample_lines": [
+    "I hear how upsetting this is, which is why I need you to comply now.",
+    "Your distress matters to us, but the process cannot pause for it.",
+    "Support is available once you stop resisting the form."
+  ],
+  "hooks": [
+    "By the time somebody names the monster correctly, the monster has already become a workflow.",
+    "Even before the grand scheme, the villain was already the kind of person who would be putting the empty ice tray back in the freezer, and the wider rot profile includes linking a required policy page to a dead document, putting the empty carton back in the fridge, abandoning the shopping cart instead of returning it.",
+    "The audience trusts the build less the moment they learn even the social attack dog is hanging around because they are debt-knotted."
+  ],
+  "llm_surface": {
+    "enabled": true,
+    "error": "RuntimeError: HTTP 400: {\"error\":\"The number of tokens to keep from the initial prompt is greater than the context length (n_keep: 4106>= n_ctx: 4096). Try to load the model with a larger context length, or provide a shorter input.\"}"
+  }
+}

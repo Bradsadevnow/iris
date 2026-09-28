@@ -1,0 +1,251 @@
+{
+  "title": "The Grieving Zealot Policy Lane",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "institutional_enforcer",
+  "modifier": "grieving_zealot",
+  "power_source": "sanctioned violence",
+  "dramatic_function": "makes the machine legible through procedure",
+  "justification_logic": "I am just following protocol",
+  "operating_environment": "ward",
+  "signifier_package": {
+    "key": "ritual_procedure",
+    "visual_cues": [
+      "uniforms",
+      "forms",
+      "fluorescent corridors",
+      "monitored doors"
+    ],
+    "room_logic": "movement itself is permissioned",
+    "object_logic": "badges, seals, and timestamps carry threat"
+  },
+  "dialogue_grammar": {
+    "key": "depersonalization",
+    "speech_pattern": "turns people into cases, units, or variables",
+    "cue_words": [
+      "asset",
+      "body count",
+      "throughput",
+      "compliance",
+      "subject"
+    ]
+  },
+  "favorite_leverage": "permissions",
+  "failure_mode": "pain converted into permission",
+  "petty_atrocity": {
+    "key": "vaguebooking_some_people",
+    "label": "vaguebooking about some people after being perfectly normal in person",
+    "detail": "makes everyone who knows you run a private reputational audit",
+    "category": "digital_etiquette_crimes",
+    "severity": "medium",
+    "tags": [
+      "ambient_accusation",
+      "passive_aggression",
+      "social_paranoia"
+    ]
+  },
+  "moral_texture": {
+    "primary": "ambient_accusation",
+    "secondary": [
+      "passive_aggression",
+      "social_paranoia"
+    ],
+    "source": "vaguebooking_some_people",
+    "commons_targeted": {
+      "type": "attention",
+      "scope": "shared"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "side_eye",
+        "gossip",
+        "avoidance"
+      ],
+      "confrontation_risk": "medium"
+    }
+  },
+  "institutional_exposure": {
+    "key": "hostile_acquisitions",
+    "label": "Hostile Acquisitions and Intimate Takeovers",
+    "summary": "sees ownership as a mood that can be imposed until the paperwork catches up",
+    "financial": "direct exposure to distressed assets, strategic undervaluation, and salvage-stage charm offensives",
+    "operational": "deep exposure to territorial behavior, reputational annexation, and adversarial due diligence",
+    "legal": "recurring exposure to nondisclosure architecture, signature timing, and suspiciously tidy settlements",
+    "predatory": "repeatedly exposed others to merger language as a substitute for consent",
+    "tags": [
+      "corporate_predator",
+      "seductive_deceiver",
+      "inherited_heir",
+      "resource_selfishness"
+    ]
+  },
+  "core_competencies": {
+    "key": "charisma_fraud_stack",
+    "label": "Charisma Fraud",
+    "summary": "can create confidence faster than reality can object",
+    "items": [
+      "narrative seizure",
+      "prestige mimicry",
+      "staged sincerity",
+      "spotlight laundering"
+    ],
+    "tags": [
+      "performance_genius",
+      "seductive_deceiver",
+      "mastermind",
+      "public_humiliation"
+    ]
+  },
+  "institution": {
+    "key": "institute_of_smelling_a_scam_before_it_happens",
+    "institution_name": "The Institute of Smelling a Scam Before It Happens",
+    "field_of_study": "Passive-Aggressive Middle Management and Redundancy Identification",
+    "motto": "What Would You Say You Do Here",
+    "accreditation_body": "Efficiency Consultant Liaison Office",
+    "notable_alumni": "employees fixed out of the system by a glitch everyone chose to respect",
+    "registrar_voice": "fluorescent deadpan",
+    "tags": [
+      "institutional_enforcer",
+      "administrative_cowardice",
+      "workplace_humiliations"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "institutional_enforcer",
+    "modifier_bias": "grieving_zealot",
+    "exposure_bias": "hostile_acquisitions",
+    "competency_bias": "charisma_fraud_stack"
+  },
+  "narrative_payoff": {
+    "key": "turn_the_records",
+    "resolution": "documentation flips from a tool of control into a weapon against the enforcer"
+  },
+  "escalation_pattern": "turns private loss into public doctrine",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "institutional_enforcer",
+      "detail": "makes the machine legible through procedure"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "grieving_zealot",
+      "detail": "pain converted into permission"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "ritual_procedure",
+      "detail": "movement itself is permissioned"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "depersonalization",
+      "detail": "turns people into cases, units, or variables"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "sanctioned violence",
+      "operating_environment": "ward",
+      "favorite_leverage": "permissions"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "I am just following protocol",
+      "failure_mode": "pain converted into permission",
+      "escalation_pattern": "turns private loss into public doctrine"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "vaguebooking about some people after being perfectly normal in person",
+      "detail": "makes everyone who knows you run a private reputational audit",
+      "category": "digital_etiquette_crimes",
+      "severity": "medium",
+      "tags": [
+        "ambient_accusation",
+        "passive_aggression",
+        "social_paranoia"
+      ]
+    },
+    "exposure": {
+      "station": "Exposure Ledger",
+      "selection": "Hostile Acquisitions and Intimate Takeovers",
+      "summary": "sees ownership as a mood that can be imposed until the paperwork catches up"
+    },
+    "competencies": {
+      "station": "Competency Rubric",
+      "selection": "Charisma Fraud",
+      "items": [
+        "narrative seizure",
+        "prestige mimicry",
+        "staged sincerity",
+        "spotlight laundering"
+      ]
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "The Institute of Smelling a Scam Before It Happens",
+      "field_of_study": "Passive-Aggressive Middle Management and Redundancy Identification",
+      "accreditation_body": "Efficiency Consultant Liaison Office"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "turn_the_records",
+      "detail": "documentation flips from a tool of control into a weapon against the enforcer"
+    }
+  },
+  "assembly_receipt": [
+    "Institutional Enforcer body",
+    "Grieving Zealot stuffing",
+    "Ritual Procedure costume",
+    "Depersonalization voice chip",
+    "sanctioned violence evil job",
+    "I am just following protocol internal lie",
+    "vaguebooking about some people after being perfectly normal in person petty atrocity",
+    "ambient accusation moral texture",
+    "Hostile Acquisitions and Intimate Takeovers exposure lateral",
+    "Charisma Fraud competency rubric",
+    "The Institute of Smelling a Scam Before It Happens credential counter",
+    "Grieving Zealot compatibility pull",
+    "Turn The Records franchise potential"
+  ],
+  "workshop_pitch": "You selected Institutional Enforcer plus Grieving Zealot and got a villain whose favorite workplace protection is permissions. Their primary moral texture is ambient accusation. Their exposure lateral is Hostile Acquisitions and Intimate Takeovers. Their core competency stack is Charisma Fraud. Their formal training comes from The Institute of Smelling a Scam Before It Happens.",
+  "opening_image": "Fluorescent corridors teach you the rules before anyone speaks them aloud.",
+  "dossier_summary": "This build runs on sanctioned violence inside a ward. At the story level, it makes the machine legible through procedure. The primary moral texture is ambient accusation. The internal lie is simple: I am just following protocol. The exposure profile is hostile acquisitions and intimate takeovers, which operationalized into charisma fraud. Before any grand plan begins, the daily proof of rot is vaguebooking about some people after being perfectly normal in person.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of ambient accusation shaped by hostile acquisitions and intimate takeovers and confident enough to treat narrative seizure like a normal leadership behavior.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to vaguebooking about some people after being perfectly normal in person. Their current strengths remain narrative seizure, prestige mimicry, staged sincerity. Do not mention the Efficiency Consultant Liaison Office matter in writing, and do not summarize their exposure to hostile acquisitions and intimate takeovers in investor-safe language unless legal forces it.",
+  "signature_scene": "The villain stages a scene inside the ward where permissions briefly passes for order until the room notices too late that the real agenda is this: turns private loss into public doctrine. The room then realizes the villain has professional-grade exposure to hostile acquisitions and intimate takeovers and a competency stack built around narrative seizure. Somewhere in the background, they are still the sort of person who would be vaguebooking about some people after being perfectly normal in person.",
+  "fake_trailer": "In a world shaped by corporate satire, one institutional enforcer build will learn that documentation flips from a tool of control into a weapon against the enforcer. Exposure: Hostile Acquisitions and Intimate Takeovers. Core competencies: narrative seizure, prestige mimicry. Certified by The Institute of Smelling a Scam Before It Happens. Somebody is definitely vaguebooking about some people after being perfectly normal in person in act one and that should have been the warning.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for vaguebooking about some people after being perfectly normal in person. So does the exposure trail, which keeps producing the same competency stack: narrative seizure, prestige mimicry.",
+  "sample_lines": [
+    "If vaguebooking about some people after being perfectly normal in person bothers you, wait until you see what hostile acquisitions and intimate takeovers did for my competencies.",
+    "My core competencies include narrative seizure and not explaining myself twice.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "The real threat is not violence but the institutional permission structure surrounding it.",
+    "Even before the grand scheme, the villain was already the kind of person who would be vaguebooking about some people after being perfectly normal in person.",
+    "The audience trusts the build less the moment they learn it graduated from The Institute of Smelling a Scam Before It Happens after years of exposure to hostile acquisitions and intimate takeovers."
+  ],
+  "llm_surface": {
+    "enabled": true,
+    "error": null
+  }
+}

@@ -1,105 +1,99 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
-import { Brain, CircleDot, Pause, Send, Sparkles, Square } from "lucide-react";
-import { api, ImaginationRun, Message, WorldMemory } from "./api";
+import { ReactNode, useEffect, useMemo, useState } from "react";
+import { ArrowRight, BookOpen, Check, ChevronDown, CirclePlus, Feather, Lightbulb, Lock, MessageSquare, PanelRightClose, PanelRightOpen, Search, Send, Sparkles, Sprout, Trash2, Unlock, X } from "lucide-react";
+import { api, CharacterSnapshot, IdeaLens, IdeaNode, IdeaProjection, IdeaRelationship, ImaginationDraft, ImaginationPack, LooseThread, WorldMemory } from "./api";
 import ImaginationWorldGraph from "./ImaginationWorldGraph";
 
-type LiveTurn = { content: string; reasoning: string; status: "thinking" | "responding" | "saving"; kind: "chat" | "autonomous" };
+type Mode = "ideas" | "draft" | "world";
+const pretty = (id: string) => id.split(":").at(-1)?.replaceAll("-", " ").replace(/\b\w/g, (c) => c.toUpperCase()) ?? id;
+const preview = (node: IdeaNode) => Object.values(node.content).flatMap((v) => Array.isArray(v) ? v : [v]).filter((v) => typeof v === "string").slice(0, 2).join(" · ") || node.domains.join(" · ");
+const kindFor = (_lens: IdeaLens | null) => "trait_bundle";
+const displayValue = (value: unknown) => Array.isArray(value) ? value.join(" · ") : typeof value === "object" && value !== null ? JSON.stringify(value) : String(value);
 
-function ImaginationTranscript({ run, live }: { run: ImaginationRun | null; live: LiveTurn | null }) {
-  const end = useRef<HTMLDivElement>(null);
-  useEffect(() => { end.current?.scrollIntoView({ behavior: "smooth" }); }, [run?.conversation?.messages.length, live?.content]);
-  const kinds = run?.turn_kinds ?? {};
-  const visible = (run?.conversation?.messages ?? []).filter((message) => message.role === "assistant" || kinds[message.turn_id]?.kind === "chat");
-  return <div className="imagination-transcript">
-    {!visible.length && !live ? <div className="imagination-awaiting"><Sparkles size={24} /><h2>A world waiting to happen</h2><p>Talk with Halcyon about the world, or choose a number of turns and let her rip.</p></div> : visible.map((message: Message) => {
-      const meta = kinds[message.turn_id];
-      const isUser = message.role === "user";
-      const label = isUser ? "You" : meta?.kind === "autonomous" ? `Autonomous turn ${meta.step ?? ""}` : "Halcyon";
-      return <article key={message.id} className={isUser ? "world-user-message" : "world-assistant-message"}>
-        <header><span>{label}</span>{!isUser && message.outcome ? <b className={message.outcome}><CircleDot size={9} />{message.outcome}</b> : null}</header>
-        {!isUser && message.reasoning_content ? <details><summary><Brain size={12} />Thinking</summary><p>{message.reasoning_content}</p></details> : null}
-        <p>{message.display_content}</p>
-      </article>;
-    })}
-    {live ? <article className={`live ${live.kind}`}><header><span>{live.kind === "chat" ? "Halcyon" : "Imagining now"}</span><b><i />{live.status}</b></header>{live.reasoning ? <details open><summary><Brain size={12} />Thinking</summary><p>{live.reasoning}</p></details> : null}{live.content ? <p>{live.content}<i className="stream-caret" /></p> : null}</article> : null}
-    <div ref={end} />
+function ModeTabs({ mode, drafts, threads, setMode }: { mode: Mode; drafts: number; threads: number; setMode: (mode: Mode) => void }) {
+  return <nav className="imagination-modes" aria-label="Imagination areas">
+    <button className={mode === "ideas" ? "active ideas" : ""} aria-pressed={mode === "ideas"} onClick={() => setMode("ideas")}><Lightbulb size={14} />Ideas</button><ArrowRight size={12} />
+    <button className={mode === "draft" ? "active draft" : ""} aria-pressed={mode === "draft"} onClick={() => setMode("draft")}><Feather size={14} />Draft{drafts ? <b>{drafts}</b> : null}</button><ArrowRight size={12} />
+    <button className={mode === "world" ? "active world" : ""} aria-pressed={mode === "world"} onClick={() => setMode("world")}><Sprout size={14} />World{threads ? <b>{threads}</b> : null}</button>
+  </nav>;
+}
+
+function Ideas({ pack, lens, projection, query, active, busy, chatRail, setLens, setQuery, add, create, update, sendCharacter }: { pack: ImaginationPack | null; lens: IdeaLens | null; projection: IdeaProjection | null; query: string; active: ImaginationDraft | null; busy: boolean; chatRail: ReactNode; setLens: (lens: IdeaLens) => void; setQuery: (query: string) => void; add: (node: IdeaNode) => void; create: () => void; update: (patch: Partial<ImaginationDraft>, reason: string) => void; sendCharacter: (snapshot: CharacterSnapshot) => Promise<void> }) {
+  const chosen = useMemo(() => new Set(active?.ingredients.map((item) => item.primitive) ?? []), [active?.ingredients]);
+  const [selected, setSelected] = useState<string | null>(null), [subcategory, setSubcategory] = useState("all"), [selectedOnly, setSelectedOnly] = useState(false), [draftCollapsed, setDraftCollapsed] = useState(false), [sharing, setSharing] = useState(false), [counts, setCounts] = useState<Record<string, number>>({}), [chosenNodes, setChosenNodes] = useState<Record<string, IdeaNode>>({}), [details, setDetails] = useState<Record<string, IdeaNode & { relationships?: IdeaRelationship[] }>>({});
+  const lensLane = lens?.lanes?.[0];
+  const laneNodes = useMemo(() => (projection?.nodes ?? []).filter((node) => !lensLane || node.lanes?.includes(lensLane)), [projection, lensLane]);
+  const subcategories = useMemo(() => { const result = new Map<string, number>(); laneNodes.forEach((node) => { const key = node.classification?.clusters[0] ?? "other"; result.set(key, (result.get(key) ?? 0) + 1); }); return [...result.entries()]; }, [laneNodes]);
+  const visibleNodes = useMemo(() => laneNodes.filter((node) => (subcategory === "all" || node.classification?.clusters[0] === subcategory) && (!selectedOnly || chosen.has(node.id))), [laneNodes, subcategory, selectedOnly, chosen]);
+  useEffect(() => {
+    if (!pack) return;
+    let live = true;
+    Promise.all(pack.lenses.map(async (item) => [item.id, (await api.imaginationDoctrine(pack.slug, item.id, "", [], 1, 250)).match_count] as const)).then((items) => { if (live) setCounts(Object.fromEntries(items)); }).catch(() => { if (live) setCounts({}); });
+    return () => { live = false; };
+  }, [pack]);
+  useEffect(() => {
+    if (!pack || !active?.ingredients.length) { setChosenNodes({}); return; }
+    let live = true;
+    Promise.all(active.ingredients.map((item) => api.imaginationDoctrineNode(item.primitive, pack.slug))).then((nodes) => { if (live) setChosenNodes(Object.fromEntries(nodes.map((node) => [node.id, node]))); }).catch(() => { if (live) setChosenNodes({}); });
+    return () => { live = false; };
+  }, [pack, active?.id, active?.revision]);
+  useEffect(() => {
+    if (!selected || !pack || details[selected]) return;
+    api.imaginationDoctrineNode(selected, pack.slug).then((node) => setDetails((items) => ({ ...items, [selected]: node }))).catch(() => undefined);
+  }, [selected, pack, details]);
+  const selectedCounts = useMemo(() => Object.values(chosenNodes).reduce<Record<string, number>>((result, node) => { if (node.lane) result[node.lane] = (result[node.lane] ?? 0) + 1; return result; }, {}), [chosenNodes]);
+  const grouped = useMemo(() => (pack?.lenses ?? []).map((item) => ({ lens: item, nodes: Object.values(chosenNodes).filter((node) => node.lane === item.lanes?.[0]) })).filter((item) => item.nodes.length), [pack, chosenNodes]);
+  const remove = (id: string) => active && update({ ingredients: active.ingredients.filter((item) => item.primitive !== id) }, "removed a trait");
+  const toggleLock = (id: string) => active && update({ ingredients: active.ingredients.map((item) => item.primitive === id ? { ...item, locked: !item.locked } : item) }, "changed a trait lock");
+  const shareCharacter = () => {
+    if (!active || !pack || !active.ingredients.length) return;
+    const traits = active.ingredients.map((ingredient) => {
+      const node = chosenNodes[ingredient.primitive];
+      return { id: ingredient.primitive, label: node?.label ?? pretty(ingredient.primitive), group: node?.lane ? (pack.lenses.find((item) => item.lanes?.includes(node.lane!))?.label ?? node.lane) : "Other", locked: Boolean(ingredient.locked) };
+    });
+    setSharing(true);
+    void sendCharacter({ title: active.title, blueprint_id: active.id, revision: active.revision, pack_id: active.pack_id, pack_version: active.pack_version, traits }).finally(() => setSharing(false));
+  };
+  return <div className={`ideas-layout ${draftCollapsed ? "draft-collapsed" : ""}`}><aside className="idea-lenses"><span className="soft-label">Build a character</span>{pack?.lenses.map((item) => { const lane = item.lanes?.[0] ?? ""; return <button key={item.id} className={lens?.id === item.id ? "active" : ""} onClick={() => { setLens(item); setSelected(null); setSubcategory("all"); }}><span>{item.label}{selectedCounts[lane] ? <b>{selectedCounts[lane]} selected</b> : null}</span><small>{item.domains.slice(0, 3).join(" · ")}</small><i>{counts[item.id] ?? "–"}</i></button>; })}</aside>
+    <section className="trait-browser"><header><div><span className="soft-label">Character traits</span><h2>{lens?.label ?? "Traits"}</h2><p>{lens?.id === "lens:identity" ? "Archetype, temperament, and presence." : lens?.id === "lens:purpose" ? "Wants, beliefs, and loyalties." : lens?.id === "lens:role" ? "Roles, relationships, and background." : lens?.id === "lens:contribution" ? "Skills, expertise, and access." : "Habits, limits, and breaking points."}</p></div><div className="trait-tools"><label className="idea-search"><Search size={14} /><input aria-label="Search traits" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Find a particular quality…" />{query ? <button aria-label="Clear search" onClick={() => setQuery("")}><X size={12} /></button> : null}</label><button className={selectedOnly ? "selected-only active" : "selected-only"} aria-pressed={selectedOnly} onClick={() => setSelectedOnly((value) => !value)}><Check size={12} />Selected only</button></div></header>
+      <nav className="trait-subcategories" aria-label={`${lens?.label ?? "Trait"} subcategories`}><button className={subcategory === "all" ? "active" : ""} onClick={() => setSubcategory("all")}>All <b>{laneNodes.length}</b></button>{subcategories.map(([item, count]) => <button key={item} className={subcategory === item ? "active" : ""} onClick={() => { setSubcategory(item); setSelected(null); }}>{item.replaceAll("_", " ")} <b>{count}</b></button>)}</nav>
+      {visibleNodes.length ? <div className="trait-card-list">{visibleNodes.map((node) => {
+        const expanded = selected === node.id;
+        const related = details[node.id]?.relationships?.filter((edge) => edge.source !== edge.target && !edge.source.includes("primitive:tag:") && !edge.target.includes("primitive:tag:")).slice(0, 6) ?? [];
+        return <article key={node.id} className={`${expanded ? "expanded" : ""} ${chosen.has(node.id) ? "chosen" : ""}`}><button className="trait-card-summary" aria-expanded={expanded} aria-controls={`trait-${node.id.replaceAll(":", "-")}`} onClick={() => setSelected(expanded ? null : node.id)}><div><span>{node.classification?.clusters.map((item) => item.replaceAll("_", " ")).join(" · ") || node.kind.replaceAll("_", " ")}<em>{pack?.name}</em></span><h3>{node.label}</h3><p>{preview(node)}</p></div><div>{chosen.has(node.id) ? <b><Check size={11} />Added</b> : null}<ChevronDown size={16} /></div></button>{expanded ? <div className="trait-card-details" id={`trait-${node.id.replaceAll(":", "-")}`}><div className="trait-fields">{Object.entries(node.content).filter(([key, value]) => key !== "tags" && key !== "variant_details" && value !== "" && value !== null).map(([key, value]) => <div key={key}><span>{key === "variants" ? "Expressions" : key.replaceAll("_", " ")}</span><p>{displayValue(value)}</p></div>)}</div><div className="idea-tags">{node.domains.filter((domain) => domain !== "fiction").map((domain) => <span key={domain}>{domain.replaceAll("_", " ")}</span>)}</div>{related.length ? <section className="trait-connections"><h4>Often works well with</h4>{related.map((edge) => <div key={edge.id}><span>{edge.relation.replaceAll("_", " ")}</span>{edge.source === node.id ? edge.target_label : edge.source_label}</div>)}</section> : null}<footer><button disabled={busy || chosen.has(node.id)} onClick={() => add(node)}>{chosen.has(node.id) ? <><Check size={13} />Added</> : <><CirclePlus size={13} />Add to character</>}</button></footer></div> : null}</article>;
+      })}</div> : <div className="imagination-empty"><Sparkles size={22} /><h3>No traits here yet</h3><p>Try another word or another constellation.</p></div>}
+    </section>
+    <aside className={`imagination-chat-rail ${draftCollapsed ? "collapsed" : ""}`}>{draftCollapsed ? <button className="draft-panel-toggle collapsed" aria-label="Open chat" title="Open chat" onClick={() => setDraftCollapsed(false)}><PanelRightOpen size={16} /><MessageSquare size={11} /></button> : <><div className="character-share"><div><span className="soft-label">Character draft</span><strong>{active?.title ?? "Nobody here yet"}</strong><small>{active ? `${active.ingredients.length} traits ready` : "Build freely, then send when you want."}</small></div><button className="send-character" disabled={!active?.ingredients.length || busy || sharing} onClick={shareCharacter}><Send size={12} />{sharing ? "Sending…" : "Send to chat"}</button><button className="draft-panel-toggle" aria-label="Collapse chat" title="Collapse chat" onClick={() => setDraftCollapsed(true)}><PanelRightClose size={15} /></button>{active ? <details className="character-share-details"><summary>Review and edit traits</summary><div className="character-draft-groups">{grouped.map((group) => <section key={group.lens.id}><h4>{group.lens.label}</h4>{group.nodes.map((node) => { const ingredient = active.ingredients.find((item) => item.primitive === node.id); return <article key={node.id}><button onClick={() => { setLens(group.lens); setSubcategory("all"); setSelected(node.id); }}><span>{node.label}</span></button><button title={ingredient?.locked ? "Unlock trait" : "Lock trait"} aria-label={ingredient?.locked ? `Unlock ${node.label}` : `Lock ${node.label}`} onClick={() => toggleLock(node.id)}>{ingredient?.locked ? <Lock size={11} /> : <Unlock size={11} />}</button><button title="Remove trait" aria-label={`Remove ${node.label}`} onClick={() => remove(node.id)}><X size={11} /></button></article>})}</section>)}</div>{!selectedCounts.flaws ? <p className="flaw-nudge">Everybody needs at least one flaw.</p> : null}<button className="warm-button" onClick={create}><Feather size={13} />Start another character</button></details> : <button className="warm-button start-character" onClick={create}><Feather size={13} />Start a character</button>}</div>{chatRail}</>}</aside></div>;
+}
+
+function Draft({ drafts, active, busy, select, create, update, compose, admit }: { drafts: ImaginationDraft[]; active: ImaginationDraft | null; busy: boolean; select: (draft: ImaginationDraft) => void; create: () => void; update: (patch: Partial<ImaginationDraft>, reason: string) => void; compose: () => void; admit: () => void }) {
+  const lore = active?.candidate ? Object.values(active.candidate.lore)[0] : "";
+  return <div className="draft-layout"><aside className="draft-list"><header><span className="soft-label">Your drafts</span><button aria-label="Start a draft" onClick={create}><CirclePlus size={15} /></button></header>{drafts.map((item) => <button key={item.id} className={active?.id === item.id ? "active" : ""} onClick={() => select(item)}><strong>{item.title}</strong><span>{item.artifact_type} · {item.ingredients.length} ideas</span><small>{item.status === "candidate" ? "ready to look over" : item.status === "admitted" ? "in the world" : item.status}</small></button>)}</aside>
+    {!active ? <section className="draft-blank imagination-empty"><Feather size={26} /><h2>Gather a few traits</h2><p>A bundle holds qualities together without changing any character.</p><button className="warm-button" onClick={create}>Start a bundle</button></section> : <section className="draft-workspace"><header><div><span className="soft-label">{active.status === "candidate" ? "A trait bundle taking shape" : active.status === "admitted" ? "An older world creation" : "Still gathering"}</span><input key={`${active.id}-${active.revision}`} aria-label="Draft title" defaultValue={active.title} disabled={busy || active.status === "admitted"} onBlur={(event) => { const title = event.target.value.trim(); if (title && title !== active.title) update({ title }, "renamed draft"); }} /><p>{active.artifact_type.replaceAll("_", " ")} · version {active.revision}</p></div><div className="draft-actions"><button disabled={busy || !active.ingredients.length || active.status === "admitted"} onClick={compose}><Sparkles size={13} />Shape bundle</button>{active.artifact_type !== "trait_bundle" ? <button className="world-button" disabled={busy || active.status !== "candidate" || !active.candidate} onClick={admit}><Sprout size={13} />Add to World</button> : null}</div></header>
+      <div className="draft-columns"><div><section className="draft-section"><h3>Ideas in the mix <span>{active.ingredients.length}</span></h3>{active.ingredients.length ? <div className="ingredient-list">{active.ingredients.map((ingredient) => <article key={ingredient.primitive}><div><strong>{pretty(ingredient.primitive)}</strong><span>{ingredient.origin.replaceAll("_", " ")}</span></div><button aria-label={ingredient.locked ? "Let this idea move" : "Keep this idea in place"} onClick={() => update({ ingredients: active.ingredients.map((item) => item.primitive === ingredient.primitive ? { ...item, locked: !item.locked } : item) }, "changed an idea")}>{ingredient.locked ? <Lock size={13} /> : <Unlock size={13} />}</button><button aria-label="Remove idea" onClick={() => update({ ingredients: active.ingredients.filter((item) => item.primitive !== ingredient.primitive) }, "removed an idea")}><Trash2 size={13} /></button></article>)}</div> : <p className="gentle-empty">This draft needs a few ideas. Wander back to Ideas and pick what feels right.</p>}</section><section className="draft-section"><h3>Questions worth keeping</h3>{active.open_questions.length ? active.open_questions.map((q) => <p className="open-question" key={q}>{q}</p>) : <p className="gentle-empty">No loose questions yet.</p>}</section></div>
+      <div><section className="creation-preview"><span className="soft-label">Preview</span>{lore ? <div className="draft-lore">{lore.split("\n").map((line, index) => line.startsWith("#") ? <h3 key={`${index}-${line}`}>{line.replace(/^#+\s*/, "")}</h3> : line ? <p key={`${index}-${line.slice(0, 8)}`}>{line}</p> : null)}</div> : <div className="preview-empty"><BookOpen size={22} /><h3>See what these ideas become</h3><p>“Make it” weaves the pieces into a creation you can read before adding it to the world.</p></div>}</section>{active.candidate ? <details className="how-we-got-here"><summary>How we got here</summary><pre>{JSON.stringify(active.candidate.genealogy, null, 2)}</pre></details> : null}</div></div></section>}
   </div>;
 }
 
-function patchFocus(patch: Record<string, any> | null): string | null {
-  if (!patch) return null;
-  const result = patch.result ?? {};
-  return result.created ?? result.node_id ?? result.target ?? result.source ?? result.related?.target ?? result.occurred?.source ?? result.constrained?.target ?? null;
+function Threads({ threads, busy, explore }: { threads: LooseThread[]; busy: boolean; explore: (thread: LooseThread) => void }) {
+  return <aside className="loose-threads"><header><div><span className="soft-label">Loose threads</span><h3>Where the world wants more</h3></div><b>{threads.filter((item) => item.status === "open").length}</b></header>{threads.length ? threads.map((thread) => <article key={thread.id}><span>{thread.kind.replaceAll("_", " ")}</span><h4>{pretty(thread.subject_entity_id)}</h4><p>{thread.reason}</p><button disabled={busy || thread.status !== "open"} onClick={() => explore(thread)}>{thread.status === "exploring" ? "Draft started" : thread.status === "open" ? "Follow this thread" : thread.status}</button></article>) : <div className="thread-empty"><Sparkles size={18} /><p>When your creations leave interesting questions behind, they’ll gather here.</p></div>}</aside>;
 }
 
-export default function ImaginationView() {
-  const [run, setRun] = useState<ImaginationRun | null>(null);
-  const runRef = useRef<ImaginationRun | null>(null);
-  const [world, setWorld] = useState<WorldMemory | null>(null);
-  const [selected, setSelected] = useState<string | null>(null);
-  const [seed, setSeed] = useState("Grow a world that reflects continuity, wonder, and the strange consequences of memory.");
-  const [turns, setTurns] = useState(5);
-  const [draft, setDraft] = useState("");
-  const [live, setLive] = useState<LiveTurn | null>(null);
-  const [error, setError] = useState("");
-  const stream = useRef<EventSource | null>(null);
-
-  const updateRun = (next: ImaginationRun) => { runRef.current = next; setRun(next); };
-  const refresh = async (runId?: string) => {
-    const [nextWorld, nextRun] = await Promise.all([api.imaginationWorld(), runId ? api.imaginationRun(runId) : Promise.resolve(null)]);
-    setWorld(nextWorld);
-    if (nextRun) updateRun(nextRun);
-  };
-  const subscribe = (id: string, url = `/api/imagination/runs/${id}/stream`) => {
-    stream.current?.close();
-    const events = new EventSource(url);
-    stream.current = events;
-    events.addEventListener("imagination.autonomous.started", () => setLive({ content: "", reasoning: "", status: "thinking", kind: "autonomous" }));
-    events.addEventListener("imagination.chat.started", () => setLive({ content: "", reasoning: "", status: "thinking", kind: "chat" }));
-    events.addEventListener("imagination.assistant.reasoning.delta", (event) => { const data = JSON.parse((event as MessageEvent).data); setLive((current) => current ? { ...current, reasoning: current.reasoning + data.delta } : current); });
-    events.addEventListener("imagination.assistant.delta", (event) => { const data = JSON.parse((event as MessageEvent).data); setLive((current) => current ? { ...current, content: current.content + data.delta, status: "responding" } : current); });
-    events.addEventListener("imagination.assistant.completed", async () => { setLive((current) => current ? { ...current, status: "saving" } : current); await refresh(id); setLive(null); });
-    events.addEventListener("imagination.step.completed", async (event) => { const data = JSON.parse((event as MessageEvent).data); await refresh(id); const focus = patchFocus(data.graph_patch); if (focus) setSelected(focus); setLive(null); });
-    for (const name of ["imagination.run.completed", "imagination.run.paused", "imagination.run.cancelled", "imagination.run.failed"]) events.addEventListener(name, async () => { events.close(); setLive(null); await refresh(id); });
-    events.onerror = () => { if (events.readyState !== EventSource.CLOSED) setError("The imagination stream disconnected."); };
-  };
-  useEffect(() => {
-    Promise.all([api.imaginationWorld(), api.imaginationRuns()]).then(async ([nextWorld, runs]) => {
-      setWorld(nextWorld);
-      if (runs[0]) { const detail = await api.imaginationRun(runs[0].id); updateRun(detail); if (detail.status === "running" || detail.conversation?.active_turn) subscribe(detail.id); }
-    }).catch(() => setError("Imagination is unavailable. Restart the Halcyon server."));
-    return () => stream.current?.close();
-  }, []);
-
-  const ensureSession = async () => {
-    if (runRef.current) return runRef.current;
-    const created = await api.createImaginationRun(seed, 1, false);
-    updateRun(created);
-    return created;
-  };
-  const rip = async () => {
-    try { setError(""); setLive(null); const current = await ensureSession(); const next = await api.startImagination(current.id, turns); updateRun(next); subscribe(current.id); }
-    catch (reason) { setError(reason instanceof Error ? reason.message : "Imagination could not start."); }
-  };
-  const send = async (event: FormEvent) => {
-    event.preventDefault();
-    const content = draft.trim();
-    if (!content) return;
-    try { setError(""); const current = await ensureSession(); setDraft(""); const response = await api.imaginationMessage(current.id, content); await refresh(current.id); subscribe(current.id, response.stream_url); }
-    catch (reason) { setError(reason instanceof Error ? reason.message : "Message could not be sent."); }
-  };
-  const pause = async () => { if (run) updateRun(await api.pauseImagination(run.id)); };
-  const stop = async () => { if (run) updateRun(await api.stopImagination(run.id)); };
-  const busy = run?.status === "running" || Boolean(run?.conversation?.active_turn) || Boolean(live);
-
-  return <main className="imagination-page">
-    <header className="imagination-toolbar"><div><span className="eyebrow">Living world workspace</span><h1>Imagination</h1></div><div className="imagination-intention"><input aria-label="World intention" value={seed} onChange={(event) => setSeed(event.target.value)} disabled={Boolean(run)} /></div><div className="imagination-actions">
-      <label className="turn-counter"><span>Turns</span><input aria-label="Autonomous turn count" type="number" min="1" max="20" value={turns} onChange={(event) => setTurns(Math.max(1, Math.min(20, Number(event.target.value) || 1)))} disabled={busy} /></label>
-      <button className="rip-button" onClick={() => void rip()} disabled={busy}><Sparkles size={13} />Rip</button>
-      <button onClick={pause} disabled={run?.status !== "running"}><Pause size={13} />Pause</button>
-      <button onClick={stop} disabled={run?.status !== "running"}><Square size={11} />Stop</button>
-    </div></header>
-    <div className="imagination-status"><span className={`run-state ${run?.status ?? "idle"}`}><i />{run?.status ?? "idle"}</span><span>{run ? `${run.completed_steps} autonomous turns complete` : "New world session"}</span><span>{world ? `state ${world.sequence} · ${Object.keys(world.nodes).length} nodes` : "loading world"}</span>{error ? <b>{error}</b> : null}</div>
-    <div className="imagination-split"><section className="imagination-chat"><ImaginationTranscript run={run} live={live} /><form className="world-composer" onSubmit={send}><textarea aria-label="Talk to Halcyon about the world" placeholder="Talk to Halcyon about this world…" rows={2} value={draft} onChange={(event) => setDraft(event.target.value)} disabled={busy} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); event.currentTarget.form?.requestSubmit(); } }} /><button aria-label="Send world message" disabled={busy || !draft.trim()}><Send size={14} /></button></form></section><section className="imagination-world"><div className="world-pane-label"><span>Canonical world</span><b>Live graph</b></div>{world ? <ImaginationWorldGraph memory={world} selected={selected} onSelect={setSelected} /> : <div className="memory-loading">Loading world…</div>}</section></div>
-  </main>;
+export default function ImaginationView({ chatRail, onSendCharacter }: { chatRail: ReactNode; onSendCharacter: (snapshot: CharacterSnapshot) => Promise<void> }) {
+  const [mode, setMode] = useState<Mode>("ideas"), [packs, setPacks] = useState<ImaginationPack[]>([]), [lens, setLens] = useState<IdeaLens | null>(null), [projection, setProjection] = useState<IdeaProjection | null>(null), [drafts, setDrafts] = useState<ImaginationDraft[]>([]), [activeId, setActiveId] = useState<string | null>(null), [threads, setThreads] = useState<LooseThread[]>([]), [world, setWorld] = useState<WorldMemory | null>(null), [selected, setSelected] = useState<string | null>(null), [query, setQuery] = useState(""), [busy, setBusy] = useState(false), [error, setError] = useState("");
+  const pack = packs[0] ?? null;
+  const active = useMemo(() => drafts.find((item) => item.id === activeId) ?? drafts.find((item) => item.status !== "admitted") ?? drafts[0] ?? null, [drafts, activeId]);
+  const activeBundle = useMemo(() => active?.artifact_type === "trait_bundle" ? active : drafts.find((item) => item.artifact_type === "trait_bundle" && item.status !== "admitted") ?? null, [active, drafts]);
+  const reload = async () => { const [d, t, w] = await Promise.all([api.imaginationBlueprints(), api.imaginationPressures(), api.imaginationWorld()]); setDrafts(d); setThreads(t); setWorld(w); };
+  useEffect(() => { Promise.all([api.imaginationPacks(), api.imaginationBlueprints(), api.imaginationPressures(), api.imaginationWorld()]).then(([p, d, t, w]) => { setPacks(p); setLens(p[0]?.lenses[0] ?? null); setDrafts(d); setThreads(t); setWorld(w); }).catch((reason) => setError(reason instanceof Error ? reason.message : "Imagination is taking a nap.")); }, []);
+  useEffect(() => { if (!pack || !lens) return; const timer = window.setTimeout(() => api.imaginationDoctrine(pack.slug, lens.id, query, activeBundle?.ingredients.map((item) => item.primitive) ?? [], 500, 16000).then(setProjection).catch((reason) => setError(reason instanceof Error ? reason.message : "Traits could not be loaded.")), 180); return () => window.clearTimeout(timer); }, [pack, lens, query, activeBundle?.id, activeBundle?.revision]);
+  const act = async (work: () => Promise<void>) => { try { setBusy(true); setError(""); await work(); } catch (reason) { setError(reason instanceof Error ? reason.message : "That did not quite work."); } finally { setBusy(false); } };
+  const create = () => void act(async () => { const made = await api.createImaginationBlueprint({ title: `Untitled ${lens?.label ?? "trait"} bundle`, artifact_type: kindFor(lens), lens_id: lens?.id }); await reload(); setActiveId(made.id); setMode("draft"); });
+  const createCharacter = () => void act(async () => { const made = await api.createImaginationBlueprint({ title: "Untitled character", artifact_type: "trait_bundle", lens_id: lens?.id }); await reload(); setActiveId(made.id); setMode("ideas"); });
+  const update = (patch: Partial<ImaginationDraft>, reason: string) => { if (active) void act(async () => { const made = await api.updateImaginationBlueprint(active.id, active.revision, patch, reason); setDrafts((items) => items.map((item) => item.id === made.id ? made : item)); }); };
+  const updateBundle = (patch: Partial<ImaginationDraft>, reason: string) => { if (activeBundle) void act(async () => { const made = await api.updateImaginationBlueprint(activeBundle.id, activeBundle.revision, patch, reason); setDrafts((items) => items.map((item) => item.id === made.id ? made : item)); setActiveId(made.id); }); };
+  const add = (node: IdeaNode) => void act(async () => { let current = activeBundle; if (!current) current = await api.createImaginationBlueprint({ title: `Untitled ${lens?.label ?? "trait"} bundle`, artifact_type: kindFor(lens), lens_id: lens?.id }); const made = await api.updateImaginationBlueprint(current.id, current.revision, { ingredients: [...current.ingredients, { primitive: node.id, origin: "user_selected", locked: false }] }, "added a trait"); await reload(); setActiveId(made.id); });
+  const compose = () => active && void act(async () => { const made = await api.composeImaginationBlueprint(active.id, active.revision); setDrafts((items) => items.map((item) => item.id === made.id ? made : item)); });
+  const admit = () => active?.candidate && void act(async () => { await api.admitImaginationBlueprint(active.id, active.revision, active.candidate!.content_hash); await reload(); setMode("world"); });
+  const explore = (thread: LooseThread) => void act(async () => { const made = await api.exploreImaginationPressure(thread.id, `The world around ${pretty(thread.subject_entity_id)}`, thread.kind === "custodian" ? "character" : "artifact", "lens:tensions"); await reload(); setActiveId(made.id); setMode("draft"); });
+  return <main className={`imagination-page imagination-${mode}`}><header className="imagination-new-toolbar"><div><span className="eyebrow">A place to make things</span><h1>Imagination</h1></div><ModeTabs mode={mode} drafts={drafts.filter((item) => item.status !== "admitted").length} threads={threads.filter((item) => item.status === "open").length} setMode={setMode} />{error ? <button className="imagination-error" title={error} onClick={() => setError("")}>Something snagged · dismiss</button> : <span className="imagination-whisper">Bundles stay as ingredients until you choose where they belong.</span>}</header>{mode === "ideas" ? <Ideas pack={pack} lens={lens} projection={projection} query={query} active={activeBundle} busy={busy} chatRail={chatRail} setLens={setLens} setQuery={setQuery} add={add} create={createCharacter} update={updateBundle} sendCharacter={onSendCharacter} /> : null}{mode === "draft" ? <Draft drafts={drafts} active={active} busy={busy} select={(item) => setActiveId(item.id)} create={create} update={update} compose={() => void compose()} admit={() => void admit()} /> : null}{mode === "world" ? <div className="world-layout"><section className="imagination-world">{world ? <ImaginationWorldGraph memory={world} selected={selected} onSelect={setSelected} /> : <div className="memory-loading">Gathering your world…</div>}</section><Threads threads={threads} busy={busy} explore={explore} /></div> : null}</main>;
 }

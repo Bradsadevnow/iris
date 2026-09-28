@@ -1,0 +1,126 @@
+{
+  "title": "The Intimacy Parasite Investor Memo",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "corporate_predator",
+  "modifier": "intimacy_parasite",
+  "power_source": "platform control",
+  "dramatic_function": "converts harm into policy and profit language",
+  "justification_logic": "optimization requires trade-offs",
+  "operating_environment": "product campus",
+  "signifier_package": {
+    "key": "investor_glass",
+    "visual_cues": [
+      "glass walls",
+      "neutral seating",
+      "product stages",
+      "frictionless branding"
+    ],
+    "room_logic": "transparency is weaponized theater",
+    "object_logic": "screens and decks replace evidence"
+  },
+  "dialogue_grammar": {
+    "key": "shareholder_calm",
+    "speech_pattern": "sounds tranquil because panic is for people without equity",
+    "cue_words": [
+      "confidence",
+      "runway",
+      "upside",
+      "position",
+      "market"
+    ]
+  },
+  "favorite_leverage": "HR language",
+  "failure_mode": "closeness as attack surface",
+  "narrative_payoff": {
+    "key": "force_the_receipts_into_daylight",
+    "resolution": "hidden records become visible enough that euphemism stops working"
+  },
+  "escalation_pattern": "colonizes trust before making a move",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "corporate_predator",
+      "detail": "converts harm into policy and profit language"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "intimacy_parasite",
+      "detail": "closeness as attack surface"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "investor_glass",
+      "detail": "transparency is weaponized theater"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "shareholder_calm",
+      "detail": "sounds tranquil because panic is for people without equity"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "platform control",
+      "operating_environment": "product campus",
+      "favorite_leverage": "HR language"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "optimization requires trade-offs",
+      "failure_mode": "closeness as attack surface",
+      "escalation_pattern": "colonizes trust before making a move"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "force_the_receipts_into_daylight",
+      "detail": "hidden records become visible enough that euphemism stops working"
+    }
+  },
+  "assembly_receipt": [
+    "Corporate Predator body",
+    "Intimacy Parasite stuffing",
+    "Investor Glass costume",
+    "Shareholder Calm voice chip",
+    "platform control evil job",
+    "optimization requires trade-offs internal lie",
+    "Force The Receipts Into Daylight franchise potential"
+  ],
+  "workshop_pitch": "You assembled a Corporate Predator with an Intimacy Parasite core, and the villain’s favorite workplace weapon is HR language.",
+  "opening_image": "Glass walls gleam in the investor lobby, promising transparency while hiding exactly what you can’t see.",
+  "dossier_summary": "Using platform control on a product campus, this villain turns harm into polished policy and profit, all under the guise of optimization trade‑offs.",
+  "signature_scene": "Inside the product campus, HR jargon sounds reassuring until trust is quietly colonized before anyone notices the real agenda.",
+  "fake_trailer": "In a world where corporate satire reigns, one Corporate Predator build learns that hidden records become visible enough to break euphemism’s spell.",
+  "sequel_slop": "Franchise expansion: new branding, same ruthless logic—now even more receipts are harder to erase.",
+  "sample_lines": [
+    "When you mistake this build for a service, it gets meaner the instant it realizes you’re on the wrong side of the contract.",
+    "You’re not dealing with a person anymore—you’re dealing with a permission matrix that writes its own agenda.",
+    "If it sounds compassionate, you’re already inside the problem and can’t stop the policy rewrite."
+  ],
+  "hooks": [
+    "The real threat isn’t violence; it’s the institutional permission structure that frames every move.",
+    "This villain prefers to redefine normality over claiming victory—watch how the room gets taught a new definition of safety.",
+    "By the time someone names the monster, the workflow has already taken root and is impossible to dismantle."
+  ],
+  "llm_surface": {
+    "enabled": true,
+    "error": null
+  }
+}

@@ -1,0 +1,550 @@
+schemes:
+  plot_goals:
+    take_over_the_world:
+      name: Take Over the World
+      structural_mechanic: maximal-scope domination goal that sets stakes at planetary
+        or galactic scale
+      jargon:
+      - world domination
+      - take over the world
+    take_over_the_city:
+      name: Take Over the City
+      structural_mechanic: scaled-down domination goal that keeps stakes intimate
+        and grounded
+      jargon:
+      - take over the city
+      - regional tyranny
+    a_god_am_i:
+      name: A God Am I
+      structural_mechanic: apotheosis goal that escalates the stakes from political
+        to metaphysical
+      jargon:
+      - a god am i
+      - apotheosis
+    omnicidal_maniac:
+      name: Omnicidal Maniac
+      structural_mechanic: destruction treated as an end in itself rather than a bargaining
+        chip
+      jargon:
+      - omnicidal maniac
+      - earth-shattering kaboom
+    assimilation_plot:
+      name: Assimilation Plot
+      structural_mechanic: abolishes difference by forcibly merging minds or bodies
+        into one system
+      jargon:
+      - assimilation plot
+      - hive mind
+    utopia_justifies_the_means:
+      name: Utopia Justifies the Means
+      structural_mechanic: makes the villain's argument defensible by anchoring it
+        in a better world purchased through atrocity
+      jargon:
+      - utopia justifies the means
+      - totalitarian utilitarian
+    engineered_crisis_sell_the_cure:
+      name: Engineer the Crisis, Sell the Cure
+      structural_mechanic: manufactures demand for control by causing the emergency
+        that justifies it
+      jargon:
+      - engineered heroics
+      - let no crisis go to waste
+      - match-pump
+    monster_protection_racket:
+      name: Monster Protection Racket
+      structural_mechanic: secretly controls the threat and then charges for defeating
+        or containing it
+      jargon:
+      - monster protection racket
+      - fake a fight
+    false_flag_consolidation:
+      name: Manufactured Threat to Consolidate Power
+      structural_mechanic: stages the chaos and then steps forward as the only credible
+        savior
+      jargon:
+      - false flag
+      - pretext for war
+      - become the savior
+    roaring_rampage_of_revenge:
+      name: Revenge Plot
+      structural_mechanic: narrows the motive to specific payback with high emotional
+        legibility
+      jargon:
+      - roaring rampage of revenge
+      - payback time
+    immortality_seeker:
+      name: Immortality Seeker
+      structural_mechanic: drives the story through fear of death and pursuit of permanence
+      jargon:
+      - immortality seeker
+      - soul jar
+      - lich
+    profit_motive:
+      name: Get-Rich-Quick / Profit Motive
+      structural_mechanic: makes greed the most scalable and least metaphysical story
+        engine available
+      jargon:
+      - cut lex luthor a check
+      - profit motive
+    release_the_sealed_evil:
+      name: Release the Sealed Evil
+      structural_mechanic: turns the villain into the agent that unleashes a larger
+        doom
+      jargon:
+      - sealed evil in a can
+  plot_shapes:
+    macguffin_drive:
+      name: The MacGuffin
+      structural_mechanic: motivates movement through an object whose value is mostly
+        structural
+      jargon:
+      - macguffin
+      - plot coupon
+      - golden fleece
+    xanatos_gambit:
+      name: Xanatos Gambit
+      structural_mechanic: makes every foreseeable outcome profitable to the planner
+      jargon:
+      - xanatos gambit
+      - mortons fork
+    batman_gambit:
+      name: Batman Gambit
+      structural_mechanic: relies on predicting how specific people will behave under
+        pressure
+      jargon:
+      - batman gambit
+      - unwitting pawn
+    gambit_roulette:
+      name: Gambit Roulette
+      structural_mechanic: mistakes luck for omniscience and calls it planning
+      jargon:
+      - gambit roulette
+    xanatos_speed_chess:
+      name: Xanatos Speed Chess
+      structural_mechanic: continuously revises the plan so improvisation still looks
+        like victory
+      jargon:
+      - xanatos speed chess
+    kansas_city_shuffle:
+      name: Kansas City Shuffle
+      structural_mechanic: weaponizes misdirection by letting the target spot the
+        wrong trick
+      jargon:
+      - kansas city shuffle
+    long_con:
+      name: The Long Con
+      structural_mechanic: stretches manipulation across time until the mark helps
+        complete the fraud
+      jargon:
+      - long con
+      - big store
+      - mark
+      - score
+    plan_was_to_be_captured:
+      name: The Plan Was to Be Captured
+      structural_mechanic: treats imprisonment or surrender as the real point of entry
+      jargon:
+      - i surrender suckers
+      - captured on purpose
+    complexity_addiction:
+      name: Complexity Addiction
+      structural_mechanic: builds an unnecessarily elaborate plan because simple success
+        would be narratively boring
+      jargon:
+      - complexity addiction
+      - why didnt they come up with a simpler plan
+    indy_ploy:
+      name: Indy Ploy
+      structural_mechanic: replaces planning with high-speed improvisation and dares
+        the world to keep up
+      jargon:
+      - indy ploy
+  betrayals:
+    the_mole:
+      name: The Mole
+      structural_mechanic: reveals that an apparently trusted person has been working
+        for the other side all along
+      jargon:
+      - the mole
+      - double agent
+      - deep cover
+    sleeper_agent:
+      name: The Sleeper / Manchurian Agent
+      structural_mechanic: plants betrayal long in advance and activates it when the
+        story can least survive it
+      jargon:
+      - sleeper agent
+      - manchurian agent
+    face_heel_turn:
+      name: Face-Heel Turn
+      structural_mechanic: turns a good actor into an openly villainous one inside
+        the story itself
+      jargon:
+      - face-heel turn
+    heel_face_turn:
+      name: Heel-Face Turn
+      structural_mechanic: converts a villain or enforcer into a source of rescue,
+        disruption, or remorse
+      jargon:
+      - heel-face turn
+      - redemption equals death
+    starscream:
+      name: The Starscream
+      structural_mechanic: makes the lieutenant's ambition an internal threat to the
+        whole organization
+      jargon:
+      - the starscream
+      - dragon ascendant
+    love_interest_traitor:
+      name: Love-Interest Traitor
+      structural_mechanic: weaponizes intimacy and audience trust by turning the obvious
+        ally into the real enemy
+      jargon:
+      - love-interest traitor
+      - evil all along
+    fake_defector:
+      name: Fake Defector
+      structural_mechanic: infiltrates the enemy side through a staged turn or false
+        allegiance
+      jargon:
+      - fake defector
+      - reverse mole
+    mistreatment_induced_betrayal:
+      name: Mistreatment-Induced Betrayal
+      structural_mechanic: turns abuse, exhaustion, or contempt into a believable
+        mutiny engine
+      jargon:
+      - mistreatment-induced betrayal
+      - the dog bites back
+    et_tu_brute:
+      name: Et Tu, Brute?
+      structural_mechanic: maximizes emotional payload by placing the knife in the
+        most trusted hand available
+      jargon:
+      - et tu brute
+  reversals:
+    peripeteia:
+      name: Peripeteia
+      structural_mechanic: flips fortune so abruptly the story must reinterpret the
+        last several minutes at once
+      jargon:
+      - peripeteia
+      - reversal of fortune
+    anagnorisis:
+      name: Anagnorisis
+      structural_mechanic: turns recognition into the engine that detonates the next
+        phase of the plot
+      jargon:
+      - anagnorisis
+      - recognition
+    the_reveal:
+      name: The Reveal
+      structural_mechanic: answers a planted question strongly enough that knowledge
+        itself feels like motion
+      jargon:
+      - the reveal
+    once_more_with_clarity:
+      name: Once More, with Clarity
+      structural_mechanic: replays earlier events under new information so the audience
+        realizes the plan was visible all along
+      jargon:
+      - once more with clarity
+      - rewatch bonus
+    evil_all_along:
+      name: Evil All Along
+      structural_mechanic: reframes a character's whole prior role by showing the
+        villain was embedded from the start
+      jargon:
+      - evil all along
+    out_gambitted:
+      name: Out-Gambitted
+      structural_mechanic: defeats the visible master plan with a better hidden one
+      jargon:
+      - out-gambitted
+      - just as planned
+    gambit_pileup:
+      name: Gambit Pileup
+      structural_mechanic: crashes multiple competing plans into each other until
+        nobody fully controls the chaos
+      jargon:
+      - gambit pileup
+      - last plan standing
+    unreliable_narrator:
+      name: The Unreliable Narrator
+      structural_mechanic: invalidates the audience's trust in the framing perspective
+        itself
+      jargon:
+      - unreliable narrator
+    reverse_chronology:
+      name: Reverse Chronology
+      structural_mechanic: makes cause the final twist by telling the story backward
+      jargon:
+      - reverse chronology
+      - memento-structure
+  heist_beats:
+  - the score
+  - assembling the crew
+  - the plan / the briefing
+  - casing the joint
+  - rehearsal montage
+  - execution
+  - the thing that goes wrong
+  - the double-cross
+  - reveal-the-real-plan flashback
+  - getaway / aftermath
+  heist_roles:
+  - mastermind
+  - inside man
+  - fixer
+  - fence / backer
+  - hacker
+  - gadget specialist
+  - safe-cracker
+  - con artist
+  - driver
+  - muscle
+  - burglar
+  - wild card
+  - fall guy
+  meta_voice:
+  - Ass Pull
+  - Unspoken Plan Guarantee
+  - Complexity Addiction
+  - Why Don't You Just Shoot Him?
+  - twist fatigue
+  core_plot_kit:
+  - objective
+  - prize
+  - pressure
+  - venue
+  - crew_or_accomplice_ecology
+  - convincer
+  - contingency
+  - betrayal_slot
+  - reveal_mechanism
+  - moral_invoice
+  plot_families:
+    domination_or_coup:
+      core_objective: seize rule, territory, succession, or strategic control
+      dominant_method: force, intrigue, assassination, legitimacy theft
+      hidden_variable: who is loyal and what public legitimacy believes
+      common_failure_mode: victory creates paranoia and turns plot into cleanup
+    revenge:
+      core_objective: punish a past wrong and rebalance humiliation or loss
+      dominant_method: hunt, framing, humiliation, symbolic reversal
+      hidden_variable: whether revenge will heal anything
+      common_failure_mode: target is destroyed but the revenger is socially or morally
+        ruined
+    theft_or_heist:
+      core_objective: acquire concentrated value
+      dominant_method: planning, specialization, timing, access
+      hidden_variable: security architecture, team trust, exit path
+      common_failure_mode: the getaway, fence, or distribution stage collapses
+    con_or_confidence_game:
+      core_objective: extract value by persuading the victim to choose loss
+      dominant_method: role-play, false authority, staged proof, social theater
+      hidden_variable: what game is actually being played
+      common_failure_mode: the mark becomes suspicious too early or too late for plausibility
+    sabotage_or_corporate_malfeasance:
+      core_objective: degrade a rival system while preserving deniability
+      dominant_method: process manipulation, paperwork, compliance theater, insider
+        leaks
+      hidden_variable: which failure was engineered versus accidental
+      common_failure_mode: the cover-up becomes the real crime
+    concealment_or_cleanup:
+      core_objective: prevent exposure after the initial crime
+      dominant_method: witness management, evidence control, scapegoating
+      hidden_variable: who knows and what survives
+      common_failure_mode: each concealment act enlarges the evidentiary footprint
+    curse_or_contamination:
+      core_objective: impose doom, possession, blight, or cosmological imbalance
+      dominant_method: ritual, forbidden object, lineage, prophecy
+      hidden_variable: the true rule set of the curse
+      common_failure_mode: the user becomes the medium of the harm
+    identity_usurpation:
+      core_objective: replace, impersonate, or narratively overwrite another person
+      dominant_method: performance, documentation, mimicry, false memory
+      hidden_variable: what identity is real in practice
+      common_failure_mode: impersonation succeeds externally but fractures internally
+  motive_clusters:
+    acquisition: works best when value is concrete and difficult to convert
+    status_or_ascendancy: works when legitimacy is contested
+    revenge_or_grievance: works when the injury is specific and personal
+    concealment: works best after the first crime rather than as the initial engine
+    obsession_or_eros: powerful for noir and psychological thrillers
+    purification_or_ideology: useful in fantasy, horror, and political thrillers
+    thrill_and_mastery: ideal for capers and stylish antihero pictures
+    fear_of_dispossession: excellent for post-victory collapse plots
+  twist_types:
+    unreliable_narrator: the account was selective, fabricated, or self-serving
+    hidden_identity: a role and a person were falsely mapped
+    false_ally: the helper is actually hunter, mark-maker, mole, or buyer
+    false_defeat_or_false_ending: apparent loss is staged or incomplete
+    moral_inversion: the villain is not the deepest source of harm
+    time_loop_or_repetition: repeated attempts turn planning into iterative knowledge
+  tension_payoff_beats:
+  - premise promise
+  - competence display
+  - hidden asymmetry
+  - rehearsal or convincer
+  - compression
+  - fracture test
+  - false victory
+  - recontextualizing reveal
+  - moral invoice
+lairs:
+  features:
+    self_destruct:
+      name: Self-Destruct Mechanism
+      structural_mechanic: gives the climax a countdown and makes escape as important
+        as victory
+      jargon:
+      - self-destruct mechanism
+      - big red button
+      - collapsing lair
+    shark_tank:
+      name: Shark Tank / Pit / Lava Pit
+      structural_mechanic: provides a theatrical hazard for disposal, intimidation,
+        or one clean fall
+      jargon:
+      - shark pool
+      - lava pit
+      - death trap
+    death_trap:
+      name: The Death Trap
+      structural_mechanic: delays execution long enough for suspense and escape to
+        become plausible
+      jargon:
+      - death trap
+      - unnecessarily slow dipping mechanism
+    control_room:
+      name: Control Room with Big Screen
+      structural_mechanic: centralizes exposition, surveillance, and gloating into
+        one command set
+      jargon:
+      - war room
+      - mission control
+      - big board
+    insecurity_system:
+      name: Over-Elaborate Security
+      structural_mechanic: transforms defense into spectacle while creating memorable
+        failure points
+      jargon:
+      - insecurity system
+      - laser hallway
+      - security robots
+    hench_barracks:
+      name: Henchmen Barracks / Den of Iniquity
+      structural_mechanic: reveals the labor layer that keeps the evil project operational
+        between scenes
+      jargon:
+      - den of iniquity
+      - legions of terror
+    human_sized_ducts:
+      name: Human-Sized Ventilation Ducts
+      structural_mechanic: quietly promises infiltration because the architecture
+        wants a hero route
+      jargon:
+      - air ducts
+      - crawlspace ingress
+    secret_entrance:
+      name: Secret Entrance / Bookcase Passage
+      structural_mechanic: lets access feel like revelation instead of ordinary circulation
+      jargon:
+      - bookcase passage
+      - hidden elevator
+    catwalk_over_hazard:
+      name: Conspicuous Catwalk Over Hazardous Material
+      structural_mechanic: stages the final fight in a place designed to reward one
+        bad shove
+      jargon:
+      - catwalk over lava
+      - unrailed walkway
+    bottomless_pit:
+      name: Bottomless Pit With No Railing
+      structural_mechanic: keeps mortality visible in the set itself
+      jargon:
+      - bottomless pit
+      - railing kill
+    giant_logo:
+      name: Giant Logo / Sigil Spam
+      structural_mechanic: turns branding into architecture so the villain never stops
+        being announced
+      jargon:
+      - sigil spam
+      - skull motif
+    inexplicably_good_design:
+      name: Inexplicably Good Interior Design
+      structural_mechanic: makes the lair feel more expensive and ideologically coherent
+        than the people inside it deserve
+      jargon:
+      - modernist lair
+      - top-rate design firm
+  story_functions:
+    self_destruct_countdown:
+      name: Self-Destruct Exists For The Countdown
+      structural_mechanic: closes the story through urgency rather than cleanup logistics
+      jargon:
+      - collapsing lair
+      - ticking clock
+    catwalk_for_final_fight:
+      name: Catwalk Exists For The Final Fight
+      structural_mechanic: makes the climax bodily, vertical, and fall-friendly
+      jargon:
+      - disney villain death
+    remoteness_for_isolation:
+      name: Remoteness Exists To Isolate The Hero
+      structural_mechanic: prevents outside intervention so the confrontation stays
+        personal
+      jargon:
+      - justified isolation
+    control_room_for_gloating:
+      name: Control Room Exists For Exposition And Gloating
+      structural_mechanic: makes the plan legible through surveillance and speechifying
+      jargon:
+      - evil gloating
+      - exposition set
+    throne_room_for_authority:
+      name: Throne Room Exists To Assert Authority
+      structural_mechanic: turns furniture and framing into proof of rule
+      jargon:
+      - throne room
+    device_chamber_for_stakes:
+      name: Device Chamber Exists To Physicalize Stakes
+      structural_mechanic: gives the climax something literal to stop, disable, or
+        redirect
+      jargon:
+      - doomsday chamber
+    elaborate_trap_for_escape:
+      name: Elaborate Trap Exists So The Hero Can Escape It
+      structural_mechanic: converts villain vanity into the story's most convenient
+        mercy
+      jargon:
+      - evil overlord list logic
+    no_osha_compliance:
+      name: No OSHA Compliance
+      structural_mechanic: uses unsafe architecture to produce advantages, hiding
+        spots, and accidental equalizers
+      jargon:
+      - no osha compliance
+      - malevolent architecture
+  meta_voice:
+  - Evil Overlord List
+  - No OSHA Compliance
+  - bad guys live in good houses
+  - expensive and inconvenient as compared to leasing office space
+  - clients expect to see such lairs
+  architecture_grammar:
+  - public mask
+  - threshold test
+  - ceremonial void
+  - operations ring
+  - private sanctum
+  - hidden escape route
+  function_axes:
+  - architectural features
+  - defenses
+  - access / egress
+  - signature petty atrocity
+  - narrative role
+  - tonal range

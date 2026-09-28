@@ -1,0 +1,149 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+PROJECT_ROOT="$(cd "$(dirname "$SCRIPT_PATH")/.." && pwd)"
+RUNTIME_ROOT="${XDG_RUNTIME_DIR:-/tmp}/halcyon-iris-${UID}"
+ACTION="${1:-start}"
+
+if ! mkdir -p "$RUNTIME_ROOT" 2>/dev/null; then
+  RUNTIME_ROOT="/tmp/halcyon-iris-${UID}"
+  mkdir -p "$RUNTIME_ROOT"
+fi
+STATE_FILE="$RUNTIME_ROOT/processes"
+
+state_value() {
+  local key="$1"
+  [[ -f "$STATE_FILE" ]] || return 0
+  sed -n "s/^${key}=//p" "$STATE_FILE" | head -n 1
+}
+
+process_belongs_to_iris() {
+  local pid="$1"
+  [[ "$pid" =~ ^[0-9]+$ ]] || return 1
+  kill -0 "$pid" 2>/dev/null || return 1
+  local cwd
+  cwd="$(readlink -f "/proc/$pid/cwd" 2>/dev/null || true)"
+  [[ "$cwd" == "$PROJECT_ROOT" || "$cwd" == "$PROJECT_ROOT/web" ]]
+}
+
+stop_group() {
+  local pid="$1"
+  if process_belongs_to_iris "$pid"; then
+    kill -TERM -- "-$pid" 2>/dev/null || kill -TERM "$pid" 2>/dev/null || true
+  fi
+}
+
+stop_existing() {
+  local backend_pid frontend_pid
+  backend_pid="$(state_value backend_pid)"
+  frontend_pid="$(state_value frontend_pid)"
+  if [[ -n "$backend_pid" || -n "$frontend_pid" ]]; then
+    echo "hal · stopping the previous Iris session"
+  fi
+  [[ -n "$frontend_pid" ]] && stop_group "$frontend_pid"
+  [[ -n "$backend_pid" ]] && stop_group "$backend_pid"
+  for _ in {1..30}; do
+    if ! process_belongs_to_iris "$backend_pid" && ! process_belongs_to_iris "$frontend_pid"; then
+      break
+    fi
+    sleep 0.1
+  done
+  [[ -n "$frontend_pid" ]] && process_belongs_to_iris "$frontend_pid" && kill -KILL -- "-$frontend_pid" 2>/dev/null || true
+  [[ -n "$backend_pid" ]] && process_belongs_to_iris "$backend_pid" && kill -KILL -- "-$backend_pid" 2>/dev/null || true
+  rm -f "$STATE_FILE"
+}
+
+show_status() {
+  local backend_pid frontend_pid
+  backend_pid="$(state_value backend_pid)"
+  frontend_pid="$(state_value frontend_pid)"
+  if process_belongs_to_iris "$backend_pid" && process_belongs_to_iris "$frontend_pid"; then
+    echo "hal · running"
+    echo "ui      http://127.0.0.1:5173  pid $frontend_pid"
+    echo "backend http://127.0.0.1:8000  pid $backend_pid"
+    return 0
+  fi
+  echo "hal · stopped"
+  return 1
+}
+
+case "$ACTION" in
+  stop)
+    stop_existing
+    echo "hal · stopped"
+    exit 0
+    ;;
+  status)
+    show_status
+    exit $?
+    ;;
+  start|restart)
+    stop_existing
+    ;;
+  *)
+    echo "usage: hal [start|restart|stop|status]" >&2
+    exit 2
+    ;;
+esac
+
+PYTHON="$PROJECT_ROOT/.venv/bin/python"
+if [[ ! -x "$PYTHON" ]]; then
+  echo "hal · missing $PYTHON" >&2
+  echo "Create the project virtual environment before launching Iris." >&2
+  exit 1
+fi
+if ! command -v npm >/dev/null 2>&1; then
+  echo "hal · npm is not available on PATH" >&2
+  exit 1
+fi
+if [[ ! -d "$PROJECT_ROOT/web/node_modules" ]]; then
+  echo "hal · web dependencies are missing; run npm install in $PROJECT_ROOT/web" >&2
+  exit 1
+fi
+
+RUN_ID="$(date +%s)-$$"
+BACKEND_PID=""
+FRONTEND_PID=""
+
+cleanup() {
+  trap - EXIT INT TERM
+  stop_group "$FRONTEND_PID"
+  stop_group "$BACKEND_PID"
+  if [[ "$(state_value run_id)" == "$RUN_ID" ]]; then
+    rm -f "$STATE_FILE"
+  fi
+}
+trap cleanup EXIT INT TERM
+
+cd "$PROJECT_ROOT"
+setsid "$PYTHON" run.py --server &
+BACKEND_PID=$!
+
+cd "$PROJECT_ROOT/web"
+setsid npm run dev &
+FRONTEND_PID=$!
+
+TEMP_STATE="$RUNTIME_ROOT/processes.$RUN_ID"
+{
+  echo "run_id=$RUN_ID"
+  echo "backend_pid=$BACKEND_PID"
+  echo "frontend_pid=$FRONTEND_PID"
+} > "$TEMP_STATE"
+mv "$TEMP_STATE" "$STATE_FILE"
+
+echo
+echo "hal · Iris is waking up"
+echo "ui      http://127.0.0.1:5173"
+echo "backend http://127.0.0.1:8000"
+echo "model   http://127.0.0.1:1234"
+echo "Press Ctrl+C to stop both Iris servers."
+echo
+
+set +e
+wait -n "$BACKEND_PID" "$FRONTEND_PID"
+EXIT_CODE=$?
+set -e
+echo
+echo "hal · one server stopped; shutting down the other"
+exit "$EXIT_CODE"

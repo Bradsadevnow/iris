@@ -1,0 +1,558 @@
+petty_atrocities:
+  last_breadstick:
+    label: taking the last breadstick
+    detail: leaves the basket empty and makes eye contact while doing it
+    category: public_space_table_sins
+    severity: high
+    tags:
+    - resource_selfishness
+    - social_dominance
+    - fake_innocence
+  no_toilet_paper_replacement:
+    label: not replacing the toilet paper
+    detail: abandons the cardboard tube like a formal declaration of contempt
+    category: bathroom_household_desecration
+    severity: high
+    tags:
+    - shared_space_disrespect
+    - burden_shifting
+    - domestic_entitlement
+  hover_roll_illusion:
+    label: placing the new toilet paper on top of the empty roll instead of replacing
+      it
+    detail: performs seventy-five percent of the effort just to make the laziness
+      feel intentional
+    category: bathroom_household_desecration
+    severity: extreme
+    tags:
+    - shared_space_disrespect
+    - passive_aggression
+    - burden_shifting
+  ghost_flush_abandonment:
+    label: leaving a ghost flush situation behind
+    detail: forces the next person to inherit an avoidable biological legacy in the
+      name of fake principle
+    category: bathroom_household_desecration
+    severity: extreme
+    tags:
+    - minor_consent_violation
+    - shared_space_disrespect
+    - passive_aggression
+  countertop_puddle_migration:
+    label: leaving the bathroom counter completely soaked
+    detail: walks away after splashing everywhere like the next person volunteered
+      to absorb the consequences
+    category: bathroom_household_desecration
+    severity: medium
+    tags:
+    - shared_space_disrespect
+    - ambient_hostility
+    - burden_shifting
+  hair_in_the_shower_drain:
+    label: leaving hair in the shower drain
+    detail: turns shared hygiene into a forced intimacy ritual nobody consented to
+    category: bathroom_household_desecration
+    severity: medium
+    tags:
+    - contamination
+    - shared_space_disrespect
+    - bodily_residue
+  empty_carton_back_in_fridge:
+    label: putting the empty carton back in the fridge
+    detail: stages counterfeit abundance so someone else has to discover the lie cold
+    category: household_deception
+    severity: medium
+    tags:
+    - fake_innocence
+    - burden_shifting
+    - counterfeit_abundance
+  half_empty_bottle_multiplier:
+    label: opening a new condiment or cheese while the old one is still there
+    detail: creates a small museum of abandoned half-used containers through pure
+      domestic cowardice
+    category: household_deception
+    severity: medium
+    tags:
+    - domestic_entitlement
+    - chore_avoidance
+    - ambient_hostility
+  tied_trash_bag_by_the_door:
+    label: tying the full trash bag and leaving it by the door
+    detail: stops exactly one step before responsibility and expects the hallway gods
+      to finish the job
+    category: household_deception
+    severity: medium
+    tags:
+    - threshold_cowardice
+    - burden_shifting
+    - chore_avoidance
+  dish_soaker_forever:
+    label: leaving dishes to soak until they become a swamp
+    detail: uses time itself as a laundering mechanism for chores nobody wants
+    category: household_deception
+    severity: high
+    tags:
+    - chore_avoidance
+    - contamination
+    - sewage_logic
+  fake_doing_the_chore:
+    label: performing the visual impression of doing a chore without actually finishing
+      it
+    detail: creates the posture of effort so someone else feels insane for still being
+      annoyed
+    category: household_deception
+    severity: high
+    tags:
+    - fake_innocence
+    - gaslighting
+    - chore_avoidance
+  never_returning_borrowed_tupperware:
+    label: never returning the borrowed tupperware
+    detail: converts domestic trust into a low-grade permanent grievance
+    category: borrowing_lending_crimes
+    severity: medium
+    tags:
+    - domestic_entitlement
+    - resource_selfishness
+    - slow_betrayal
+  pyrex_returned_stained_and_lidless:
+    label: returning borrowed Pyrex six months later stained and without the lid
+    detail: takes a complete object and sends back an exhausted witness
+    category: borrowing_lending_crimes
+    severity: high
+    tags:
+    - domestic_entitlement
+    - slow_betrayal
+    - fake_innocence
+  steals_your_charger_and_acts_confused:
+    label: taking your charger and acting confused about it
+    detail: weaponizes fake innocence over a cable everyone recognizes
+    category: borrowing_lending_crimes
+    severity: high
+    tags:
+    - gaslighting
+    - property_hijack
+    - fake_innocence
+  lends_out_your_thing_to_a_third_party:
+    label: borrowing something and then lending it to someone else
+    detail: launders your property through another human being like consent was a
+      transferable asset
+    category: borrowing_lending_crimes
+    severity: high
+    tags:
+    - property_hijack
+    - consent_slippage
+    - fake_innocence
+  office_fridge_theft:
+    label: stealing lunch from the office fridge
+    detail: commits a tiny crime with civilization-level implications
+    category: office_kitchen_biohazards
+    severity: extreme
+    tags:
+    - resource_selfishness
+    - office_terror
+    - moral_collapse
+  one_bite_reshelver:
+    label: eating half the communal pastry and putting it back in the box
+    detail: leaves a mutilated bakery corpse behind and expects everyone else to process
+      it gracefully
+    category: office_kitchen_biohazards
+    severity: extreme
+    tags:
+    - resource_selfishness
+    - contamination
+    - fake_innocence
+  ice_cube_phantom:
+    label: putting the empty ice tray back in the freezer
+    detail: behaves as if water refills itself through dark infrastructure nobody
+      else is allowed to question
+    category: office_kitchen_biohazards
+    severity: medium
+    tags:
+    - burden_shifting
+    - ambient_hostility
+    - domestic_entitlement
+  sponge_defiler:
+    label: ruining the communal sponge and leaving it to ferment
+    detail: compresses it into a wet gray bio-weapon and then walks away like the
+      sponge had a choice
+    category: office_kitchen_biohazards
+    severity: high
+    tags:
+    - contamination
+    - shared_space_disrespect
+    - office_terror
+  liquid_gold_thief:
+    label: secretly using just enough of someone else's premium creamer to make them
+      question reality
+    detail: steals at a quantity specifically calibrated to make the victim sound
+      unreasonable if they complain
+    category: office_kitchen_biohazards
+    severity: high
+    tags:
+    - resource_selfishness
+    - gaslighting
+    - fake_innocence
+  microwave_fish_at_work:
+    label: microwaving fish at work
+    detail: turns a shared space into a hostile atmosphere event
+    category: office_kitchen_biohazards
+    severity: high
+    tags:
+    - shared_space_disrespect
+    - atmospheric_warfare
+    - office_terror
+  helpful_fridge_purger:
+    label: throwing away clearly labeled food because it has been there for days
+    detail: wears the costume of responsibility while destroying something that was
+      not yours to curate
+    category: office_kitchen_biohazards
+    severity: high
+    tags:
+    - false_virtue
+    - resource_selfishness
+    - administrative_cowardice
+  breakroom_dish_soak_lie:
+    label: leaving dishes in the break-room sink under the logic that they are soaking
+    detail: turns a dirty plate into a bureaucratic holding pattern
+    category: office_kitchen_biohazards
+    severity: medium
+    tags:
+    - chore_avoidance
+    - contamination
+    - procedural_evasion
+  per_my_last_email_after_not_answering:
+    label: saying per my last email after never answering the actual question
+    detail: uses documentation as a taunt instead of communication
+    category: workplace_humiliations
+    severity: high
+    tags:
+    - bureaucratic_condescension
+    - administrative_cowardice
+    - fake_authority
+  surprise_cc_ambush:
+    label: cc'ing someone's boss into a minor disagreement without warning
+    detail: turns a small issue into a staged disciplinary hearing for sport
+    category: workplace_humiliations
+    severity: high
+    tags:
+    - public_humiliation
+    - administrative_cowardice
+    - escalation_theater
+  friday_430_meeting:
+    label: scheduling a Friday 4:30 meeting for something that could have been an
+      email
+    detail: treats the weekend like loose inventory available for extraction
+    category: workplace_humiliations
+    severity: high
+    tags:
+    - time_theft
+    - ambient_hostility
+    - managerial_vandalism
+  reply_all_storm_thanks:
+    label: replying-all with thanks to a giant thread
+    detail: multiplies the nuisance while pretending to be polite
+    category: workplace_humiliations
+    severity: medium
+    tags:
+    - inbox_pollution
+    - procedural_shrapnel
+    - fake_politeness
+  conference_room_no_show:
+    label: claiming a conference room and then never using it
+    detail: privatizes time and space only to abandon both without apology
+    category: workplace_humiliations
+    severity: medium
+    tags:
+    - resource_selfishness
+    - phantom_reservation
+    - ambient_hostility
+  hovering_over_someone_eating:
+    label: hovering over someone's desk while they are eating to ask one quick thing
+    detail: makes lunch feel like a hostage situation with a calendar invite attached
+    category: workplace_humiliations
+    severity: medium
+    tags:
+    - boundary_puncture
+    - time_theft
+    - social_pressure
+  non_promotable_task_dodger:
+    label: never volunteering for the cleanup work that keeps the place functional
+    detail: offloads the same invisible labor onto the same conscientious people every
+      single time
+    category: workplace_humiliations
+    severity: high
+    tags:
+    - burden_shifting
+    - chore_avoidance
+    - structural_selfishness
+  speakerphone_in_public:
+    label: using speakerphone in public
+    detail: behaves as if everyone nearby agreed to be drafted into the call
+    category: public_space_crimes
+    severity: medium
+    tags:
+    - minor_consent_violation
+    - social_burden_shifting
+    - public_entropy
+  bluetooth_hijack:
+    label: staying connected to the shared speaker and blasting something unhinged
+      from blocks away
+    detail: turns absentmindedness into a roaming territorial offense
+    category: public_space_crimes
+    severity: high
+    tags:
+    - minor_consent_violation
+    - public_entropy
+    - tech_haunting
+  chat_and_cut:
+    label: chatting your way into the front of a line
+    detail: disguises queue theft as sociability and leaves the witnesses radicalized
+    category: public_space_crimes
+    severity: high
+    tags:
+    - queue_parasitism
+    - fake_sociability
+    - social_dominance
+  not_returning_the_shopping_cart:
+    label: abandoning the shopping cart instead of returning it
+    detail: outsources the final moral task to anonymous strangers because supervision
+      is the only thing holding you together
+    category: public_space_crimes
+    severity: extreme
+    tags:
+    - civilizational_failure
+    - burden_shifting
+    - public_entropy
+  cart_aisle_blocker:
+    label: abandoning your cart across the aisle while you backtrack for one item
+    detail: makes your indecision everyone's traffic pattern
+    category: public_space_crimes
+    severity: medium
+    tags:
+    - shared_space_disrespect
+    - public_entropy
+    - ambient_hostility
+  stop_short_in_doorway:
+    label: stopping short in the doorway
+    detail: turns shared movement into an avoidable logistics crisis
+    category: public_space_crimes
+    severity: medium
+    tags:
+    - shared_space_disrespect
+    - ambient_hostility
+    - minor_consent_violation
+  escalator_left_lane_block:
+    label: standing still on the left side of the escalator
+    detail: mistakes public circulation for a personal reflection zone
+    category: public_space_crimes
+    severity: medium
+    tags:
+    - flow_sabotage
+    - shared_space_disrespect
+    - ambient_hostility
+  bag_on_train_seat:
+    label: putting your bag on a seat in a crowded train or bus
+    detail: acts like your tote qualified for passenger status before the rest of
+      humanity did
+    category: public_space_crimes
+    severity: high
+    tags:
+    - resource_selfishness
+    - public_entropy
+    - social_dominance
+  slow_walker_phalanx:
+    label: walking four across on a busy sidewalk
+    detail: converts public space into a moving wall of entitlement
+    category: public_space_crimes
+    severity: medium
+    tags:
+    - flow_sabotage
+    - social_dominance
+    - ambient_hostility
+  bare_feet_on_airplane_wall:
+    label: putting bare feet on the airplane wall
+    detail: behaves like boundaries are an optional premium feature
+    category: public_space_crimes
+    severity: extreme
+    tags:
+    - minor_consent_violation
+    - public_entropy
+    - bodily_hubris
+  double_dipping_communal_salsa:
+    label: double-dipping in communal salsa
+    detail: collapses private mouth and shared bowl into one horrifying diplomatic
+      incident
+    category: public_space_crimes
+    severity: high
+    tags:
+    - contamination
+    - social_disgust
+    - boundary_failure
+  leaves_you_on_read_then_demands_urgency:
+    label: leaving you on read for days and then asking for a quick turnaround
+    detail: encodes hierarchy through delay and then calls it collaboration
+    category: digital_etiquette_crimes
+    severity: medium
+    tags:
+    - asymmetrical_responsiveness
+    - time_theft
+    - administrative_cowardice
+  question_mark_after_five_minutes:
+    label: sending a question mark five minutes after the first message
+    detail: manufactures lateness where none exists and calls it follow-up
+    category: digital_etiquette_crimes
+    severity: medium
+    tags:
+    - urgency_theater
+    - time_theft
+    - ambient_hostility
+  two_minute_voice_note_for_logistics:
+    label: sending a two-minute voice note for a ten-second logistical fact
+    detail: outsources transcription labor and calls it authenticity
+    category: digital_etiquette_crimes
+    severity: medium
+    tags:
+    - time_theft
+    - friction_export
+    - communication_selfishness
+  group_chat_left_on_read:
+    label: leaving a time-sensitive group chat question unanswered while reacting
+      to it
+    detail: transforms a request for help into a tiny theater of social abandonment
+    category: digital_etiquette_crimes
+    severity: high
+    tags:
+    - administrative_cowardice
+    - social_isolation
+    - passive_aggression
+  added_to_group_chat_without_consent:
+    label: adding someone to a group chat without asking
+    detail: treats their attention and notifications like public land available for
+      annexation
+    category: digital_etiquette_crimes
+    severity: medium
+    tags:
+    - minor_consent_violation
+    - attention_theft
+    - public_entropy
+  puts_you_on_speaker_without_warning:
+    label: putting someone on speaker without warning them
+    detail: turns a conversation into ambient performance without consent from the
+      other side
+    category: digital_etiquette_crimes
+    severity: high
+    tags:
+    - privacy_conscripting
+    - minor_consent_violation
+    - social_betrayal
+  screenshotting_private_dms_for_clout:
+    label: posting private DMs for public credibility
+    detail: monetizes intimacy the second an audience can be recruited for it
+    category: digital_etiquette_crimes
+    severity: extreme
+    tags:
+    - performative_betrayal
+    - privacy_conscripting
+    - social_dominance
+  vaguebooking_some_people:
+    label: vaguebooking about some people after being perfectly normal in person
+    detail: makes everyone who knows you run a private reputational audit
+    category: digital_etiquette_crimes
+    severity: medium
+    tags:
+    - ambient_accusation
+    - passive_aggression
+    - social_paranoia
+  reaction_instead_of_answer:
+    label: reacting to a real question instead of answering it
+    detail: converts a bid for coordination into notification gravel
+    category: digital_etiquette_crimes
+    severity: medium
+    tags:
+    - administrative_cowardice
+    - social_isolation
+    - fake_engagement
+  application_auto_reject_minutes_later:
+    label: auto-rejecting a job application minutes after submission
+    detail: makes aspiration feel pre-sorted by a machine that resents your time
+    category: institutional_douchebaggery
+    severity: high
+    tags:
+    - algorithmic_contempt
+    - bureaucratic_sadism
+    - time_theft
+  one_more_form_twice:
+    label: saying the application is complete and then asking for one more form twice
+    detail: turns compliance into a moving target maintained by pure paper hunger
+    category: institutional_douchebaggery
+    severity: high
+    tags:
+    - procedural_recursion
+    - administrative_cowardice
+    - time_theft
+  cancel_by_phone_only:
+    label: allowing sign-up online but requiring a phone call to cancel
+    detail: builds retention out of friction and then acts confused when people call
+      it a trap
+    category: institutional_douchebaggery
+    severity: extreme
+    tags:
+    - retention_by_friction
+    - time_theft
+    - bureaucratic_sadism
+  convenience_fee_for_only_payment_path:
+    label: adding a convenience fee to the only available payment option
+    detail: charges people for the privilege of having no other route left
+    category: institutional_douchebaggery
+    severity: high
+    tags:
+    - monetized_coercion
+    - bureaucratic_sadism
+    - structural_selfishness
+  estimated_wait_time_lie:
+    label: saying the wait time is two minutes when it is closer to an hour
+    detail: corrodes trust in the interface itself by lying in the voice of certainty
+    category: institutional_douchebaggery
+    severity: high
+    tags:
+    - institutional_gaslighting
+    - fake_authority
+    - time_theft
+  dead_required_policy_link:
+    label: linking a required policy page to a dead document
+    detail: signals obligation without maintaining the doorway into it
+    category: institutional_douchebaggery
+    severity: medium
+    tags:
+    - abandoned_authority
+    - procedural_void
+    - ambient_hostility
+  chatbot_no_human_exit:
+    label: trapping customer support inside a chatbot with no human exit
+    detail: converts service into a self-defense maze built out of fake concern
+    category: institutional_douchebaggery
+    severity: extreme
+    tags:
+    - containment_architecture
+    - performative_listening
+    - bureaucratic_sadism
+  satisfaction_survey_before_solution:
+    label: sending a satisfaction survey before solving the problem
+    detail: asks for emotional labor before repair and calls that care
+    category: institutional_douchebaggery
+    severity: medium
+    tags:
+    - performative_listening
+    - administrative_cowardice
+    - ambient_hostility
+  shops_exclusively_at_erewhon:
+    label: shopping exclusively at Erewhon and acting like it is moral clarity
+    detail: treats luxury grocery access as proof of spiritual refinement while everybody
+      else is still trying to buy normal food
+    category: social_dietary_treachery
+    severity: high
+    tags:
+    - class_performance
+    - consumer_puritanism
+    - ambient_contempt

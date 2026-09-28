@@ -48,6 +48,21 @@ ROLE_STRATEGIES: dict[str, dict[str, list[str]]] = {
                        "edges": ["involves", "depends_on", "related_to"]},
 }
 
+PROFILE_TENSIONS: dict[frozenset[str], dict[str, str]] = {
+    frozenset({"security", "sales"}): {
+        "between": "Security favors restrictive boundaries while Sales favors low-friction progress.",
+        "requirement": "Preserve authorization boundaries while minimizing friction for legitimate users.",
+    },
+    frozenset({"academic", "sales"}): {
+        "between": "Academic qualification can compete with Sales brevity and momentum.",
+        "requirement": "Keep the recommendation concise without overstating evidence or confidence.",
+    },
+    frozenset({"financer", "game-developer"}): {
+        "between": "Financial efficiency can compete with experimentation needed to validate player value.",
+        "requirement": "Bound experimentation by cost while preserving a meaningful playtest signal.",
+    },
+}
+
 
 def _tokens(value: str) -> set[str]:
     return {token for m in WORD.finditer(value or "")
@@ -98,9 +113,10 @@ class ProjectionService:
         active = self.store.active_context()
         versions = self.store.versions()
         selected_roles, role_sources = self._select_roles(message, active.get("roles", []))
+        compiled_stance = self.compile_stance(selected_roles, role_sources)
         nodes, edges = self._federate(
             state, active, memory_channels, include_known_world,
-            include_imagination_world, selected_roles,
+            include_imagination_world, selected_roles, role_sources,
         )
         query_terms = _tokens(message)
         roles = selected_roles
@@ -165,7 +181,8 @@ class ProjectionService:
                         "limits": {"prompt_tokens": token_budget, "max_nodes": max_nodes, "max_depth": max_depth}},
             "strategy": {"explicit_roles": active.get("roles", []), "selected_roles": roles,
                          "role_sources": role_sources, "query_terms": sorted(query_terms),
-                         "role_terms": sorted(role_terms), "preferred_edges": preferred_edges},
+                         "role_terms": sorted(role_terms), "preferred_edges": preferred_edges,
+                         "compiled_stance": compiled_stance},
             "selected_nodes": selected,
             "selected_edges": selected_edges,
             "expansion_handles": handles,
@@ -190,6 +207,7 @@ class ProjectionService:
         nodes, edges = self._federate(
             state, active, memory_channels, include_known_world,
             include_imagination_world, active.get("roles", []),
+            {role: "explicit" for role in active.get("roles", [])},
         )
         return {
             "nodes": {node_id: asdict(node) for node_id, node in nodes.items()},
@@ -198,7 +216,7 @@ class ProjectionService:
 
     def _federate(self, state: dict, active: dict, memory_channels: list[str] | None,
                   include_known_world: bool, include_imagination_world: bool,
-                  selected_roles: list[str]):
+                  selected_roles: list[str], role_sources: dict[str, str]):
         nodes: dict[str, ProjectionNode] = {
             SELF_ID: ProjectionNode(SELF_ID, "self", "subject", "Halcyon", "The canonical subject of this projection.")
         }
@@ -225,7 +243,7 @@ class ProjectionService:
                     edges.append(ProjectionEdge(item["id"], "derived_from", source_id, "memory"))
 
         self._add_context(nodes, edges, active)
-        self._add_roles(nodes, edges, selected_roles)
+        self._add_roles(nodes, edges, selected_roles, role_sources)
         self._add_capabilities(nodes, edges)
         if include_known_world:
             self._add_world(nodes, edges, visible_world(state["world"]), "known_world", "self_knows_about", "canonical")
@@ -252,6 +270,57 @@ class ProjectionService:
             sources[role] = "inferred"
         return chosen, sources
 
+    def compile_stance(self, roles: list[str], sources: dict[str, str] | None = None) -> dict[str, Any]:
+        """Compile profile packs into bounded, attributable task guidance."""
+        sources = sources or {role: "explicit" for role in roles}
+        profiles = []
+        contributions: dict[str, dict[str, set[str]]] = {
+            "attention": {}, "principles": {}, "methods": {},
+            "expression": {}, "preferred_edges": {},
+        }
+
+        def contribute(kind: str, value: str, role_id: str):
+            normalized = value.strip()
+            if normalized:
+                contributions[kind].setdefault(normalized, set()).add(role_id)
+
+        for role_id in roles:
+            path = self.identity_packs_dir / f"{role_id}.json"
+            if not path.exists():
+                continue
+            pack = load_pack(path)
+            strategy = ROLE_STRATEGIES.get(role_id, {})
+            principles = [claim["value"] for claim in pack["claims"]
+                          if claim["kind"] in {"value", "commitment", "goal", "self_understanding"}]
+            expression = [claim["value"] for claim in pack["claims"]
+                          if claim["kind"] == "preference" and claim["predicate"] == "expresses itself with"]
+            methods = [{"id": item["id"], "description": item["description"]}
+                       for item in pack.get("capabilities", [])]
+            attention = strategy.get("terms", [])
+            edges = strategy.get("edges", [])
+            profiles.append({"id": role_id, "name": pack["name"], "source": sources.get(role_id, "explicit"),
+                             "attention": attention, "principles": principles, "methods": methods,
+                             "expression": expression, "preferred_edges": edges})
+            for item in attention: contribute("attention", item, role_id)
+            for item in principles: contribute("principles", item, role_id)
+            for item in methods: contribute("methods", item["id"], role_id)
+            for item in expression: contribute("expression", item, role_id)
+            for item in edges: contribute("preferred_edges", item, role_id)
+
+        tensions = []
+        role_set = set(roles)
+        for pair, detail in PROFILE_TENSIONS.items():
+            if pair <= role_set:
+                tensions.append({"profiles": sorted(pair), **detail})
+        merged = {
+            kind: [{"value": value, "contributed_by": sorted(contributors)}
+                   for value, contributors in sorted(items.items())]
+            for kind, items in contributions.items()
+        }
+        return {"profiles": profiles, **merged, "tensions": tensions,
+                "precedence": ["governance", "canonical_self", "user_instruction",
+                               "explicit_profiles", "inferred_profile", "expression"]}
+
     @staticmethod
     def _add_context(nodes, edges, active):
         values = []
@@ -265,7 +334,7 @@ class ProjectionService:
             nodes[node_id] = ProjectionNode(node_id, "context", kind, value, f"Active {kind}: {value}")
             edges.append(ProjectionEdge(SELF_ID, "self_is_working_on" if kind == "task" else "scoped_to", node_id, "context"))
 
-    def _add_roles(self, nodes, edges, roles):
+    def _add_roles(self, nodes, edges, roles, sources):
         for role_id in roles:
             path = self.identity_packs_dir / f"{role_id}.json"
             if not path.exists():
@@ -276,11 +345,12 @@ class ProjectionService:
             claims = [f"[{c['kind']}] {c['predicate']} {c['value']}" for c in pack["claims"]
                       if c["kind"] in reasoning_kinds]
             methods = [cap["id"] for cap in pack.get("capabilities", [])]
-            content = f"Task stance: {pack['name']} — {pack.get('tagline', '')}\n" + "\n".join(claims)
+            source = sources.get(role_id, "explicit")
+            content = f"Task stance ({source}): {pack['name']} — {pack.get('tagline', '')}\n" + "\n".join(claims)
             if methods:
                 content += "\nKnown methods: " + ", ".join(methods)
             nodes[node_id] = ProjectionNode(node_id, "role", "role", pack["name"], content,
-                                             metadata={"role_id": role_id, "methods": methods})
+                                             metadata={"role_id": role_id, "source": source, "methods": methods})
             edges.append(ProjectionEdge(SELF_ID, "self_is_filling_role", node_id, "role"))
 
     def _add_capabilities(self, nodes, edges):
@@ -386,10 +456,24 @@ class ProjectionService:
                 continue
             lines.append(f"## {headings[owner]}")
             if owner == "role":
-                lines.append("These task-specific stances shape attention and method; they do not rename or replace Halcyon.")
+                lines.append("These task-specific stances shape attention and method; they do not rename or replace Halcyon. Explicit profiles compose as peers. Any inferred profile is turn-scoped support and cannot override an explicit profile.")
             if owner == "capabilities":
                 lines.append("Registry entries are not callable tools. A capability is callable only when a bound tool definition and tool result are present.")
             lines.extend(f"- [{item['id']}] status={item['status']} scope={item['scope']}: {item['content']}" for item in items)
+            if owner == "role":
+                stance = projection["strategy"].get("compiled_stance", {})
+                attention = stance.get("attention", [])
+                methods = stance.get("methods", [])
+                if attention:
+                    lines.append("Combined attention: " + "; ".join(
+                        f"{item['value']} [{'+'.join(item['contributed_by'])}]" for item in attention
+                    ))
+                if methods:
+                    lines.append("Known methods (reasoning procedures, not bound tools): " + "; ".join(
+                        f"{item['value']} [{'+'.join(item['contributed_by'])}]" for item in methods
+                    ))
+                for tension in stance.get("tensions", []):
+                    lines.append(f"Productive tension ({' + '.join(tension['profiles'])}): {tension['between']} Requirement: {tension['requirement']}")
             lines.append("")
         if projection["expansion_handles"]:
             lines.append("## EXPANSION HANDLES")

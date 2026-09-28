@@ -1,0 +1,293 @@
+lairs:
+  glass_command_atrium:
+    label: Glass Command Atrium
+    category: executive_lair
+    summary: An elevated glass habitat that confuses visibility with accountability.
+    family_tags:
+    - corporate_predator
+    - mastermind
+    - rogue_ai
+    property_type: executive tower suite
+    location_vibe: skyline dominance with curated access
+    access_pattern: segmented elevators and ceremonial check-ins
+    defense_logic: everybody can see the room but nobody can reach the lever
+    hospitality_cover: investor briefing space
+    vulnerability: too much of the plan depends on uninterrupted spectacle
+  domestic_legitimacy_manor:
+    label: Domestic Legitimacy Manor
+    category: household_lair
+    summary: A beautiful home arranged to make danger look like family administration.
+    family_tags:
+    - seductive_deceiver
+    - inherited_heir
+    - false_savior
+    property_type: estate with kitchen-island jurisprudence
+    location_vibe: old money calm with unresolved custody energy
+    access_pattern: coded doors hidden behind hospitality rituals
+    defense_logic: every room has emotional witness pressure baked in
+    hospitality_cover: multigenerational retreat
+    vulnerability: the house requires everybody to keep pretending the photo wall
+      is normal
+  sealed_research_campus:
+    label: Sealed Research Campus
+    category: science_lair
+    summary: A research environment where ethics only survive as signage.
+    family_tags:
+    - hubristic_creator
+    - rogue_ai
+    - monstrous_other
+    property_type: research campus
+    location_vibe: remote sterility with badge-based theology
+    access_pattern: airlocks, corridors, and politely armed reception desks
+    defense_logic: confusion is part of the containment stack
+    hospitality_cover: pilot program center
+    vulnerability: the override exists because somebody once felt guilty
+  volcanic_bond_complex:
+    label: Volcanic Bond Complex
+    category: prestige_lair
+    summary: A lair that mistakes dramatic geography for invulnerability and keeps
+      almost getting away with it.
+    family_tags:
+    - mastermind
+    - chaos_psychopath
+    - performance_genius
+    property_type: fortified caldera residence
+    location_vibe: impossible wealth with active magma denial
+    access_pattern: one theatrical transit route plus several lethal maintenance shafts
+    defense_logic: the environment is doing half the threatening for free
+    hospitality_cover: private leadership retreat
+    vulnerability: every system assumes the monologue will not be interrupted
+  orbital_mercy_station:
+    label: Orbital Mercy Station
+    category: sci_fi_lair
+    summary: A space-borne facility designed to sound humanitarian while acting like
+      a sorting machine.
+    family_tags:
+    - rogue_ai
+    - institutional_enforcer
+    - false_savior
+    property_type: orbital station
+    location_vibe: clean vacuum paternalism
+    access_pattern: docking authority, biometric corridors, and morale chimes
+    defense_logic: the habitat itself defines survivability
+    hospitality_cover: relief and recovery hub
+    vulnerability: one local failure becomes everybody's problem at once
+  subterranean_archive_bunker:
+    label: Subterranean Archive Bunker
+    category: archive_lair
+    summary: A deep storage site where files, bodies, and excuses all believe they
+      are temporary.
+    family_tags:
+    - institutional_enforcer
+    - corporate_predator
+    - mastermind
+    property_type: hardened bunker archive
+    location_vibe: fluorescent secrecy with mildew authority
+    access_pattern: service tunnels, freight lifts, and unhelpful maps
+    defense_logic: most intruders give up before the truth becomes geographically
+      reachable
+    hospitality_cover: records preservation facility
+    vulnerability: the wrong document can still walk out in a lunch bag
+  skyfort_airship_salon:
+    label: Skyfort Airship Salon
+    category: mobile_lair
+    summary: A floating fortress for bastards who want altitude to count as moral
+      altitude too.
+    family_tags:
+    - performance_genius
+    - collapse_prophet
+    - mastermind
+    property_type: armed airship salon
+    location_vibe: luxury panic above public consequences
+    access_pattern: invitation-only boarding plus one humiliating cargo winch
+    defense_logic: mobility turns jurisdiction into a scheduling problem
+    hospitality_cover: donor voyage series
+    vulnerability: weather remains emotionally unconvinced
+  wrong_house_neighborhood_grid:
+    label: Wrong House Neighborhood Grid
+    category: thriller_lair
+    summary: Not one lair but several emotionally adjacent properties acting like
+      a single organism.
+    family_tags:
+    - seductive_deceiver
+    - chaos_psychopath
+    - intimacy_parasite
+    property_type: neighborhood-scale domestic maze
+    location_vibe: cul-de-sac dread with HOA paperwork
+    access_pattern: side gates, garage codes, and borrowed familiarity
+    defense_logic: the threat disperses across plausible normalcy
+    hospitality_cover: quiet residential block
+    vulnerability: once one witness compares notes, the geography starts confessing
+  bel_air_glass_palace:
+    label: Bel-Air Glass Palace
+    category: ultra_modern_prestige_lair
+    summary: A 100,000-square-foot glass and steel palace that mistakes transparency
+      for invulnerability.
+    family_tags:
+    - corporate_predator
+    - mastermind
+    - performance_genius
+    property_type: ultra-modern palace
+    location_vibe: Bel-Air dominance with impossible maintenance confidence
+    access_pattern: screened entry, exposed approaches, and social filtration rituals
+    defense_logic: the openness is deliberate because intimidation is part of the
+      wall system
+    hospitality_cover: champagne-forward donor residence
+    vulnerability: open glass facades make camouflage impossible and entry screening
+      becomes its own bottleneck
+  private_island_monastery:
+    label: Flathead Private Island Monastery
+    category: prepper_island_lair
+    summary: An unfinished concrete monastery sold as self-sufficiency and experienced
+      as siege rehearsal.
+    family_tags:
+    - collapse_prophet
+    - institutional_enforcer
+    - mastermind
+    property_type: private island bunker monastery
+    location_vibe: prepper isolation with exposed supply-chain nerves
+    access_pattern: water approach, service dock bottlenecks, and inventory-dependent
+      landings
+    defense_logic: distance and concrete do most of the talking until the supplies
+      run thin
+    hospitality_cover: wellness-secession retreat
+    vulnerability: finish-out costs and vulnerable supply runs turn every siege into
+      a logistics math problem
+  brutalist_morale_sink:
+    label: Concrete Brutalist Compound
+    category: brutalist_lair
+    summary: A clinically hostile compound where sterility itself becomes an intruder
+      debuff and an employee-retention disaster.
+    family_tags:
+    - institutional_enforcer
+    - corporate_predator
+    - rogue_ai
+    property_type: industrial concrete compound
+    location_vibe: Beverly Hills intimidation with no domestic softness whatsoever
+    access_pattern: hard surfaces, overexposed approaches, and too many bathrooms
+      for tactical dignity
+    defense_logic: clinical surfaces lower intruder morale while everyone working
+      there becomes spiritually dustier
+    hospitality_cover: architectural statement residence
+    vulnerability: the total absence of cozy texture creates passive worker morale
+      decay
+  disguised_substation_house:
+    label: Disguised Substation House
+    category: infrastructure_lair
+    summary: A suburban facade wrapped around a hardened power node with the soul
+      of a municipal secret.
+    family_tags:
+    - rogue_ai
+    - institutional_enforcer
+    - mastermind
+    property_type: residential-faced utility bunker
+    location_vibe: suburban normalcy hiding dual-grid paranoia
+    access_pattern: fake domestic thresholds over concrete floors and heavy generator
+      dependencies
+    defense_logic: heavy walls, backup power, and the camouflage of boredom
+    hospitality_cover: unremarkable neighborhood residence
+    vulnerability: windowless moisture-heavy interiors destroy organic morale and
+      ventilation forgiveness
+  highland_prepper_castle:
+    label: Highland Prepper Castle
+    category: gothic_prepper_lair
+    summary: A million-brick fortress for villains who want tunnels, augers, and doctrinal
+      masonry.
+    family_tags:
+    - mastermind
+    - collapse_prophet
+    - false_savior
+    property_type: gothic prepper castle
+    location_vibe: religious frontier stonework with tunnel-minded certainty
+    access_pattern: compressed vertical ratios, elevators, and underground routes
+    defense_logic: thickness, ritual geometry, and sheer stubborn brick volume
+    hospitality_cover: family legacy stronghold
+    vulnerability: low ceilings and compressed movement channels restrict giant defensive
+      units
+  abandoned_funhouse_screen:
+    label: Abandoned Funhouse Screen
+    category: camouflage_lair
+    summary: A decaying amusement facade where rust, weeds, and bad nostalgia do active
+      counter-surveillance work.
+    family_tags:
+    - chaos_psychopath
+    - performance_genius
+    - seductive_deceiver
+    property_type: dilapidated amusement-park lair
+    location_vibe: overgrown spectacle rot with accidental satellite evasion
+    access_pattern: broken midway paths, structural lies, and ride-shaped blind spots
+    defense_logic: camouflage through neglect and terrain-induced embarrassment
+    hospitality_cover: defunct attraction with redevelopment rumors
+    vulnerability: infrastructure rot creates relentless technician-hour bleed
+  gothic_castle_heirloom:
+    label: Gothic Castle Heirloom
+    category: gothic_castle
+    summary: Old stone on remote height where hospitality, inheritance, and entrapment
+      have been the same thing for centuries.
+    family_tags:
+    - seductive_deceiver
+    - mastermind
+    - false_savior
+    property_type: remote stone castle
+    location_vibe: wet altitude with overinstructed etiquette
+    access_pattern: bridge, carriage road, barred gallery, and one room too carefully
+      assigned to the guest
+    defense_logic: height, lineage dread, and servants who know when not to answer
+      questions
+    hospitality_cover: ancestral residence and formal guest protocol
+    vulnerability: the whole arrangement depends on guests obeying courtesy longer
+      than fear allows
+  cult_compound_vernacular:
+    label: Cult Compound Vernacular
+    category: cult_compound
+    summary: A campus of ordinary buildings repurposed into concentric systems of
+      spiritual obligation and armed belonging.
+    family_tags:
+    - false_savior
+    - collapse_prophet
+    - institutional_enforcer
+    property_type: compound of reclaimed ordinary life
+    location_vibe: false warmth with perimeter theology
+    access_pattern: road gate, church entry, dorm circulation, workshop oversight,
+      and social checkpoint rituals
+    defense_logic: fervor, labor capture, and the fact that every threshold is framed
+      as care
+    hospitality_cover: retreat center, farm network, or county ministry campus
+    vulnerability: once belonging fails, the architecture stops feeling holy and starts
+      feeling fenced
+  mundane_business_front:
+    label: Mundane Business Front
+    category: commercial_mask_lair
+    summary: A banal service business whose innocent floor plan overlaps just enough
+      with the real one to make disappearance feel procedural.
+    family_tags:
+    - corporate_predator
+    - chaos_psychopath
+    - seductive_deceiver
+    property_type: shopfront with understructure
+    location_vibe: commercial routine underwritten by hidden disposal logic
+    access_pattern: counter, back room, ladder, chute, cellar, and one door that belongs
+      to a different story
+    defense_logic: throughput, deniability, and the victim's willingness to accept
+      ordinary service exchange
+    hospitality_cover: retail or personal service business
+    vulnerability: once the innocent and real floor plans are compared, normalcy turns
+      witness
+  liminal_wild_sanctuary:
+    label: Liminal Wild Sanctuary
+    category: landscape_threshold_lair
+    summary: A threshold in weather and landscape where fate, corruption, or pact
+      appears before power stabilizes into walls.
+    family_tags:
+    - monstrous_other
+    - collapse_prophet
+    - mastermind
+    property_type: ritualized wild site
+    location_vibe: predestination through terrain and weather
+    access_pattern: wandering path, stone marker, omen, and one crossing nobody can
+      later map cleanly
+    defense_logic: taboo, misdirection, and the uncertainty of whether you were invited
+      or merely lost
+    hospitality_cover: none beyond folklore and bad decisions
+    vulnerability: the site cannot prevent interpretation once someone survives it
+      with a story

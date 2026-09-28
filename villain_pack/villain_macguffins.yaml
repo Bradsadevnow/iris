@@ -1,0 +1,234 @@
+macguffins:
+  ancient_apocalypse_engine:
+    label: The Last Meridian Engine
+    artifact_class: ancient_artifact
+    promise_family: dominion
+    stakes_scale: civilizational
+    visual_form: relic engine
+    genre_lane: mythic adventure
+    portability_band: relocatable_with_absurd_cost
+    resolution_type: unleashed_then_removed
+    subversion_lane: sacred object that punishes the wrong claimant
+    public_myth: a lost civilizational relic said to restore rightful order
+    real_function: reorients whole regions around one sovereign logic and calls the collateral correction
+    desired_by: anyone who wants to skip persuasion and govern through inevitability
+    misread_by: prestige chasers who think owning old power makes them legitimate
+    activation_condition: requires a site of ceremony, one living witness, and a public threshold crossing
+    use_cost: every activation narrows the future into fewer survivable options
+    containment_needs: vault architecture, ritual handling protocol, and insulated witness management
+    betrayal_magnet: the sidekick who realizes the machine works too well to stay private
+    plot_family_bias: conquest_and_reordering
+    lair_compatibility: command floor, island compound, ritual sanctuary
+    institutional_cover_story: described in filings as a continuity restoration platform
+    portability: relocatable only with absurd expense and one doomed logistics team
+    custody_state: held under ceremonial guard until somebody mistakes awe for consent
+    side_effects: produces reverent language in weak people and panic in strong ones
+    tags: [mastermind, institutional_enforcer, corporate_predator, architectural_power, world_ordering]
+
+  corruptive_wish_object:
+    label: The Mercy Crown
+    artifact_class: artifact_of_doom
+    promise_family: immortality
+    stakes_scale: dynastic
+    visual_form: crown
+    genre_lane: dark fantasy
+    portability_band: wearable
+    resolution_type: refused_or_resealed
+    subversion_lane: the cure works only by destroying the seeker's moral self
+    public_myth: a humane instrument that grants the bearer the strength to save everyone
+    real_function: converts domination into a feeling of moral clarity for the person wearing it
+    desired_by: villains who want power without admitting they love power
+    misread_by: reformers who think intent can outvote corruption
+    activation_condition: must be claimed in a moment of grief, vanity, or public desperation
+    use_cost: each use erodes the user's ability to distinguish care from control
+    containment_needs: mirrored storage, contact restrictions, and rotating custodians who never touch it twice
+    betrayal_magnet: the loyalist who keeps telling themselves one more use is acceptable
+    plot_family_bias: corruption_and_temptation
+    lair_compatibility: sanctum, heirloom castle, luxury suite
+    institutional_cover_story: archived as a heritage regalia asset pending museum partnership
+    portability: wearable, concealable, and therefore spiritually catastrophic
+    custody_state: nominally sealed, practically circulating among people who think they are exceptions
+    side_effects: makes every command sound like a kindness to the speaker
+    tags: [seductive_deceiver, false_savior, inherited_heir, gaslighting, ceremonial_luxury]
+
+  doomsday_sun_lattice:
+    label: The Noon Lattice
+    artifact_class: doomsday_device
+    promise_family: apocalypse
+    stakes_scale: planetary
+    visual_form: weapons array
+    genre_lane: super-science spectacle
+    portability_band: nonportable_system
+    resolution_type: facility_destroyed
+    subversion_lane: everyone thinks arming it is power until the countdown becomes the protagonist
+    public_myth: a deterrence array nobody would ever be reckless enough to fully power
+    real_function: turns spectacle, infrastructure, and threat theater into a one-switch extinction platform
+    desired_by: leaders who want the room to confuse fear with peace
+    misread_by: technocrats who think escalation remains manageable at scale
+    activation_condition: requires synchronized feeds, grid priority, and one irreversible command path
+    use_cost: even partial arming reorganizes every nearby institution around obedience
+    containment_needs: hardened power routing, dead-man overrides, and a lair designed for countdown scenes
+    betrayal_magnet: the contractor who built one safety layer too many and finally gets curious
+    plot_family_bias: annihilation_and_leverage
+    lair_compatibility: bunker, command floor, orbital platform
+    institutional_cover_story: appears in procurement language as emergency resilience infrastructure
+    portability: impossible to move quietly and stupid to build twice
+    custody_state: distributed across contractors who all think they only made one harmless part
+    side_effects: creates a management culture that mistakes apocalypse readiness for vision
+    tags: [mastermind, rogue_ai, hubristic_creator, skybeam, spectacle_control]
+
+  designer_pathogen:
+    label: The Courtesy Strain
+    artifact_class: biological_agent
+    promise_family: apocalypse
+    stakes_scale: population
+    visual_form: vial strain
+    genre_lane: techno-horror
+    portability_band: compact_and_unstable
+    resolution_type: contained_at_cost
+    subversion_lane: the alleged cure is worse than the disease because control was the point
+    public_myth: a precision containment tool for future crises
+    real_function: makes social participation itself feel unsafe and therefore governable
+    desired_by: systems monsters who want control to travel through fear and hygiene theater
+    misread_by: planners who think targeted harm remains targetable
+    activation_condition: requires live vectors, deniable release conditions, and a bureaucracy willing to delay naming it
+    use_cost: it mutates every institutional lie into a health recommendation
+    containment_needs: clean rooms, sacrificial testing sites, and people willing to disappear after exposure
+    betrayal_magnet: the lab worker who notices the immunity tier map
+    plot_family_bias: outbreak_and_control
+    lair_compatibility: research campus, hidden lab, biotech front
+    institutional_cover_story: funded as preparedness, resilience, and population continuity research
+    portability: compact enough to smuggle, unstable enough to punish arrogance
+    custody_state: stored in redundant freezers and in three separate guilty consciences
+    side_effects: makes compassion language indistinguishable from population triage
+    tags: [monstrous_other, rogue_ai, hubristic_creator, biosecurity, clean_horror]
+
+  forbidden_operating_manual:
+    label: The Soft Black Ledger
+    artifact_class: forbidden_tome
+    promise_family: revelation
+    stakes_scale: institutional
+    visual_form: black book
+    genre_lane: occult bureaucracy
+    portability_band: briefcase_portable
+    resolution_type: hidden_or_incomplete
+    subversion_lane: the text is most dangerous when treated like operations guidance instead of magic
+    public_myth: a suppressed manual of total knowledge and hidden correspondences
+    real_function: gives step-by-step instructions for turning private appetite into durable systems
+    desired_by: villains who prefer procedure to charisma but still want the world to kneel
+    misread_by: amateurs who think reading a bad book makes them the first bad person alive
+    activation_condition: must be read aloud in sections, each one requiring a worse compromise than the last
+    use_cost: the reader starts narrating their own degradation as if it were strategy
+    containment_needs: humidity control, access logs, and one librarian who is paid not to ask questions
+    betrayal_magnet: the assistant who has read just enough to recognize the missing pages
+    plot_family_bias: occult_instruction_and_descent
+    lair_compatibility: archive wing, library sanctum, front business with locked basement
+    institutional_cover_story: cataloged as restricted doctrine and governance history
+    portability: briefcase portable, soul portable not guaranteed
+    custody_state: supposedly incomplete, which only increases demand
+    side_effects: makes every user overestimate how original their evil is
+    tags: [mastermind, collapse_prophet, institutional_enforcer, bureaucracy, tome_logic]
+
+  cosmic_veto_shard:
+    label: The Veto Shard
+    artifact_class: cosmic_object
+    promise_family: dominion
+    stakes_scale: universal
+    visual_form: glowing shard
+    genre_lane: cosmic franchise
+    portability_band: escort_chain_only
+    resolution_type: dispersed_or_sealed
+    subversion_lane: exposes infinite stakes as a personality defect instead of a climax upgrade
+    public_myth: a fragment of first authority capable of overruling reality itself
+    real_function: lets one person impose a single answer on complex worlds that should remain contested
+    desired_by: absolutists, founders, and anyone offended by uncertainty
+    misread_by: people who think infinite stakes are the same thing as meaningful stakes
+    activation_condition: requires a synchronized chamber, a willing conduit, and enough ego to call it mercy
+    use_cost: each use makes every smaller human relationship feel disposable
+    containment_needs: radiation shielding, theological language, and very expensive silence
+    betrayal_magnet: the believer who learns they were always just the battery
+    plot_family_bias: universal_stakes_and_false_transcendence
+    lair_compatibility: orbital station, cathedral bunker, command floor with bad stars
+    institutional_cover_story: described as a deep-energy governance prototype with cosmological implications
+    portability: transportable only inside a panic-worthy escort chain
+    custody_state: split between vault custody and whispered founder mythology
+    side_effects: causes immediate sky-beam behavior in weak scripts
+    tags: [rogue_ai, mastermind, collapse_prophet, cosmic_scale, stakes_inflation]
+
+  sovereign_access_key:
+    label: The Quiet Key
+    artifact_class: access_device
+    promise_family: revelation
+    stakes_scale: geopolitical
+    visual_form: master key credential
+    genre_lane: espionage thriller
+    portability_band: pocket_portable
+    resolution_type: stolen_or_destroyed
+    subversion_lane: everyone chases the door-opener and forgets the real weapon is consent collapse
+    public_myth: a master credential able to open any secure domain or sealed record
+    real_function: collapses every locked room, classified file, and protected threshold into one person's convenience
+    desired_by: thieves, states, compliance cultists, and anybody who thinks access is innocence
+    misread_by: people who think information power remains bloodless
+    activation_condition: needs a live target system, mirrored credentials, and somebody willing to say this is just process
+    use_cost: every use teaches the holder that consent is a permissions bug
+    containment_needs: air-gapped storage, rotating codes, and paranoid handoff rituals
+    betrayal_magnet: the courier who realizes the package matters more than the employer
+    plot_family_bias: theft_and_infiltration
+    lair_compatibility: surveillance house, executive suite, blacksite office
+    institutional_cover_story: logged as an interoperability bridge for continuity operations
+    portability: pocket-sized, deniable, and devastatingly scalable
+    custody_state: always in transit, which is why nobody trusts anyone near it
+    side_effects: spreads keycard morality into every human relationship nearby
+    tags: [corporate_predator, institutional_enforcer, seductive_deceiver, espionage, access_logic]
+
+  coupon_constellation:
+    label: The Mercy Set
+    artifact_class: plot_coupon_set
+    promise_family: revelation
+    stakes_scale: franchise
+    visual_form: shard set
+    genre_lane: serialized quest
+    portability_band: piecewise_portable
+    resolution_type: assembled_then_dispersed
+    subversion_lane: every recovered piece makes the final disappointment harder to walk away from
+    public_myth: a scattered collection of harmless relics that supposedly mean nothing on their own
+    real_function: rewards obsession by making every recovered piece feel like destiny and sunk cost at once
+    desired_by: franchise-minded monsters and collectors who mistake persistence for worthiness
+    misread_by: sidekicks who think one more retrieval will finally justify the previous five
+    activation_condition: the set must be assembled in full, usually after several betrayals and one map room montage
+    use_cost: every recovered piece expands the blast radius of the eventual disappointment
+    containment_needs: multiple vaults, rival claimants, and a lair with display lighting for partial progress
+    betrayal_magnet: the teammate who decides a six-piece betrayal is better than a seven-piece defeat
+    plot_family_bias: collection_and_escalation
+    lair_compatibility: gallery compound, heirloom castle, collector bunker
+    institutional_cover_story: insured as a distributed cultural stewardship initiative
+    portability: each piece is portable; the obsession absolutely is not
+    custody_state: fragmented, contested, and ideal for episodic suffering
+    side_effects: turns whole organizations into errand structures
+    tags: [inherited_heir, performance_genius, corporate_predator, collection_logic, sequel_bait]
+
+  fake_prize_decoy:
+    label: The Lion Trap Apparatus
+    artifact_class: mockguffin
+    promise_family: revelation
+    stakes_scale: situational
+    visual_form: mysterious casework
+    genre_lane: caper fakeout
+    portability_band: lightweight_portable
+    resolution_type: revealed_fake
+    subversion_lane: the fake turns out to matter only because people degraded themselves for it
+    public_myth: an earthshaking prize whose importance seems to increase the less anyone can explain it
+    real_function: occupies enemies, sidekicks, and entire scripts while the real move happens elsewhere
+    desired_by: schemers who want attention to travel in the wrong direction on purpose
+    misread_by: literally everyone until the reveal lands
+    activation_condition: only works if at least one faction is too embarrassed to admit they never understood it
+    use_cost: the user risks looking stupid if the bluff collapses early
+    containment_needs: theatrical casing, contradictory rumors, and confidence bordering on insult
+    betrayal_magnet: the accomplice who figures out the thing is fake and wants leverage for staying quiet
+    plot_family_bias: misdirection_and_reveal
+    lair_compatibility: museum front, auction floor, prop vault
+    institutional_cover_story: filed as a classified heritage acquisition with incomplete provenance
+    portability: extremely portable because its main weight is narrative
+    custody_state: constantly changing hands because nobody wants to be the one who admits it may be nothing
+    side_effects: humiliates every seriousness layer around it
+    tags: [mastermind, performance_genius, chaos_psychopath, misdirection, parody]

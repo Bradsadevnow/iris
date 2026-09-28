@@ -116,6 +116,13 @@ Imagination is a persistent world session, not a disposable generation job.
   attempt receives one governed retry before the run fails.
 - Each committed step refreshes the right-hand graph and focuses the changed entity when possible.
 
+Each imagined entity also has a first-class Markdown lore document. A newly admitted world
+mutation creates lore for every entity it touches; later admitted mutations append a versioned
+development entry in the same database transaction as the graph change. Lore is forward-only:
+existing entities are not backfilled from old chat. Their original assistant reflection remains
+visible as labeled provenance, but is not silently promoted into canonical lore. The entity
+dossier opens on **Lore**, with separate **Graph** and **History** views.
+
 ### Important graph distinction
 
 There are three canonical graphs/dicts in `canonical_state`, and they are never mixed:
@@ -176,7 +183,10 @@ Prompt construction now keeps these stages explicit:
 1. **Canonical Self** — stable identity, values, commitments, relationships, and goals.
 2. **Task context** — active World, Task, and Skill scopes.
 3. **Active reasoning role** — explicit roles plus at most one deterministically inferred task
-   stance. A role shapes attention and method; it does not rename or replace Halcyon.
+   stance. Users may manually compose multiple explicit profiles; they participate as peer lenses.
+   The inferred profile is ephemeral support and cannot override explicit profiles. Profiles compile
+   into attributable attention, principles, methods, traversal preferences, and expression guidance;
+   they do not rename or replace Halcyon.
 4. **Supplied knowledge** — selected Memory, known-world, or fictional nodes with owner and
    epistemic status preserved.
 5. **Expansion handles** — receipts for omitted adjacent nodes, never retrieval results.
@@ -205,6 +215,10 @@ over-selection from stop words, single-token matches, broad role vocabulary, cap
 competition, fictional leakage, and a star-shaped Self graph that makes graph distance weak. The
 remediation sequence and acceptance criteria live in
 [`docs/CONTEXT_PIPELINE_ROADMAP.md`](docs/CONTEXT_PIPELINE_ROADMAP.md).
+
+The ownership and transaction changes that make Self compression-only, Memory independent,
+Affect bounded, and fictional canon Imagination-only are roadmapped in
+[`docs/CHAT_STATE_BOUNDARIES_ROADMAP.md`](docs/CHAT_STATE_BOUNDARIES_ROADMAP.md).
 
 ## Self and capabilities
 
@@ -277,6 +291,18 @@ Open `http://127.0.0.1:5173`.
 
 The API defaults to `http://127.0.0.1:8000`. The Vite development server proxies `/api` there.
 
+For normal local development, install the repository launcher once and use `hal` from any
+terminal. It starts the backend and Vite UI together, restarts a prior Iris session if necessary,
+streams both logs, and stops both process groups on Ctrl+C:
+
+```bash
+ln -sf "$(pwd)/bin/hal" "$HOME/.local/bin/hal"
+hal
+```
+
+`hal restart` is equivalent to `hal`; `hal status` reports the tracked processes, and `hal stop`
+shuts them down without touching the model server on port 1234.
+
 ### Model configuration
 
 | Variable | Purpose | Default |
@@ -331,6 +357,7 @@ docs/CHAT_SPEC.md               chat behavior and atomicity specification
 docs/BRAID_UI_SPEC.md           Affect–Memory–Language model
 docs/SELF_SYSTEM_TOOLS_SPEC.md  state-owner and capability architecture
 docs/CONTEXT_PIPELINE_ROADMAP.md identity/role/retrieval/tool/expression remediation plan
+docs/CHAT_STATE_BOUNDARIES_ROADMAP.md chat/Self/Memory/Affect/Imagination ownership roadmap
 docs/CONTEXT_BRAID_DESIGN.md     joint Context, Memory, Affect, grounding, and expression contract
 ```
 
@@ -360,6 +387,12 @@ These are active architecture decisions, not hidden implementation details:
 The goal is to make the Imagination graph a view of its own imagined-world store — not a Memory
 view with different data passed into it, and not the same store as the seeded/known-entity graph.
 Phases 1–3 below are done; this landed as small, inspectable slices.
+
+> **Imagination sequencing guardrail:** the active trait-constellation work is character-only
+> (Who they are, What they're about, Why they're here, What they bring, Flaws). Villain Pack MacGuffins and lairs are
+> losslessly reserved for the next **Holdings** pass. Do not reclassify them as character traits,
+> discard their fields, or admit a trait bundle as a World entity. Holdings must later preserve
+> Artifacts and Strongholds as distinct, independently saved drafts.
 
 ### Phase 1 — Separate names, API surfaces, and storage ✅
 

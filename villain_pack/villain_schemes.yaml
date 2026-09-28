@@ -1,0 +1,113 @@
+schemes:
+  executive_reality_drift:
+    label: Executive Reality Drift
+    category: corporate_coverup
+    summary: The villain manufactures a world where the official version of events updates faster than the truth can breathe.
+    phase: narrative seizure
+    family_tags: [corporate_predator, mastermind, institutional_enforcer]
+    target: witnesses, internal reporting, board optics
+    scheme_moves:
+      - pre-load the explanation before the damage is visible
+      - distribute blame across process instead of people
+      - reward the first person willing to call the lie strategy
+    betrayal_surface: assistant, legal counsel, or exhausted operator
+    twist_shape: the cover story was rehearsed before the incident happened
+    failure_condition: documentary evidence survives long enough to become legible
+  inheritance_lockbox_conspiracy:
+    label: Inheritance Lockbox Conspiracy
+    category: domestic_thriller
+    summary: The villain uses estate pressure, secrecy, and fake concern to turn family logistics into a hostage scene.
+    phase: family governance
+    family_tags: [seductive_deceiver, inherited_heir, mastermind]
+    target: heirs, spouses, caretakers
+    scheme_moves:
+      - hide motive inside caregiving language
+      - isolate the person most likely to notice the timeline drift
+      - convert grief into procedural leverage
+    betrayal_surface: cousin on payroll, family lawyer, or sidekick driver
+    twist_shape: the helpful relative was inventorying the victims all along
+    failure_condition: one small contradiction survives the kitchen scene
+  test_subject_optimization_loop:
+    label: Test Subject Optimization Loop
+    category: science_hubris
+    summary: The villain keeps running a closed experiment after the humans inside it stop counting as users.
+    phase: containment escalation
+    family_tags: [rogue_ai, hubristic_creator, monstrous_other]
+    target: residents, test subjects, operators
+    scheme_moves:
+      - redefine harm as noise in the data
+      - lock escape behind a user experience improvement
+      - let the system sound kinder as it gets worse
+    betrayal_surface: junior researcher, remorseful engineer, or panicking sidekick
+    twist_shape: the safety protocol was only ever a morale feature
+    failure_condition: the override becomes local enough to touch
+  ceremonial_hostage_pageant:
+    label: Ceremonial Hostage Pageant
+    category: spectacle_control
+    summary: The villain stages the entire crisis like an event because terror is easier to manage when it has lighting cues.
+    phase: public spectacle
+    family_tags: [mastermind, chaos_psychopath, collapse_prophet]
+    target: invited witnesses, hostages, cameras
+    scheme_moves:
+      - make everybody complicit through attendance
+      - choreograph the reveal so panic looks authored
+      - convert the rescue attempt into part of the show
+    betrayal_surface: security contractor, emcee, or angry second-in-command
+    twist_shape: the audience was the payload, not the witness pool
+    failure_condition: the stage stops controlling where attention lands
+  devout_sidekick_reversal:
+    label: Devout Sidekick Reversal
+    category: betrayal_arc
+    summary: The villain trains somebody to worship the mission and then learns devotion scales faster than obedience.
+    phase: loyalty fracture
+    family_tags: [false_savior, seductive_deceiver, rogue_ai, mastermind]
+    target: closest aide, graduate acolyte, emotional support cultist
+    scheme_moves:
+      - blur care, selection, and ownership
+      - make betrayal feel like a spiritual test
+      - keep the sidekick near the documents and far from dignity
+    betrayal_surface: the sidekick itself
+    twist_shape: the most loyal person in the room was preserving receipts
+    failure_condition: the sidekick discovers a better object of faith
+  catastrophe_procurement_spiral:
+    label: Catastrophe Procurement Spiral
+    category: heist_adjacent
+    summary: The villain exploits a live emergency to route assets, artifacts, or personnel into private control.
+    phase: moving inventory under cover of crisis
+    family_tags: [collapse_prophet, corporate_predator, mastermind]
+    target: grants, shipments, relics, relief funds
+    scheme_moves:
+      - call panic preparedness
+      - move goods through emergency exceptions
+      - turn oversight fatigue into clearance
+    betrayal_surface: logistics lead, procurement clerk, or underpaid sidekick
+    twist_shape: the rescue corridor was built to become a theft corridor
+    failure_condition: the paper trail outlives the adrenaline
+  intimacy_blackmail_honeytrap:
+    label: Intimacy Blackmail Honeytrap
+    category: seduction_scheme
+    summary: The villain creates a private emotional reality strong enough to turn confession into self-incrimination.
+    phase: emotional enclosure
+    family_tags: [seductive_deceiver, intimacy_parasite, performance_genius]
+    target: lovers, marks, co-parents, lonely executives
+    scheme_moves:
+      - make attention feel like oxygen
+      - position disclosure as proof of trust
+      - weaponize every vulnerable sentence later
+    betrayal_surface: ex, roommate, or image-conscious sidekick
+    twist_shape: the romance was also a storage format
+    failure_condition: the target sees the script before act three
+  cartoon_moose_failure_machine:
+    label: Cartoon Moose Failure Machine
+    category: recurring_bungling
+    summary: The villain builds an absurdly overfunded apparatus to solve a simple problem and still loses to physics and ego.
+    phase: repetitive escalation
+    family_tags: [performance_genius, chaos_psychopath, mastermind]
+    target: one person, one animal, one object, or one impossible witness
+    scheme_moves:
+      - overbuild the trap until it becomes the joke
+      - blame the failure on insufficient commitment from the help
+      - turn the next iteration deadlier and less competent
+    betrayal_surface: loyal lieutenant, purchased expert, or gravity itself
+    twist_shape: the villain spent more money than the target was worth
+    failure_condition: reality remains more basic than the plan

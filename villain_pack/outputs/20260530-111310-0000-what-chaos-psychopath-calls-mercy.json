@@ -1,0 +1,179 @@
+{
+  "title": "What Chaos Psychopath Calls Mercy",
+  "skin": "generic",
+  "skin_framing": "cinematic portable villain card",
+  "villain_family": "chaos_psychopath",
+  "modifier": "collapse_prophet",
+  "power_source": "dread",
+  "dramatic_function": "removes stable bargaining from the story",
+  "justification_logic": "because you wanted to know",
+  "operating_environment": "wrong houses",
+  "signifier_package": {
+    "key": "ritual_damage",
+    "visual_cues": [
+      "arranged objects",
+      "repeated symbols",
+      "careful vandalism",
+      "devotional cruelty"
+    ],
+    "room_logic": "violence is meant to be read as a message",
+    "object_logic": "damage becomes handwriting"
+  },
+  "dialogue_grammar": {
+    "key": "destabilizing_calm",
+    "speech_pattern": "stays emotionally flat in ways that make panic worse",
+    "cue_words": [
+      "interesting",
+      "maybe",
+      "sure",
+      "if you say so",
+      "all right"
+    ]
+  },
+  "favorite_leverage": "symbolic cruelty",
+  "failure_mode": "vindication hunger",
+  "petty_atrocity": {
+    "key": "hair_in_the_shower_drain",
+    "label": "leaving hair in the shower drain",
+    "detail": "turns shared hygiene into a forced intimacy ritual nobody consented to",
+    "category": "bathroom_household_desecration",
+    "severity": "medium",
+    "tags": [
+      "contamination",
+      "shared_space_disrespect",
+      "bodily_residue"
+    ]
+  },
+  "moral_texture": {
+    "primary": "contamination",
+    "secondary": [
+      "shared_space_disrespect",
+      "bodily_residue"
+    ],
+    "source": "hair_in_the_shower_drain",
+    "commons_targeted": {
+      "type": "space",
+      "scope": "shared"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "side_eye",
+        "gossip",
+        "avoidance"
+      ],
+      "confrontation_risk": "medium"
+    }
+  },
+  "compatibility_pressure": {
+    "family_bias": "monstrous_other",
+    "modifier_bias": "grieving_zealot"
+  },
+  "narrative_payoff": {
+    "key": "refuse_the_game",
+    "resolution": "the hero survives by not accepting the villain's ritual terms of meaning"
+  },
+  "escalation_pattern": "welcomes disaster because it proves the worldview",
+  "portable_skin_nouns": [
+    "facility",
+    "network",
+    "room",
+    "records",
+    "subject"
+  ],
+  "portable_institutions": [
+    "oversight board",
+    "private office",
+    "response team",
+    "archive"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "generic",
+      "detail": "cinematic portable villain card"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "chaos_psychopath",
+      "detail": "removes stable bargaining from the story"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "collapse_prophet",
+      "detail": "vindication hunger"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "ritual_damage",
+      "detail": "violence is meant to be read as a message"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "destabilizing_calm",
+      "detail": "stays emotionally flat in ways that make panic worse"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "dread",
+      "operating_environment": "wrong houses",
+      "favorite_leverage": "symbolic cruelty"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "because you wanted to know",
+      "failure_mode": "vindication hunger",
+      "escalation_pattern": "welcomes disaster because it proves the worldview"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "leaving hair in the shower drain",
+      "detail": "turns shared hygiene into a forced intimacy ritual nobody consented to",
+      "category": "bathroom_household_desecration",
+      "severity": "medium",
+      "tags": [
+        "contamination",
+        "shared_space_disrespect",
+        "bodily_residue"
+      ]
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "refuse_the_game",
+      "detail": "the hero survives by not accepting the villain's ritual terms of meaning"
+    }
+  },
+  "assembly_receipt": [
+    "Chaos Psychopath body",
+    "Collapse Prophet stuffing",
+    "Ritual Damage costume",
+    "Destabilizing Calm voice chip",
+    "dread evil job",
+    "because you wanted to know internal lie",
+    "leaving hair in the shower drain petty atrocity",
+    "contamination moral texture",
+    "Grieving Zealot compatibility pull",
+    "Refuse The Game franchise potential"
+  ],
+  "workshop_pitch": "You selected Chaos Psychopath plus Collapse Prophet and got a villain whose favorite workplace protection is symbolic cruelty. Their primary moral texture is contamination. Also, on a completely ordinary Tuesday, they would absolutely be caught leaving hair in the shower drain.",
+  "opening_image": "The real threat is not violence but the institutional permission structure surrounding it.",
+  "dossier_summary": "This build runs on dread inside a wrong houses. At the story level, it removes stable bargaining from the story. The primary moral texture is contamination. The internal lie is simple: because you wanted to know. Before any grand plan begins, the daily proof of rot is leaving hair in the shower drain.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of contamination who is still the kind of person who is leaving hair in the shower drain and expecting gratitude for it.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to leaving hair in the shower drain. This behavior is now being interpreted internally as a visible instance of contamination. Staff morale is not to be interpreted as material risk at this time.",
+  "signature_scene": "The villain stages a scene inside the wrong houses where symbolic cruelty briefly passes for order until the room notices too late that the real agenda is this: welcomes disaster because it proves the worldview. Somewhere in the background, they are also the sort of person who would be leaving hair in the shower drain.",
+  "fake_trailer": "In a world shaped by generic, one chaos psychopath build will learn that the hero survives by not accepting the villain's ritual terms of meaning. Also, somebody is definitely leaving hair in the shower drain in act one and that should have been the warning.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for leaving hair in the shower drain.",
+  "sample_lines": [
+    "If leaving hair in the shower drain bothers you, wait until you see what I do with actual power.",
+    "You are not dealing with a person anymore. You are dealing with a permission structure.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "The real threat is not violence but the institutional permission structure surrounding it.",
+    "Even before the grand scheme, the villain was already the kind of person who would be leaving hair in the shower drain.",
+    "The audience trusts the build less the moment they learn it keeps getting away with leaving hair in the shower drain."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

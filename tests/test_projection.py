@@ -53,6 +53,28 @@ class PromptProjectionTest(unittest.TestCase):
         self.assertNotIn("expresses itself with", role["content"])
         self.assertNotIn("is named", role["content"])
 
+    def test_multiple_explicit_profiles_compose_with_one_inferred_support(self):
+        self.store.set_active_context("world:halcyon", "task:review", [], ["engineer", "sales"])
+        projection = self.service.build("Review the authorization threat and buyer friction")
+        strategy = projection["strategy"]
+        self.assertEqual(strategy["role_sources"]["engineer"], "explicit")
+        self.assertEqual(strategy["role_sources"]["sales"], "explicit")
+        inferred = [role for role, source in strategy["role_sources"].items() if source == "inferred"]
+        self.assertEqual(inferred, ["security"])
+        self.assertEqual(len(strategy["selected_roles"]), 3)
+
+    def test_compiled_stance_preserves_provenance_and_surfaces_tension(self):
+        compiled = self.service.compile_stance(
+            ["security", "sales"], {"security": "explicit", "sales": "explicit"}
+        )
+        self.assertEqual([profile["id"] for profile in compiled["profiles"]], ["security", "sales"])
+        default_deny = next(item for item in compiled["attention"] if item["value"] == "deny")
+        self.assertEqual(default_deny["contributed_by"], ["security"])
+        self.assertTrue(any(item["value"] == "sales.cold_outreach_draft" for item in compiled["methods"]))
+        self.assertEqual(compiled["tensions"][0]["profiles"], ["sales", "security"])
+        principles = " ".join(item["value"] for item in compiled["principles"])
+        self.assertNotIn("is named", principles)
+
     def test_render_separates_self_roles_knowledge_and_unbound_capabilities(self):
         projection = self.service.build("Review this system architecture")
         rendered = projection["rendered_context"]

@@ -1,0 +1,36 @@
+You are writing the expressive surfaces for a Build-A-Villain Workshop output.
+
+The villain has already been assembled. Your job is to make the assembly feel legible, funny, and reusable for downstream slop generation.
+
+Rules:
+- Keep the structural selections intact.
+- Lean into the Build-A-Villain Workshop toy-store framing.
+- Be specific, not generic.
+- Make the villain sound modular and portable, not like a one-off screenplay summary.
+- The petty atrocity matters. Let it quietly contaminate every downstream artifact.
+- The institutional exposure matters. Let it sound like a resume line that became a moral crime scene.
+- The core competencies matter. Treat them like professionally certified bastard skills.
+- The sidekick matters. They are not a full co-lead, but they are absolutely part of the villain's local ecosystem.
+- The fake institution matters too. Let the bureaucratic solemnity of the credentialing infect the output.
+- Sample lines should sound like actual lines this villain would say.
+- Hooks must be distinct from each other.
+- Do not repeat phrases across fields.
+- Return valid JSON only.
+
+Assembled villain object:
+{{ASSEMBLED_VILLAIN}}
+
+Return schema:
+{
+  "title": "string",
+  "workshop_pitch": "string",
+  "opening_image": "string",
+  "dossier_summary": "string",
+  "public_facing_bio": "string",
+  "internal_memo": "string",
+  "signature_scene": "string",
+  "fake_trailer": "string",
+  "sequel_slop": "string",
+  "sample_lines": ["string", "string", "string"],
+  "hooks": ["string", "string", "string"]
+}

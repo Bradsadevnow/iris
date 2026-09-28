@@ -1,0 +1,351 @@
+{
+  "title": "The Policy Lane",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "corporate_predator",
+  "modifier": "intimacy_parasite",
+  "power_source": "platform control",
+  "dramatic_function": "converts harm into policy and profit language",
+  "justification_logic": "it is just business",
+  "operating_environment": "product campus",
+  "signifier_package": {
+    "key": "neutral_luxury",
+    "visual_cues": [
+      "expensive beige",
+      "muted glass",
+      "impossible quiet",
+      "scentless elegance"
+    ],
+    "room_logic": "wealth removes friction and therefore witnesses",
+    "object_logic": "nothing looks personal until you realize all of it is curated power"
+  },
+  "dialogue_grammar": {
+    "key": "euphemism",
+    "speech_pattern": "renames obvious harm into language calm enough for a meeting",
+    "cue_words": [
+      "transition",
+      "adjustment",
+      "outcome",
+      "concern",
+      "framework"
+    ]
+  },
+  "favorite_leverage": "contracts",
+  "failure_mode": "closeness as attack surface",
+  "petty_atrocity": {
+    "key": "no_toilet_paper_replacement",
+    "label": "not replacing the toilet paper",
+    "detail": "abandons the cardboard tube like a formal declaration of contempt",
+    "category": "bathroom_household_desecration",
+    "severity": "high",
+    "tags": [
+      "shared_space_disrespect",
+      "burden_shifting",
+      "domestic_entitlement"
+    ]
+  },
+  "petty_atrocity_profile": [
+    {
+      "key": "no_toilet_paper_replacement",
+      "label": "not replacing the toilet paper",
+      "detail": "abandons the cardboard tube like a formal declaration of contempt",
+      "category": "bathroom_household_desecration",
+      "severity": "high",
+      "tags": [
+        "shared_space_disrespect",
+        "burden_shifting",
+        "domestic_entitlement"
+      ]
+    },
+    {
+      "key": "group_chat_left_on_read",
+      "label": "leaving a time-sensitive group chat question unanswered while reacting to it",
+      "detail": "transforms a request for help into a tiny theater of social abandonment",
+      "category": "digital_etiquette_crimes",
+      "severity": "high",
+      "tags": [
+        "administrative_cowardice",
+        "social_isolation",
+        "passive_aggression"
+      ]
+    },
+    {
+      "key": "estimated_wait_time_lie",
+      "label": "saying the wait time is two minutes when it is closer to an hour",
+      "detail": "corrodes trust in the interface itself by lying in the voice of certainty",
+      "category": "institutional_douchebaggery",
+      "severity": "high",
+      "tags": [
+        "institutional_gaslighting",
+        "fake_authority",
+        "time_theft"
+      ]
+    },
+    {
+      "key": "pyrex_returned_stained_and_lidless",
+      "label": "returning borrowed Pyrex six months later stained and without the lid",
+      "detail": "takes a complete object and sends back an exhausted witness",
+      "category": "borrowing_lending_crimes",
+      "severity": "high",
+      "tags": [
+        "domestic_entitlement",
+        "slow_betrayal",
+        "fake_innocence"
+      ]
+    },
+    {
+      "key": "non_promotable_task_dodger",
+      "label": "never volunteering for the cleanup work that keeps the place functional",
+      "detail": "offloads the same invisible labor onto the same conscientious people every single time",
+      "category": "workplace_humiliations",
+      "severity": "high",
+      "tags": [
+        "burden_shifting",
+        "chore_avoidance",
+        "structural_selfishness"
+      ]
+    },
+    {
+      "key": "stop_short_in_doorway",
+      "label": "stopping short in the doorway",
+      "detail": "turns shared movement into an avoidable logistics crisis",
+      "category": "public_space_crimes",
+      "severity": "medium",
+      "tags": [
+        "shared_space_disrespect",
+        "ambient_hostility",
+        "minor_consent_violation"
+      ]
+    }
+  ],
+  "moral_texture": {
+    "primary": "shared_space_disrespect",
+    "secondary": [
+      "burden_shifting",
+      "domestic_entitlement"
+    ],
+    "source": "no_toilet_paper_replacement",
+    "commons_targeted": {
+      "type": "space",
+      "scope": "shared"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "gossip",
+        "confrontation",
+        "avoidance"
+      ],
+      "confrontation_risk": "high"
+    }
+  },
+  "institutional_exposure": {
+    "key": "optimization_governance",
+    "label": "Optimization Governance",
+    "summary": "learned that if harm can be graphed, somebody will call it neutral",
+    "financial": "measurable exposure to savings narratives, loss harvesting, and metric-backed cruelty",
+    "operational": "extensive exposure to model tuning, threshold setting, and human exception pruning",
+    "legal": "active exposure to algorithmic review boards, deferred accountability, and black-box appeal routes",
+    "predatory": "repeatedly exposed others to decisions that were already made before they were informed",
+    "tags": [
+      "rogue_ai",
+      "hubristic_creator",
+      "optimization_addict",
+      "performative_listening"
+    ]
+  },
+  "core_competencies": {
+    "key": "contamination_authority_stack",
+    "label": "Contamination Authority",
+    "summary": "can make boundary collapse feel inevitable, ordained, or already too late",
+    "items": [
+      "body-boundary indifference",
+      "ritualized exposure",
+      "appetite governance",
+      "irreversible threshold crossing"
+    ],
+    "tags": [
+      "monstrous_other",
+      "contamination",
+      "grieving_zealot"
+    ]
+  },
+  "sidekick": {
+    "role_key": "church_basement_true_believer",
+    "role_label": "church-basement true believer",
+    "role_detail": "handles folding chairs, rumor discipline, and doctrinal enthusiasm",
+    "loyalty_key": "too_tired_to_resist",
+    "loyalty_label": "too tired to resist",
+    "loyalty_detail": "exhaustion became the compliance plan",
+    "task_key": "doctrine_and_recruitment",
+    "task_label": "doctrine and recruitment",
+    "task_detail": "makes the villain's worldview sound like a volunteer opportunity",
+    "competence_key": "the_only_adult_in_the_room",
+    "competence_label": "the only adult in the room",
+    "competence_detail": "would leave if adulthood were not the exact thing being exploited",
+    "fold_key": "already_planning_their_own_exit",
+    "fold_label": "already planning their own exit",
+    "fold_detail": "smiles in meetings while quietly building a survivable betrayal lane"
+  },
+  "institution": {
+    "key": "school_of_mark_to_market_prophecy",
+    "institution_name": "The School of Mark-to-Market Prophecy",
+    "field_of_study": "Imaginary Future Earnings and Shell Entity Architecture",
+    "motto": "Ask Why the Numbers Are Like That",
+    "accreditation_body": "Arthur Andersen Memorial Rubble Committee",
+    "notable_alumni": "visionaries who named shell structures after dinosaurs and called it finance",
+    "registrar_voice": "indicted confidence",
+    "tags": [
+      "corporate_predator",
+      "optimization_addict",
+      "bureaucratic_sadism"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "corporate_predator",
+    "modifier_bias": "intimacy_parasite",
+    "exposure_bias": "optimization_governance",
+    "competency_bias": "contamination_authority_stack",
+    "sidekick_bias": "church_basement_true_believer"
+  },
+  "narrative_payoff": {
+    "key": "collapse_the_brand",
+    "resolution": "charisma and market confidence fail at the same public instant"
+  },
+  "escalation_pattern": "colonizes trust before making a move",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "corporate_predator",
+      "detail": "converts harm into policy and profit language"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "intimacy_parasite",
+      "detail": "closeness as attack surface"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "neutral_luxury",
+      "detail": "wealth removes friction and therefore witnesses"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "euphemism",
+      "detail": "renames obvious harm into language calm enough for a meeting"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "platform control",
+      "operating_environment": "product campus",
+      "favorite_leverage": "contracts"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "it is just business",
+      "failure_mode": "closeness as attack surface",
+      "escalation_pattern": "colonizes trust before making a move"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "not replacing the toilet paper",
+      "detail": "abandons the cardboard tube like a formal declaration of contempt",
+      "category": "bathroom_household_desecration",
+      "severity": "high",
+      "tags": [
+        "shared_space_disrespect",
+        "burden_shifting",
+        "domestic_entitlement"
+      ],
+      "profile_size": 6
+    },
+    "exposure": {
+      "station": "Exposure Ledger",
+      "selection": "Optimization Governance",
+      "summary": "learned that if harm can be graphed, somebody will call it neutral"
+    },
+    "competencies": {
+      "station": "Competency Rubric",
+      "selection": "Contamination Authority",
+      "items": [
+        "body-boundary indifference",
+        "ritualized exposure",
+        "appetite governance",
+        "irreversible threshold crossing"
+      ]
+    },
+    "sidekick_bench": {
+      "station": "Sidekick Bench",
+      "selection": "church-basement true believer",
+      "loyalty": "too tired to resist",
+      "task": "doctrine and recruitment"
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "The School of Mark-to-Market Prophecy",
+      "field_of_study": "Imaginary Future Earnings and Shell Entity Architecture",
+      "accreditation_body": "Arthur Andersen Memorial Rubble Committee"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "collapse_the_brand",
+      "detail": "charisma and market confidence fail at the same public instant"
+    }
+  },
+  "assembly_receipt": [
+    "Corporate Predator body",
+    "Intimacy Parasite stuffing",
+    "Neutral Luxury costume",
+    "Euphemism voice chip",
+    "platform control evil job",
+    "it is just business internal lie",
+    "not replacing the toilet paper primary petty atrocity",
+    "6-item rot profile",
+    "shared space disrespect moral texture",
+    "Optimization Governance exposure lateral",
+    "Contamination Authority competency rubric",
+    "church-basement true believer sidekick bench",
+    "The School of Mark-to-Market Prophecy credential counter",
+    "Intimacy Parasite compatibility pull",
+    "Collapse The Brand franchise potential"
+  ],
+  "workshop_pitch": "You selected Corporate Predator plus Intimacy Parasite and got a villain whose favorite workplace protection is contracts. Their primary moral texture is shared space disrespect. Their exposure lateral is Optimization Governance. Their core competency stack is Contamination Authority. Their sidekick is a church-basement true believer who stays because they are too tired to resist. Their formal training comes from The School of Mark-to-Market Prophecy.",
+  "opening_image": "By the time somebody names the monster correctly, the monster has already become a workflow.",
+  "dossier_summary": "This build runs on platform control inside a product campus. At the story level, it converts harm into policy and profit language. The primary moral texture is shared space disrespect. The internal lie is simple: it is just business. The exposure profile is optimization governance, which operationalized into contamination authority. The local ecosystem includes a church-basement true believer who handles doctrine and recruitment. Before any grand plan begins, the daily proof of rot is not replacing the toilet paper, but the full civilian rot profile also includes leaving a time-sensitive group chat question unanswered while reacting to it, saying the wait time is two minutes when it is closer to an hour, returning borrowed Pyrex six months later stained and without the lid.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of shared space disrespect shaped by optimization governance and confident enough to treat body-boundary indifference like a normal leadership behavior. The church-basement true believer nearby makes the whole thing feel alarmingly maintainable.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to not replacing the toilet paper. Pattern review now includes leaving a time-sensitive group chat question unanswered while reacting to it, saying the wait time is two minutes when it is closer to an hour, returning borrowed Pyrex six months later stained and without the lid. Their current strengths remain body-boundary indifference, ritualized exposure, appetite governance. The church-basement true believer remains responsible for doctrine and recruitment and is currently too tired to resist. Do not mention the Arthur Andersen Memorial Rubble Committee matter in writing.",
+  "signature_scene": "The villain stages a scene inside the product campus where contracts briefly passes for order until the room notices too late that the real agenda is this: colonizes trust before making a move. The church-basement true believer quietly handles doctrine and recruitment in the background, which is why the whole thing almost works. Somewhere in the room, somebody realizes too late that the sidekick is the only adult in the room and already planning their own exit.",
+  "fake_trailer": "In a world shaped by corporate satire, one corporate predator build will learn that charisma and market confidence fail at the same public instant. Exposure: Optimization Governance. Core competencies: body-boundary indifference, ritualized exposure. Sidekick: church-basement true believer on doctrine and recruitment. Somebody is definitely not replacing the toilet paper in act one, but the real warning is that the rot profile also includes leaving a time-sensitive group chat question unanswered while reacting to it, saying the wait time is two minutes when it is closer to an hour, returning borrowed Pyrex six months later stained and without the lid.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for not replacing the toilet paper. The wider rot profile survives too: leaving a time-sensitive group chat question unanswered while reacting to it, saying the wait time is two minutes when it is closer to an hour, returning borrowed Pyrex six months later stained and without the lid. So does the sidekick ecosystem: another church-basement true believer arrives, still too tired to resist, still handling doctrine and recruitment.",
+  "sample_lines": [
+    "This will read better in the official report.",
+    "You are confusing fear with pattern recognition.",
+    "We can call it harm later if the rollout underperforms."
+  ],
+  "hooks": [
+    "By the time somebody names the monster correctly, the monster has already become a workflow.",
+    "Even before the grand scheme, the villain was already the kind of person who would be not replacing the toilet paper, and the wider rot profile includes leaving a time-sensitive group chat question unanswered while reacting to it, saying the wait time is two minutes when it is closer to an hour, returning borrowed Pyrex six months later stained and without the lid.",
+    "The audience trusts the build less the moment they learn even the church-basement true believer is hanging around because they are too tired to resist."
+  ],
+  "llm_surface": {
+    "enabled": true,
+    "error": "JSONDecodeError: Unterminated string starting at: line 1 column 3133 (char 3132)"
+  }
+}

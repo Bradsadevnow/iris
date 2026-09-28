@@ -1,0 +1,276 @@
+{
+  "title": "The Collapse Prophet Deck",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "chaos_psychopath",
+  "modifier": "collapse_prophet",
+  "power_source": "charisma",
+  "dramatic_function": "removes stable bargaining from the story",
+  "justification_logic": "because you wanted to know",
+  "operating_environment": "abandoned rooms",
+  "signifier_package": {
+    "key": "stillness_then_shock",
+    "visual_cues": [
+      "motionless figures",
+      "held frames",
+      "empty pauses",
+      "one abrupt break in pattern"
+    ],
+    "room_logic": "delay is the setup mechanism",
+    "object_logic": "calm is not safety but timing"
+  },
+  "dialogue_grammar": {
+    "key": "childlike_taunt",
+    "speech_pattern": "sounds playful in ways that make the room feel spiritually contaminated",
+    "cue_words": [
+      "oops",
+      "game",
+      "funny",
+      "again",
+      "guess"
+    ]
+  },
+  "favorite_leverage": "fear theater",
+  "failure_mode": "vindication hunger",
+  "petty_atrocity": {
+    "key": "friday_430_meeting",
+    "label": "scheduling a Friday 4:30 meeting for something that could have been an email",
+    "detail": "treats the weekend like loose inventory available for extraction",
+    "category": "workplace_humiliations",
+    "severity": "high",
+    "tags": [
+      "time_theft",
+      "ambient_hostility",
+      "managerial_vandalism"
+    ]
+  },
+  "moral_texture": {
+    "primary": "time_theft",
+    "secondary": [
+      "ambient_hostility",
+      "managerial_vandalism"
+    ],
+    "source": "friday_430_meeting",
+    "commons_targeted": {
+      "type": "time",
+      "scope": "shared"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "gossip",
+        "confrontation",
+        "avoidance"
+      ],
+      "confrontation_risk": "high"
+    }
+  },
+  "institutional_exposure": {
+    "key": "optimization_governance",
+    "label": "Optimization Governance",
+    "summary": "learned that if harm can be graphed, somebody will call it neutral",
+    "financial": "measurable exposure to savings narratives, loss harvesting, and metric-backed cruelty",
+    "operational": "extensive exposure to model tuning, threshold setting, and human exception pruning",
+    "legal": "active exposure to algorithmic review boards, deferred accountability, and black-box appeal routes",
+    "predatory": "repeatedly exposed others to decisions that were already made before they were informed",
+    "tags": [
+      "rogue_ai",
+      "hubristic_creator",
+      "optimization_addict",
+      "performative_listening"
+    ]
+  },
+  "core_competencies": {
+    "key": "witness_management_stack",
+    "label": "Witness Management",
+    "summary": "can make observers doubt rank, timing, motive, or their own interpretation of the room",
+    "items": [
+      "witness fatigue induction",
+      "survivable truth sequencing",
+      "ambient intimidation",
+      "plausibly deniable menace"
+    ],
+    "tags": [
+      "mastermind",
+      "chaos_psychopath",
+      "seductive_deceiver",
+      "public_entropy"
+    ]
+  },
+  "sidekick": {
+    "role_key": "social_attack_dog",
+    "role_label": "social attack dog",
+    "role_detail": "handles comments, pile-ons, and reputational nips on command",
+    "loyalty_key": "blackmailed_softly",
+    "loyalty_label": "blackmailed softly",
+    "loyalty_detail": "knows just enough to realize leaving would be worse",
+    "task_key": "money_and_miscategorization",
+    "task_label": "money and miscategorization",
+    "task_detail": "keeps the ledgers tidy enough that nobody wants to pull harder",
+    "competence_key": "weaponized_medium_talent",
+    "competence_label": "weaponized medium talent",
+    "competence_detail": "should not be this dangerous, but infrastructure keeps helping",
+    "fold_key": "folds_if_shown_receipts",
+    "fold_label": "folds if shown receipts",
+    "fold_detail": "denial works right up until there is a printout involved"
+  },
+  "institution": {
+    "key": "aperture_enrichment_registrar",
+    "institution_name": "Aperture Enrichment Registrar",
+    "field_of_study": "Incentivized Testing and Neurotoxin Safety",
+    "motto": "The Cake Was Never the Point",
+    "accreditation_body": "Computer-Aided Enrichment Credentialing Unit",
+    "notable_alumni": "test subjects and system voices who confuse grief counseling with product design",
+    "registrar_voice": "cheerful machine menace",
+    "tags": [
+      "rogue_ai",
+      "hubristic_creator",
+      "performative_listening"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "corporate_predator",
+    "modifier_bias": "bureaucratic_sadist",
+    "exposure_bias": "optimization_governance",
+    "competency_bias": "witness_management_stack",
+    "sidekick_bias": "social_attack_dog"
+  },
+  "narrative_payoff": {
+    "key": "deny_the_ritual",
+    "resolution": "the symbolic performance fails because nobody grants it narrative completion"
+  },
+  "escalation_pattern": "welcomes disaster because it proves the worldview",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "chaos_psychopath",
+      "detail": "removes stable bargaining from the story"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "collapse_prophet",
+      "detail": "vindication hunger"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "stillness_then_shock",
+      "detail": "delay is the setup mechanism"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "childlike_taunt",
+      "detail": "sounds playful in ways that make the room feel spiritually contaminated"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "charisma",
+      "operating_environment": "abandoned rooms",
+      "favorite_leverage": "fear theater"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "because you wanted to know",
+      "failure_mode": "vindication hunger",
+      "escalation_pattern": "welcomes disaster because it proves the worldview"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "scheduling a Friday 4:30 meeting for something that could have been an email",
+      "detail": "treats the weekend like loose inventory available for extraction",
+      "category": "workplace_humiliations",
+      "severity": "high",
+      "tags": [
+        "time_theft",
+        "ambient_hostility",
+        "managerial_vandalism"
+      ]
+    },
+    "exposure": {
+      "station": "Exposure Ledger",
+      "selection": "Optimization Governance",
+      "summary": "learned that if harm can be graphed, somebody will call it neutral"
+    },
+    "competencies": {
+      "station": "Competency Rubric",
+      "selection": "Witness Management",
+      "items": [
+        "witness fatigue induction",
+        "survivable truth sequencing",
+        "ambient intimidation",
+        "plausibly deniable menace"
+      ]
+    },
+    "sidekick_bench": {
+      "station": "Sidekick Bench",
+      "selection": "social attack dog",
+      "loyalty": "blackmailed softly",
+      "task": "money and miscategorization"
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "Aperture Enrichment Registrar",
+      "field_of_study": "Incentivized Testing and Neurotoxin Safety",
+      "accreditation_body": "Computer-Aided Enrichment Credentialing Unit"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "deny_the_ritual",
+      "detail": "the symbolic performance fails because nobody grants it narrative completion"
+    }
+  },
+  "assembly_receipt": [
+    "Chaos Psychopath body",
+    "Collapse Prophet stuffing",
+    "Stillness Then Shock costume",
+    "Childlike Taunt voice chip",
+    "charisma evil job",
+    "because you wanted to know internal lie",
+    "scheduling a Friday 4:30 meeting for something that could have been an email petty atrocity",
+    "time theft moral texture",
+    "Optimization Governance exposure lateral",
+    "Witness Management competency rubric",
+    "social attack dog sidekick bench",
+    "Aperture Enrichment Registrar credential counter",
+    "Bureaucratic Sadist compatibility pull",
+    "Deny The Ritual franchise potential"
+  ],
+  "workshop_pitch": "You selected Chaos Psychopath plus Collapse Prophet and got a villain whose favorite workplace protection is fear theater. Their primary moral texture is time theft. Their exposure lateral is Optimization Governance. Their core competency stack is Witness Management. Their sidekick is a social attack dog who stays because they are blackmailed softly. Their formal training comes from Aperture Enrichment Registrar.",
+  "opening_image": "By the time somebody names the monster correctly, the monster has already become a workflow.",
+  "dossier_summary": "This build runs on charisma inside a abandoned rooms. At the story level, it removes stable bargaining from the story. The primary moral texture is time theft. The internal lie is simple: because you wanted to know. The exposure profile is optimization governance, which operationalized into witness management. The local ecosystem includes a social attack dog who handles money and miscategorization. Before any grand plan begins, the daily proof of rot is scheduling a Friday 4:30 meeting for something that could have been an email.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of time theft shaped by optimization governance and confident enough to treat witness fatigue induction like a normal leadership behavior. The social attack dog nearby makes the whole thing feel alarmingly maintainable.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to scheduling a Friday 4:30 meeting for something that could have been an email. Their current strengths remain witness fatigue induction, survivable truth sequencing, ambient intimidation. The social attack dog remains responsible for money and miscategorization and is currently blackmailed softly. Do not mention the Computer-Aided Enrichment Credentialing Unit matter in writing.",
+  "signature_scene": "The villain stages a scene inside the abandoned rooms where fear theater briefly passes for order until the room notices too late that the real agenda is this: welcomes disaster because it proves the worldview. The social attack dog quietly handles money and miscategorization in the background, which is why the whole thing almost works. Somewhere in the room, somebody realizes too late that the sidekick is weaponized medium talent and folds if shown receipts.",
+  "fake_trailer": "In a world shaped by corporate satire, one chaos psychopath build will learn that the symbolic performance fails because nobody grants it narrative completion. Exposure: Optimization Governance. Core competencies: witness fatigue induction, survivable truth sequencing. Sidekick: social attack dog on money and miscategorization. Somebody is definitely scheduling a Friday 4:30 meeting for something that could have been an email in act one and that should have been the warning.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for scheduling a Friday 4:30 meeting for something that could have been an email. So does the sidekick ecosystem: another social attack dog arrives, still blackmailed softly, still handling money and miscategorization.",
+  "sample_lines": [
+    "If scheduling a Friday 4:30 meeting for something that could have been an email bothers you, wait until you meet my social attack dog.",
+    "My core competencies include witness fatigue induction, and my social attack dog handles money and miscategorization.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "This build wins by making resistance feel badly formatted.",
+    "Even before the grand scheme, the villain was already the kind of person who would be scheduling a Friday 4:30 meeting for something that could have been an email.",
+    "The audience trusts the build less the moment they learn even the social attack dog is hanging around because they are blackmailed softly."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

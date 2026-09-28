@@ -32,6 +32,14 @@ class RoleOverlayTest(unittest.TestCase):
         self.assertEqual(result["roles"], ["academic", "engineer"])
         self.assertEqual(self.store.active_context()["roles"], ["academic", "engineer"])
 
+    def test_system_projection_compiles_all_manually_selected_profiles(self):
+        self.store.set_active_context("world:halcyon", None, [], ["engineer", "security", "strategist"])
+        with patch.object(server, "STORE", self.store):
+            projection = server.system_projection()
+        profiles = projection["stance"]["profiles"]
+        self.assertEqual([item["id"] for item in profiles], ["engineer", "security", "strategist"])
+        self.assertTrue(all(item["source"] == "explicit" for item in profiles))
+
     def test_active_role_overlays_the_prompt_without_touching_self_claims(self):
         self.store.set_active_context("world:halcyon", None, [], ["engineer"])
         with patch.object(server, "STORE", self.store):

@@ -1,0 +1,200 @@
+{
+  "title": "How To Survive Campus",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "seductive_deceiver",
+  "modifier": "performance_genius",
+  "power_source": "desire",
+  "dramatic_function": "turns intimacy into the delivery system for danger",
+  "justification_logic": "I only completed the fantasy",
+  "operating_environment": "private suite",
+  "signifier_package": {
+    "key": "wrong_family_photo",
+    "visual_cues": [
+      "portraits that are almost right",
+      "duplicate smiles",
+      "edited histories",
+      "extra people in frames"
+    ],
+    "room_logic": "domestic legitimacy is assembled by hand",
+    "object_logic": "the image is where the lie congeals"
+  },
+  "dialogue_grammar": {
+    "key": "double_meaning",
+    "speech_pattern": "every intimate line can also be a threat",
+    "cue_words": [
+      "trust me",
+      "ours",
+      "closer",
+      "only you",
+      "safe"
+    ]
+  },
+  "favorite_leverage": "seduction",
+  "failure_mode": "branding louder than competence",
+  "petty_atrocity": {
+    "key": "bag_on_train_seat",
+    "label": "putting your bag on a seat in a crowded train or bus",
+    "detail": "acts like your tote qualified for passenger status before the rest of humanity did",
+    "category": "public_space_crimes",
+    "severity": "high",
+    "tags": [
+      "resource_selfishness",
+      "public_entropy",
+      "social_dominance"
+    ]
+  },
+  "moral_texture": {
+    "primary": "resource_selfishness",
+    "secondary": [
+      "public_entropy",
+      "social_dominance"
+    ],
+    "source": "bag_on_train_seat",
+    "commons_targeted": {
+      "type": "space",
+      "scope": "public"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "gossip",
+        "confrontation",
+        "avoidance"
+      ],
+      "confrontation_risk": "high"
+    }
+  },
+  "institution": {
+    "key": "dastardly_cheating_before_finish_line",
+    "institution_name": "The Institute of Cheating Before the Finish Line",
+    "field_of_study": "Applied Sabotage and Premature Victory Celebration",
+    "motto": "I Cheat That I May Win",
+    "accreditation_body": "Council for Schemes That Backfire in the Final Reel",
+    "notable_alumni": "every racer who came in dead last while leading",
+    "registrar_voice": "cartoon solemnity",
+    "tags": [
+      "cartoon_villain",
+      "sabotage",
+      "public_humiliation"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "seductive_deceiver",
+    "modifier_bias": "performance_genius"
+  },
+  "narrative_payoff": {
+    "key": "survive_the_reversal",
+    "resolution": "the intimate trap is recognized before the identity theft fully closes"
+  },
+  "escalation_pattern": "uses charisma and spectacle to cover mediocrity or fraud",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "seductive_deceiver",
+      "detail": "turns intimacy into the delivery system for danger"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "performance_genius",
+      "detail": "branding louder than competence"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "wrong_family_photo",
+      "detail": "domestic legitimacy is assembled by hand"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "double_meaning",
+      "detail": "every intimate line can also be a threat"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "desire",
+      "operating_environment": "private suite",
+      "favorite_leverage": "seduction"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "I only completed the fantasy",
+      "failure_mode": "branding louder than competence",
+      "escalation_pattern": "uses charisma and spectacle to cover mediocrity or fraud"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "putting your bag on a seat in a crowded train or bus",
+      "detail": "acts like your tote qualified for passenger status before the rest of humanity did",
+      "category": "public_space_crimes",
+      "severity": "high",
+      "tags": [
+        "resource_selfishness",
+        "public_entropy",
+        "social_dominance"
+      ]
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "The Institute of Cheating Before the Finish Line",
+      "field_of_study": "Applied Sabotage and Premature Victory Celebration",
+      "accreditation_body": "Council for Schemes That Backfire in the Final Reel"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "survive_the_reversal",
+      "detail": "the intimate trap is recognized before the identity theft fully closes"
+    }
+  },
+  "assembly_receipt": [
+    "Seductive Deceiver body",
+    "Performance Genius stuffing",
+    "Wrong Family Photo costume",
+    "Double Meaning voice chip",
+    "desire evil job",
+    "I only completed the fantasy internal lie",
+    "putting your bag on a seat in a crowded train or bus petty atrocity",
+    "resource selfishness moral texture",
+    "The Institute of Cheating Before the Finish Line credential counter",
+    "Performance Genius compatibility pull",
+    "Survive The Reversal franchise potential"
+  ],
+  "workshop_pitch": "You selected Seductive Deceiver plus Performance Genius and got a villain whose favorite workplace protection is seduction. Their primary moral texture is resource selfishness. Their formal training comes from The Institute of Cheating Before the Finish Line.",
+  "opening_image": "The real threat is not violence but the institutional permission structure surrounding it.",
+  "dossier_summary": "This build runs on desire inside a private suite. At the story level, it turns intimacy into the delivery system for danger. The primary moral texture is resource selfishness. The internal lie is simple: I only completed the fantasy. Before any grand plan begins, the daily proof of rot is putting your bag on a seat in a crowded train or bus.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of resource selfishness who still behaves like someone trained at The Institute of Cheating Before the Finish Line to turn applied sabotage and premature victory celebration into a worldview.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to putting your bag on a seat in a crowded train or bus. This behavior is now being interpreted internally as a visible instance of resource selfishness. Do not mention the Council for Schemes That Backfire in the Final Reel matter in writing.",
+  "signature_scene": "The villain stages a scene inside the private suite where seduction briefly passes for order until the room notices too late that the real agenda is this: uses charisma and spectacle to cover mediocrity or fraud. Somewhere in the background, they are also the sort of person who would be putting your bag on a seat in a crowded train or bus, which is exactly the kind of thing The Institute of Cheating Before the Finish Line seems to reward.",
+  "fake_trailer": "In a world shaped by corporate satire, one seductive deceiver build will learn that the intimate trap is recognized before the identity theft fully closes. Certified by The Institute of Cheating Before the Finish Line. Accredited by Council for Schemes That Backfire in the Final Reel. Somebody is definitely putting your bag on a seat in a crowded train or bus in act one and that should have been the warning.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for putting your bag on a seat in a crowded train or bus. So does the institution, which continues graduating new monsters under the motto: I Cheat That I May Win.",
+  "sample_lines": [
+    "If putting your bag on a seat in a crowded train or bus bothers you, wait until you see what they taught me at The Institute of Cheating Before the Finish Line.",
+    "You are not dealing with a person anymore. You are dealing with a permission structure.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "The villain is less interested in victory than in teaching the room a worse definition of normal.",
+    "Even before the grand scheme, the villain was already the kind of person who would be putting your bag on a seat in a crowded train or bus.",
+    "The audience trusts the build less the moment they learn it graduated from The Institute of Cheating Before the Finish Line with honors in Applied Sabotage and Premature Victory Celebration."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

@@ -1,0 +1,276 @@
+{
+  "title": "The User Base",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "seductive_deceiver",
+  "modifier": "inherited_heir",
+  "power_source": "proximity",
+  "dramatic_function": "turns intimacy into the delivery system for danger",
+  "justification_logic": "honesty is just timing",
+  "operating_environment": "mirrored apartment",
+  "signifier_package": {
+    "key": "staged_intimacy",
+    "visual_cues": [
+      "carefully framed family photos",
+      "curated breakfasts",
+      "placed gifts",
+      "rehearsed closeness"
+    ],
+    "room_logic": "affection has blocking notes",
+    "object_logic": "personal gestures are evidence of preparation"
+  },
+  "dialogue_grammar": {
+    "key": "withholding",
+    "speech_pattern": "leaves the crucial third of every sentence implied rather than said",
+    "cue_words": [
+      "later",
+      "enough",
+      "not yet",
+      "maybe",
+      "eventually"
+    ]
+  },
+  "favorite_leverage": "seduction",
+  "failure_mode": "old power with updated packaging",
+  "petty_atrocity": {
+    "key": "steals_your_charger_and_acts_confused",
+    "label": "taking your charger and acting confused about it",
+    "detail": "weaponizes fake innocence over a cable everyone recognizes",
+    "category": "borrowing_lending_crimes",
+    "severity": "high",
+    "tags": [
+      "gaslighting",
+      "property_hijack",
+      "fake_innocence"
+    ]
+  },
+  "moral_texture": {
+    "primary": "gaslighting",
+    "secondary": [
+      "property_hijack",
+      "fake_innocence"
+    ],
+    "source": "steals_your_charger_and_acts_confused",
+    "commons_targeted": {
+      "type": "property",
+      "scope": "personal"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "gossip",
+        "confrontation",
+        "avoidance"
+      ],
+      "confrontation_risk": "high"
+    }
+  },
+  "institutional_exposure": {
+    "key": "therapeutic_capture",
+    "label": "Therapeutic Capture",
+    "summary": "learned how care language can soften a room before control closes around it",
+    "financial": "indirect exposure to wellness monetization, treatment dependency, and billable reassurance",
+    "operational": "deep exposure to intake rituals, trust farming, and emotionally calibrated containment",
+    "legal": "notable exposure to consent paperwork, confidentiality asymmetry, and professional shields",
+    "predatory": "repeatedly exposed others to help that became leverage the moment they relaxed",
+    "tags": [
+      "seductive_deceiver",
+      "institutional_enforcer",
+      "false_savior",
+      "gaslighting"
+    ]
+  },
+  "core_competencies": {
+    "key": "coercive_reassurance_stack",
+    "label": "Coercive Reassurance",
+    "summary": "can make control sound considerate long enough for compliance to feel self-authored",
+    "items": [
+      "coercive reassurance",
+      "hostage empathy",
+      "selective soothing",
+      "managed dependency"
+    ],
+    "tags": [
+      "seductive_deceiver",
+      "false_savior",
+      "institutional_enforcer",
+      "gaslighting"
+    ]
+  },
+  "sidekick": {
+    "role_key": "family_fixer",
+    "role_label": "family fixer",
+    "role_detail": "inherited with the estate and already knows which problems get moved at night",
+    "loyalty_key": "paid_too_well",
+    "loyalty_label": "paid too well",
+    "loyalty_detail": "compensation has become a moral anesthetic",
+    "task_key": "rumor_and_reputation_ops",
+    "task_label": "rumor and reputation ops",
+    "task_detail": "floods the room with survivable interpretations before truth gets dressed",
+    "competence_key": "carrying_the_entire_operation",
+    "competence_label": "carrying the entire operation",
+    "competence_detail": "the villain is basically the face and the sidekick is the load-bearing wall",
+    "fold_key": "never_folds_cleanly",
+    "fold_label": "never folds cleanly",
+    "fold_detail": "if they crack, they take half the room with them out of spite or panic"
+  },
+  "institution": {
+    "key": "school_of_self_disappearance_and_spousal_framing",
+    "institution_name": "The School of Self-Disappearance and Spousal Framing",
+    "field_of_study": "Narrative Control and Forensic Staging",
+    "motto": "There Is No Cool Girl",
+    "accreditation_body": "Diary Forensics Accreditation Council",
+    "notable_alumni": "graduates whose alibis improve the less they are examined emotionally",
+    "registrar_voice": "prestige psychodrama",
+    "tags": [
+      "seductive_deceiver",
+      "intimacy_parasite",
+      "gaslighting"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "seductive_deceiver",
+    "modifier_bias": "intimacy_parasite",
+    "exposure_bias": "therapeutic_capture",
+    "competency_bias": "coercive_reassurance_stack",
+    "sidekick_bias": "family_fixer"
+  },
+  "narrative_payoff": {
+    "key": "expose_the_performance",
+    "resolution": "the seduction, persona, or social performance is made visible enough that nobody can keep mistaking it for sincerity"
+  },
+  "escalation_pattern": "claims entitlement through lineage or prior ownership",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "seductive_deceiver",
+      "detail": "turns intimacy into the delivery system for danger"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "inherited_heir",
+      "detail": "old power with updated packaging"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "staged_intimacy",
+      "detail": "affection has blocking notes"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "withholding",
+      "detail": "leaves the crucial third of every sentence implied rather than said"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "proximity",
+      "operating_environment": "mirrored apartment",
+      "favorite_leverage": "seduction"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "honesty is just timing",
+      "failure_mode": "old power with updated packaging",
+      "escalation_pattern": "claims entitlement through lineage or prior ownership"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "taking your charger and acting confused about it",
+      "detail": "weaponizes fake innocence over a cable everyone recognizes",
+      "category": "borrowing_lending_crimes",
+      "severity": "high",
+      "tags": [
+        "gaslighting",
+        "property_hijack",
+        "fake_innocence"
+      ]
+    },
+    "exposure": {
+      "station": "Exposure Ledger",
+      "selection": "Therapeutic Capture",
+      "summary": "learned how care language can soften a room before control closes around it"
+    },
+    "competencies": {
+      "station": "Competency Rubric",
+      "selection": "Coercive Reassurance",
+      "items": [
+        "coercive reassurance",
+        "hostage empathy",
+        "selective soothing",
+        "managed dependency"
+      ]
+    },
+    "sidekick_bench": {
+      "station": "Sidekick Bench",
+      "selection": "family fixer",
+      "loyalty": "paid too well",
+      "task": "rumor and reputation ops"
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "The School of Self-Disappearance and Spousal Framing",
+      "field_of_study": "Narrative Control and Forensic Staging",
+      "accreditation_body": "Diary Forensics Accreditation Council"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "expose_the_performance",
+      "detail": "the seduction, persona, or social performance is made visible enough that nobody can keep mistaking it for sincerity"
+    }
+  },
+  "assembly_receipt": [
+    "Seductive Deceiver body",
+    "Inherited Heir stuffing",
+    "Staged Intimacy costume",
+    "Withholding voice chip",
+    "proximity evil job",
+    "honesty is just timing internal lie",
+    "taking your charger and acting confused about it petty atrocity",
+    "gaslighting moral texture",
+    "Therapeutic Capture exposure lateral",
+    "Coercive Reassurance competency rubric",
+    "family fixer sidekick bench",
+    "The School of Self-Disappearance and Spousal Framing credential counter",
+    "Intimacy Parasite compatibility pull",
+    "Expose The Performance franchise potential"
+  ],
+  "workshop_pitch": "You selected Seductive Deceiver plus Inherited Heir and got a villain whose favorite workplace protection is seduction. Their primary moral texture is gaslighting. Their exposure lateral is Therapeutic Capture. Their core competency stack is Coercive Reassurance. Their sidekick is a family fixer who stays because they are paid too well. Their formal training comes from The School of Self-Disappearance and Spousal Framing.",
+  "opening_image": "By the time somebody names the monster correctly, the monster has already become a workflow.",
+  "dossier_summary": "This build runs on proximity inside a mirrored apartment. At the story level, it turns intimacy into the delivery system for danger. The primary moral texture is gaslighting. The internal lie is simple: honesty is just timing. The exposure profile is therapeutic capture, which operationalized into coercive reassurance. The local ecosystem includes a family fixer who handles rumor and reputation ops. Before any grand plan begins, the daily proof of rot is taking your charger and acting confused about it.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of gaslighting shaped by therapeutic capture and confident enough to treat coercive reassurance like a normal leadership behavior. The family fixer nearby makes the whole thing feel alarmingly maintainable.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to taking your charger and acting confused about it. Their current strengths remain coercive reassurance, hostage empathy, selective soothing. The family fixer remains responsible for rumor and reputation ops and is currently paid too well. Do not mention the Diary Forensics Accreditation Council matter in writing.",
+  "signature_scene": "The villain stages a scene inside the mirrored apartment where seduction briefly passes for order until the room notices too late that the real agenda is this: claims entitlement through lineage or prior ownership. The family fixer quietly handles rumor and reputation ops in the background, which is why the whole thing almost works. Somewhere in the room, somebody realizes too late that the sidekick is carrying the entire operation and never folds cleanly.",
+  "fake_trailer": "In a world shaped by corporate satire, one seductive deceiver build will learn that the seduction, persona, or social performance is made visible enough that nobody can keep mistaking it for sincerity. Exposure: Therapeutic Capture. Core competencies: coercive reassurance, hostage empathy. Sidekick: family fixer on rumor and reputation ops. Somebody is definitely taking your charger and acting confused about it in act one and that should have been the warning.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for taking your charger and acting confused about it. So does the sidekick ecosystem: another family fixer arrives, still paid too well, still handling rumor and reputation ops.",
+  "sample_lines": [
+    "If taking your charger and acting confused about it bothers you, wait until you meet my family fixer.",
+    "My core competencies include coercive reassurance, and my family fixer handles rumor and reputation ops.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "The villain is less interested in victory than in teaching the room a worse definition of normal.",
+    "Even before the grand scheme, the villain was already the kind of person who would be taking your charger and acting confused about it.",
+    "The audience trusts the build less the moment they learn even the family fixer is hanging around because they are paid too well."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

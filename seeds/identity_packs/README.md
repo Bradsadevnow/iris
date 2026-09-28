@@ -4,13 +4,16 @@ A pack is a JSON manifest of `self_claims` (identity, values, commitments,
 goals — the same shape `seeds/halcyon_identity.json` uses) plus a
 `capabilities` list (the persona's declared toolkit).
 
-**In the app, these load as role overlays** (Self → Roles, or the Roles
-section of the "Self" popout in chat): Halcyon's own Self stays canonical
-and always active; equipping a pack folds its claims into the prompt for
-that session as an `# ACTIVE ROLE OVERLAY` — informing her, not replacing
-her. Toggling is instant, reversible, and writes nothing to `self_claims`
-or `capabilities` (see `iris/server.py`'s `render_role_overlay` and the
-`roles` field on `/api/context/active`).
+**In the app, these compile into task stances.** Halcyon's own Self stays canonical and always
+active. A user may select multiple packs; all manually selected profiles compose as explicit peer
+stances and persist until removed. The selector may add at most one inferred support profile for a
+single turn. Inferred support never persists or overrides explicit profiles.
+
+The runtime discards pack identity/name claims during stance use and compiles the remaining material
+into attributable attention priorities, reasoning principles, methods, graph preferences, and
+expression guidance. Declared pack capabilities are methods, not executable tools. Known tensions
+between selected profiles become explicit reasoning requirements rather than blended identities.
+This writes nothing to `self_claims` or the executable capability registry.
 
 There is also a CLI-only **permanent identity swap** path, for anyone who
 wants a genuinely separate persistent identity rather than an overlay:
@@ -66,6 +69,10 @@ another pack, loadable and revertible the same way.
   ]
 }
 ```
+
+The identity-shaped format remains supported because these artifacts can still be installed as a
+genuinely different persistent Self through the CLI. Normal UI use treats the same file as a source
+bundle and compiles only its bounded stance fragments.
 
 `kind` must be one of `identity`, `value`, `preference`, `commitment`,
 `relationship`, `goal`, `self_understanding` — the same set

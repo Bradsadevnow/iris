@@ -1,0 +1,250 @@
+{
+  "title": "How To Survive User Base",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "seductive_deceiver",
+  "modifier": "intimacy_parasite",
+  "power_source": "proximity",
+  "dramatic_function": "turns intimacy into the delivery system for danger",
+  "justification_logic": "honesty is just timing",
+  "operating_environment": "perfect family home",
+  "signifier_package": {
+    "key": "wrong_family_photo",
+    "visual_cues": [
+      "portraits that are almost right",
+      "duplicate smiles",
+      "edited histories",
+      "extra people in frames"
+    ],
+    "room_logic": "domestic legitimacy is assembled by hand",
+    "object_logic": "the image is where the lie congeals"
+  },
+  "dialogue_grammar": {
+    "key": "double_meaning",
+    "speech_pattern": "every intimate line can also be a threat",
+    "cue_words": [
+      "trust me",
+      "ours",
+      "closer",
+      "only you",
+      "safe"
+    ]
+  },
+  "favorite_leverage": "strategic vulnerability",
+  "failure_mode": "closeness as attack surface",
+  "petty_atrocity": {
+    "key": "countertop_puddle_migration",
+    "label": "leaving the bathroom counter completely soaked",
+    "detail": "walks away after splashing everywhere like the next person volunteered to absorb the consequences",
+    "category": "bathroom_household_desecration",
+    "severity": "medium",
+    "tags": [
+      "shared_space_disrespect",
+      "ambient_hostility",
+      "burden_shifting"
+    ]
+  },
+  "moral_texture": {
+    "primary": "shared_space_disrespect",
+    "secondary": [
+      "ambient_hostility",
+      "burden_shifting"
+    ],
+    "source": "countertop_puddle_migration",
+    "commons_targeted": {
+      "type": "space",
+      "scope": "shared"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "side_eye",
+        "gossip",
+        "avoidance"
+      ],
+      "confrontation_risk": "medium"
+    }
+  },
+  "institutional_exposure": {
+    "key": "therapeutic_capture",
+    "label": "Therapeutic Capture",
+    "summary": "learned how care language can soften a room before control closes around it",
+    "financial": "indirect exposure to wellness monetization, treatment dependency, and billable reassurance",
+    "operational": "deep exposure to intake rituals, trust farming, and emotionally calibrated containment",
+    "legal": "notable exposure to consent paperwork, confidentiality asymmetry, and professional shields",
+    "predatory": "repeatedly exposed others to help that became leverage the moment they relaxed",
+    "tags": [
+      "seductive_deceiver",
+      "institutional_enforcer",
+      "false_savior",
+      "gaslighting"
+    ]
+  },
+  "core_competencies": {
+    "key": "intimacy_capture_stack",
+    "label": "Intimacy Capture",
+    "summary": "can turn trust into infrastructure and affection into a lock-in strategy",
+    "items": [
+      "emotional mirroring abuse",
+      "selective vulnerability",
+      "closeness colonization",
+      "memory dispute management"
+    ],
+    "tags": [
+      "seductive_deceiver",
+      "intimacy_parasite",
+      "privacy_conscripting"
+    ]
+  },
+  "institution": {
+    "key": "aperture_enrichment_registrar",
+    "institution_name": "Aperture Enrichment Registrar",
+    "field_of_study": "Incentivized Testing and Neurotoxin Safety",
+    "motto": "The Cake Was Never the Point",
+    "accreditation_body": "Computer-Aided Enrichment Credentialing Unit",
+    "notable_alumni": "test subjects and system voices who confuse grief counseling with product design",
+    "registrar_voice": "cheerful machine menace",
+    "tags": [
+      "rogue_ai",
+      "hubristic_creator",
+      "performative_listening"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "seductive_deceiver",
+    "modifier_bias": "intimacy_parasite",
+    "exposure_bias": "therapeutic_capture",
+    "competency_bias": "intimacy_capture_stack"
+  },
+  "narrative_payoff": {
+    "key": "survive_the_reversal",
+    "resolution": "the intimate trap is recognized before the identity theft fully closes"
+  },
+  "escalation_pattern": "colonizes trust before making a move",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "seductive_deceiver",
+      "detail": "turns intimacy into the delivery system for danger"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "intimacy_parasite",
+      "detail": "closeness as attack surface"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "wrong_family_photo",
+      "detail": "domestic legitimacy is assembled by hand"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "double_meaning",
+      "detail": "every intimate line can also be a threat"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "proximity",
+      "operating_environment": "perfect family home",
+      "favorite_leverage": "strategic vulnerability"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "honesty is just timing",
+      "failure_mode": "closeness as attack surface",
+      "escalation_pattern": "colonizes trust before making a move"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "leaving the bathroom counter completely soaked",
+      "detail": "walks away after splashing everywhere like the next person volunteered to absorb the consequences",
+      "category": "bathroom_household_desecration",
+      "severity": "medium",
+      "tags": [
+        "shared_space_disrespect",
+        "ambient_hostility",
+        "burden_shifting"
+      ]
+    },
+    "exposure": {
+      "station": "Exposure Ledger",
+      "selection": "Therapeutic Capture",
+      "summary": "learned how care language can soften a room before control closes around it"
+    },
+    "competencies": {
+      "station": "Competency Rubric",
+      "selection": "Intimacy Capture",
+      "items": [
+        "emotional mirroring abuse",
+        "selective vulnerability",
+        "closeness colonization",
+        "memory dispute management"
+      ]
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "Aperture Enrichment Registrar",
+      "field_of_study": "Incentivized Testing and Neurotoxin Safety",
+      "accreditation_body": "Computer-Aided Enrichment Credentialing Unit"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "survive_the_reversal",
+      "detail": "the intimate trap is recognized before the identity theft fully closes"
+    }
+  },
+  "assembly_receipt": [
+    "Seductive Deceiver body",
+    "Intimacy Parasite stuffing",
+    "Wrong Family Photo costume",
+    "Double Meaning voice chip",
+    "proximity evil job",
+    "honesty is just timing internal lie",
+    "leaving the bathroom counter completely soaked petty atrocity",
+    "shared space disrespect moral texture",
+    "Therapeutic Capture exposure lateral",
+    "Intimacy Capture competency rubric",
+    "Aperture Enrichment Registrar credential counter",
+    "Intimacy Parasite compatibility pull",
+    "Survive The Reversal franchise potential"
+  ],
+  "workshop_pitch": "You selected Seductive Deceiver plus Intimacy Parasite and got a villain whose favorite workplace protection is strategic vulnerability. Their primary moral texture is shared space disrespect. Their exposure lateral is Therapeutic Capture. Their core competency stack is Intimacy Capture. Their formal training comes from Aperture Enrichment Registrar.",
+  "opening_image": "This build wins by making resistance feel badly formatted.",
+  "dossier_summary": "This build runs on proximity inside a perfect family home. At the story level, it turns intimacy into the delivery system for danger. The primary moral texture is shared space disrespect. The internal lie is simple: honesty is just timing. The exposure profile is therapeutic capture, which operationalized into intimacy capture. Before any grand plan begins, the daily proof of rot is leaving the bathroom counter completely soaked.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of shared space disrespect shaped by therapeutic capture and confident enough to treat emotional mirroring abuse like a normal leadership behavior.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to leaving the bathroom counter completely soaked. Their current strengths remain emotional mirroring abuse, selective vulnerability, closeness colonization. Do not mention the Computer-Aided Enrichment Credentialing Unit matter in writing, and do not summarize their exposure to therapeutic capture in investor-safe language unless legal forces it.",
+  "signature_scene": "The villain stages a scene inside the perfect family home where strategic vulnerability briefly passes for order until the room notices too late that the real agenda is this: colonizes trust before making a move. The room then realizes the villain has professional-grade exposure to therapeutic capture and a competency stack built around emotional mirroring abuse. Somewhere in the background, they are still the sort of person who would be leaving the bathroom counter completely soaked.",
+  "fake_trailer": "In a world shaped by corporate satire, one seductive deceiver build will learn that the intimate trap is recognized before the identity theft fully closes. Exposure: Therapeutic Capture. Core competencies: emotional mirroring abuse, selective vulnerability. Certified by Aperture Enrichment Registrar. Somebody is definitely leaving the bathroom counter completely soaked in act one and that should have been the warning.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for leaving the bathroom counter completely soaked. So does the exposure trail, which keeps producing the same competency stack: emotional mirroring abuse, selective vulnerability.",
+  "sample_lines": [
+    "If leaving the bathroom counter completely soaked bothers you, wait until you see what therapeutic capture did for my competencies.",
+    "My core competencies include emotional mirroring abuse and not explaining myself twice.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "The real threat is not violence but the institutional permission structure surrounding it.",
+    "Even before the grand scheme, the villain was already the kind of person who would be leaving the bathroom counter completely soaked.",
+    "The audience trusts the build less the moment they learn it graduated from Aperture Enrichment Registrar after years of exposure to therapeutic capture."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

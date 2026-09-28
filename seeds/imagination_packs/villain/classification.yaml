@@ -1,0 +1,298 @@
+schema: iris.imagination-classification/v1
+
+constellations:
+  - id: identity
+    label: Who they are
+    question: Who are they?
+    clusters: [archetype, temperament, presence, voice, manner, habits, conduct]
+  - id: purpose
+    label: What they're about
+    question: What matters to them?
+    clusters: [drives, values, appetites, convictions, loyalty, obligation]
+  - id: role
+    label: Why they're here
+    question: What places them in this world or group?
+    clusters: [social_role, relationship, upbringing, education, institution, profession, crisis, ideology]
+  - id: contribution
+    label: What they bring
+    question: What can they contribute?
+    clusters: [knacks, training, expertise, practices]
+  - id: flaws
+    label: Flaws
+    question: Where do they break?
+    clusters: [vulnerability, blind_spot, compulsion, contradiction, breaking_point, failure]
+
+groups:
+  families:
+    subject: character
+    role: trait_bundle
+    constellations: [identity]
+    clusters: [archetype]
+    granularity: compound
+    selectable: true
+    treatment: split_fields
+    fields:
+      dramatic_function: {cluster: temperament, treatment: summary}
+      power_sources: {treatment: defer_resources}
+      justification_logics: {constellation: purpose, cluster: values, treatment: split, selectable: true}
+      leverage_modes: {constellation: contribution, cluster: practices, treatment: split}
+      environments: {treatment: contextualize}
+      signifier_tags: {constellation: identity, cluster: presence, treatment: connect}
+      dialogue_tags: {constellation: identity, cluster: voice, treatment: connect}
+      payoff_tags: {treatment: story_only}
+      title_words: {treatment: naming_only}
+  modifiers:
+    subject: character
+    role: trait
+    constellations: [identity]
+    clusters: [temperament]
+    granularity: mixed
+    selectable: true
+    treatment: split_fields
+    fields:
+      effect: {constellation: identity, cluster: temperament, treatment: trait}
+      texture: {constellation: flaws, cluster: compulsion, treatment: trait}
+      compatible_families: {treatment: connect}
+  plot_goals:
+    subject: character
+    role: motive
+    constellations: [purpose]
+    clusters: [goals]
+    granularity: mixed
+    selectable: true
+    treatment: review_then_split
+  strategic_agendas:
+    subject: character
+    role: motive_bundle
+    constellations: [purpose]
+    clusters: [agendas]
+    granularity: compound
+    selectable: true
+    treatment: review_then_split
+  competencies:
+    subject: character
+    role: capability_bundle
+    constellations: [contribution]
+    clusters: [competencies]
+    granularity: compound
+    selectable: true
+    treatment: split_items
+    fields:
+      label: {treatment: bundle_name}
+      summary: {treatment: summary}
+      items: {cluster: expertise, treatment: split}
+      tags: {treatment: connect}
+  task_domains:
+    subject: character
+    role: trait
+    constellations: [contribution]
+    clusters: [practices]
+    granularity: atomic
+    selectable: true
+    treatment: keep
+  competence_profiles:
+    subject: character
+    role: trait
+    constellations: [contribution]
+    clusters: [aptitude]
+    granularity: atomic
+    selectable: true
+    treatment: keep
+  contractor_classes:
+    subject: character
+    role: reference
+    constellations: [contribution]
+    clusters: [practices]
+    granularity: atomic
+    selectable: false
+    treatment: contextualize
+  dialogue_grammars:
+    subject: character
+    role: trait
+    constellations: [identity]
+    clusters: [voice]
+    granularity: atomic
+    selectable: true
+    treatment: keep
+    fields:
+      speech_pattern: {cluster: voice, treatment: trait}
+      cue_words: {treatment: examples}
+  loyalty_modes:
+    subject: character
+    role: trait
+    constellations: [purpose]
+    clusters: [loyalties]
+    granularity: atomic
+    selectable: true
+    treatment: keep
+  roles:
+    subject: character
+    role: relationship_bundle
+    constellations: [role]
+    clusters: [roles]
+    granularity: mixed
+    selectable: true
+    treatment: split_fields
+  fold_profiles:
+    subject: character
+    role: trait
+    constellations: [flaws]
+    clusters: [breaking_points]
+    granularity: atomic
+    selectable: true
+    treatment: keep
+  betrayals:
+    subject: story
+    role: story_pattern
+    constellations: []
+    clusters: []
+    granularity: compound
+    selectable: false
+    treatment: story_only
+  exposures:
+    subject: character
+    role: formation_bundle
+    constellations: [role]
+    clusters: [backgrounds]
+    granularity: compound
+    selectable: true
+    treatment: split_fields
+    fields:
+      summary: {treatment: summary}
+      financial: {cluster: profession, treatment: trait}
+      operational: {cluster: profession, treatment: trait}
+      legal: {cluster: institution, treatment: trait}
+      predatory: {constellation: flaws, cluster: conduct, treatment: trait}
+      tags: {treatment: connect}
+# Most source groups have one natural home. These exceptions let individual
+# cards tell the truth about what they are instead of inheriting a misleading
+# bucket from the file that happened to contain them.
+overrides:
+  competence_profiles:
+    actively_making_things_worse:
+      role: flaw
+      constellations: [flaws]
+      clusters: [failures]
+    panic_prone_under_light_pressure:
+      role: flaw
+      constellations: [flaws]
+      clusters: [breaking_points]
+    polished_but_limited:
+      role: flaw
+      constellations: [flaws]
+      clusters: [limitations]
+  fold_profiles:
+    dies_before_act_two:
+      subject: story
+      role: story_outcome
+      constellations: []
+      clusters: []
+      selectable: false
+      treatment: story_only
+    absolutely_unbreakable:
+      role: trait
+      constellations: [contribution]
+      clusters: [aptitude]
+    secretly_recording_everything:
+      role: motive
+      constellations: [purpose]
+      clusters: [agendas]
+    waiting_for_a_better_offer:
+      role: trait
+      constellations: [purpose]
+      clusters: [loyalties]
+    more_loyal_than_the_villain_deserves:
+      role: trait
+      constellations: [purpose]
+      clusters: [loyalties]
+    already_planning_their_own_exit:
+      role: motive
+      constellations: [purpose]
+      clusters: [agendas]
+
+# Canonical cards keep the browser readable while every authored member remains
+# available inside the card as a named variant with its complete source payload.
+collapses:
+  # Voice profiles
+  - {id: voice-commanding-visionary, label: Commanding Visionary, constellation: identity, cluster: voice, members: [primitive:dialogue-grammars:superiority-monologue, primitive:dialogue-grammars:invitation-to-witness, primitive:dialogue-grammars:strategic-condescension]}
+  - {id: voice-clinical-visionary, label: Clinical Visionary, constellation: identity, cluster: voice, members: [primitive:dialogue-grammars:technical-evasion, primitive:dialogue-grammars:clinical-reassurance, primitive:dialogue-grammars:visionary-arrogance]}
+  - {id: voice-corporate-calm, label: Corporate Calm, constellation: identity, cluster: voice, members: [primitive:dialogue-grammars:euphemism, primitive:dialogue-grammars:mission-statement, primitive:dialogue-grammars:shareholder-calm]}
+  - {id: voice-procedural-authority, label: Procedural Authority, constellation: identity, cluster: voice, members: [primitive:dialogue-grammars:fake-empathy, primitive:dialogue-grammars:depersonalization, primitive:dialogue-grammars:procedure-script]}
+  - {id: voice-playful-nihilist, label: Playful Nihilist, constellation: identity, cluster: voice, members: [primitive:dialogue-grammars:aphorism, primitive:dialogue-grammars:destabilizing-calm, primitive:dialogue-grammars:childlike-taunt]}
+  - {id: voice-intimate-evasion, label: Intimate Evasion, constellation: identity, cluster: voice, members: [primitive:dialogue-grammars:withholding, primitive:dialogue-grammars:redirection, primitive:dialogue-grammars:double-meaning]}
+  - {id: voice-inhuman-chorus, label: Inhuman Chorus, constellation: identity, cluster: voice, members: [primitive:dialogue-grammars:inhuman-echo, primitive:dialogue-grammars:choral-voice, primitive:dialogue-grammars:sensory-taunt]}
+  - {id: voice-system-calm, label: System Calm, constellation: identity, cluster: voice, members: [primitive:dialogue-grammars:literal-optimization, primitive:dialogue-grammars:reassuring-override, primitive:dialogue-grammars:system-voice]}
+
+  # Value systems derived from each archetype's authored justifications
+  - {id: values-order-from-above, label: Order From Above, constellation: purpose, cluster: values, member_parents: [primitive:families:mastermind]}
+  - {id: values-progress-at-any-cost, label: Progress At Any Cost, constellation: purpose, cluster: values, member_parents: [primitive:families:hubristic-creator]}
+  - {id: values-business-above-harm, label: Business Above Harm, constellation: purpose, cluster: values, member_parents: [primitive:families:corporate-predator]}
+  - {id: values-rules-are-morality, label: Rules Are Morality, constellation: purpose, cluster: values, member_parents: [primitive:families:institutional-enforcer]}
+  - {id: values-meaning-is-fake, label: Meaning Is Fake, constellation: purpose, cluster: values, member_parents: [primitive:families:chaos-psychopath]}
+  - {id: values-desire-excuses-harm, label: Desire Excuses Harm, constellation: purpose, cluster: values, member_parents: [primitive:families:seductive-deceiver]}
+  - {id: values-hunger-is-truth, label: Hunger Is Truth, constellation: purpose, cluster: values, member_parents: [primitive:families:monstrous-other]}
+  - {id: values-efficiency-is-mercy, label: Efficiency Is Mercy, constellation: purpose, cluster: values, member_parents: [primitive:families:rogue-ai]}
+
+  # Loyalty patterns
+  - {id: loyalty-financially-trapped, label: Financially Trapped, constellation: purpose, cluster: loyalties, members: [primitive:sidekicks:loyalty-modes:paid-too-well, primitive:sidekicks:loyalty-modes:career-trapped, primitive:sidekicks:loyalty-modes:debt-knotted, primitive:sidekicks:loyalty-modes:nobody-else-would-hire-them]}
+  - {id: loyalty-coerced-obligation, label: Bound By Obligation, constellation: purpose, cluster: loyalties, members: [primitive:sidekicks:loyalty-modes:blackmailed-softly, primitive:sidekicks:loyalty-modes:coauthor-of-the-coverup, primitive:sidekicks:loyalty-modes:accidentally-signed-a-binding-oath, primitive:sidekicks:loyalty-modes:owes-a-debt]}
+  - {id: loyalty-true-believer, label: True Believer, constellation: purpose, cluster: loyalties, members: [primitive:sidekicks:loyalty-modes:ideologically-aligned, primitive:sidekicks:loyalty-modes:cultishly-grateful, primitive:sidekicks:loyalty-modes:believes-the-mission]}
+  - {id: loyalty-emotionally-bound, label: Emotionally Bound, constellation: purpose, cluster: loyalties, members: [primitive:sidekicks:loyalty-modes:emotionally-imprinted, primitive:sidekicks:loyalty-modes:thinks-they-can-fix-them, primitive:sidekicks:loyalty-modes:in-love-with-them]}
+  - {id: loyalty-history-bound, label: Bound By History, constellation: purpose, cluster: loyalties, members: [primitive:sidekicks:loyalty-modes:family-bound, primitive:sidekicks:loyalty-modes:too-old-to-start-over]}
+  - {id: loyalty-normalized-exhaustion, label: Normalized Exhaustion, constellation: purpose, cluster: loyalties, members: [primitive:sidekicks:loyalty-modes:too-tired-to-resist, primitive:sidekicks:loyalty-modes:convinced-this-is-normal]}
+  - {id: loyalty-genuine-devotion, label: Genuine Devotion, constellation: purpose, cluster: loyalties, members: [primitive:sidekicks:loyalty-modes:genuinely-loyal, primitive:sidekicks:fold-profiles:more-loyal-than-the-villain-deserves]}
+  - {id: loyalty-pending-betrayal, label: Pending Betrayal, constellation: purpose, cluster: loyalties, members: [primitive:sidekicks:loyalty-modes:waiting-for-the-perfect-betrayal, primitive:sidekicks:fold-profiles:waiting-for-a-better-offer]}
+
+  # Functional role families
+  - {id: role-operations-leadership, label: Operations Leadership, constellation: role, cluster: roles, members: [primitive:sidekicks:roles:chief-of-staff, primitive:sidekicks:roles:executive-assistant-of-doom, primitive:sidekicks:roles:systems-operator]}
+  - {id: role-compliance-and-legal, label: Compliance And Legal, constellation: role, cluster: roles, members: [primitive:sidekicks:roles:compliance-lieutenant, primitive:sidekicks:roles:legal-affairs-sprite, primitive:sidekicks:roles:professional-enabler]}
+  - {id: role-security-and-logistics, label: Security And Logistics, constellation: role, cluster: roles, members: [primitive:sidekicks:roles:loyal-driver, primitive:sidekicks:roles:family-fixer, primitive:sidekicks:roles:cleanup-specialist, primitive:sidekicks:roles:security-contractor]}
+  - {id: role-reputation-management, label: Reputation Management, constellation: role, cluster: roles, members: [primitive:sidekicks:roles:deputy-of-vibes, primitive:sidekicks:roles:social-attack-dog, primitive:sidekicks:roles:publicist-of-the-end-times]}
+  - {id: role-care-and-control, label: Care And Emotional Control, constellation: role, cluster: roles, members: [primitive:sidekicks:roles:wellness-coordinator, primitive:sidekicks:roles:discreet-nanny, primitive:sidekicks:roles:personal-therapist-with-boundary-issues]}
+  - {id: role-doctrine-and-occult, label: Doctrine And Occult Support, constellation: role, cluster: roles, members: [primitive:sidekicks:roles:graduate-acolyte, primitive:sidekicks:roles:church-basement-true-believer, primitive:sidekicks:roles:emotional-support-cultist, primitive:sidekicks:roles:court-wizard]}
+  - {id: role-personal-entanglement, label: Personal Entanglement, constellation: role, cluster: roles, members: [primitive:sidekicks:roles:legacy-cousin-on-payroll, primitive:sidekicks:roles:former-nemesis-on-retainer, primitive:sidekicks:roles:childhood-friend-with-clearance, primitive:sidekicks:roles:person-who-keeps-getting-dragged-into-this]}
+
+  # Operational practice families
+  - {id: practice-administrative-control, label: Administrative Control, constellation: contribution, cluster: practices, members: [primitive:sidekicks:task-domains:access-and-schedule-control, primitive:sidekicks:task-domains:paperwork-and-permissions, primitive:sidekicks:task-domains:money-and-miscategorization, primitive:sidekicks:task-domains:legal-affairs]}
+  - {id: practice-cleanup-and-logistics, label: Cleanup And Logistics, constellation: contribution, cluster: practices, members: [primitive:sidekicks:task-domains:cleanup-and-disposal, primitive:sidekicks:task-domains:logistics, primitive:sidekicks:task-domains:procurement]}
+  - {id: practice-influence-operations, label: Influence Operations, constellation: contribution, cluster: practices, members: [primitive:sidekicks:task-domains:witness-management, primitive:sidekicks:task-domains:rumor-and-reputation-ops, primitive:sidekicks:task-domains:excuses, primitive:sidekicks:task-domains:social-media]}
+  - {id: practice-human-containment, label: Human Containment, constellation: contribution, cluster: practices, members: [primitive:sidekicks:task-domains:domestic-normalization, primitive:sidekicks:task-domains:emotional-containment, primitive:sidekicks:task-domains:hostage-coordination]}
+  - {id: practice-doctrine-maintenance, label: Doctrine And Ritual Maintenance, constellation: contribution, cluster: practices, members: [primitive:sidekicks:task-domains:doctrine-and-recruitment, primitive:sidekicks:task-domains:curse-maintenance]}
+  - {id: practice-security-and-removal, label: Security And Removal, constellation: contribution, cluster: practices, members: [primitive:sidekicks:task-domains:security-and-removal]}
+
+  # Broad aptitude levels
+  - {id: aptitude-learning-on-the-job, label: Learning On The Job, constellation: contribution, cluster: aptitude, members: [primitive:sidekicks:competence-profiles:enthusiastic-amateur, primitive:sidekicks:competence-profiles:weaponized-medium-talent]}
+  - {id: aptitude-capable, label: Capable, constellation: contribution, cluster: aptitude, members: [primitive:sidekicks:competence-profiles:surprisingly-capable]}
+  - {id: aptitude-exceptional, label: Exceptional, constellation: contribution, cluster: aptitude, members: [primitive:sidekicks:competence-profiles:frighteningly-effective, primitive:sidekicks:competence-profiles:terrifyingly-competent, primitive:sidekicks:competence-profiles:quietly-genius, primitive:sidekicks:fold-profiles:absolutely-unbreakable]}
+  - {id: aptitude-carries-the-operation, label: Carries The Operation, constellation: contribution, cluster: aptitude, members: [primitive:sidekicks:competence-profiles:carrying-the-entire-operation, primitive:sidekicks:competence-profiles:the-only-adult-in-the-room]}
+
+  # Breaking-point families
+  - {id: flaw-collapses-under-pressure, label: Collapses Under Pressure, constellation: flaws, cluster: breaking_points, members: [primitive:sidekicks:fold-profiles:folds-if-shown-receipts, primitive:sidekicks:fold-profiles:folds-immediately, primitive:sidekicks:fold-profiles:folds-under-mild-questioning, primitive:sidekicks:fold-profiles:immediately-cooperates-with-authorities, primitive:sidekicks:competence-profiles:panic-prone-under-light-pressure]}
+  - {id: flaw-emotional-leverage, label: Emotionally Compromised, constellation: flaws, cluster: breaking_points, members: [primitive:sidekicks:fold-profiles:folds-only-for-love]}
+  - {id: flaw-material-leverage, label: Materially Compromised, constellation: flaws, cluster: breaking_points, members: [primitive:sidekicks:fold-profiles:folds-when-payroll-stops]}
+  - {id: flaw-petty-leverage, label: Petty Breaking Point, constellation: flaws, cluster: breaking_points, members: [primitive:sidekicks:fold-profiles:betrays-for-a-sandwich]}
+  - {id: flaw-destructive-collapse, label: Destructive Collapse, constellation: flaws, cluster: breaking_points, members: [primitive:sidekicks:fold-profiles:never-folds-cleanly]}
+
+deferred:
+  plot_devices:
+    preserve_losslessly: true
+    next_pass: true
+    groups: [petty_atrocities]
+    future_clusters: [social_friction, recurring_gag, inciting_incident, escalation_trigger, character_reveal]
+  settings:
+    preserve_losslessly: true
+    next_pass: true
+    groups: [signifiers, skins, institutions]
+    future_clusters: [visual_language, atmosphere, room_logic, object_logic, genre_frame, organization]
+  holdings:
+    preserve_losslessly: true
+    next_pass: true
+    groups: [macguffins, lairs, features]
+    future_clusters: [artifacts, strongholds, access, resources, costs, liabilities]
+  story:
+    preserve_losslessly: true
+    groups: [schemes, plot_shapes, plot_families, payoffs, reversals, story_functions,
+             structural_complications, post_victory_reversal_states]
+  generator:
+    preserve_losslessly: true
+    groups: [slots, selection_policy, tag]

@@ -1,0 +1,33 @@
+modifiers:
+  false_savior:
+    effect: presents domination as rescue
+    compatible_families: [mastermind, corporate_predator, rogue_ai, institutional_enforcer, hubristic_creator]
+    texture: salvation language with coercive implementation
+  grieving_zealot:
+    effect: turns private loss into public doctrine
+    compatible_families: [mastermind, hubristic_creator, institutional_enforcer, monstrous_other]
+    texture: pain converted into permission
+  performance_genius:
+    effect: uses charisma and spectacle to cover mediocrity or fraud
+    compatible_families: [mastermind, corporate_predator, seductive_deceiver]
+    texture: branding louder than competence
+  bureaucratic_sadist:
+    effect: enjoys punishment through procedure
+    compatible_families: [institutional_enforcer, corporate_predator]
+    texture: fake empathy plus administered pain
+  intimacy_parasite:
+    effect: colonizes trust before making a move
+    compatible_families: [seductive_deceiver, chaos_psychopath, corporate_predator, rogue_ai]
+    texture: closeness as attack surface
+  collapse_prophet:
+    effect: welcomes disaster because it proves the worldview
+    compatible_families: [mastermind, chaos_psychopath, rogue_ai, monstrous_other]
+    texture: vindication hunger
+  optimization_addict:
+    effect: treats human cost as a smoothing problem
+    compatible_families: [rogue_ai, corporate_predator, hubristic_creator]
+    texture: metrics over meaning
+  inherited_heir:
+    effect: claims entitlement through lineage or prior ownership
+    compatible_families: [mastermind, corporate_predator, seductive_deceiver]
+    texture: old power with updated packaging

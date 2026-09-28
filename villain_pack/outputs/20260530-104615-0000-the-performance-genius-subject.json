@@ -1,0 +1,153 @@
+{
+  "title": "The Performance Genius Subject",
+  "skin": "generic",
+  "skin_framing": "cinematic portable villain card",
+  "villain_family": "mastermind",
+  "modifier": "performance_genius",
+  "power_source": "state detachment",
+  "dramatic_function": "builds a whole environment around one plan",
+  "justification_logic": "only scale can fix this",
+  "operating_environment": "sealed command floor",
+  "signifier_package": {
+    "key": "architectural_power",
+    "visual_cues": [
+      "elevated rooms",
+      "private maps",
+      "controlled lighting",
+      "distance from ordinary people"
+    ],
+    "room_logic": "power is visible in the walls",
+    "object_logic": "keys, screens, doors, and thresholds matter"
+  },
+  "dialogue_grammar": {
+    "key": "superiority_monologue",
+    "speech_pattern": "explains the plan because explanation itself is domination",
+    "cue_words": [
+      "obviously",
+      "inevitable",
+      "history",
+      "scale",
+      "design"
+    ]
+  },
+  "favorite_leverage": "blackmail archives",
+  "failure_mode": "branding louder than competence",
+  "petty_atrocity": {
+    "key": "pyrex_returned_stained_and_lidless",
+    "label": "returning borrowed Pyrex six months later stained and without the lid",
+    "detail": "takes a complete object and sends back an exhausted witness",
+    "category": "social_dietary_treachery",
+    "severity": "high",
+    "tags": [
+      "domestic_entitlement",
+      "slow_betrayal",
+      "fake_innocence"
+    ]
+  },
+  "narrative_payoff": {
+    "key": "destroy_the_stage",
+    "resolution": "the villain loses because the architecture of spectacle is broken in public"
+  },
+  "escalation_pattern": "uses charisma and spectacle to cover mediocrity or fraud",
+  "portable_skin_nouns": [
+    "facility",
+    "network",
+    "room",
+    "records",
+    "subject"
+  ],
+  "portable_institutions": [
+    "oversight board",
+    "private office",
+    "response team",
+    "archive"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "generic",
+      "detail": "cinematic portable villain card"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "mastermind",
+      "detail": "builds a whole environment around one plan"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "performance_genius",
+      "detail": "branding louder than competence"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "architectural_power",
+      "detail": "power is visible in the walls"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "superiority_monologue",
+      "detail": "explains the plan because explanation itself is domination"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "state detachment",
+      "operating_environment": "sealed command floor",
+      "favorite_leverage": "blackmail archives"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "only scale can fix this",
+      "failure_mode": "branding louder than competence",
+      "escalation_pattern": "uses charisma and spectacle to cover mediocrity or fraud"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "returning borrowed Pyrex six months later stained and without the lid",
+      "detail": "takes a complete object and sends back an exhausted witness",
+      "category": "social_dietary_treachery",
+      "severity": "high",
+      "tags": [
+        "domestic_entitlement",
+        "slow_betrayal",
+        "fake_innocence"
+      ]
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "destroy_the_stage",
+      "detail": "the villain loses because the architecture of spectacle is broken in public"
+    }
+  },
+  "assembly_receipt": [
+    "Mastermind body",
+    "Performance Genius stuffing",
+    "Architectural Power costume",
+    "Superiority Monologue voice chip",
+    "state detachment evil job",
+    "only scale can fix this internal lie",
+    "returning borrowed Pyrex six months later stained and without the lid petty atrocity",
+    "Destroy The Stage franchise potential"
+  ],
+  "workshop_pitch": "You selected Mastermind plus Performance Genius and got a villain whose favorite workplace protection is blackmail archives. Also, on a completely ordinary Tuesday, they would absolutely be caught returning borrowed Pyrex six months later stained and without the lid.",
+  "opening_image": "An elevated room waits above everyone else, already arranged for explanation.",
+  "dossier_summary": "This build runs on state detachment inside a sealed command floor. At the story level, it builds a whole environment around one plan. The internal lie is simple: only scale can fix this. Before any grand plan begins, the daily proof of rot is returning borrowed Pyrex six months later stained and without the lid.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are still the kind of person who is returning borrowed Pyrex six months later stained and without the lid and expecting gratitude for it.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to returning borrowed Pyrex six months later stained and without the lid. Staff morale is not to be interpreted as material risk at this time.",
+  "signature_scene": "The villain stages a scene inside the sealed command floor where blackmail archives briefly passes for order until the room notices too late that the real agenda is this: uses charisma and spectacle to cover mediocrity or fraud. Somewhere in the background, they are also the sort of person who would be returning borrowed Pyrex six months later stained and without the lid.",
+  "fake_trailer": "In a world shaped by generic, one mastermind build will learn that the villain loses because the architecture of spectacle is broken in public. Also, somebody is definitely returning borrowed Pyrex six months later stained and without the lid in act one and that should have been the warning.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for returning borrowed Pyrex six months later stained and without the lid.",
+  "sample_lines": [
+    "If returning borrowed Pyrex six months later stained and without the lid bothers you, wait until you see what I do with actual power.",
+    "You are not dealing with a person anymore. You are dealing with a permission structure.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "The real threat is not violence but the institutional permission structure surrounding it.",
+    "Even before the grand scheme, the villain was already the kind of person who would be returning borrowed Pyrex six months later stained and without the lid.",
+    "The audience trusts the build less the moment they learn it keeps getting away with returning borrowed Pyrex six months later stained and without the lid."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

@@ -1,0 +1,276 @@
+{
+  "title": "What Mastermind Calls Mercy",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "mastermind",
+  "modifier": "false_savior",
+  "power_source": "state detachment",
+  "dramatic_function": "builds a whole environment around one plan",
+  "justification_logic": "people need governing from above",
+  "operating_environment": "mountain estate",
+  "signifier_package": {
+    "key": "architectural_power",
+    "visual_cues": [
+      "elevated rooms",
+      "private maps",
+      "controlled lighting",
+      "distance from ordinary people"
+    ],
+    "room_logic": "power is visible in the walls",
+    "object_logic": "keys, screens, doors, and thresholds matter"
+  },
+  "dialogue_grammar": {
+    "key": "strategic_condescension",
+    "speech_pattern": "flatters the listener just enough to make disagreement sound childish",
+    "cue_words": [
+      "surely",
+      "obviously",
+      "come now",
+      "be serious",
+      "you understand"
+    ]
+  },
+  "favorite_leverage": "blackmail archives",
+  "failure_mode": "salvation language with coercive implementation",
+  "petty_atrocity": {
+    "key": "bluetooth_hijack",
+    "label": "staying connected to the shared speaker and blasting something unhinged from blocks away",
+    "detail": "turns absentmindedness into a roaming territorial offense",
+    "category": "public_space_crimes",
+    "severity": "high",
+    "tags": [
+      "minor_consent_violation",
+      "public_entropy",
+      "tech_haunting"
+    ]
+  },
+  "moral_texture": {
+    "primary": "minor_consent_violation",
+    "secondary": [
+      "public_entropy",
+      "tech_haunting"
+    ],
+    "source": "bluetooth_hijack",
+    "commons_targeted": {
+      "type": "space",
+      "scope": "public"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "gossip",
+        "confrontation",
+        "avoidance"
+      ],
+      "confrontation_risk": "high"
+    }
+  },
+  "institutional_exposure": {
+    "key": "strategic_accountability_avoidance",
+    "label": "Strategic Accountability Avoidance",
+    "summary": "learned to survive inside systems that reward harm as long as nobody names it correctly",
+    "financial": "cross-functional exposure to liability partitioning, severance math, and budgetary absolution",
+    "operational": "extensive exposure to compliance theater, stakeholder management, and document-safe cruelty",
+    "legal": "meaningful exposure to unresolved procurement questions and preemptive blame routing",
+    "predatory": "repeatedly exposed others to accountability deserts disguised as process",
+    "tags": [
+      "corporate_predator",
+      "institutional_enforcer",
+      "burden_shifting",
+      "bureaucratic_sadism"
+    ]
+  },
+  "core_competencies": {
+    "key": "catastrophe_leverage_stack",
+    "label": "Catastrophe Leverage",
+    "summary": "can extract advantage from panic while sounding like the only adult in the room",
+    "items": [
+      "crisis opportunism",
+      "scarcity theater",
+      "aid capture",
+      "triage exceptionalism"
+    ],
+    "tags": [
+      "collapse_prophet",
+      "mastermind",
+      "chaos_psychopath",
+      "civilizational_failure"
+    ]
+  },
+  "sidekick": {
+    "role_key": "systems_operator",
+    "role_label": "systems operator",
+    "role_detail": "never touches the spotlight, only the thresholds that decide whether doors open",
+    "loyalty_key": "coauthor_of_the_coverup",
+    "loyalty_label": "coauthor of the coverup",
+    "loyalty_detail": "helped once, then had to keep helping forever",
+    "task_key": "security_and_removal",
+    "task_label": "security and removal",
+    "task_detail": "escorts risk out of frame with professional calm",
+    "competence_key": "terrifyingly_competent",
+    "competence_label": "terrifyingly competent",
+    "competence_detail": "could run the whole operation if the villain slipped once",
+    "fold_key": "folds_only_for_love",
+    "fold_label": "folds only for love",
+    "fold_detail": "romance, family, or misplaced tenderness is the single exploit path"
+  },
+  "institution": {
+    "key": "apex_example_of_doing_right_without_force_college",
+    "institution_name": "The Apex Example College of Doing Right Without Force",
+    "field_of_study": "Moral Failure Under Zero Supervision",
+    "motto": "The Cart Return Reveals the Soul",
+    "accreditation_body": "Shopping Cart Theory Provisional Board",
+    "notable_alumni": "civilians who discovered they were animals the second nobody was watching",
+    "registrar_voice": "deadpan anthropology",
+    "tags": [
+      "shared_bucket",
+      "civilizational_failure",
+      "burden_shifting"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "mastermind",
+    "modifier_bias": "false_savior",
+    "exposure_bias": "strategic_accountability_avoidance",
+    "competency_bias": "catastrophe_leverage_stack",
+    "sidekick_bias": "systems_operator"
+  },
+  "narrative_payoff": {
+    "key": "penetrate_the_system",
+    "resolution": "hero must infiltrate the villain environment and reverse the control advantage"
+  },
+  "escalation_pattern": "presents domination as rescue",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "mastermind",
+      "detail": "builds a whole environment around one plan"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "false_savior",
+      "detail": "salvation language with coercive implementation"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "architectural_power",
+      "detail": "power is visible in the walls"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "strategic_condescension",
+      "detail": "flatters the listener just enough to make disagreement sound childish"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "state detachment",
+      "operating_environment": "mountain estate",
+      "favorite_leverage": "blackmail archives"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "people need governing from above",
+      "failure_mode": "salvation language with coercive implementation",
+      "escalation_pattern": "presents domination as rescue"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "staying connected to the shared speaker and blasting something unhinged from blocks away",
+      "detail": "turns absentmindedness into a roaming territorial offense",
+      "category": "public_space_crimes",
+      "severity": "high",
+      "tags": [
+        "minor_consent_violation",
+        "public_entropy",
+        "tech_haunting"
+      ]
+    },
+    "exposure": {
+      "station": "Exposure Ledger",
+      "selection": "Strategic Accountability Avoidance",
+      "summary": "learned to survive inside systems that reward harm as long as nobody names it correctly"
+    },
+    "competencies": {
+      "station": "Competency Rubric",
+      "selection": "Catastrophe Leverage",
+      "items": [
+        "crisis opportunism",
+        "scarcity theater",
+        "aid capture",
+        "triage exceptionalism"
+      ]
+    },
+    "sidekick_bench": {
+      "station": "Sidekick Bench",
+      "selection": "systems operator",
+      "loyalty": "coauthor of the coverup",
+      "task": "security and removal"
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "The Apex Example College of Doing Right Without Force",
+      "field_of_study": "Moral Failure Under Zero Supervision",
+      "accreditation_body": "Shopping Cart Theory Provisional Board"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "penetrate_the_system",
+      "detail": "hero must infiltrate the villain environment and reverse the control advantage"
+    }
+  },
+  "assembly_receipt": [
+    "Mastermind body",
+    "False Savior stuffing",
+    "Architectural Power costume",
+    "Strategic Condescension voice chip",
+    "state detachment evil job",
+    "people need governing from above internal lie",
+    "staying connected to the shared speaker and blasting something unhinged from blocks away petty atrocity",
+    "minor consent violation moral texture",
+    "Strategic Accountability Avoidance exposure lateral",
+    "Catastrophe Leverage competency rubric",
+    "systems operator sidekick bench",
+    "The Apex Example College of Doing Right Without Force credential counter",
+    "False Savior compatibility pull",
+    "Penetrate The System franchise potential"
+  ],
+  "workshop_pitch": "You selected Mastermind plus False Savior and got a villain whose favorite workplace protection is blackmail archives. Their primary moral texture is minor consent violation. Their exposure lateral is Strategic Accountability Avoidance. Their core competency stack is Catastrophe Leverage. Their sidekick is a systems operator who stays because they are coauthor of the coverup. Their formal training comes from The Apex Example College of Doing Right Without Force.",
+  "opening_image": "An elevated room waits above everyone else, already arranged for explanation.",
+  "dossier_summary": "This build runs on state detachment inside a mountain estate. At the story level, it builds a whole environment around one plan. The primary moral texture is minor consent violation. The internal lie is simple: people need governing from above. The exposure profile is strategic accountability avoidance, which operationalized into catastrophe leverage. The local ecosystem includes a systems operator who handles security and removal. Before any grand plan begins, the daily proof of rot is staying connected to the shared speaker and blasting something unhinged from blocks away.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of minor consent violation shaped by strategic accountability avoidance and confident enough to treat crisis opportunism like a normal leadership behavior. The systems operator nearby makes the whole thing feel alarmingly maintainable.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to staying connected to the shared speaker and blasting something unhinged from blocks away. Their current strengths remain crisis opportunism, scarcity theater, aid capture. The systems operator remains responsible for security and removal and is currently coauthor of the coverup. Do not mention the Shopping Cart Theory Provisional Board matter in writing.",
+  "signature_scene": "The villain stages a scene inside the mountain estate where blackmail archives briefly passes for order until the room notices too late that the real agenda is this: presents domination as rescue. The systems operator quietly handles security and removal in the background, which is why the whole thing almost works. Somewhere in the room, somebody realizes too late that the sidekick is terrifyingly competent and folds only for love.",
+  "fake_trailer": "In a world shaped by corporate satire, one mastermind build will learn that hero must infiltrate the villain environment and reverse the control advantage. Exposure: Strategic Accountability Avoidance. Core competencies: crisis opportunism, scarcity theater. Sidekick: systems operator on security and removal. Somebody is definitely staying connected to the shared speaker and blasting something unhinged from blocks away in act one and that should have been the warning.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for staying connected to the shared speaker and blasting something unhinged from blocks away. So does the sidekick ecosystem: another systems operator arrives, still coauthor of the coverup, still handling security and removal.",
+  "sample_lines": [
+    "If staying connected to the shared speaker and blasting something unhinged from blocks away bothers you, wait until you meet my systems operator.",
+    "My core competencies include crisis opportunism, and my systems operator handles security and removal.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "This build wins by making resistance feel badly formatted.",
+    "Even before the grand scheme, the villain was already the kind of person who would be staying connected to the shared speaker and blasting something unhinged from blocks away.",
+    "The audience trusts the build less the moment they learn even the systems operator is hanging around because they are coauthor of the coverup."
+  ],
+  "llm_surface": {
+    "enabled": true,
+    "error": null
+  }
+}

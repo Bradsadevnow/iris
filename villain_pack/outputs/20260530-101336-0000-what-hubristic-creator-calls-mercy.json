@@ -1,0 +1,137 @@
+{
+  "title": "What Hubristic Creator Calls Mercy",
+  "skin": "suburban_thriller",
+  "skin_framing": "domestic paranoia",
+  "villain_family": "hubristic_creator",
+  "modifier": "grieving_zealot",
+  "power_source": "miracle technology",
+  "dramatic_function": "mistakes invention for permission",
+  "justification_logic": "because we can",
+  "operating_environment": "sealed workshop",
+  "signifier_package": {
+    "key": "sterile_precision",
+    "visual_cues": [
+      "measured spacing",
+      "polished metal",
+      "calibrated trays",
+      "no visible mess"
+    ],
+    "room_logic": "precision is used to deny guilt",
+    "object_logic": "each tool implies premeditation without admitting it"
+  },
+  "dialogue_grammar": {
+    "key": "technical_evasion",
+    "speech_pattern": "hides moral violence behind process nouns and verbs",
+    "cue_words": [
+      "protocol",
+      "adjustment",
+      "variance",
+      "outcome",
+      "threshold"
+    ]
+  },
+  "favorite_leverage": "technical asymmetry",
+  "failure_mode": "pain converted into permission",
+  "petty_atrocity": {
+    "key": "last_breadstick",
+    "label": "taking the last breadstick",
+    "detail": "leaves the basket empty and makes eye contact while doing it"
+  },
+  "narrative_payoff": {
+    "key": "reveal_the_trial",
+    "resolution": "proof of experimentation reaches the outside world and changes the moral frame"
+  },
+  "escalation_pattern": "turns private loss into public doctrine",
+  "portable_skin_nouns": [
+    "house",
+    "county",
+    "basement",
+    "nursery",
+    "letter"
+  ],
+  "portable_institutions": [
+    "sheriff office",
+    "memorial hospital",
+    "school board",
+    "family court"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "suburban_thriller",
+      "detail": "domestic paranoia"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "hubristic_creator",
+      "detail": "mistakes invention for permission"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "grieving_zealot",
+      "detail": "pain converted into permission"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "sterile_precision",
+      "detail": "precision is used to deny guilt"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "technical_evasion",
+      "detail": "hides moral violence behind process nouns and verbs"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "miracle technology",
+      "operating_environment": "sealed workshop",
+      "favorite_leverage": "technical asymmetry"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "because we can",
+      "failure_mode": "pain converted into permission",
+      "escalation_pattern": "turns private loss into public doctrine"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "taking the last breadstick",
+      "detail": "leaves the basket empty and makes eye contact while doing it"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "reveal_the_trial",
+      "detail": "proof of experimentation reaches the outside world and changes the moral frame"
+    }
+  },
+  "assembly_receipt": [
+    "Hubristic Creator body",
+    "Grieving Zealot stuffing",
+    "Sterile Precision costume",
+    "Technical Evasion voice chip",
+    "miracle technology evil job",
+    "because we can internal lie",
+    "taking the last breadstick petty atrocity",
+    "Reveal The Trial franchise potential"
+  ],
+  "workshop_pitch": "You selected Hubristic Creator plus Grieving Zealot and got a villain whose favorite workplace protection is technical asymmetry. Also, on a completely ordinary Tuesday, they would absolutely be caught taking the last breadstick.",
+  "opening_image": "This build wins by making resistance feel badly formatted.",
+  "dossier_summary": "This build runs on miracle technology inside a sealed workshop. Its dramatic function is to mistakes invention for permission. The internal lie is simple: because we can. Before any grand plan begins, the daily proof of rot is taking the last breadstick.",
+  "signature_scene": "The villain stages a scene inside the sealed workshop where technical asymmetry briefly passes for order until the room notices too late that the real agenda is turns private loss into public doctrine. Somewhere in the background, they are also the sort of person who would be taking the last breadstick.",
+  "fake_trailer": "In a world shaped by suburban thriller, one hubristic creator build will learn that proof of experimentation reaches the outside world and changes the moral frame.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill.",
+  "sample_lines": [
+    "This build gets meaner the moment somebody mistakes it for a service.",
+    "You are not dealing with a person anymore. You are dealing with a permission structure.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "The real threat is not violence but the institutional permission structure surrounding it.",
+    "By the time somebody names the monster correctly, the monster has already become a workflow.",
+    "The villain is less interested in victory than in teaching the room a worse definition of normal."
+  ],
+  "llm_surface": {
+    "enabled": false,
+    "error": null
+  }
+}

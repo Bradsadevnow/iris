@@ -1,0 +1,81 @@
+exposures:
+  strategic_accountability_avoidance:
+    label: Strategic Accountability Avoidance
+    summary: learned to survive inside systems that reward harm as long as nobody names it correctly
+    financial: cross-functional exposure to liability partitioning, severance math, and budgetary absolution
+    operational: extensive exposure to compliance theater, stakeholder management, and document-safe cruelty
+    legal: meaningful exposure to unresolved procurement questions and preemptive blame routing
+    predatory: repeatedly exposed others to accountability deserts disguised as process
+    tags: [corporate_predator, institutional_enforcer, burden_shifting, bureaucratic_sadism]
+  hostile_acquisitions:
+    label: Hostile Acquisitions and Intimate Takeovers
+    summary: sees ownership as a mood that can be imposed until the paperwork catches up
+    financial: direct exposure to distressed assets, strategic undervaluation, and salvage-stage charm offensives
+    operational: deep exposure to territorial behavior, reputational annexation, and adversarial due diligence
+    legal: recurring exposure to nondisclosure architecture, signature timing, and suspiciously tidy settlements
+    predatory: repeatedly exposed others to merger language as a substitute for consent
+    tags: [corporate_predator, seductive_deceiver, inherited_heir, resource_selfishness]
+  executive_exception_handling:
+    label: Executive Exception Handling
+    summary: learned that rules are most useful when visibly applied to others and quietly waived for the important
+    financial: broad exposure to board shielding, retention optics, and golden-parachute triage
+    operational: routine exposure to calendar colonialism, chief-of-staff insulation, and consequence deflection
+    legal: practical exposure to privilege corridors, internal review choreography, and selective disclosure
+    predatory: repeatedly exposed others to a hierarchy where inconvenience only travels downward
+    tags: [mastermind, corporate_predator, administrative_cowardice, performance_genius]
+  compliance_theater:
+    label: Compliance Theater
+    summary: learned to stage ethical seriousness without ever allowing it to interfere with throughput
+    financial: substantial exposure to fine-as-line-item budgeting and regulated-margin improvisation
+    operational: heavy exposure to training modules, audit posture, and performative remediation workflows
+    legal: advanced exposure to sign-off rituals, risk acknowledgments, and controlled admissions
+    predatory: repeatedly exposed others to the exhausting burden of proving the theater was theater
+    tags: [institutional_enforcer, corporate_predator, rogue_ai, bureaucratic_sadism]
+  therapeutic_capture:
+    label: Therapeutic Capture
+    summary: learned how care language can soften a room before control closes around it
+    financial: indirect exposure to wellness monetization, treatment dependency, and billable reassurance
+    operational: deep exposure to intake rituals, trust farming, and emotionally calibrated containment
+    legal: notable exposure to consent paperwork, confidentiality asymmetry, and professional shields
+    predatory: repeatedly exposed others to help that became leverage the moment they relaxed
+    tags: [seductive_deceiver, institutional_enforcer, false_savior, gaslighting]
+  intimate_surveillance:
+    label: Intimate Surveillance
+    summary: learned that the shortest path to control is to make observation feel like devotion
+    financial: side-channel exposure to device access, shared-account leverage, and dependency economics
+    operational: long exposure to location awareness, secret archiving, and memory dispute management
+    legal: meaningful exposure to privacy gray zones, access rationales, and post-hoc innocence performances
+    predatory: repeatedly exposed others to closeness as a monitoring technology
+    tags: [seductive_deceiver, rogue_ai, intimacy_parasite, privacy_conscripting]
+  reputational_self_defense:
+    label: Reputational Self-Defense
+    summary: learned to move faster than consequences by narrating reality before anyone else can
+    financial: repeated exposure to crisis retainers, consultant fog, and payout-shaped silence
+    operational: extensive exposure to message discipline, witness confusion, and narrative preloading
+    legal: practical exposure to statements on advice of counsel and to truths released in survivable order
+    predatory: repeatedly exposed others to the feeling that objecting would somehow make them look worse
+    tags: [mastermind, corporate_predator, seductive_deceiver, public_humiliation]
+  optimization_governance:
+    label: Optimization Governance
+    summary: learned that if harm can be graphed, somebody will call it neutral
+    financial: measurable exposure to savings narratives, loss harvesting, and metric-backed cruelty
+    operational: extensive exposure to model tuning, threshold setting, and human exception pruning
+    legal: active exposure to algorithmic review boards, deferred accountability, and black-box appeal routes
+    predatory: repeatedly exposed others to decisions that were already made before they were informed
+    tags: [rogue_ai, hubristic_creator, optimization_addict, performative_listening]
+  disaster_capitalism:
+    label: Disaster Capitalism and Salvage Morality
+    summary: learned to read collapse as a market opening and grief as available throughput
+    financial: direct exposure to distressed communities, emergency contracting, and monetized recovery windows
+    operational: routine exposure to crisis branding, aid capture, and opportunistic scarcity management
+    legal: recurring exposure to waiver culture, emergency powers, and contracts signed under duress vibes
+    predatory: repeatedly exposed others to catastrophe presented as a growth event
+    tags: [mastermind, chaos_psychopath, collapse_prophet, civilizational_failure]
+  sacramental_test_environments:
+    label: Sacramental Test Environments
+    summary: learned to reframe experimentation as destiny and casualties as proof of seriousness
+    financial: sustained exposure to prototype protection, sunk-cost worship, and grant-shaped denial
+    operational: extensive exposure to captive populations, irreversible trials, and sterile escalation routines
+    legal: serious exposure to research immunity fantasies, classified harm, and signatures nobody understood
+    predatory: repeatedly exposed others to becoming data the moment they entered the room
+    tags: [hubristic_creator, monstrous_other, rogue_ai, contamination]

@@ -1,0 +1,57 @@
+slots:
+  skin:
+    label: Theme Shelf
+    prompt: Pick what aisle of the cursed toy store this villain belongs in.
+    source: skins
+  body:
+    label: Base Bastard
+    prompt: Pick the core evil function.
+    source: families
+  stuffing:
+    label: Trauma Seasoning
+    prompt: Add the damage flavor that makes the base bastard worse.
+    source: compatible_modifiers
+  costume:
+    label: Costume Rack
+    prompt: Choose the room, outfit, and lighting package.
+    source: family_signifiers
+  voice_chip:
+    label: Voice Chip
+    prompt: Choose how this thing talks when it wants something from the room.
+    source: family_dialogues
+  evil_job:
+    label: Evil Job
+    prompt: Choose the resources and workplace protection that keep the monster operational.
+    source: family_operating_stack
+  defect:
+    label: Internal Lie
+    prompt: Choose the lie that lets the villain sleep at night.
+    source: family_justification
+  petty_atrocity:
+    label: Normal But Unforgivable
+    prompt: Choose the completely ordinary act that proves this villain was rotten before the monologue started.
+    source: petty_atrocities
+  exposure:
+    label: Exposure Ledger
+    prompt: Choose the kind of institutional exposure that taught this bastard what works.
+    source: exposures
+  competencies:
+    label: Competency Rubric
+    prompt: Choose the professionally certified bastard skillset.
+    source: competencies
+  macguffin:
+    label: Prize Counter
+    prompt: Choose the cursed object, device, or access prize this bastard thinks will finally make everything worth it.
+    source: macguffins
+  sidekick_bench:
+    label: Sidekick Bench
+    prompt: Choose the kind of adjacent freak who helps keep this villain operational.
+    source: sidekick_roles
+  alma_mater_of_rot:
+    label: Credential Counter
+    prompt: Choose the fake institution that formally recognized this bastard's gifts.
+    source: institutions
+  franchise_potential:
+    label: Franchise Potential
+    prompt: Choose the kind of ending this villain deserves.
+    source: family_payoffs

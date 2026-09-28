@@ -1,0 +1,276 @@
+{
+  "title": "How To Survive Policy Lane",
+  "skin": "corporate_satire",
+  "skin_framing": "glossy executive menace",
+  "villain_family": "chaos_psychopath",
+  "modifier": "collapse_prophet",
+  "power_source": "volatility",
+  "dramatic_function": "removes stable bargaining from the story",
+  "justification_logic": "because I could",
+  "operating_environment": "empty highways",
+  "signifier_package": {
+    "key": "asymmetry",
+    "visual_cues": [
+      "crooked frames",
+      "mismatched eyes",
+      "unbalanced rooms",
+      "one wrong detail"
+    ],
+    "room_logic": "the world is off by just enough to trigger dread",
+    "object_logic": "the tiny inconsistency becomes the whole story"
+  },
+  "dialogue_grammar": {
+    "key": "childlike_taunt",
+    "speech_pattern": "sounds playful in ways that make the room feel spiritually contaminated",
+    "cue_words": [
+      "oops",
+      "game",
+      "funny",
+      "again",
+      "guess"
+    ]
+  },
+  "favorite_leverage": "fear theater",
+  "failure_mode": "vindication hunger",
+  "petty_atrocity": {
+    "key": "stop_short_in_doorway",
+    "label": "stopping short in the doorway",
+    "detail": "turns shared movement into an avoidable logistics crisis",
+    "category": "public_space_crimes",
+    "severity": "medium",
+    "tags": [
+      "shared_space_disrespect",
+      "ambient_hostility",
+      "minor_consent_violation"
+    ]
+  },
+  "moral_texture": {
+    "primary": "shared_space_disrespect",
+    "secondary": [
+      "ambient_hostility",
+      "minor_consent_violation"
+    ],
+    "source": "stop_short_in_doorway",
+    "commons_targeted": {
+      "type": "space",
+      "scope": "public"
+    },
+    "sanction_profile": {
+      "likely_reactions": [
+        "side_eye",
+        "gossip",
+        "avoidance"
+      ],
+      "confrontation_risk": "medium"
+    }
+  },
+  "institutional_exposure": {
+    "key": "strategic_accountability_avoidance",
+    "label": "Strategic Accountability Avoidance",
+    "summary": "learned to survive inside systems that reward harm as long as nobody names it correctly",
+    "financial": "cross-functional exposure to liability partitioning, severance math, and budgetary absolution",
+    "operational": "extensive exposure to compliance theater, stakeholder management, and document-safe cruelty",
+    "legal": "meaningful exposure to unresolved procurement questions and preemptive blame routing",
+    "predatory": "repeatedly exposed others to accountability deserts disguised as process",
+    "tags": [
+      "corporate_predator",
+      "institutional_enforcer",
+      "burden_shifting",
+      "bureaucratic_sadism"
+    ]
+  },
+  "core_competencies": {
+    "key": "blame_laundering_stack",
+    "label": "Blame Laundering",
+    "summary": "can move fault across rooms, roles, and reporting lines until nobody feels authorized to hold it",
+    "items": [
+      "blame laundering",
+      "strategic ambiguity",
+      "documentation weaponization",
+      "reputational self-extraction"
+    ],
+    "tags": [
+      "corporate_predator",
+      "institutional_enforcer",
+      "burden_shifting",
+      "bureaucratic_sadism"
+    ]
+  },
+  "sidekick": {
+    "role_key": "wellness_coordinator",
+    "role_label": "wellness coordinator",
+    "role_detail": "weaponizes herbal tea, intake language, and disturbingly gentle eye contact",
+    "loyalty_key": "career_trapped",
+    "loyalty_label": "career-trapped",
+    "loyalty_detail": "resume damage now feels more terrifying than conscience",
+    "task_key": "money_and_miscategorization",
+    "task_label": "money and miscategorization",
+    "task_detail": "keeps the ledgers tidy enough that nobody wants to pull harder",
+    "competence_key": "weaponized_medium_talent",
+    "competence_label": "weaponized medium talent",
+    "competence_detail": "should not be this dangerous, but infrastructure keeps helping",
+    "fold_key": "already_planning_their_own_exit",
+    "fold_label": "already planning their own exit",
+    "fold_detail": "smiles in meetings while quietly building a survivable betrayal lane"
+  },
+  "institution": {
+    "key": "apex_example_of_doing_right_without_force_college",
+    "institution_name": "The Apex Example College of Doing Right Without Force",
+    "field_of_study": "Moral Failure Under Zero Supervision",
+    "motto": "The Cart Return Reveals the Soul",
+    "accreditation_body": "Shopping Cart Theory Provisional Board",
+    "notable_alumni": "civilians who discovered they were animals the second nobody was watching",
+    "registrar_voice": "deadpan anthropology",
+    "tags": [
+      "shared_bucket",
+      "civilizational_failure",
+      "burden_shifting"
+    ]
+  },
+  "compatibility_pressure": {
+    "family_bias": "chaos_psychopath",
+    "modifier_bias": "collapse_prophet",
+    "exposure_bias": "strategic_accountability_avoidance",
+    "competency_bias": "blame_laundering_stack",
+    "sidekick_bias": "wellness_coordinator"
+  },
+  "narrative_payoff": {
+    "key": "survive_the_encounter",
+    "resolution": "victory means making it out alive without accepting the villain's worldview"
+  },
+  "escalation_pattern": "welcomes disaster because it proves the worldview",
+  "portable_skin_nouns": [
+    "campus",
+    "deck",
+    "investor memo",
+    "policy lane",
+    "user base"
+  ],
+  "portable_institutions": [
+    "board",
+    "legal",
+    "trust and safety",
+    "growth office"
+  ],
+  "workshop": {
+    "skin": {
+      "station": "Theme Shelf",
+      "selection": "corporate_satire",
+      "detail": "glossy executive menace"
+    },
+    "body": {
+      "station": "Base Bastard",
+      "selection": "chaos_psychopath",
+      "detail": "removes stable bargaining from the story"
+    },
+    "stuffing": {
+      "station": "Trauma Seasoning",
+      "selection": "collapse_prophet",
+      "detail": "vindication hunger"
+    },
+    "costume": {
+      "station": "Costume Rack",
+      "selection": "asymmetry",
+      "detail": "the world is off by just enough to trigger dread"
+    },
+    "voice_chip": {
+      "station": "Voice Chip",
+      "selection": "childlike_taunt",
+      "detail": "sounds playful in ways that make the room feel spiritually contaminated"
+    },
+    "evil_job": {
+      "station": "Evil Job",
+      "power_source": "volatility",
+      "operating_environment": "empty highways",
+      "favorite_leverage": "fear theater"
+    },
+    "defect": {
+      "station": "Internal Lie",
+      "selection": "because I could",
+      "failure_mode": "vindication hunger",
+      "escalation_pattern": "welcomes disaster because it proves the worldview"
+    },
+    "petty_atrocity": {
+      "station": "Normal But Unforgivable",
+      "selection": "stopping short in the doorway",
+      "detail": "turns shared movement into an avoidable logistics crisis",
+      "category": "public_space_crimes",
+      "severity": "medium",
+      "tags": [
+        "shared_space_disrespect",
+        "ambient_hostility",
+        "minor_consent_violation"
+      ]
+    },
+    "exposure": {
+      "station": "Exposure Ledger",
+      "selection": "Strategic Accountability Avoidance",
+      "summary": "learned to survive inside systems that reward harm as long as nobody names it correctly"
+    },
+    "competencies": {
+      "station": "Competency Rubric",
+      "selection": "Blame Laundering",
+      "items": [
+        "blame laundering",
+        "strategic ambiguity",
+        "documentation weaponization",
+        "reputational self-extraction"
+      ]
+    },
+    "sidekick_bench": {
+      "station": "Sidekick Bench",
+      "selection": "wellness coordinator",
+      "loyalty": "career-trapped",
+      "task": "money and miscategorization"
+    },
+    "alma_mater_of_rot": {
+      "station": "Credential Counter",
+      "selection": "The Apex Example College of Doing Right Without Force",
+      "field_of_study": "Moral Failure Under Zero Supervision",
+      "accreditation_body": "Shopping Cart Theory Provisional Board"
+    },
+    "franchise_potential": {
+      "station": "Franchise Potential",
+      "selection": "survive_the_encounter",
+      "detail": "victory means making it out alive without accepting the villain's worldview"
+    }
+  },
+  "assembly_receipt": [
+    "Chaos Psychopath body",
+    "Collapse Prophet stuffing",
+    "Asymmetry costume",
+    "Childlike Taunt voice chip",
+    "volatility evil job",
+    "because I could internal lie",
+    "stopping short in the doorway petty atrocity",
+    "shared space disrespect moral texture",
+    "Strategic Accountability Avoidance exposure lateral",
+    "Blame Laundering competency rubric",
+    "wellness coordinator sidekick bench",
+    "The Apex Example College of Doing Right Without Force credential counter",
+    "Collapse Prophet compatibility pull",
+    "Survive The Encounter franchise potential"
+  ],
+  "workshop_pitch": "You selected Chaos Psychopath plus Collapse Prophet and got a villain whose favorite workplace protection is fear theater. Their primary moral texture is shared space disrespect. Their exposure lateral is Strategic Accountability Avoidance. Their core competency stack is Blame Laundering. Their sidekick is a wellness coordinator who stays because they are career-trapped. Their formal training comes from The Apex Example College of Doing Right Without Force.",
+  "opening_image": "The villain is less interested in victory than in teaching the room a worse definition of normal.",
+  "dossier_summary": "This build runs on volatility inside an empty highways. At the story level, it removes stable bargaining from the story. The primary moral texture is shared space disrespect. The internal lie is simple: because I could. The exposure profile is strategic accountability avoidance, which operationalized into blame laundering. The local ecosystem includes a wellness coordinator who handles money and miscategorization. Before any grand plan begins, the daily proof of rot is stopping short in the doorway.",
+  "public_facing_bio": "Publicly, this figure presents as polished, necessary, and strangely inevitable. Privately, they are a pure engine of shared space disrespect shaped by strategic accountability avoidance and confident enough to treat blame laundering like a normal leadership behavior. The wellness coordinator nearby makes the whole thing feel alarmingly maintainable.",
+  "internal_memo": "Internal note: continue protecting the principal from low-level reputation damage tied to stopping short in the doorway. Their current strengths remain blame laundering, strategic ambiguity, documentation weaponization. The wellness coordinator remains responsible for money and miscategorization and is currently career-trapped. Do not mention the Shopping Cart Theory Provisional Board matter in writing.",
+  "signature_scene": "The villain stages a scene inside the empty highways where fear theater briefly passes for order until the room notices too late that the real agenda is this: welcomes disaster because it proves the worldview. The wellness coordinator quietly handles money and miscategorization in the background, which is why the whole thing almost works. Somewhere in the room, somebody realizes too late that the sidekick is weaponized medium talent and already planning their own exit.",
+  "fake_trailer": "In a world shaped by corporate satire, one chaos psychopath build will learn that victory means making it out alive without accepting the villain's worldview. Exposure: Strategic Accountability Avoidance. Core competencies: blame laundering, strategic ambiguity. Sidekick: wellness coordinator on money and miscategorization. Somebody is definitely stopping short in the doorway in act one and that should have been the warning.",
+  "sequel_slop": "Franchise extension: somebody rebuilds the same logic with fresher branding, and the receipts get harder to kill. The petty tell survives too, because evil this scalable still finds time for stopping short in the doorway. So does the sidekick ecosystem: another wellness coordinator arrives, still career-trapped, still handling money and miscategorization.",
+  "sample_lines": [
+    "If stopping short in the doorway bothers you, wait until you meet my wellness coordinator.",
+    "My core competencies include blame laundering, and my wellness coordinator handles money and miscategorization.",
+    "If this sounds compassionate, you are already inside the problem."
+  ],
+  "hooks": [
+    "By the time somebody names the monster correctly, the monster has already become a workflow.",
+    "Even before the grand scheme, the villain was already the kind of person who would be stopping short in the doorway.",
+    "The audience trusts the build less the moment they learn even the wellness coordinator is hanging around because they are career-trapped."
+  ],
+  "llm_surface": {
+    "enabled": true,
+    "error": null
+  }
+}
